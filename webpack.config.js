@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = (env, argv) => ({
   entry: "./src/code.ts",
@@ -12,4 +13,9 @@ module.exports = (env, argv) => ({
     filename: "code.js",
     path: path.resolve(__dirname, "lib"),
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    }),
+  ],
 });
