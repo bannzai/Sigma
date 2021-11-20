@@ -14,7 +14,7 @@ const traversed = (root: SceneNode): SwiftUIContext => {
 };
 
 const print = (context: SwiftUIContext) => {
-  console.log(context.code.length);
+  console.log(context.code);
 };
 
 run();
