@@ -116,15 +116,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   const { children, layoutMode, itemSpacing, counterAxisAlignItems } = node;
 
-  console.log(
-    JSON.stringify({
-      children,
-      layoutMode,
-      itemSpacing,
-      counterAxisAlignItems,
-    })
-  );
-
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
     containerCode += "HStack(";
