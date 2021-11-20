@@ -62,7 +62,7 @@ export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
 */
 
 function mappedFontWeight(fontName: FontName): string | null {
-  const mapOffigmaAndSwiftUIFontWeight: { [key: string]: string } = {
+  const mapOfFigmaAndSwiftUIFontWeight: { [key: string]: string } = {
     thin: "ultraLight",
     extralight: "thin",
     light: "light",
@@ -74,5 +74,5 @@ function mappedFontWeight(fontName: FontName): string | null {
     heavy: "heavy",
     black: "black",
   };
-  return mapOffigmaAndSwiftUIFontWeight[fontName.style];
+  return mapOfFigmaAndSwiftUIFontWeight[fontName.style];
 }
