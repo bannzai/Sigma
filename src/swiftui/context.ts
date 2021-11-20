@@ -1,11 +1,11 @@
 export class SwiftUIContext {
-  indentLevel: number = 0;
+  indent: number = 0;
   code: string = "";
 
   nest() {
-    this.indentLevel += 4;
+    this.indent += 4;
   }
   unnest() {
-    this.indentLevel -= 4;
+    this.indent -= 4;
   }
 }

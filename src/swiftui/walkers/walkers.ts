@@ -70,8 +70,8 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   const { children } = node;
   children.forEach((child) => {
     const { id, name, type } = child;
-    const { indentLevel } = context;
-    console.log(JSON.stringify({ id, name, type, indentLevel }));
+    const { indent } = context;
+    console.log(JSON.stringify({ indent, id, name, type }));
 
     walk(context, child);
   });
