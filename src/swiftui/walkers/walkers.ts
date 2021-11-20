@@ -146,7 +146,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   const isExistsContainer = containerCode.length > 0;
   if (isExistsContainer) {
     context.add(containerCode);
-    context.add(" {\n");
+    context.add(" {\n", { withoutIndent: true });
   }
 
   children.forEach((child) => {
