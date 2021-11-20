@@ -70,11 +70,13 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
   if (node.name.includes("SwiftUI:Button")) {
-    context.add("Button(action: { /* TODO */ }) {", { lineBreakType: "Right" });
+    context.add("Button(action: { /* TODO */ }) {");
+    context.add("\n");
     node.children.forEach((child) => {
       walk(context, child);
     });
-    context.add("}", { lineBreakType: "Left" });
+    context.add("\n");
+    context.add("}");
   }
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
@@ -167,6 +169,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   });
 
   if (isExistsContainer) {
-    context.add("}", { lineBreakType: "Left" });
+    context.add("\n");
+    context.add("}");
   }
 }
