@@ -120,11 +120,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     })
   );
 
-  // FIXME: Hotfix
-  if (!context.code.endsWith("\n")) {
-    context.add("\n");
-  }
-
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
     containerCode += "HStack(";
@@ -158,6 +153,11 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   const isExistsContainer = containerCode.length > 0;
   if (isExistsContainer) {
+    // FIXME: Hotfix
+    if (!context.code.endsWith("\n")) {
+      context.add("\n");
+    }
+
     context.add(containerCode);
     context.add(" {\n", { withoutIndent: true });
   }
