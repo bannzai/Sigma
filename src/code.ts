@@ -1,11 +1,9 @@
-import * as copy from "copy-to-clipboard";
 import { SwiftUIContext } from "./swiftui/context";
 import { walk } from "./swiftui/walkers/walkers";
 
 const run = () => {
   const root = figma.currentPage.selection[0];
   const traversedContext = traversed(root);
-  copy(traversedContext.code);
   print(traversedContext);
 };
 
