@@ -10,5 +10,8 @@
   "license": "",
   "devDependencies": {
     "@figma/plugin-typings": "^1.39.1"
+  },
+  "dependencies": {
+    "@types/assert": "^1.5.6"
   }
 }
