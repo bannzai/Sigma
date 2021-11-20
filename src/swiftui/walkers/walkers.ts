@@ -97,8 +97,6 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
   }
 
   adaptTextModifier(context, node);
-  
-  context.unnest();
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -159,6 +157,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   });
 
   if (isExistsContainer) {
-    context.add("\n}");
+    context.add("\n}\n");
   }
 }
