@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "./swiftui/context";
-import { walkToScene } from "./swiftui/walkers/walkers";
+import { walk } from "./swiftui/walkers/walkers";
 
 const run = () => {
   const root = figma.currentPage.selection[0];
@@ -9,7 +9,7 @@ const run = () => {
 
 const traversed = (root: SceneNode): SwiftUIContext => {
   const context = new SwiftUIContext();
-  walkToScene(context, root);
+  walk(context, root);
   return context;
 };
 

@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import { SwiftUIContext } from "../context";
 
-export function walkToScene(context: SwiftUIContext, node: SceneNode) {
+export function walk(context: SwiftUIContext, node: SceneNode) {
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip
   } else if (node.type === "CODE_BLOCK") {
@@ -65,7 +65,7 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {}
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   const { children } = node;
   children.forEach((child) => {
-    const { id, name, type } = node;
+    const { id, name, type } = child;
     console.log(JSON.stringify({ id, name, type }));
   });
 }
