@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import { trace } from "../../util/tracer";
 import { SwiftUIContext } from "../context";
+import { adaptTextModifier } from "../modifiers/text";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   trace(`#walk`, context, node);
@@ -82,6 +83,7 @@ export function walkToShapeWithText(
 }
 export function walkToText(context: SwiftUIContext, node: TextNode) {
   trace(`#walkToText`, context, node);
+  adaptTextModifier(context, node);
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
