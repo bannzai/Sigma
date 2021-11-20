@@ -83,7 +83,22 @@ export function walkToShapeWithText(
 }
 export function walkToText(context: SwiftUIContext, node: TextNode) {
   trace(`#walkToText`, context, node);
+
+  const { characters } = node;
+  const stringList = characters.split("\n");
+  if (stringList.length <= 1) {
+    context.add(`Text("${characters}")`);
+  } else {
+    context.add(`Text("""\n`);
+    stringList.forEach((string) => {
+      context.add(`${string}\n`);
+    });
+    context.add(`""")`);
+  }
+
   adaptTextModifier(context, node);
+  
+  context.unnest();
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
