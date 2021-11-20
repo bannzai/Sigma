@@ -1,3 +1,4 @@
+import { mappedSwiftUIColor } from "../../util/mapper";
 import { SwiftUIContext } from "../context";
 
 export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
@@ -23,6 +24,19 @@ export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
     // const fontFamily = node.fontName.family;
     // console.log(JSON.stringify({ fontFamily, fontSize }));
   }
+
+  if (node.fills !== figma.mixed) {
+    for (const fill of node.fills) {
+      if (fill.type === "SOLID") {
+        const { color, opacity } = fill;
+        context.add(`\n.foregroundColor(${mappedSwiftUIColor(color, opacity)}`);
+      } else {
+        // TODO:
+      }
+    }
+  }
+
+  context.unnest();
 }
 
 /**
