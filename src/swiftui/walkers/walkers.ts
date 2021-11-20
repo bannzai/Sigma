@@ -2,6 +2,8 @@ import * as assert from "assert";
 import { SwiftUIContext } from "../context";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
+  context.nest();
+
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip
   } else if (node.type === "CODE_BLOCK") {
@@ -50,6 +52,8 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   } else if (node.type === "WIDGET") {
     // NOTE: Skip because it is figjam property
   }
+
+  context.unnest();
 }
 
 export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {}
@@ -66,6 +70,9 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   const { children } = node;
   children.forEach((child) => {
     const { id, name, type } = child;
-    console.log(JSON.stringify({ id, name, type }));
+    const { indentLevel } = context;
+    console.log(JSON.stringify({ id, name, type, indentLevel }));
+
+    walk(context, child);
   });
 }
