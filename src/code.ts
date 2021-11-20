@@ -8,8 +8,8 @@ const run = async () => {
 
   // For debugging code
   const rect = figma.createText();
-  rect.x = -3000;
-  rect.y = -2300;
+  rect.x = 100;
+  rect.y = 50;
   await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
   rect.characters = traversedContext.code;
   rect.fills = [{ type: "SOLID", color: { r: 1, g: 0.5, b: 0 } }];
