@@ -2,9 +2,11 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["es6"],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/@figma"
-    ]
-  }
+    "outDir": "lib",
+    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"],
+    "sourceMap": true,
+    "strict": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/*.ts", "src/**/*.ts", "code.ts"]
 }
