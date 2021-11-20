@@ -123,7 +123,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   children.forEach((child) => {
     const { id, name, type } = child;
     const { indent } = context;
-    console.log(JSON.stringify({ indent, id, name, type }));
 
     walk(context, child);
   });
