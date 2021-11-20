@@ -1,21 +1,15 @@
-
-const path = require('path')
+const path = require("path");
 
 module.exports = (env, argv) => ({
-  mode: argv.mode === 'production' ? 'production' : 'development',
-  devtool: argv.mode === 'production' ? false : 'inline-source-map',
-  entry: {
-    code: './src/code.ts'
-  },
+  entry: "./src/code.ts",
+  mode: argv.mode === "production" ? "production" : "development",
+  devtool: argv.mode === "production" ? false : "inline-source-map",
   module: {
-    rules: [
-      { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
-    ]
+    rules: [{ test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/ }],
   },
-  resolve: { extensions: ['.tsx', '.ts', '.jsx', '.js'] },
+  resolve: { extensions: [".tsx", ".ts", ".jsx", ".js"] },
   output: {
-    filename: 'code.js',
-    path: path.resolve(__dirname, 'lib')
-  }
-})
-
+    filename: "code.js",
+    path: path.resolve(__dirname, "lib"),
+  },
+});
