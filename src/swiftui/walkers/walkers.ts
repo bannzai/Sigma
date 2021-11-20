@@ -1,4 +1,5 @@
 import * as assert from "assert";
+import { SwiftUIContext } from "../context";
 
 export function walkToScene(context: SwiftUIContext, node: SceneNode) {
   if (node.type === "BOOLEAN_OPERATION") {
