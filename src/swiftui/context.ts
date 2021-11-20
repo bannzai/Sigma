@@ -14,9 +14,6 @@ export class SwiftUIContext {
   }
 
   _indent(): string {
-    return Array(this.indent)
-      .fill("\t")
-      .map((r) => r)
-      .join();
+    return Array(this.indent).fill("\t").join();
   }
 }
