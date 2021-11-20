@@ -59,16 +59,30 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   context.unnest();
 }
 
-export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {}
-export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {}
-export function walkToGroup(context: SwiftUIContext, node: GroupNode) {}
-export function walkToLine(context: SwiftUIContext, node: LineNode) {}
-export function walkToRectagnle(context: SwiftUIContext, node: RectangleNode) {}
+export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {
+  trace(`#walkToComponent`, context, node);
+}
+export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
+  trace(`#walkToEllipse`, context, node);
+}
+export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
+  trace(`#walkToGroup`, context, node);
+}
+export function walkToLine(context: SwiftUIContext, node: LineNode) {
+  trace(`#walkToLine`, context, node);
+}
+export function walkToRectagnle(context: SwiftUIContext, node: RectangleNode) {
+  trace(`#walkToRectagnle`, context, node);
+}
 export function walkToShapeWithText(
   context: SwiftUIContext,
   node: ShapeWithTextNode
-) {}
-export function walkToText(context: SwiftUIContext, node: TextNode) {}
+) {
+  trace(`#walkToShapeWithText`, context, node);
+}
+export function walkToText(context: SwiftUIContext, node: TextNode) {
+  trace(`#walkToText`, context, node);
+}
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
 
