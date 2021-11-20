@@ -158,13 +158,10 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   }
 
   children.forEach((child) => {
-    const { id, name, type } = child;
-    const { indent } = context;
-
     walk(context, child);
   });
 
   if (isExistsContainer) {
-    context.add("\n}\n");
+    context.add("}", { lineBreakType: "Left" });
   }
 }
