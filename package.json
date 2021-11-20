@@ -9,7 +9,8 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "@figma/plugin-typings": "^1.39.1"
+    "@figma/plugin-typings": "^1.39.1",
+    "webpack": "^5.64.1"
   },
   "dependencies": {
     "@types/assert": "^1.5.6"
