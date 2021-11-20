@@ -1,4 +1,4 @@
-import { walkToScene } from "./src/swiftui/walkers/walkers";
+import { walkToScene } from "./swiftui/walkers/walkers";
 
 const run = () => {
   const root = figma.currentPage.selection[0];
