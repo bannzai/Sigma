@@ -1,7 +1,10 @@
 import * as assert from "assert";
+import { trace } from "../../util/tracer";
 import { SwiftUIContext } from "../context";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
+  trace(`#walk`, context, node);
+
   context.nest();
 
   if (node.type === "BOOLEAN_OPERATION") {
@@ -67,7 +70,56 @@ export function walkToShapeWithText(
 ) {}
 export function walkToText(context: SwiftUIContext, node: TextNode) {}
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
-  const { children } = node;
+  trace(`#walkToFrame`, context, node);
+
+  const { children, layoutMode, itemSpacing, counterAxisAlignItems } = node;
+
+  console.log(
+    JSON.stringify({
+      children,
+      layoutMode,
+      itemSpacing,
+      counterAxisAlignItems,
+    })
+  );
+
+  var containerCode: string = "";
+  if (layoutMode === "HORIZONTAL") {
+    containerCode += "HStack(";
+
+    const args: string[] = [];
+    if (counterAxisAlignItems === "MIN") {
+      args.push("alignment: .top");
+    } else if (counterAxisAlignItems === "MAX") {
+      args.push("alignment: .bottom");
+    }
+    args.push(`spacing: ${itemSpacing}`);
+
+    containerCode += args.join(", ");
+    containerCode += ")";
+  } else if (layoutMode === "VERTICAL") {
+    containerCode += "VStack(";
+
+    const args: string[] = [];
+    if (counterAxisAlignItems === "MIN") {
+      args.push("alignment: .leading");
+    } else if (counterAxisAlignItems === "MAX") {
+      args.push("alignment: .trailing");
+    }
+    args.push(`spacing: ${itemSpacing}`);
+
+    containerCode += args.join(", ");
+    containerCode += ")";
+  } else if (children.length > 1) {
+    containerCode += "ZStack";
+  }
+
+  const isExistsContainer = containerCode.length > 0;
+  if (isExistsContainer) {
+    context.add(containerCode);
+    context.add(" {\n");
+  }
+
   children.forEach((child) => {
     const { id, name, type } = child;
     const { indent } = context;
@@ -75,4 +127,8 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
     walk(context, child);
   });
+
+  if (isExistsContainer) {
+    context.add("\n}");
+  }
 }

@@ -8,4 +8,15 @@ export class SwiftUIContext {
   unnest() {
     this.indent -= 4;
   }
+
+  add(code: string) {
+    this.code += `${this._indent()} ${code}`;
+  }
+
+  _indent(): string {
+    return Array(this.indent)
+      .fill("\t")
+      .map((r) => r)
+      .join();
+  }
 }
