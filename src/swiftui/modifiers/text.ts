@@ -17,7 +17,7 @@ export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
     }
 
     const fontSize = node.fontSize;
-    context.add(`\n.font(.system(size: ${fontWeight}))`);
+    context.add(`\n.font(.system(size: ${fontSize}))`);
 
     // TOOD: Mapping to SwiftUI FontFamily
     // const fontFamily = node.fontName.family;
