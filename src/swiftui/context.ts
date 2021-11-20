@@ -1,4 +1,4 @@
-export type LineBreakType = "Left" | "Right" | "None" | "Both";
+export type LineBreakType = "Left" | "Right" | "Both";
 
 export class SwiftUIContext {
   indent: number = 0;
@@ -11,16 +11,28 @@ export class SwiftUIContext {
     this.indent -= 4;
   }
 
-  add(code: string, lineBreakType: LineBreakType = "None") {
-    if (lineBreakType === "None") {
-      this.code += `${this._indent()}${code}`;
+  add(
+    code: string,
+    options?: {
+      lineBreakType?: LineBreakType;
+      withoutIndent?: boolean;
+    }
+  ) {
+    const { lineBreakType, withoutIndent } = options ?? {
+      lineBreakType: undefined,
+      withoutIndent: undefined,
+    };
+
+    const indent = withoutIndent ? "" : this._indent();
+    if (lineBreakType == null) {
+      this.code += `${indent}${code}`;
     } else {
       if (lineBreakType === "Left") {
-        this.code += `\n${this._indent()}${code}`;
+        this.code += `\n${indent}${code}`;
       } else if (lineBreakType === "Right") {
-        this.code += `${this._indent()}${code}\n`;
+        this.code += `${indent}${code}\n`;
       } else if (lineBreakType === "Both") {
-        this.code += `\n${this._indent()}${code}\n`;
+        this.code += `\n${indent}${code}\n`;
       }
     }
   }
