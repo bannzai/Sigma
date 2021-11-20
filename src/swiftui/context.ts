@@ -1,4 +1,4 @@
-export type LineBreakType = "Left" | "Right";
+export type LineBreakType = "Left" | "Right" | "Both";
 
 export class SwiftUIContext {
   indent: number = 0;
@@ -21,8 +21,6 @@ export class SwiftUIContext {
     const lineBreakType = options?.lineBreakType ?? null;
     const withoutIndent = options?.withoutIndent ?? false;
 
-    console.log(JSON.stringify({ lineBreakType, withoutIndent, code }));
-
     const indent = withoutIndent ? "" : this._indent();
     if (lineBreakType == null) {
       this.code += `${indent}${code}`;
@@ -31,6 +29,8 @@ export class SwiftUIContext {
         this.code += `\n${indent}${code}`;
       } else if (lineBreakType === "Right") {
         this.code += `${indent}${code}\n`;
+      } else if (lineBreakType === "Both") {
+        this.code += `\n${indent}${code}\n`;
       }
     }
   }
