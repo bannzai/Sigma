@@ -5,20 +5,20 @@ export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
   context.nest();
 
   if (node.textDecoration === "UNDERLINE") {
-    context.add("\n.underline()");
+    context.add(".underline()", "Left");
   } else if (node.textDecoration === "STRIKETHROUGH") {
-    context.add("\n.strikethrough()");
+    context.add(".strikethrough()", "Left");
   }
 
   // NOTE: Sigma only supports single font member on Text
   if (node.fontName !== figma.mixed && node.fontSize !== figma.mixed) {
     const fontWeight = mappedFontWeight(node.fontName);
     if (fontWeight != null) {
-      context.add(`\n.fontWeight(.${fontWeight})`);
+      context.add(`.fontWeight(.${fontWeight})`, "Left");
     }
 
     const fontSize = node.fontSize;
-    context.add(`\n.font(.system(size: ${fontSize}))`);
+    context.add(`.font(.system(size: ${fontSize}))`, "Left");
 
     // TOOD: Mapping to SwiftUI FontFamily
     // const fontFamily = node.fontName.family;
@@ -29,7 +29,10 @@ export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
     for (const fill of node.fills) {
       if (fill.type === "SOLID") {
         const { color, opacity } = fill;
-        context.add(`\n.foregroundColor(${mappedSwiftUIColor(color, opacity)}`);
+        context.add(
+          `.foregroundColor(${mappedSwiftUIColor(color, opacity)})`,
+          "Left"
+        );
       } else {
         // TODO:
       }
