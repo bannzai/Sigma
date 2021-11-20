@@ -1,10 +1,24 @@
 import { SwiftUIContext } from "./swiftui/context";
 import { walk } from "./swiftui/walkers/walkers";
 
-const run = () => {
+const run = async () => {
   const root = figma.currentPage.selection[0];
   const traversedContext = traversed(root);
   print(traversedContext);
+
+  // For debugging code
+  const rect = figma.createText();
+  rect.x = -3000;
+  rect.y = -2300;
+  await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+  rect.characters = traversedContext.code;
+  rect.fills = [{ type: "SOLID", color: { r: 1, g: 0.5, b: 0 } }];
+  figma.currentPage.appendChild(rect);
+  const nodes = [rect];
+  figma.currentPage.selection = nodes;
+  figma.viewport.scrollAndZoomIntoView(nodes);
+
+  figma.closePlugin();
 };
 
 const traversed = (root: SceneNode): SwiftUIContext => {
@@ -18,4 +32,3 @@ const print = (context: SwiftUIContext) => {
 };
 
 run();
-figma.closePlugin();
