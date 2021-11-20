@@ -55,6 +55,9 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
     // TODO:
   } else if (node.type === "WIDGET") {
     // NOTE: Skip because it is figjam property
+  } else {
+    // NOTE: Check if all cases are covered
+    const _: never = node;
   }
 
   context.unnest();
