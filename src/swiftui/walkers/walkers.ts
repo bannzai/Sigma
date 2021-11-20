@@ -120,6 +120,11 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     })
   );
 
+  // FIXME: Hotfix
+  if (!context.code.endsWith("\n")) {
+    context.add("\n");
+  }
+
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
     containerCode += "HStack(";
