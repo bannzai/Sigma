@@ -2,3 +2,5 @@
 node_modules
 
 code.js
+src/**/*.js
+src/*.js
