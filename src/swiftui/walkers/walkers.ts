@@ -68,6 +68,14 @@ export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
 }
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
+
+  if (node.name.includes("SwiftUI:Button")) {
+    context.add("Button(action: { /* TODO */ }) {", { lineBreakType: "Right" });
+    node.children.forEach((child) => {
+      walk(context, child);
+    });
+    context.add("}", { lineBreakType: "Left" });
+  }
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
