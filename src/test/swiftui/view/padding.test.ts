@@ -178,5 +178,36 @@ describe("#View.padding(_:)", () => {
     .padding(.horizontal, 10)`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
+
+    test("All different values", async () => {
+      await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+      const vstack = figma.createFrame();
+      vstack.layoutMode = "VERTICAL";
+      vstack.counterAxisAlignItems = "MIN";
+      vstack.paddingLeft = 1;
+      vstack.paddingTop = 2;
+      vstack.paddingRight = 3;
+      vstack.paddingBottom = 4;
+      vstack.itemSpacing = 10;
+      vstack.appendChild(createText("1"));
+      vstack.appendChild(createText("2"));
+      vstack.appendChild(createText("3"));
+
+      const context = new SwiftUIContext();
+      walk(context, vstack);
+
+      const code = `
+    VStack(alignment: .leading, spacing: 10) {
+        Text("1")
+        Text("2")
+        Text("3")
+    }
+    .padding(.left, 1)
+    .padding(.top, 2)
+    .padding(.right, 3)
+    .padding(.bottom, 4)`;
+      expect(context.code).toEqual(code.slice("\n".length));
+    });
   });
 });
