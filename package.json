@@ -5,6 +5,7 @@
   "main": "code.js",
   "scripts": {
     "test": "jest",
+    "build": "webpack --mode=development",
     "dev:watch": "webpack --mode=development --watch"
   },
   "author": "",
