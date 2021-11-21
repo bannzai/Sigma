@@ -29,11 +29,11 @@ describe("#VStack", () => {
     const context = new SwiftUIContext();
     walk(context, vstack);
 
-    const code = `
+    const code = `\
     VStack(alignment: .leading, spacing: 10) {
-       Text("1")
-       Text("2")
-       Text("3")
+        Text("1")
+        Text("2")
+        Text("3")
     }`;
     expect(context.code).toEqual(code);
   });
