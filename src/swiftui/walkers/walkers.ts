@@ -103,7 +103,7 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
   const { characters } = node;
   const stringList = characters.split("\n");
   if (stringList.length <= 1) {
-    context.add(`Text("${characters}")`);
+    context.add(`Text("${characters}")\n`);
   } else {
     context.add(`Text("""\n`);
     stringList.forEach((string) => {
