@@ -15,7 +15,10 @@ export class SwiftUIContext {
       withoutIndent?: boolean;
     }
   ) {
-    const withoutIndent = options?.withoutIndent ?? false;
+    var withoutIndent = options?.withoutIndent ?? false;
+    if (code === "\n") {
+      withoutIndent = true;
+    }
 
     const indent = withoutIndent ? "" : this._indent();
     this.code += `${indent}${code}`;

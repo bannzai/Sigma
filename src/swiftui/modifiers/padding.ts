@@ -33,33 +33,44 @@ export function adaptPaddingModifier(
     if (left !== 0 || right !== 0) {
       if (left === right) {
         paddings.set("horizontal", left);
-      } else if (left !== 0) {
-        paddings.set("left", left);
-      } else if (right !== 0) {
-        paddings.set("right", right);
+      } else {
+        if (left !== 0) {
+          paddings.set("left", left);
+        }
+        if (right !== 0) {
+          paddings.set("right", right);
+        }
       }
     }
 
     if (top !== 0 || bottom !== 0) {
       if (top === bottom) {
         paddings.set("vertical", top);
-      } else if (top !== 0) {
-        paddings.set("top", top);
-      } else if (right !== 0) {
-        paddings.set("bottom", bottom);
+      } else {
+        if (top !== 0) {
+          paddings.set("top", top);
+        }
+        if (right !== 0) {
+          paddings.set("bottom", bottom);
+        }
       }
     }
 
     const paddingValues = Array.from(paddings.values());
     const isAllEqual = paddingValues.every((e) => e === paddingValues[0]);
-    if (isAllEqual) {
+    if (isAllEqual && paddingValues.length !== 1) {
       const directions = Array.from(paddings.keys())
         .map((e) => `.${e}`)
         .join(", ");
       context.add("\n");
-      context.add(`.padding(${directions}, ${paddingValues[0]})`);
+      context.add(`.padding([${directions}], ${paddingValues[0]})`);
     } else {
-      paddings.forEach((value, key) => {
+      const keys = Array.from(paddings.keys());
+      const compare: (l: PaddingType, r: PaddingType) => number = (l, r) => {
+        return paddingTypes.indexOf(l) - paddingTypes.indexOf(r);
+      };
+      keys.sort(compare).forEach((key) => {
+        const value = paddings.get(key)!;
         context.add("\n");
         context.add(`.padding(.${key}, ${value})`);
       });
