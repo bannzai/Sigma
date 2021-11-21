@@ -59,9 +59,9 @@ export function adaptPaddingModifier(
       context.add("\n");
       context.add(`.padding(${directions}, ${paddingValues[0]})`);
     } else {
-      paddings.forEach((k, v) => {
+      paddings.forEach((value, key) => {
         context.add("\n");
-        context.add(`.padding(.${k}, ${v})`);
+        context.add(`.padding(.${key}, ${value})`);
       });
     }
   }
