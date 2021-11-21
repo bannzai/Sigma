@@ -4,6 +4,7 @@
   "description": "Your Figma plugin",
   "main": "code.js",
   "scripts": {
+    "test": "jest",
     "dev:watch": "webpack --mode=development --watch"
   },
   "author": "",
