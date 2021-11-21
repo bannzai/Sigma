@@ -15,8 +15,6 @@ export function adaptPaddingModifier(
     return;
   }
 
-  context.nest();
-
   if (left === top && top === right && right === bottom) {
     context.add("\n");
     context.add(`.padding(.all, ${top})`);
@@ -67,6 +65,4 @@ export function adaptPaddingModifier(
       });
     }
   }
-
-  context.unnest();
 }
