@@ -1,31 +1,41 @@
 import { SwiftUIContext } from "../../../swiftui/context";
 import { walk } from "../../../swiftui/walkers/walkers";
+import { createText } from "./utility";
+import { createFigma } from "figma-api-stub";
 
 describe("#VStack", () => {
-  context("it is besically pattern. VStack has three text", () => {
-    it("", () => {
-      const vstack = figma.createFrame();
-      vstack.layoutMode = "VERTICAL";
-      vstack.appendChild(createText("1"));
-      vstack.appendChild(createText("2"));
-      vstack.appendChild(createText("3"));
+  const figma = createFigma({
+    simulateErrors: true,
+    isWithoutTimeout: false,
+  });
+  // @ts-ignore for some reason, need to override this for figma.mixed to work
+  global.figma = figma;
 
-      const context = new SwiftUIContext();
-      walk(context, vstack);
+  test("it is besically pattern. VStack has three text", async () => {
+    await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
-      context.code = `
-VStack(alignment: .leading, spacing: 0) {
+    const vstack = figma.createFrame();
+    vstack.layoutMode = "VERTICAL";
+    vstack.counterAxisAlignItems = "MIN";
+    vstack.paddingLeft = 0;
+    vstack.paddingTop = 0;
+    vstack.paddingRight = 0;
+    vstack.paddingBottom = 0;
+    vstack.itemSpacing = 10;
+    vstack.appendChild(createText("1"));
+    vstack.appendChild(createText("2"));
+    vstack.appendChild(createText("3"));
+
+    const context = new SwiftUIContext();
+    walk(context, vstack);
+
+    const code = `
+VStack(alignment: .leading, spacing: 10) {
    Text("1")
    Text("2")
    Text("3")
 }
       `;
-    });
+    expect(context.code).toEqual(code);
   });
 });
-
-const createText = (text: string): TextNode => {
-  const node = figma.createText();
-  node.characters = text;
-  return node;
-};
