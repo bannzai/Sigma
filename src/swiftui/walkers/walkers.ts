@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import { trace } from "../../util/tracer";
 import { SwiftUIContext } from "../context";
+import { adaptPaddingModifier } from "../modifiers/padding";
 import { adaptTextModifier } from "../modifiers/text";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
@@ -65,6 +66,8 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
 
 export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {
   trace(`#walkToComponent`, context, node);
+
+  adaptPaddingModifier(context, node);
 }
 export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
   trace(`#walkToEllipse`, context, node);
@@ -166,4 +169,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.add("\n");
     context.add("}");
   }
+
+  adaptPaddingModifier(context, node);
 }
