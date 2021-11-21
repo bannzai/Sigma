@@ -9,6 +9,7 @@
   "author": "",
   "license": "",
   "devDependencies": {
+    "@babel/preset-typescript": "^7.16.0",
     "@figma/plugin-typings": "^1.39.1",
     "@types/jest": "^27.0.3",
     "jest": "^27.3.1",
