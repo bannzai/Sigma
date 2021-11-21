@@ -65,7 +65,12 @@ export function adaptPaddingModifier(
       context.add("\n");
       context.add(`.padding([${directions}], ${paddingValues[0]})`);
     } else {
-      paddings.forEach((value, key) => {
+      const keys = Array.from(paddings.keys());
+      const compare: (l: PaddingType, r: PaddingType) => number = (l, r) => {
+        return paddingTypes.indexOf(l) - paddingTypes.indexOf(r);
+      };
+      keys.sort(compare).forEach((key) => {
+        const value = paddings.get(key)!;
         context.add("\n");
         context.add(`.padding(.${key}, ${value})`);
       });
