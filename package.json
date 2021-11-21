@@ -4,12 +4,18 @@
   "description": "Your Figma plugin",
   "main": "code.js",
   "scripts": {
+    "test": "jest",
     "dev:watch": "webpack --mode=development --watch"
   },
   "author": "",
   "license": "",
   "devDependencies": {
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
     "@figma/plugin-typings": "^1.39.1",
+    "@types/jest": "^27.0.3",
+    "figma-api-stub": "^0.0.48",
+    "jest": "^27.3.1",
     "ts-loader": "^9.2.6",
     "webpack": "^5.64.1",
     "webpack-cli": "^4.9.1"
