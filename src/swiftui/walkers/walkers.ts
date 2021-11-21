@@ -55,6 +55,9 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
     // TODO:
   } else if (node.type === "WIDGET") {
     // NOTE: Skip because it is figjam property
+  } else {
+    // NOTE: Check if all cases are covered
+    const _: never = node;
   }
 
   context.unnest();
@@ -70,11 +73,13 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
   if (node.name.includes("SwiftUI:Button")) {
-    context.add("Button(action: { /* TODO */ }) {", { lineBreakType: "Right" });
+    context.add("Button(action: { /* TODO */ }) {");
+    context.add("\n");
     node.children.forEach((child) => {
       walk(context, child);
     });
-    context.add("}", { lineBreakType: "Left" });
+    context.add("\n");
+    context.add("}");
   }
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
@@ -110,15 +115,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
 
   const { children, layoutMode, itemSpacing, counterAxisAlignItems } = node;
-
-  console.log(
-    JSON.stringify({
-      children,
-      layoutMode,
-      itemSpacing,
-      counterAxisAlignItems,
-    })
-  );
 
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
@@ -167,6 +163,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   });
 
   if (isExistsContainer) {
-    context.add("}", { lineBreakType: "Left" });
+    context.add("\n");
+    context.add("}");
   }
 }

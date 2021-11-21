@@ -5,20 +5,24 @@ export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
   context.nest();
 
   if (node.textDecoration === "UNDERLINE") {
-    context.add(".underline()", { lineBreakType: "Left" });
+    context.add("\n");
+    context.add(".underline()");
   } else if (node.textDecoration === "STRIKETHROUGH") {
-    context.add(".strikethrough()", { lineBreakType: "Left" });
+    context.add("\n");
+    context.add(".strikethrough()");
   }
 
   // NOTE: Sigma only supports single font member on Text
   if (node.fontName !== figma.mixed && node.fontSize !== figma.mixed) {
     const fontWeight = mappedFontWeight(node.fontName);
     if (fontWeight != null) {
-      context.add(`.fontWeight(.${fontWeight})`, { lineBreakType: "Left" });
+      context.add("\n");
+      context.add(`.fontWeight(.${fontWeight})`);
     }
 
     const fontSize = node.fontSize;
-    context.add(`.font(.system(size: ${fontSize}))`, { lineBreakType: "Left" });
+    context.add("\n");
+    context.add(`.font(.system(size: ${fontSize}))`);
 
     // TOOD: Mapping to SwiftUI FontFamily
     // const fontFamily = node.fontName.family;
@@ -29,9 +33,8 @@ export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
     for (const fill of node.fills) {
       if (fill.type === "SOLID") {
         const { color, opacity } = fill;
-        context.add(`.foregroundColor(${mappedSwiftUIColor(color, opacity)})`, {
-          lineBreakType: "Left",
-        });
+        context.add("\n");
+        context.add(`.foregroundColor(${mappedSwiftUIColor(color, opacity)})`);
       } else {
         // TODO:
       }
@@ -59,7 +62,7 @@ export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
 */
 
 function mappedFontWeight(fontName: FontName): string | null {
-  const mapOffigmaAndSwiftUIFontWeight: { [key: string]: string } = {
+  const mapOfFigmaAndSwiftUIFontWeight: { [key: string]: string } = {
     thin: "ultraLight",
     extralight: "thin",
     light: "light",
@@ -71,5 +74,5 @@ function mappedFontWeight(fontName: FontName): string | null {
     heavy: "heavy",
     black: "black",
   };
-  return mapOffigmaAndSwiftUIFontWeight[fontName.style];
+  return mapOfFigmaAndSwiftUIFontWeight[fontName.style];
 }
