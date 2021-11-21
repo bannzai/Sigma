@@ -30,7 +30,7 @@ describe("#HStack", () => {
     walk(context, vstack);
 
     const code = `
-    HStack(alignment: .leading, spacing: 10) {
+    HStack(alignment: .top, spacing: 10) {
         Text("1")
         Text("2")
         Text("3")
