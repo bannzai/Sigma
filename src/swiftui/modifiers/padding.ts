@@ -52,12 +52,12 @@ export function adaptPaddingModifier(
 
     const paddingValues = Array.from(paddings.values());
     const isAllEqual = paddingValues.every((e) => e === paddingValues[0]);
-    if (isAllEqual) {
+    if (isAllEqual && paddingValues.length !== 1) {
       const directions = Array.from(paddings.keys())
         .map((e) => `.${e}`)
         .join(", ");
       context.add("\n");
-      context.add(`.padding(${directions}, ${paddingValues[0]})`);
+      context.add(`.padding([${directions}], ${paddingValues[0]})`);
     } else {
       paddings.forEach((value, key) => {
         context.add("\n");
