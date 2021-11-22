@@ -6,8 +6,6 @@ export function walkForMask(
   maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode
 ) {
-  context.nest();
-
   const temporaryContext = new SwiftUIContext();
   temporaryContext.ignoredIndent = true;
   walk(temporaryContext, maskingNode);
@@ -18,6 +16,4 @@ export function walkForMask(
     context.add(`.mask(${temporaryContext.code})\n`);
     context.unnest();
   }
-
-  context.unnest();
 }

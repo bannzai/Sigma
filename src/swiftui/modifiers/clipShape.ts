@@ -6,8 +6,6 @@ export function walkForClipShape(
   maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode
 ) {
-  context.nest();
-
   const temporaryContext = new SwiftUIContext();
   temporaryContext.ignoredIndent = true;
   walk(temporaryContext, maskingNode);
@@ -18,6 +16,4 @@ export function walkForClipShape(
     context.add(`.clipShape(${temporaryContext.code})\n`);
     context.unnest();
   }
-
-  context.unnest();
 }
