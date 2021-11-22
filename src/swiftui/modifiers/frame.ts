@@ -8,23 +8,11 @@ export function walkForFrame(
     name,
     width,
     height,
-    absoluteRenderBounds,
     primaryAxisSizingMode,
     counterAxisSizingMode,
     layoutAlign,
     layoutMode,
   } = node;
-  console.log(
-    JSON.stringify({
-      name,
-      width,
-      height,
-      absoluteRenderBounds,
-      layoutAlign,
-      primaryAxisSizingMode,
-      counterAxisSizingMode,
-    })
-  );
 
   if (
     layoutAlign === "MIN" ||
@@ -80,14 +68,14 @@ export function walkForFrame(
            */
         context.add(`.frame(maxWidth: .infinity, maxHeight: .infinity)`);
       } else if (layoutMode === "VERTICAL") {
-        const isFixedHeight = primaryAxisSizingMode !== "AUTO";
+        const isFixedHeight = primaryAxisSizingMode === "FIXED";
         if (isFixedHeight) {
           context.add(`.frame(maxWidth: .infinity, maxHeight: ${height})`);
         } else {
           context.add(`.frame(maxWidth: .infinity)`);
         }
       } else if (layoutMode === "HORIZONTAL") {
-        const isFixedWidth = primaryAxisSizingMode !== "AUTO";
+        const isFixedWidth = primaryAxisSizingMode === "FIXED";
         if (isFixedWidth) {
           context.add(`.frame(maxWidth: ${width}, maxHeight: .infinity)`);
         } else {
@@ -98,4 +86,6 @@ export function walkForFrame(
       const _: never = layoutAlign;
     }
   }
+
+  context.lineBreak();
 }
