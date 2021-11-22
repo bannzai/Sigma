@@ -3,7 +3,7 @@ import { trace } from "../../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
-import { walkForImage } from "../image";
+import { walkForImage } from "../view/image";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   trace(`#walk`, context, node);
