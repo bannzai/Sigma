@@ -4,9 +4,11 @@ import { SwiftUIContext } from "../context";
 import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
 import { walkForImage } from "../image";
+import { isBlendMixin } from "../type/type_guards";
+import { walkForClipShape } from "../modifiers/clipShape";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
-  trace(`#walk`, context, node);
+  // trace(`#walk`, context, node);
 
   context.nest();
 
