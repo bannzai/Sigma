@@ -25,4 +25,18 @@ Image("image")
 `;
     expect(context.code).toEqual(code.slice("\n".length));
   });
+
+  test("Image for scaleMode to FILL", async () => {
+    const rectangle = figma.createRectangle();
+    rectangle.name = "image";
+    rectangle.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: "" }];
+
+    const context = new SwiftUIContext();
+    walk(context, rectangle);
+
+    const code = `
+Image("image")
+`;
+    expect(context.code).toEqual(code.slice("\n".length));
+  });
 });
