@@ -1,6 +1,6 @@
 import { SwiftUIContext } from "../../../swiftui/context";
 import { walk } from "../../../swiftui/walkers/walkers";
-import { createText } from "./utility";
+import { createText } from "../view/utility";
 import { createFigma } from "figma-api-stub";
 
 describe("#View.padding(_:)", () => {
