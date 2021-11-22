@@ -8,7 +8,7 @@ export function walkForImage(context: SwiftUIContext, node: ImageNode) {
     for (const fill of fills) {
       if (fill.type === "IMAGE") {
         context.lineBreak();
-        context.add(`Image("${name}")`);
+        context.add(`Image("${name}")\n`);
         walkForImageModifier(context, fill);
       }
     }
