@@ -113,7 +113,7 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
           if (isBlendMixin(child)) {
             walkForMask(context, target, child);
           } else {
-            walk(context, child);
+            assert(false, "unexpected is not mask node");
           }
           context.unnest();
         });
