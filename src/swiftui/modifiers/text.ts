@@ -1,7 +1,7 @@
 import { mappedSwiftUIColor } from "../../util/mapper";
 import { SwiftUIContext } from "../context";
 
-export function adaptTextModifier(context: SwiftUIContext, node: TextNode) {
+export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
   context.nest();
 
   if (node.textDecoration === "UNDERLINE") {
