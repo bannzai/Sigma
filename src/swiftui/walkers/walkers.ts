@@ -11,8 +11,6 @@ import { walkForClipShape } from "../modifiers/clipShape";
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
 
-  context.nest();
-
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip
   } else if (node.type === "CODE_BLOCK") {
@@ -64,8 +62,6 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
     // NOTE: Check if all cases are covered
     const _: never = node;
   }
-
-  context.unnest();
 }
 
 export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {
@@ -99,7 +95,7 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
         walk(context, target);
 
         const { id, width, height } = target;
-        console.log(JSON.stringify({ id, width, height }));
+        console.debug(JSON.stringify({ id, width, height }));
 
         const maskNode = reversed[1] as BlendMixin & SceneNode;
         walkForClipShape(context, target, maskNode);
