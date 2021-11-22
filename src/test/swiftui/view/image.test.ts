@@ -12,8 +12,6 @@ describe("#Image", () => {
   global.figma = figma;
 
   test("Image for scaleMode to FIT", async () => {
-    await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
-
     const rectangle = figma.createRectangle();
     rectangle.name = "image";
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash: "" }];
