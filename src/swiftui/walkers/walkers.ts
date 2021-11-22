@@ -118,6 +118,12 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
           context.unnest();
         });
       }
+
+      const { width, height } = node;
+      context.lineBreak();
+      context.nest();
+      context.add(`.frame(width: ${width}, height: ${height})`);
+      context.unnest();
     } else {
       node.children.forEach((child) => {
         context.nest();
