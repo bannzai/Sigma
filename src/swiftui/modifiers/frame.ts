@@ -86,4 +86,6 @@ export function walkForFrame(
       const _: never = layoutAlign;
     }
   }
+
+  context.lineBreak();
 }
