@@ -40,7 +40,7 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   } else if (node.type === "POLYGON") {
     // TODO:
   } else if (node.type === "RECTANGLE") {
-    walkToRectagnle(context, node);
+    walkToRectangle(context, node);
   } else if (node.type === "SHAPE_WITH_TEXT") {
     walkToShapeWithText(context, node);
   } else if (node.type === "SLICE") {
@@ -83,13 +83,17 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
     });
     context.lineBreak();
     context.add("}");
+  } else {
+    node.children.forEach((child) => {
+      walk(context, child);
+    });
   }
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
 }
-export function walkToRectagnle(context: SwiftUIContext, node: RectangleNode) {
-  trace(`#walkToRectagnle`, context, node);
+export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
+  trace(`#walkToRectangle`, context, node);
   walkForImage(context, node);
 }
 export function walkToShapeWithText(
