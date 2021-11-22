@@ -23,8 +23,8 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       walk(context, text);
 
       const code = `
-    Text("Hello")
-        .underline()`;
+Text("Hello")
+    .underline()`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
@@ -41,8 +41,8 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       walk(context, text);
 
       const code = `
-    Text("Hello")
-        .strikethrough()`;
+Text("Hello")
+    .strikethrough()`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
@@ -59,8 +59,8 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       walk(context, text);
 
       const code = `
-    Text("Hello")
-        .foregroundColor(Color(red: 1, green: 1, blue: 0))`;
+Text("Hello")
+    .foregroundColor(Color(red: 1, green: 1, blue: 0))`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -77,8 +77,8 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       walk(context, text);
 
       const code = `
-    Text("Hello")
-        .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))`;
+Text("Hello")
+    .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
@@ -98,9 +98,9 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       walk(context, text);
 
       const code = `
-    Text("Hello")
-        .strikethrough()
-        .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))`;
+Text("Hello")
+    .strikethrough()
+    .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });

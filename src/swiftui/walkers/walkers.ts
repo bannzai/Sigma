@@ -3,11 +3,13 @@ import { trace } from "../../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
+import { walkForImage } from "../image";
+import { isBlendMixin } from "../type/type_guards";
+import { walkForMask } from "../modifiers/mask";
+import { walkForClipShape } from "../modifiers/clipShape";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
-  trace(`#walk`, context, node);
-
-  context.nest();
+  // trace(`#walk`, context, node);
 
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip
@@ -17,9 +19,11 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
     walkToComponent(context, node);
   } else if (node.type === "COMPONENT_SET") {
     assert(!node.children.every((component) => component.type === "COMPONENT"));
-    node.children.forEach((child) =>
-      walkToComponent(context, child as ComponentNode)
-    );
+    node.children.forEach((child) => {
+      context.nest();
+      walkToComponent(context, child as ComponentNode);
+      context.unnest();
+    });
   } else if (node.type === "CONNECTOR") {
     // NOTE: Skip because it is figjam property
   } else if (node.type === "ELLIPSE") {
@@ -39,7 +43,7 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   } else if (node.type === "POLYGON") {
     // TODO:
   } else if (node.type === "RECTANGLE") {
-    walkToRectagnle(context, node);
+    walkToRectangle(context, node);
   } else if (node.type === "SHAPE_WITH_TEXT") {
     walkToShapeWithText(context, node);
   } else if (node.type === "SLICE") {
@@ -60,8 +64,6 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
     // NOTE: Check if all cases are covered
     const _: never = node;
   }
-
-  context.unnest();
 }
 
 export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {
@@ -71,24 +73,72 @@ export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {
 }
 export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
   trace(`#walkToEllipse`, context, node);
+  context.add("Ellipse()");
 }
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
   if (node.name.includes("SwiftUI:Button")) {
+    context.lineBreak();
     context.add("Button(action: { /* TODO */ }) {\n");
     node.children.forEach((child) => {
+      context.nest();
       walk(context, child);
+      context.unnest();
     });
     context.lineBreak();
     context.add("}");
+  } else {
+    const isContainMaskNode = node.children.some(
+      (e) => isBlendMixin(e) && e.isMask
+    );
+    if (isContainMaskNode) {
+      if (node.children.length === 2) {
+        const reversed = Array.from(node.children).reverse();
+        const target = reversed[0];
+        walk(context, target);
+
+        const { id, width, height } = target;
+        console.log(JSON.stringify({ id, width, height }));
+
+        const maskNode = reversed[1] as BlendMixin & SceneNode;
+        walkForClipShape(context, target, maskNode);
+      } else {
+        const reversed = Array.from(node.children).reverse();
+        const target = reversed[0];
+        walk(context, target);
+
+        reversed.slice(1).forEach((child) => {
+          context.nest();
+          if (isBlendMixin(child)) {
+            walkForMask(context, target, child);
+          } else {
+            assert(false, "unexpected is not mask node");
+          }
+          context.unnest();
+        });
+      }
+
+      const { width, height } = node;
+      context.lineBreak();
+      context.nest();
+      context.add(`.frame(width: ${width}, height: ${height})`);
+      context.unnest();
+    } else {
+      node.children.forEach((child) => {
+        context.nest();
+        walk(context, child);
+        context.unnest();
+      });
+    }
   }
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
 }
-export function walkToRectagnle(context: SwiftUIContext, node: RectangleNode) {
-  trace(`#walkToRectagnle`, context, node);
+export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
+  trace(`#walkToRectangle`, context, node);
+  walkForImage(context, node);
 }
 export function walkToShapeWithText(
   context: SwiftUIContext,
@@ -106,7 +156,9 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
   } else {
     context.add(`Text("""\n`);
     stringList.forEach((string) => {
+      context.nest();
       context.add(`${string}\n`);
+      context.unnest();
     });
     context.add(`""")`);
   }
@@ -157,7 +209,9 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   }
 
   children.forEach((child) => {
+    context.nest();
     walk(context, child);
+    context.unnest();
   });
 
   if (isExistsContainer) {

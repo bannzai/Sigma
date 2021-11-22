@@ -1,6 +1,7 @@
 export class SwiftUIContext {
   indent: number = 0;
   code: string = "";
+  ignoredIndent: boolean = false;
 
   nest() {
     this.indent += 4;
@@ -25,12 +26,17 @@ export class SwiftUIContext {
   }
 
   lineBreak(isForceLineBreak: boolean = false) {
-    if (this.code.length > 0 && !this.code.endsWith("\n")) {
+    if (isForceLineBreak) {
+      this.add("\n");
+    } else if (this.code.length > 0 && !this.code.endsWith("\n")) {
       this.add("\n");
     }
   }
 
   _indent(): string {
+    if (this.ignoredIndent) {
+      return "";
+    }
     return Array(this.indent).fill(" ").join("");
   }
 }
