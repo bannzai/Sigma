@@ -82,4 +82,26 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
+
+  describe("combined some modifiers", () => {
+    test("", async () => {
+      await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+      const text = figma.createText();
+      text.characters = "Hello";
+      text.textDecoration = "STRIKETHROUGH";
+      text.fills = [
+        { type: "SOLID", color: { r: 1, g: 1, b: 0 }, opacity: 0.1 },
+      ];
+
+      const context = new SwiftUIContext();
+      walk(context, text);
+
+      const code = `
+    Text("Hello")
+        .strikethrough()
+        .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))`;
+      expect(context.code).toEqual(code.slice("\n".length));
+    });
+  });
 });
