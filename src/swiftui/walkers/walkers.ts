@@ -167,8 +167,15 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
+  node.parent
 
-  const { children, layoutMode, itemSpacing, counterAxisAlignItems } = node;
+  const {
+    children,
+    layoutMode,
+    itemSpacing,
+    counterAxisAlignItems,
+    primaryAxisAlignItems,
+  } = node;
 
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
@@ -208,11 +215,25 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.add(" {\n", { withoutIndent: true });
   }
 
+  if (primaryAxisAlignItems === "MAX") {
+    context.lineBreak();
+    context.nest();
+    context.add("Spacer()\n");
+    context.unnest();
+  }
+
   children.forEach((child) => {
     context.nest();
     walk(context, child);
     context.unnest();
   });
+
+  if (primaryAxisAlignItems === "MIN") {
+    context.lineBreak();
+    context.nest();
+    context.add("Spacer()\n");
+    context.unnest();
+  }
 
   if (isExistsContainer) {
     context.lineBreak();
