@@ -167,7 +167,6 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
-  node.parent
 
   const {
     children,
