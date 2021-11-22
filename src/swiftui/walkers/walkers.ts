@@ -87,8 +87,10 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
     context.lineBreak();
     context.add("}");
   } else {
-    const isMaskNode = node.children.some((e) => isBlendMixin(e) && e.isMask);
-    if (isMaskNode) {
+    const isContainMaskNode = node.children.some(
+      (e) => isBlendMixin(e) && e.isMask
+    );
+    if (isContainMaskNode) {
       const reversed = Array.from(node.children).reverse();
       const target = reversed[0];
       walk(context, target);
