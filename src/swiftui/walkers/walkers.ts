@@ -6,6 +6,7 @@ import { walkForTextModifier } from "../modifiers/text";
 import { walkForImage } from "../image";
 import { isBlendMixin } from "../type/type_guards";
 import { walkForMask } from "../modifiers/mask";
+import { walkForClipShape } from "../modifiers/clipShape";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -91,17 +92,26 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
       (e) => isBlendMixin(e) && e.isMask
     );
     if (isContainMaskNode) {
-      const reversed = Array.from(node.children).reverse();
-      const target = reversed[0];
-      walk(context, target);
+      if (node.children.length === 2) {
+        const reversed = Array.from(node.children).reverse();
+        const target = reversed[0];
+        walk(context, target);
 
-      reversed.slice(1).forEach((child) => {
-        if (isBlendMixin(child)) {
-          walkForMask(context, target, child);
-        } else {
-          walk(context, child);
-        }
-      });
+        const maskNode = reversed[1] as BlendMixin & SceneNode;
+        walkForClipShape(context, target, maskNode);
+      } else {
+        const reversed = Array.from(node.children).reverse();
+        const target = reversed[0];
+        walk(context, target);
+
+        reversed.slice(1).forEach((child) => {
+          if (isBlendMixin(child)) {
+            walkForMask(context, target, child);
+          } else {
+            walk(context, child);
+          }
+        });
+      }
     } else {
       node.children.forEach((child) => {
         walk(context, child);
