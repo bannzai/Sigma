@@ -19,9 +19,11 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
     walkToComponent(context, node);
   } else if (node.type === "COMPONENT_SET") {
     assert(!node.children.every((component) => component.type === "COMPONENT"));
-    node.children.forEach((child) =>
-      walkToComponent(context, child as ComponentNode)
-    );
+    node.children.forEach((child) => {
+      context.nest();
+      walkToComponent(context, child as ComponentNode);
+      context.unnest();
+    });
   } else if (node.type === "CONNECTOR") {
     // NOTE: Skip because it is figjam property
   } else if (node.type === "ELLIPSE") {
@@ -80,7 +82,9 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
     context.lineBreak();
     context.add("Button(action: { /* TODO */ }) {\n");
     node.children.forEach((child) => {
+      context.nest();
       walk(context, child);
+      context.unnest();
     });
     context.lineBreak();
     context.add("}");
@@ -105,16 +109,20 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
         walk(context, target);
 
         reversed.slice(1).forEach((child) => {
+          context.nest();
           if (isBlendMixin(child)) {
             walkForMask(context, target, child);
           } else {
             walk(context, child);
           }
+          context.unnest();
         });
       }
     } else {
       node.children.forEach((child) => {
+        context.nest();
         walk(context, child);
+        context.unnest();
       });
     }
   }
@@ -142,7 +150,9 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
   } else {
     context.add(`Text("""\n`);
     stringList.forEach((string) => {
+      context.nest();
       context.add(`${string}\n`);
+      context.unnest();
     });
     context.add(`""")`);
   }
@@ -193,7 +203,9 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   }
 
   children.forEach((child) => {
+    context.nest();
     walk(context, child);
+    context.unnest();
   });
 
   if (isExistsContainer) {
