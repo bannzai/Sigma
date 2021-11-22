@@ -214,4 +214,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   }
 
   walkForPadding(context, node);
+
+  context.lineBreak(true);
 }

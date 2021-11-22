@@ -26,7 +26,9 @@ export class SwiftUIContext {
   }
 
   lineBreak(isForceLineBreak: boolean = false) {
-    if (this.code.length > 0 && !this.code.endsWith("\n")) {
+    if (isForceLineBreak) {
+      this.add("\n");
+    } else if (this.code.length > 0 && !this.code.endsWith("\n")) {
       this.add("\n");
     }
   }

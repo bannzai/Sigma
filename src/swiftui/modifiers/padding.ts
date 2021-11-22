@@ -59,8 +59,8 @@ export function walkForPadding(context: SwiftUIContext, node: BaseFrameMixin) {
       const directions = Array.from(paddings.keys())
         .map((e) => `.${e}`)
         .join(", ");
-      context.add("\n");
-      context.add(`.padding([${directions}], ${paddingValues[0]})`);
+      context.lineBreak();
+      context.add(`.padding([${directions}], ${paddingValues[0]})\n`);
     } else {
       const keys = Array.from(paddings.keys());
       const compare: (l: PaddingType, r: PaddingType) => number = (l, r) => {
@@ -68,8 +68,8 @@ export function walkForPadding(context: SwiftUIContext, node: BaseFrameMixin) {
       };
       keys.sort(compare).forEach((key) => {
         const value = paddings.get(key)!;
-        context.add("\n");
-        context.add(`.padding(.${key}, ${value})`);
+        context.lineBreak();
+        context.add(`.padding(.${key}, ${value})\n`);
       });
     }
   }
