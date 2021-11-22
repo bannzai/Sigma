@@ -1,9 +1,6 @@
 import { SwiftUIContext } from "../context";
 
-export function adaptPaddingModifier(
-  context: SwiftUIContext,
-  node: BaseFrameMixin
-) {
+export function walkForPadding(context: SwiftUIContext, node: BaseFrameMixin) {
   const {
     paddingLeft: left,
     paddingTop: top,
