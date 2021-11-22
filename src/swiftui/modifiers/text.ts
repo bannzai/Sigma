@@ -5,10 +5,10 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
   context.nest();
 
   if (node.textDecoration === "UNDERLINE") {
-    context.add("\n");
+    context.lineBreak();
     context.add(".underline()");
   } else if (node.textDecoration === "STRIKETHROUGH") {
-    context.add("\n");
+    context.lineBreak();
     context.add(".strikethrough()");
   }
 
@@ -16,12 +16,12 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
   if (node.fontName !== figma.mixed && node.fontSize !== figma.mixed) {
     const fontWeight = mappedFontWeight(node.fontName);
     if (fontWeight != null) {
-      context.add("\n");
+      context.lineBreak();
       context.add(`.fontWeight(.${fontWeight})`);
     }
 
     const fontSize = node.fontSize;
-    context.add("\n");
+    context.lineBreak();
     context.add(`.font(.system(size: ${fontSize}))`);
 
     // TOOD: Mapping to SwiftUI FontFamily
@@ -33,7 +33,7 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
     for (const fill of node.fills) {
       if (fill.type === "SOLID") {
         const { color, opacity } = fill;
-        context.add("\n");
+        context.lineBreak();
         context.add(`.foregroundColor(${mappedSwiftUIColor(color, opacity)})`);
       } else {
         // TODO:
