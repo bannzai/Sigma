@@ -3,7 +3,7 @@ export function mappedSwiftUIColor(
   opacity: number | undefined
 ): string {
   if (opacity !== undefined && opacity !== 1) {
-    return `Color(red: ${color.r}, green: ${color.g}, blue: ${color.b}, alpha: ${opacity})`;
+    return `Color(red: ${color.r}, green: ${color.g}, blue: ${color.b}, opacity: ${opacity})`;
   } else {
     return `Color(red: ${color.r}, green: ${color.g}, blue: ${color.b})`;
   }
