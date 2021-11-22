@@ -87,9 +87,24 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
     context.lineBreak();
     context.add("}");
   } else {
-    node.children.forEach((child) => {
-      walk(context, child);
-    });
+    const isMaskNode = node.children.some((e) => isBlendMixin(e) && e.isMask);
+    if (isMaskNode) {
+      const reversed = Array.from(node.children).reverse();
+      const target = reversed[0];
+      walk(context, target);
+
+      reversed.slice(1).forEach((child) => {
+        if (isBlendMixin(child)) {
+          walkForClipShape(context, target, child);
+        } else {
+          walk(context, child);
+        }
+      });
+    } else {
+      node.children.forEach((child) => {
+        walk(context, child);
+      });
+    }
   }
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
