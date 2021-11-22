@@ -34,7 +34,9 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
       if (fill.type === "SOLID") {
         const { color, opacity } = fill;
         context.lineBreak();
-        context.add(`.foregroundColor(${mappedSwiftUIColor(color, opacity)})`);
+        context.add(
+          `.foregroundColor(${mappedSwiftUIColor(color, opacity)})\n`
+        );
       } else {
         // TODO:
       }

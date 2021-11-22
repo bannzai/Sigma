@@ -7,6 +7,7 @@ import { walkForImage } from "../image";
 import { isBlendMixin } from "../type/type_guards";
 import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
+import { walkForFrame } from "../modifiers/frame";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -168,7 +169,13 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
 
-  const { children, layoutMode, itemSpacing, counterAxisAlignItems } = node;
+  const {
+    children,
+    layoutMode,
+    itemSpacing,
+    counterAxisAlignItems,
+    primaryAxisAlignItems,
+  } = node;
 
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
@@ -208,16 +215,37 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.add(" {\n", { withoutIndent: true });
   }
 
+  if (
+    (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+    primaryAxisAlignItems === "MAX"
+  ) {
+    context.lineBreak();
+    context.nest();
+    context.add("Spacer()\n");
+    context.unnest();
+  }
+
   children.forEach((child) => {
     context.nest();
     walk(context, child);
     context.unnest();
   });
 
+  if (
+    (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+    primaryAxisAlignItems === "MIN"
+  ) {
+    context.lineBreak();
+    context.nest();
+    context.add("Spacer()\n");
+    context.unnest();
+  }
+
   if (isExistsContainer) {
     context.lineBreak();
-    context.add("}");
+    context.add("}\n");
   }
 
   walkForPadding(context, node);
+  walkForFrame(context, node);
 }
