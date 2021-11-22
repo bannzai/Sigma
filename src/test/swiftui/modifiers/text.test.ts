@@ -29,6 +29,24 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
     });
   });
 
+  describe("#strikethrough", () => {
+    test("node.textDecoration is STRIKETHROUGH", async () => {
+      await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+      const text = figma.createText();
+      text.characters = "Hello";
+      text.textDecoration = "STRIKETHROUGH";
+
+      const context = new SwiftUIContext();
+      walk(context, text);
+
+      const code = `
+    Text("Hello")
+        .strikethrough()`;
+      expect(context.code).toEqual(code.slice("\n".length));
+    });
+  });
+
   describe("#foregroundColor", () => {
     test("without opacity", async () => {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
