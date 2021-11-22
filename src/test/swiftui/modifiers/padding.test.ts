@@ -36,7 +36,8 @@ VStack(alignment: .leading, spacing: 10) {
     Text("2")
     Text("3")
 }
-.padding(.all, 20)`;
+.padding(.all, 20)
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -91,7 +92,8 @@ VStack(alignment: .leading, spacing: 10) {
     Text("2")
     Text("3")
 }
-.padding(.top, 10)`;
+.padding(.top, 10)
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -119,7 +121,8 @@ VStack(alignment: .leading, spacing: 10) {
     Text("2")
     Text("3")
 }
-.padding([.left, .top], 10)`;
+.padding([.left, .top], 10)
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -147,7 +150,8 @@ VStack(alignment: .leading, spacing: 10) {
     Text("2")
     Text("3")
 }
-.padding(.vertical, 10)`;
+.padding(.vertical, 10)
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -175,7 +179,8 @@ VStack(alignment: .leading, spacing: 10) {
     Text("2")
     Text("3")
 }
-.padding(.horizontal, 10)`;
+.padding(.horizontal, 10)
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -206,7 +211,8 @@ VStack(alignment: .leading, spacing: 10) {
 .padding(.left, 1)
 .padding(.top, 2)
 .padding(.right, 3)
-.padding(.bottom, 4)`;
+.padding(.bottom, 4)
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
