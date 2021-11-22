@@ -74,6 +74,7 @@ export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {
 }
 export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
   trace(`#walkToEllipse`, context, node);
+  context.add("Ellipse()");
 }
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
