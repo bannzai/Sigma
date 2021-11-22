@@ -34,7 +34,8 @@ HStack(alignment: .top, spacing: 10) {
     Text("1")
     Text("2")
     Text("3")
-}`;
+}
+`;
     expect(context.code).toEqual(code.slice("\n".length));
   });
 
