@@ -76,12 +76,11 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
   if (node.name.includes("SwiftUI:Button")) {
-    context.add("Button(action: { /* TODO */ }) {");
-    context.add("\n");
+    context.add("Button(action: { /* TODO */ }) {\n");
     node.children.forEach((child) => {
       walk(context, child);
     });
-    context.add("\n");
+    context.lineBreak();
     context.add("}");
   }
 }
