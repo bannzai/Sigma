@@ -7,6 +7,7 @@ import { walkForImage } from "../image";
 import { isBlendMixin } from "../type/type_guards";
 import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
+import { walkForFrame } from "../modifiers/frame";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -246,4 +247,5 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   }
 
   walkForPadding(context, node);
+  walkForFrame(context, node);
 }
