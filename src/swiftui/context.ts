@@ -1,6 +1,7 @@
 export class SwiftUIContext {
   indent: number = 0;
   code: string = "";
+  ignoredIndent: boolean = false;
 
   nest() {
     this.indent += 4;
@@ -31,6 +32,9 @@ export class SwiftUIContext {
   }
 
   _indent(): string {
+    if (this.ignoredIndent) {
+      return "";
+    }
     return Array(this.indent).fill(" ").join("");
   }
 }
