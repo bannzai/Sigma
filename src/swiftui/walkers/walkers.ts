@@ -3,6 +3,7 @@ import { trace } from "../../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
+import { walkForImage } from "../view/image";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   trace(`#walk`, context, node);
@@ -89,6 +90,7 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
 }
 export function walkToRectagnle(context: SwiftUIContext, node: RectangleNode) {
   trace(`#walkToRectagnle`, context, node);
+  walkForImage(context, node);
 }
 export function walkToShapeWithText(
   context: SwiftUIContext,
