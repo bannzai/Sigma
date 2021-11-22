@@ -7,6 +7,7 @@ export function walkForImage(context: SwiftUIContext, node: ImageNode) {
   if (fills !== figma.mixed) {
     for (const fill of fills) {
       if (fill.type === "IMAGE") {
+        context.lineBreak();
         context.add(`Image("${name}")`);
         walkForImageModifier(context, fill);
       }
@@ -22,7 +23,7 @@ export function walkForImageModifier(
 
   if (image.scaleMode === "FIT") {
     context.lineBreak();
-    context.add(".resizable()");
+    context.add(".resizable()\n");
   }
 
   context.unnest();
