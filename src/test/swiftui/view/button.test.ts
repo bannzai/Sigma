@@ -22,9 +22,9 @@ describe("#Button", () => {
     walk(context, button);
 
     const code = `
-    Button(action: { /* TODO */ }) {
-        Text("1")
-    }`;
+Button(action: { /* TODO */ }) {
+    Text("1")
+}`;
     expect(context.code).toEqual(code.slice("\n".length));
   });
 });

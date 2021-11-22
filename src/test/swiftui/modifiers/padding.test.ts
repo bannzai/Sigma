@@ -31,12 +31,12 @@ describe("#View.padding(_:)", () => {
       walk(context, vstack);
 
       const code = `
-    VStack(alignment: .leading, spacing: 10) {
-        Text("1")
-        Text("2")
-        Text("3")
-    }
-    .padding(.all, 20)`;
+VStack(alignment: .leading, spacing: 10) {
+    Text("1")
+    Text("2")
+    Text("3")
+}
+.padding(.all, 20)`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -59,11 +59,11 @@ describe("#View.padding(_:)", () => {
       walk(context, vstack);
 
       const code = `
-    VStack(alignment: .leading, spacing: 10) {
-        Text("1")
-        Text("2")
-        Text("3")
-    }`;
+VStack(alignment: .leading, spacing: 10) {
+    Text("1")
+    Text("2")
+    Text("3")
+}`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -86,12 +86,12 @@ describe("#View.padding(_:)", () => {
       walk(context, vstack);
 
       const code = `
-    VStack(alignment: .leading, spacing: 10) {
-        Text("1")
-        Text("2")
-        Text("3")
-    }
-    .padding(.top, 10)`;
+VStack(alignment: .leading, spacing: 10) {
+    Text("1")
+    Text("2")
+    Text("3")
+}
+.padding(.top, 10)`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -114,12 +114,12 @@ describe("#View.padding(_:)", () => {
       walk(context, vstack);
 
       const code = `
-    VStack(alignment: .leading, spacing: 10) {
-        Text("1")
-        Text("2")
-        Text("3")
-    }
-    .padding([.left, .top], 10)`;
+VStack(alignment: .leading, spacing: 10) {
+    Text("1")
+    Text("2")
+    Text("3")
+}
+.padding([.left, .top], 10)`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -142,12 +142,12 @@ describe("#View.padding(_:)", () => {
       walk(context, vstack);
 
       const code = `
-    VStack(alignment: .leading, spacing: 10) {
-        Text("1")
-        Text("2")
-        Text("3")
-    }
-    .padding(.vertical, 10)`;
+VStack(alignment: .leading, spacing: 10) {
+    Text("1")
+    Text("2")
+    Text("3")
+}
+.padding(.vertical, 10)`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -170,12 +170,12 @@ describe("#View.padding(_:)", () => {
       walk(context, vstack);
 
       const code = `
-    VStack(alignment: .leading, spacing: 10) {
-        Text("1")
-        Text("2")
-        Text("3")
-    }
-    .padding(.horizontal, 10)`;
+VStack(alignment: .leading, spacing: 10) {
+    Text("1")
+    Text("2")
+    Text("3")
+}
+.padding(.horizontal, 10)`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
 
@@ -198,15 +198,15 @@ describe("#View.padding(_:)", () => {
       walk(context, vstack);
 
       const code = `
-    VStack(alignment: .leading, spacing: 10) {
-        Text("1")
-        Text("2")
-        Text("3")
-    }
-    .padding(.left, 1)
-    .padding(.top, 2)
-    .padding(.right, 3)
-    .padding(.bottom, 4)`;
+VStack(alignment: .leading, spacing: 10) {
+    Text("1")
+    Text("2")
+    Text("3")
+}
+.padding(.left, 1)
+.padding(.top, 2)
+.padding(.right, 3)
+.padding(.bottom, 4)`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
