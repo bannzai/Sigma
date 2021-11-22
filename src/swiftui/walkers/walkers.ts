@@ -5,7 +5,7 @@ import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
 import { walkForImage } from "../image";
 import { isBlendMixin } from "../type/type_guards";
-import { walkForClipShape } from "../modifiers/clipShape";
+import { walkForMask } from "../modifiers/mask";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -95,7 +95,7 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
 
       reversed.slice(1).forEach((child) => {
         if (isBlendMixin(child)) {
-          walkForClipShape(context, target, child);
+          walkForMask(context, target, child);
         } else {
           walk(context, child);
         }
