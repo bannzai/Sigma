@@ -98,6 +98,9 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
         const target = reversed[0];
         walk(context, target);
 
+        const { id, width, height } = target;
+        console.log(JSON.stringify({ id, width, height }));
+
         const maskNode = reversed[1] as BlendMixin & SceneNode;
         walkForClipShape(context, target, maskNode);
       } else {
