@@ -1,4 +1,4 @@
-import { SwiftUIContext } from "../context";
+import { SwiftUIContext } from "./context";
 
 export function walkForImage(
   context: SwiftUIContext,
