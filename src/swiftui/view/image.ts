@@ -8,9 +8,7 @@ export function walkForImage(
   if (fills !== figma.mixed) {
     for (const fill of fills) {
       if (fill.type === "IMAGE") {
-        if (fill.imageHash != null) {
-          context.add(`Image("${name}")`);
-        }
+        context.add(`Image("${name}")`);
       }
     }
   }
