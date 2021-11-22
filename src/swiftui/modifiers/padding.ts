@@ -13,8 +13,8 @@ export function walkForPadding(context: SwiftUIContext, node: BaseFrameMixin) {
   }
 
   if (left === top && top === right && right === bottom) {
-    context.add("\n");
-    context.add(`.padding(.all, ${top})`);
+    context.lineBreak();
+    context.add(`.padding(.all, ${top})\n`);
   } else {
     const paddingTypes = [
       "left",

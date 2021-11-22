@@ -62,7 +62,8 @@ HStack(alignment: .top, spacing: 10) {
     Text("2")
     Text("3")
 }
-.padding(.all, 20)`;
+.padding(.all, 20)
+`;
     expect(context.code).toEqual(code.slice("\n".length));
   });
 });
