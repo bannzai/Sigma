@@ -214,7 +214,10 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.add(" {\n", { withoutIndent: true });
   }
 
-  if (primaryAxisAlignItems === "MAX") {
+  if (
+    (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+    primaryAxisAlignItems === "MAX"
+  ) {
     context.lineBreak();
     context.nest();
     context.add("Spacer()\n");
@@ -227,7 +230,10 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.unnest();
   });
 
-  if (primaryAxisAlignItems === "MIN") {
+  if (
+    (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+    primaryAxisAlignItems === "MIN"
+  ) {
     context.lineBreak();
     context.nest();
     context.add("Spacer()\n");
@@ -236,7 +242,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   if (isExistsContainer) {
     context.lineBreak();
-    context.add("}");
+    context.add("}\n");
   }
 
   walkForPadding(context, node);
