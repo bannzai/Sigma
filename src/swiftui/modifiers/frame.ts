@@ -8,23 +8,11 @@ export function walkForFrame(
     name,
     width,
     height,
-    absoluteRenderBounds,
     primaryAxisSizingMode,
     counterAxisSizingMode,
     layoutAlign,
     layoutMode,
   } = node;
-  console.log(
-    JSON.stringify({
-      name,
-      width,
-      height,
-      absoluteRenderBounds,
-      layoutAlign,
-      primaryAxisSizingMode,
-      counterAxisSizingMode,
-    })
-  );
 
   if (
     layoutAlign === "MIN" ||
