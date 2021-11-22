@@ -11,6 +11,24 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
   // @ts-ignore for some reason, need to override this for figma.mixed to work
   global.figma = figma;
 
+  describe("#underline", () => {
+    test("node.textDecoration is UNDERLINE", async () => {
+      await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+      const text = figma.createText();
+      text.characters = "Hello";
+      text.textDecoration = "UNDERLINE";
+
+      const context = new SwiftUIContext();
+      walk(context, text);
+
+      const code = `
+    Text("Hello")
+        .underline()`;
+      expect(context.code).toEqual(code.slice("\n".length));
+    });
+  });
+
   describe("#foregroundColor", () => {
     test("without opacity", async () => {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
