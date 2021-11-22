@@ -152,11 +152,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   const isExistsContainer = containerCode.length > 0;
   if (isExistsContainer) {
-    // FIXME: Hotfix
-    if (context.code.length > 0 && !context.code.endsWith("\n")) {
-      context.add("\n");
-    }
-
+    context.lineBreak();
     context.add(containerCode);
     context.add(" {\n", { withoutIndent: true });
   }
@@ -166,10 +162,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   });
 
   if (isExistsContainer) {
-    // FIXME: Hotfix
-    if (!context.code.endsWith("\n")) {
-      context.add("\n");
-    }
+    context.lineBreak();
     context.add("}");
   }
 

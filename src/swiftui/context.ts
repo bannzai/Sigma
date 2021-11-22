@@ -24,6 +24,12 @@ export class SwiftUIContext {
     this.code += `${indent}${code}`;
   }
 
+  lineBreak(isForceLineBreak: boolean = false) {
+    if (this.code.length > 0 && !this.code.endsWith("\n")) {
+      this.add("\n");
+    }
+  }
+
   _indent(): string {
     return Array(this.indent).fill(" ").join("");
   }
