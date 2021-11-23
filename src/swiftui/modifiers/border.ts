@@ -4,9 +4,9 @@ import { SwiftUIContext } from "../context";
 
 export function walkForBorder(
   context: SwiftUIContext,
-  node: MinimalStrokesMixin & SceneNode
+  node: MinimalStrokesMixin & CornerMixin & SceneNode
 ) {
-  const { strokes, strokeAlign, strokeWeight } = node;
+  const { strokes, strokeAlign, strokeWeight, cornerRadius } = node;
 
   for (const stroke of strokes) {
     if (stroke.type === "SOLID") {
@@ -14,12 +14,24 @@ export function walkForBorder(
 
       if (strokeAlign === "INSIDE") {
         context.nest();
-        context.add(
-          `.border(${mappedSwiftUIColor(
-            stroke.color,
-            stroke.opacity
-          )}, width: ${strokeWeight})\n`
-        );
+        if (cornerRadius !== figma.mixed) {
+          if (cornerRadius === 0) {
+            context.add(
+              `.overlay(Rectangle().stroke(${mappedSwiftUIColor(
+                stroke.color,
+                stroke.opacity
+              )}, lineWidth: ${strokeWeight}))`
+            );
+          } else {
+            context.add(`.cornerRadius(${cornerRadius})\n`);
+            context.add(
+              `.overlay(RoundedRectangle(cornerRadius: ${cornerRadius}).stroke(${mappedSwiftUIColor(
+                stroke.color,
+                stroke.opacity
+              )}, lineWidth: ${strokeWeight}))`
+            );
+          }
+        }
         context.unnest();
       } else {
         assert(
