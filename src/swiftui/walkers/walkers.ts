@@ -12,6 +12,7 @@ import {
   walkForFrame,
   walkForGropuFrame,
 } from "../modifiers/frame";
+import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -262,4 +263,5 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   walkForPadding(context, node);
   walkForFrame(context, node);
+  walkForBackgroundColor(context, node);
 }
