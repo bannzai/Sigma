@@ -122,7 +122,9 @@ export function walkForGropuFrame(
       parent = parent.parent;
     }
 
-    assert(layoutMode != null);
+    if (layoutMode == null) {
+      return;
+    }
 
     const isFixedMainAxis = layoutGrow === 0;
     const isStretchMainAxis = layoutGrow === 1;
