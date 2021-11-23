@@ -154,7 +154,17 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
 }
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
-  walkForImage(context, node);
+  const { name, fills } = node;
+  if (fills !== figma.mixed) {
+    for (const fill of fills) {
+      if (fill.type === "IMAGE") {
+        walkForImage(context, fill, node);
+        if (fill.scaleMode === "FIT") {
+          walkForFixedFrame(context, node);
+        }
+      }
+    }
+  }
 }
 export function walkToShapeWithText(
   context: SwiftUIContext,
