@@ -5,7 +5,6 @@ export function walkForFrame(
   node: BaseFrameMixin & BaseNode
 ) {
   const {
-    name,
     width,
     height,
     primaryAxisSizingMode,
@@ -30,8 +29,8 @@ export function walkForFrame(
   } else {
     if (layoutAlign === "INHERIT") {
       if (layoutMode === "VERTICAL") {
-        const isFixedHeight = primaryAxisSizingMode !== "AUTO";
-        const isFixedWidth = counterAxisSizingMode !== "AUTO";
+        const isFixedHeight = primaryAxisSizingMode === "FIXED";
+        const isFixedWidth = counterAxisSizingMode === "FIXED";
         if (isFixedWidth && isFixedHeight) {
           context.add(`.frame(width: ${width}, height: ${height})`);
         } else {
@@ -42,8 +41,8 @@ export function walkForFrame(
           }
         }
       } else {
-        const isFixedWidth = primaryAxisSizingMode !== "AUTO";
-        const isFixedHeight = counterAxisSizingMode !== "AUTO";
+        const isFixedWidth = primaryAxisSizingMode === "FIXED";
+        const isFixedHeight = counterAxisSizingMode === "FIXED";
         if (isFixedWidth && isFixedHeight) {
           context.add(`.frame(width: ${width}, height: ${height})`);
         } else {
