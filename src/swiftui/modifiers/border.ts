@@ -6,7 +6,7 @@ export function walkForBorder(
   context: SwiftUIContext,
   node: MinimalStrokesMixin & SceneNode
 ) {
-  const { name, strokes, strokeAlign, strokeWeight } = node;
+  const { strokes, strokeAlign, strokeWeight } = node;
 
   for (const stroke of strokes) {
     if (stroke.type === "SOLID") {
