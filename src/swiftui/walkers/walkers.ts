@@ -7,7 +7,11 @@ import { walkForImage } from "../image";
 import { isBlendMixin } from "../type/type_guards";
 import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
-import { walkForFrame } from "../modifiers/frame";
+import {
+  walkForFixedFrame,
+  walkForFrame,
+  walkForGropuFrame,
+} from "../modifiers/frame";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -80,6 +84,18 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
   if (node.name.includes("SwiftUI:Button")) {
+    const { id, name, type, layoutAlign, width, height } = node;
+    console.log(
+      JSON.stringify({
+        id,
+        name,
+        type,
+        layoutAlign,
+        width,
+        height,
+      })
+    );
+
     context.lineBreak();
     context.add("Button(action: { /* TODO */ }) {\n");
     node.children.forEach((child) => {
@@ -89,6 +105,8 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
     });
     context.lineBreak();
     context.add("}");
+
+    walkForGropuFrame(context, node);
   } else {
     const isContainMaskNode = node.children.some(
       (e) => isBlendMixin(e) && e.isMask
@@ -120,11 +138,7 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
         });
       }
 
-      const { width, height } = node;
-      context.lineBreak();
-      context.nest();
-      context.add(`.frame(width: ${width}, height: ${height})`);
-      context.unnest();
+      walkForFixedFrame(context, node);
     } else {
       node.children.forEach((child) => {
         context.nest();
