@@ -13,6 +13,7 @@ import {
   walkForGropuFrame,
 } from "../modifiers/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
+import { walkForBorder } from "../modifiers/border";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -165,6 +166,8 @@ export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
       }
     }
   }
+
+  walkForBorder(context, node);
 }
 export function walkToShapeWithText(
   context: SwiftUIContext,
