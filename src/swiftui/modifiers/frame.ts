@@ -6,12 +6,14 @@ export function walkForFrame(
   node: BaseFrameMixin & BaseNode
 ) {
   const {
+    name,
     width,
     height,
     primaryAxisSizingMode,
     counterAxisSizingMode,
     layoutAlign,
     layoutMode,
+    layoutGrow,
   } = node;
 
   if (
@@ -66,7 +68,14 @@ export function walkForFrame(
 
             Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
            */
-        context.add(`.frame(maxWidth: .infinity, maxHeight: .infinity)`);
+
+        // NOTE: undocument behavior
+        if (layoutGrow === 0) {
+          context.add(`.frame(maxWidth: .infinity)\n`);
+          context.add(`.frame(height: ${height})\n`);
+        } else {
+          context.add(`.frame(maxWidth: .infinity, maxHeight: .infinity)\n`);
+        }
       } else {
         if (layoutMode === "VERTICAL") {
           const isFixedHeight = primaryAxisSizingMode === "FIXED";
