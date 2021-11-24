@@ -14,6 +14,7 @@ import {
 } from "../modifiers/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForBorder } from "../modifiers/border";
+import { walkForPosition } from "../modifiers/position";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -149,6 +150,7 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
       });
     }
   }
+  walkForPosition(context, node);
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
@@ -168,6 +170,7 @@ export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   }
 
   walkForBorder(context, node);
+  walkForPosition(context, node);
 }
 export function walkToShapeWithText(
   context: SwiftUIContext,
@@ -240,9 +243,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     if (children.length > 1) {
       context.push(node, "ZStack");
       containerCode += "ZStack";
-    } else {
-      context.push(node, "NONE");
-      context.push(node, "NONE");
     }
   } else {
     const _: never = layoutMode;
@@ -290,5 +290,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   walkForFrame(context, node);
   walkForBackgroundColor(context, node);
 
-  context.pop();
+  if (isExistsContainer) {
+    context.pop();
+  }
 }
