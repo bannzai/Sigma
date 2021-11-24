@@ -35,24 +35,24 @@ export function walkForFrame(
         const isFixedHeight = primaryAxisSizingMode === "FIXED";
         const isFixedWidth = counterAxisSizingMode === "FIXED";
         if (isFixedWidth && isFixedHeight) {
-          context.add(`.frame(width: ${width}, height: ${height})`);
+          context.add(`.frame(width: ${width}, height: ${height})\n`);
         } else {
           if (isFixedWidth) {
-            context.add(`.frame(width: ${width})`);
+            context.add(`.frame(width: ${width})\n`);
           } else if (isFixedHeight) {
-            context.add(`.frame(height: ${height})`);
+            context.add(`.frame(height: ${height})\n`);
           }
         }
       } else {
         const isFixedWidth = primaryAxisSizingMode === "FIXED";
         const isFixedHeight = counterAxisSizingMode === "FIXED";
         if (isFixedWidth && isFixedHeight) {
-          context.add(`.frame(width: ${width}, height: ${height})`);
+          context.add(`.frame(width: ${width}, height: ${height})\n`);
         } else {
           if (isFixedWidth) {
-            context.add(`.frame(width: ${width})`);
+            context.add(`.frame(width: ${width})\n`);
           } else if (isFixedHeight) {
-            context.add(`.frame(height: ${height})`);
+            context.add(`.frame(height: ${height})\n`);
           }
         }
       }
@@ -80,16 +80,16 @@ export function walkForFrame(
         if (layoutMode === "VERTICAL") {
           const isFixedHeight = primaryAxisSizingMode === "FIXED";
           if (isFixedHeight) {
-            context.add(`.frame(maxWidth: .infinity, maxHeight: ${height})`);
+            context.add(`.frame(maxWidth: .infinity, maxHeight: ${height})\n`);
           } else {
-            context.add(`.frame(maxWidth: .infinity)`);
+            context.add(`.frame(maxWidth: .infinity)\n`);
           }
         } else if (layoutMode === "HORIZONTAL") {
           const isFixedWidth = primaryAxisSizingMode === "FIXED";
           if (isFixedWidth) {
-            context.add(`.frame(maxWidth: ${width}, maxHeight: .infinity)`);
+            context.add(`.frame(maxWidth: ${width}, maxHeight: .infinity)\n`);
           } else {
-            context.add(`.frame(maxHeight: .infinity)`);
+            context.add(`.frame(maxHeight: .infinity)\n`);
           }
         }
       }
