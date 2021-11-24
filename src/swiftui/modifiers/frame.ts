@@ -67,19 +67,21 @@ export function walkForFrame(
             Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
            */
         context.add(`.frame(maxWidth: .infinity, maxHeight: .infinity)`);
-      } else if (layoutMode === "VERTICAL") {
-        const isFixedHeight = primaryAxisSizingMode === "FIXED";
-        if (isFixedHeight) {
-          context.add(`.frame(maxWidth: .infinity, maxHeight: ${height})`);
-        } else {
-          context.add(`.frame(maxWidth: .infinity)`);
-        }
-      } else if (layoutMode === "HORIZONTAL") {
-        const isFixedWidth = primaryAxisSizingMode === "FIXED";
-        if (isFixedWidth) {
-          context.add(`.frame(maxWidth: ${width}, maxHeight: .infinity)`);
-        } else {
-          context.add(`.frame(maxHeight: .infinity)`);
+      } else {
+        if (layoutMode === "VERTICAL") {
+          const isFixedHeight = primaryAxisSizingMode === "FIXED";
+          if (isFixedHeight) {
+            context.add(`.frame(maxWidth: .infinity, maxHeight: ${height})`);
+          } else {
+            context.add(`.frame(maxWidth: .infinity)`);
+          }
+        } else if (layoutMode === "HORIZONTAL") {
+          const isFixedWidth = primaryAxisSizingMode === "FIXED";
+          if (isFixedWidth) {
+            context.add(`.frame(maxWidth: ${width}, maxHeight: .infinity)`);
+          } else {
+            context.add(`.frame(maxHeight: .infinity)`);
+          }
         }
       }
     } else {
