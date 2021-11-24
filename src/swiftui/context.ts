@@ -1,4 +1,4 @@
-export type SwiftUIFrame = "VStack" | "HStack" | "ZStack" | "NONE";
+export type SwiftUIFrame = "VStack" | "HStack" | "ZStack";
 export interface SwiftUIFrameNode {
   frame: SwiftUIFrame;
   node: FrameNode;
@@ -22,6 +22,12 @@ export class SwiftUIContext {
   }
   pop(): SwiftUIFrameNode | null {
     return this.frameNodeHistories.pop() ?? null;
+  }
+  get latestFrameNode(): SwiftUIFrameNode | null {
+    if (this.frameNodeHistories.length === 0) {
+      return null;
+    }
+    return this.frameNodeHistories[this.frameNodeHistories.length - 1];
   }
 
   add(
