@@ -14,6 +14,7 @@ describe("#Image", () => {
   test("Image for scaleMode to FIT", async () => {
     const rectangle = figma.createRectangle();
     rectangle.name = "image";
+    rectangle.strokes = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash: "" }];
 
     const context = new SwiftUIContext();
@@ -29,6 +30,7 @@ Image("image")
   test("Image for scaleMode to FILL", async () => {
     const rectangle = figma.createRectangle();
     rectangle.name = "image";
+    rectangle.strokes = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: "" }];
 
     const context = new SwiftUIContext();
