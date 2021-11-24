@@ -16,7 +16,7 @@ describe("#Button", () => {
 
     const root = figma.createFrame();
     const button = figma.group([createText("1")], root);
-    button.name = "SwiftUI:Button";
+    button.name = "SwiftUI::Button";
 
     const context = new SwiftUIContext();
     walk(context, button);

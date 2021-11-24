@@ -86,7 +86,7 @@ export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
-  if (node.name.includes("SwiftUI:Button")) {
+  if (node.name.includes("SwiftUI::Button")) {
     const { id, name, type, layoutAlign, width, height } = node;
     console.log(
       JSON.stringify({
