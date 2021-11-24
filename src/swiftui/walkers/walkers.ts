@@ -207,6 +207,8 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
+    context.push(node, "HStack");
+
     containerCode += "HStack(";
 
     const args: string[] = [];
@@ -220,6 +222,8 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     containerCode += args.join(", ");
     containerCode += ")";
   } else if (layoutMode === "VERTICAL") {
+    context.push(node, "VStack");
+
     containerCode += "VStack(";
 
     const args: string[] = [];
@@ -232,8 +236,16 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
     containerCode += args.join(", ");
     containerCode += ")";
-  } else if (children.length > 1) {
-    containerCode += "ZStack";
+  } else if (layoutMode === "NONE") {
+    if (children.length > 1) {
+      context.push(node, "ZStack");
+      containerCode += "ZStack";
+    } else {
+      context.push(node, "NONE");
+      context.push(node, "NONE");
+    }
+  } else {
+    const _: never = layoutMode;
   }
 
   const isExistsContainer = containerCode.length > 0;
@@ -277,4 +289,6 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   walkForPadding(context, node);
   walkForFrame(context, node);
   walkForBackgroundColor(context, node);
+
+  context.pop();
 }

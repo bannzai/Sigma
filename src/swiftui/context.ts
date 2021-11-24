@@ -1,6 +1,13 @@
+export type SwiftUIFrame = "VStack" | "HStack" | "ZStack" | "NONE";
+export interface SwiftUIFrameNode {
+  frame: SwiftUIFrame;
+  node: FrameNode;
+}
+
 export class SwiftUIContext {
   indent: number = 0;
   code: string = "";
+  frameNodeHistories: SwiftUIFrameNode[] = [];
   ignoredIndent: boolean = false;
 
   nest() {
@@ -8,6 +15,13 @@ export class SwiftUIContext {
   }
   unnest() {
     this.indent -= 4;
+  }
+
+  push(node: FrameNode, frame: SwiftUIFrame) {
+    this.frameNodeHistories.push({ node, frame });
+  }
+  pop(): SwiftUIFrameNode | null {
+    return this.frameNodeHistories.pop() ?? null;
   }
 
   add(
