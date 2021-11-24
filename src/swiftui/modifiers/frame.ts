@@ -16,6 +16,19 @@ export function walkForFrame(
     layoutGrow,
   } = node;
 
+  console.log(
+    JSON.stringify({
+      name,
+      width,
+      height,
+      primaryAxisSizingMode,
+      counterAxisSizingMode,
+      layoutAlign,
+      layoutMode,
+      layoutGrow,
+    })
+  );
+
   if (
     layoutAlign === "MIN" ||
     layoutAlign === "MAX" ||
