@@ -22,15 +22,15 @@ export function walkForFixedSpacer(
   }
   if (latestFrameNode.frame === "VStack") {
     context.lineBreak();
-    context.add("Spacer()");
+    context.add("Spacer()\n");
     context.nest();
-    context.add(`.frame(height: ${height})`);
+    context.add(`.frame(height: ${height})\n`);
     context.unnest();
   } else if (latestFrameNode.frame === "HStack") {
     context.lineBreak();
-    context.add("Spacer()");
+    context.add("Spacer()\n");
     context.nest();
-    context.add(`.frame(width: ${width})`);
+    context.add(`.frame(width: ${width})\n`);
     context.unnest();
   } else {
     const _: never = latestFrameNode.frame;
