@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import { SwiftUIContext } from "../context";
 
-export function walkForFrame(
+export function walkToFrameNodeForFrameModifier(
   context: SwiftUIContext,
   node: BaseFrameMixin & BaseNode
 ) {

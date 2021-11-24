@@ -9,7 +9,7 @@ import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
 import {
   walkForFixedFrame,
-  walkForFrame,
+  walkToFrameNodeForFrameModifier,
   walkForGropuFrame,
 } from "../modifiers/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
@@ -292,7 +292,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   }
 
   walkForPadding(context, node);
-  walkForFrame(context, node);
+  walkToFrameNodeForFrameModifier(context, node);
   walkForBackgroundColor(context, node);
 
   if (isExistsContainer) {
