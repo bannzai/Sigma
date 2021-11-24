@@ -15,6 +15,7 @@ import {
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForBorder } from "../modifiers/border";
 import { walkForPosition } from "../modifiers/position";
+import { walkForFixedSpacer } from "../view/spacer";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -169,8 +170,12 @@ export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
     }
   }
 
-  walkForBorder(context, node);
-  walkForPosition(context, node);
+  if (name === "SwiftUI::Spacer") {
+    walkForFixedSpacer(context, node);
+  } else {
+    walkForBorder(context, node);
+    walkForPosition(context, node);
+  }
 }
 export function walkToShapeWithText(
   context: SwiftUIContext,
