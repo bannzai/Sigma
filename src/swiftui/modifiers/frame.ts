@@ -94,15 +94,11 @@ export function walkForFrame(
           const isFixedHeight = primaryAxisSizingMode === "FIXED";
           if (isFixedHeight) {
             context.add(`.frame(maxWidth: .infinity, maxHeight: ${height})\n`);
-          } else {
-            context.add(`.frame(maxWidth: .infinity)\n`);
           }
         } else if (layoutMode === "HORIZONTAL") {
           const isFixedWidth = primaryAxisSizingMode === "FIXED";
           if (isFixedWidth) {
             context.add(`.frame(maxWidth: ${width}, maxHeight: .infinity)\n`);
-          } else {
-            context.add(`.frame(maxHeight: .infinity)\n`);
           }
         }
       }
