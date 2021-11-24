@@ -11,6 +11,7 @@ export function walkToFrameNodeForFrameModifier(
     height,
     primaryAxisSizingMode,
     counterAxisSizingMode,
+    counterAxisAlignItems,
     layoutAlign,
     layoutMode,
     layoutGrow,
@@ -29,6 +30,23 @@ export function walkToFrameNodeForFrameModifier(
     })
   );
 
+  interface FixedWidth {
+    label: "width";
+    width: number;
+  }
+  interface MaxWidth {
+    label: "maxWidth";
+    width: "infinity";
+  }
+  interface FixedHeight {
+    label: "height";
+    height: number;
+  }
+  interface MaxHeight {
+    label: "maxHeight";
+    height: "infinity";
+  }
+
   if (
     layoutAlign === "MIN" ||
     layoutAlign === "MAX" ||
@@ -43,29 +61,51 @@ export function walkToFrameNodeForFrameModifier(
    */
     return;
   } else {
+    var fixedWidth: FixedWidth | null;
+    var maxWidth: MaxWidth | null;
+    var fixedHeight: FixedHeight | null;
+    var maxHeight: MaxHeight | null;
+    var alignment: "leading" | "top" | "trailing" | "bottom" | null;
+
+    if (layoutMode === "VERTICAL") {
+      if (counterAxisAlignItems === "MIN") {
+        alignment = "leading";
+      } else if (counterAxisAlignItems === "MAX") {
+        alignment = "trailing";
+      }
+    } else {
+      if (counterAxisAlignItems === "MIN") {
+        alignment = "top";
+      } else if (counterAxisAlignItems === "MAX") {
+        alignment = "bottom";
+      }
+    }
+
     if (layoutAlign === "INHERIT") {
       if (layoutMode === "VERTICAL") {
         const isFixedHeight = primaryAxisSizingMode === "FIXED";
         const isFixedWidth = counterAxisSizingMode === "FIXED";
         if (isFixedWidth && isFixedHeight) {
-          context.add(`.frame(width: ${width}, height: ${height})\n`);
+          fixedWidth = { label: "width", width };
+          fixedHeight = { label: "height", height };
         } else {
           if (isFixedWidth) {
-            context.add(`.frame(width: ${width})\n`);
+            fixedWidth = { label: "width", width };
           } else if (isFixedHeight) {
-            context.add(`.frame(height: ${height})\n`);
+            fixedHeight = { label: "height", height };
           }
         }
       } else {
         const isFixedWidth = primaryAxisSizingMode === "FIXED";
         const isFixedHeight = counterAxisSizingMode === "FIXED";
         if (isFixedWidth && isFixedHeight) {
-          context.add(`.frame(width: ${width}, height: ${height})\n`);
+          fixedWidth = { label: "width", width };
+          fixedHeight = { label: "height", height };
         } else {
           if (isFixedWidth) {
-            context.add(`.frame(width: ${width})\n`);
+            fixedWidth = { label: "width", width };
           } else if (isFixedHeight) {
-            context.add(`.frame(height: ${height})\n`);
+            fixedHeight = { label: "height", height };
           }
         }
       }
@@ -84,10 +124,11 @@ export function walkToFrameNodeForFrameModifier(
 
         // NOTE: undocument behavior
         if (layoutGrow === 0) {
-          context.add(`.frame(maxWidth: .infinity)\n`);
-          context.add(`.frame(height: ${height})\n`);
+          maxWidth = { label: "maxWidth", width: "infinity" };
+          fixedHeight = { label: "height", height };
         } else {
-          context.add(`.frame(maxWidth: .infinity, maxHeight: .infinity)\n`);
+          maxWidth = { label: "maxWidth", width: "infinity" };
+          maxHeight = { label: "maxHeight", height: "infinity" };
         }
       } else {
         /*
@@ -103,9 +144,9 @@ So, (primary|counter)AxisSizingMode === FIXED means the corresponding one is STR
           const isVerticalAxisStretch = primaryAxisSizingMode === "FIXED";
           const isHorizontalAxisStretch = counterAxisSizingMode === "FIXED";
           if (isVerticalAxisStretch) {
-            context.add(`.frame(maxHeight: .infinity)\n`);
+            maxHeight = { label: "maxHeight", height: "infinity" };
           } else if (isHorizontalAxisStretch) {
-            context.add(`.frame(maxWidth: .infinity)\n`);
+            maxWidth = { label: "maxWidth", width: "infinity" };
           } else if (isVerticalAxisStretch && isHorizontalAxisStretch) {
             assert(false, "unknown pattern");
           }
@@ -113,9 +154,9 @@ So, (primary|counter)AxisSizingMode === FIXED means the corresponding one is STR
           const isHorizontalAxisStretch = primaryAxisSizingMode === "FIXED";
           const isVerticalAxisStretch = counterAxisSizingMode === "FIXED";
           if (isHorizontalAxisStretch) {
-            context.add(`.frame(maxWidth: .infinity)\n`);
+            maxWidth = { label: "maxWidth", width: "infinity" };
           } else if (isVerticalAxisStretch) {
-            context.add(`.frame(maxHeight: .infinity)\n`);
+            maxHeight = { label: "maxHeight", height: "infinity" };
           } else if (isVerticalAxisStretch && isHorizontalAxisStretch) {
             assert(false, "unknown pattern");
           }
