@@ -36,7 +36,7 @@ export function walkToFrameNodeForFrameModifier(
   }
   interface MaxWidth {
     label: "maxWidth";
-    width: "infinity";
+    width: ".infinity";
   }
   interface FixedHeight {
     label: "height";
@@ -44,7 +44,7 @@ export function walkToFrameNodeForFrameModifier(
   }
   interface MaxHeight {
     label: "maxHeight";
-    height: "infinity";
+    height: ".infinity";
   }
 
   if (
@@ -61,11 +61,11 @@ export function walkToFrameNodeForFrameModifier(
    */
     return;
   } else {
-    var fixedWidth: FixedWidth | null;
-    var maxWidth: MaxWidth | null;
-    var fixedHeight: FixedHeight | null;
-    var maxHeight: MaxHeight | null;
-    var alignment: "leading" | "top" | "trailing" | "bottom" | null;
+    var fixedWidth: FixedWidth | null = null;
+    var maxWidth: MaxWidth | null = null;
+    var fixedHeight: FixedHeight | null = null;
+    var maxHeight: MaxHeight | null = null;
+    var alignment: "leading" | "top" | "trailing" | "bottom" | null = null;
 
     if (layoutMode === "VERTICAL") {
       if (counterAxisAlignItems === "MIN") {
@@ -124,11 +124,11 @@ export function walkToFrameNodeForFrameModifier(
 
         // NOTE: undocument behavior
         if (layoutGrow === 0) {
-          maxWidth = { label: "maxWidth", width: "infinity" };
+          maxWidth = { label: "maxWidth", width: ".infinity" };
           fixedHeight = { label: "height", height };
         } else {
-          maxWidth = { label: "maxWidth", width: "infinity" };
-          maxHeight = { label: "maxHeight", height: "infinity" };
+          maxWidth = { label: "maxWidth", width: ".infinity" };
+          maxHeight = { label: "maxHeight", height: ".infinity" };
         }
       } else {
         /*
@@ -144,9 +144,9 @@ So, (primary|counter)AxisSizingMode === FIXED means the corresponding one is STR
           const isVerticalAxisStretch = primaryAxisSizingMode === "FIXED";
           const isHorizontalAxisStretch = counterAxisSizingMode === "FIXED";
           if (isVerticalAxisStretch) {
-            maxHeight = { label: "maxHeight", height: "infinity" };
+            maxHeight = { label: "maxHeight", height: ".infinity" };
           } else if (isHorizontalAxisStretch) {
-            maxWidth = { label: "maxWidth", width: "infinity" };
+            maxWidth = { label: "maxWidth", width: ".infinity" };
           } else if (isVerticalAxisStretch && isHorizontalAxisStretch) {
             assert(false, "unknown pattern");
           }
@@ -154,9 +154,9 @@ So, (primary|counter)AxisSizingMode === FIXED means the corresponding one is STR
           const isHorizontalAxisStretch = primaryAxisSizingMode === "FIXED";
           const isVerticalAxisStretch = counterAxisSizingMode === "FIXED";
           if (isHorizontalAxisStretch) {
-            maxWidth = { label: "maxWidth", width: "infinity" };
+            maxWidth = { label: "maxWidth", width: ".infinity" };
           } else if (isVerticalAxisStretch) {
-            maxHeight = { label: "maxHeight", height: "infinity" };
+            maxHeight = { label: "maxHeight", height: ".infinity" };
           } else if (isVerticalAxisStretch && isHorizontalAxisStretch) {
             assert(false, "unknown pattern");
           }
@@ -164,6 +164,38 @@ So, (primary|counter)AxisSizingMode === FIXED means the corresponding one is STR
       }
     } else {
       const _: never = layoutAlign;
+    }
+
+    var maximumFrameArgs: string[] = [];
+    if (maxWidth != null) {
+      maximumFrameArgs.push(`maxWidth: ${maxWidth.width}`);
+    }
+    if (maxHeight != null) {
+      maximumFrameArgs.push(`maxHeight: ${maxHeight.height}`);
+    }
+    if (maximumFrameArgs.length > 0) {
+      if (alignment != null) {
+        maximumFrameArgs.push(`alignment: .${alignment}`);
+      }
+
+      const args = maximumFrameArgs.join(", ");
+      context.add(`.frame(${args})\n`);
+    }
+
+    var fixedFrameArgs: string[] = [];
+    if (fixedWidth != null) {
+      fixedFrameArgs.push(`width: ${fixedWidth.width}`);
+    }
+    if (fixedHeight != null) {
+      fixedFrameArgs.push(`height: ${fixedHeight.height}`);
+    }
+    if (fixedFrameArgs.length > 0) {
+      if (alignment != null) {
+        maximumFrameArgs.push(`alignment: .${alignment}`);
+      }
+
+      const args = fixedFrameArgs.join(", ");
+      context.add(`.frame(${args})\n`);
     }
   }
 
