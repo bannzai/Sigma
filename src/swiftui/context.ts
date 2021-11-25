@@ -30,6 +30,12 @@ export class SwiftUIContext {
     }
     return this.frameNodeHistories[this.frameNodeHistories.length - 1];
   }
+  get secondLatestFromNode(): SwiftUIFrameNode | null {
+    if (this.frameNodeHistories.length < 2) {
+      return null;
+    }
+    return this.frameNodeHistories[this.frameNodeHistories.length - 2];
+  }
 
   add(
     code: string,
