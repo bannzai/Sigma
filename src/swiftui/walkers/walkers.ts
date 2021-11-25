@@ -240,8 +240,10 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   const {
     children,
     layoutMode,
+    layoutAlign,
     itemSpacing,
     counterAxisAlignItems,
+    primaryAxisSizingMode,
     primaryAxisAlignItems,
   } = node;
 
@@ -312,10 +314,30 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
     primaryAxisAlignItems === "MIN"
   ) {
-    context.lineBreak();
-    context.nest();
-    context.add("Spacer()\n");
-    context.unnest();
+    if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
+      context.lineBreak();
+      context.nest();
+      context.add("Spacer()\n");
+      context.unnest();
+    } else {
+      if (layoutMode === "VERTICAL") {
+        if (node.height === context.rootSize.height) {
+          context.lineBreak();
+          context.nest();
+          context.add("Spacer()\n");
+          context.unnest();
+        }
+      } else if (layoutMode === "HORIZONTAL") {
+        if (node.width === context.rootSize.width) {
+          context.lineBreak();
+          context.nest();
+          context.add("Spacer()\n");
+          context.unnest();
+        }
+      } else {
+        const _: never = layoutMode
+      }
+    }
   }
 
   if (isExistsContainer) {

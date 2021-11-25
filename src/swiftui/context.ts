@@ -9,6 +9,7 @@ export class SwiftUIContext {
   code: string = "";
   frameNodeHistories: SwiftUIFrameNode[] = [];
   ignoredIndent: boolean = false;
+  rootSize!: { width: number; height: number };
 
   nest() {
     this.indent += 4;
