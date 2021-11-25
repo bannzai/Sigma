@@ -11,6 +11,7 @@ export function walkToFrameNodeForFrameModifier(
     height,
     primaryAxisSizingMode,
     counterAxisSizingMode,
+    primaryAxisAlignItems,
     counterAxisAlignItems,
     layoutAlign,
     layoutMode,
@@ -65,19 +66,52 @@ export function walkToFrameNodeForFrameModifier(
     var maxWidth: MaxWidth | null = null;
     var fixedHeight: FixedHeight | null = null;
     var maxHeight: MaxHeight | null = null;
-    var alignment: "leading" | "top" | "trailing" | "bottom" | null = null;
+    var alignment:
+      | "leading"
+      | "top"
+      | "trailing"
+      | "bottom"
+      | "topLeading"
+      | "topTrailing"
+      | "bottomLeading"
+      | "bottomTrailing"
+      | "center" = "center";
 
     if (layoutMode === "VERTICAL") {
-      if (counterAxisAlignItems === "MIN") {
-        alignment = "leading";
-      } else if (counterAxisAlignItems === "MAX") {
-        alignment = "trailing";
+      if (primaryAxisAlignItems === "MIN") {
+        if (counterAxisAlignItems === "MIN") {
+          alignment = "topLeading";
+        } else if (counterAxisAlignItems === "MAX") {
+          alignment = "topTrailing";
+        } else {
+          alignment = "top";
+        }
+      } else if (primaryAxisAlignItems === "MAX") {
+        if (counterAxisAlignItems === "MIN") {
+          alignment = "bottomLeading";
+        } else if (counterAxisAlignItems === "MAX") {
+          alignment = "bottomTrailing";
+        } else {
+          alignment = "bottom";
+        }
       }
     } else {
-      if (counterAxisAlignItems === "MIN") {
-        alignment = "top";
-      } else if (counterAxisAlignItems === "MAX") {
-        alignment = "bottom";
+      if (primaryAxisAlignItems === "MIN") {
+        if (counterAxisAlignItems === "MIN") {
+          alignment = "topLeading";
+        } else if (counterAxisAlignItems === "MAX") {
+          alignment = "bottomLeading";
+        } else {
+          alignment = "leading";
+        }
+      } else if (primaryAxisAlignItems === "MAX") {
+        if (counterAxisAlignItems === "MIN") {
+          alignment = "topTrailing";
+        } else if (counterAxisAlignItems === "MAX") {
+          alignment = "bottomTrailing";
+        } else {
+          alignment = "trailing";
+        }
       }
     }
 
@@ -174,7 +208,7 @@ So, (primary|counter)AxisSizingMode === FIXED means the corresponding one is STR
       maximumFrameArgs.push(`maxHeight: ${maxHeight.height}`);
     }
     if (maximumFrameArgs.length > 0) {
-      if (alignment != null) {
+      if (alignment !== "center") {
         maximumFrameArgs.push(`alignment: .${alignment}`);
       }
 
@@ -190,7 +224,7 @@ So, (primary|counter)AxisSizingMode === FIXED means the corresponding one is STR
       fixedFrameArgs.push(`height: ${fixedHeight.height}`);
     }
     if (fixedFrameArgs.length > 0) {
-      if (alignment != null) {
+      if (alignment !== "center") {
         maximumFrameArgs.push(`alignment: .${alignment}`);
       }
 
