@@ -16,6 +16,7 @@ import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForBorder } from "../modifiers/border";
 import { walkForPosition } from "../modifiers/position";
 import { walkForFixedSpacer } from "../view/spacer";
+import { mappedSwiftUIColor } from "../../util/mapper";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -185,22 +186,57 @@ export function walkToShapeWithText(
 }
 export function walkToText(context: SwiftUIContext, node: TextNode) {
   trace(`#walkToText`, context, node);
+  const { characters, fills } = node;
 
-  const { characters } = node;
-  const stringList = characters.split("\n");
-  if (stringList.length <= 1) {
-    context.add(`Text(verbatim: "${characters}")\n`);
+  if (fills === figma.mixed) {
+    var nextStyleIndex = 0;
+    var isFirstText = true;
+    for (var i = nextStyleIndex; i < characters.length; i++) {
+      const fillComponent = node.getRangeFills(nextStyleIndex, i + 1);
+      if (i !== characters.length - 1 && fillComponent != figma.mixed) {
+        continue;
+      }
+      const componentFills = node.getRangeFills(nextStyleIndex, i - 1);
+
+      if (componentFills === figma.mixed || componentFills.length !== 1) {
+        console.log(`[DEBUG] assertion`);
+        assert(false);
+      }
+
+      const fill = componentFills[0];
+      if (fill.type === "SOLID") {
+        if (!isFirstText) {
+          context.add(" + \n", { withoutIndent: true });
+        }
+        context.add(`Text("${characters.substring(nextStyleIndex, i)}")\n`);
+        context.nest();
+        context.add(
+          `.foregroundColor(${mappedSwiftUIColor(fill.color, fill.opacity)})`
+        );
+        context.unnest();
+
+        isFirstText = false;
+      }
+
+      nextStyleIndex = i;
+    }
+
+    context.lineBreak();
   } else {
-    context.add(`Text(verbatim: """\n`);
-    stringList.forEach((string) => {
-      context.nest();
-      context.add(`${string}\n`);
-      context.unnest();
-    });
-    context.add(`""")`);
+    const stringList = characters.split("\n");
+    if (stringList.length <= 1) {
+      context.add(`Text(verbatim: "${characters}")\n`);
+    } else {
+      context.add(`Text(verbatim: """\n`);
+      stringList.forEach((string) => {
+        context.nest();
+        context.add(`${string}\n`);
+        context.unnest();
+      });
+      context.add(`""")`);
+    }
+    walkForTextModifier(context, node);
   }
-
-  walkForTextModifier(context, node);
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
