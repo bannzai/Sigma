@@ -9,12 +9,14 @@ export function walkToFrameNodeForFrameModifier(
     name,
     width,
     height,
-    primaryAxisSizingMode,
-    counterAxisSizingMode,
+    layoutMode,
     primaryAxisAlignItems,
     counterAxisAlignItems,
+    // Decide to self(frame node) sizing mode
+    primaryAxisSizingMode,
+    counterAxisSizingMode,
+    // Dependant to parent properties
     layoutAlign,
-    layoutMode,
     layoutGrow,
   } = node;
 
@@ -28,8 +30,8 @@ export function walkToFrameNodeForFrameModifier(
       primaryAxisAlignItems,
       counterAxisAlignItems,
       layoutAlign,
-      layoutMode,
       layoutGrow,
+      layoutMode,
     })
   );
 
@@ -117,89 +119,109 @@ export function walkToFrameNodeForFrameModifier(
       }
     }
 
-    if (layoutAlign === "INHERIT") {
-      if (layoutMode === "VERTICAL") {
-        const isFixedHeight = primaryAxisSizingMode === "FIXED";
-        const isFixedWidth = counterAxisSizingMode === "FIXED";
-        if (isFixedWidth && isFixedHeight) {
-          fixedWidth = { label: "width", width };
+    if (layoutMode === "VERTICAL") {
+      // NOTE: "FIXED": The primary axis length is determined by the user or plugins, unless the layoutAlign is set to “STRETCH” or layoutGrow is 1.
+      // https://www.figma.com/plugin-docs/api/properties/nodes-primaryaxissizingmode/
+      if (primaryAxisSizingMode === "FIXED") {
+        const parentLayoutMode = context.secondLatestFromNode?.node.layoutMode;
+        if (parentLayoutMode == null) {
           fixedHeight = { label: "height", height };
         } else {
-          if (isFixedWidth) {
-            fixedWidth = { label: "width", width };
-          } else if (isFixedHeight) {
-            fixedHeight = { label: "height", height };
-          }
-        }
-      } else {
-        const isFixedWidth = primaryAxisSizingMode === "FIXED";
-        const isFixedHeight = counterAxisSizingMode === "FIXED";
-        if (isFixedWidth && isFixedHeight) {
-          fixedWidth = { label: "width", width };
-          fixedHeight = { label: "height", height };
-        } else {
-          if (isFixedWidth) {
-            fixedWidth = { label: "width", width };
-          } else if (isFixedHeight) {
-            fixedHeight = { label: "height", height };
+          if (parentLayoutMode === "VERTICAL") {
+            if (layoutGrow === 0) {
+              fixedHeight = { label: "height", height };
+            }
+          } else if (parentLayoutMode === "HORIZONTAL") {
+            if (layoutAlign !== "STRETCH") {
+              fixedHeight = { label: "height", height };
+            }
           }
         }
       }
-    } else if (layoutAlign === "STRETCH") {
-      if (
-        primaryAxisSizingMode === "FIXED" &&
-        counterAxisSizingMode === "FIXED"
-      ) {
-        /*
-           NOTE: If the current node is an auto layout frame (e.g. an auto layout frame inside a parent auto layout frame) 
-           if you set layoutAlign to “STRETCH” you should set the corresponding axis – either primaryAxisSizingMode or counterAxisSizingMode – 
-           to be “FIXED”. This is because an auto-layout frame cannot simultaneously stretch to fill its parent and shrink to hug its children.
-
-            Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
-           */
-
-        // NOTE: undocument behavior
-        if (layoutGrow === 0) {
-          maxWidth = { label: "maxWidth", width: ".infinity" };
-          fixedHeight = { label: "height", height };
+      // NOTE: "FIXED": The counter axis length is determined by the user or plugins, unless the layoutAlign is set to “STRETCH” or layoutGrow is 1.
+      // https://www.figma.com/plugin-docs/api/properties/nodes-counteraxissizingmode/
+      if (counterAxisSizingMode === "FIXED") {
+        const parentLayoutMode = context.secondLatestFromNode?.node.layoutMode;
+        if (parentLayoutMode == null) {
+          fixedWidth = { label: "width", width };
         } else {
-          maxWidth = { label: "maxWidth", width: ".infinity" };
-          maxHeight = { label: "maxHeight", height: ".infinity" };
-        }
-      } else {
-        /*
-NOTE: If the current node is an auto layout frame (e.g. an auto layout frame inside a parent auto layout frame) 
-if you set layoutAlign to “STRETCH” you should set the corresponding axis – either primaryAxisSizingMode or counterAxisSizingMode 
-– to be“FIXED”. This is because an auto-layout frame cannot simultaneously stretch to fill its parent and shrink to hug its children.
-
-Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
-
-So, (primary|counter)AxisSizingMode === FIXED means the corresponding one is STRETCH
-        */
-        if (layoutMode === "VERTICAL") {
-          const isVerticalAxisStretch = primaryAxisSizingMode === "FIXED";
-          const isHorizontalAxisStretch = counterAxisSizingMode === "FIXED";
-          if (isVerticalAxisStretch) {
-            maxHeight = { label: "maxHeight", height: ".infinity" };
-          } else if (isHorizontalAxisStretch) {
-            maxWidth = { label: "maxWidth", width: ".infinity" };
-          } else if (isVerticalAxisStretch && isHorizontalAxisStretch) {
-            assert(false, "unknown pattern");
-          }
-        } else if (layoutMode === "HORIZONTAL") {
-          const isHorizontalAxisStretch = primaryAxisSizingMode === "FIXED";
-          const isVerticalAxisStretch = counterAxisSizingMode === "FIXED";
-          if (isHorizontalAxisStretch) {
-            maxWidth = { label: "maxWidth", width: ".infinity" };
-          } else if (isVerticalAxisStretch) {
-            maxHeight = { label: "maxHeight", height: ".infinity" };
-          } else if (isVerticalAxisStretch && isHorizontalAxisStretch) {
-            assert(false, "unknown pattern");
+          if (parentLayoutMode === "VERTICAL") {
+            if (layoutAlign !== "STRETCH") {
+              fixedWidth = { label: "width", width };
+            }
+          } else if (parentLayoutMode === "HORIZONTAL") {
+            if (layoutGrow === 0) {
+              fixedWidth = { label: "width", width };
+            }
           }
         }
       }
-    } else {
-      const _: never = layoutAlign;
+    } else if (layoutMode === "HORIZONTAL") {
+      if (primaryAxisSizingMode === "FIXED") {
+        const parentLayoutMode = context.secondLatestFromNode?.node.layoutMode;
+        if (parentLayoutMode == null) {
+          fixedWidth = { label: "width", width };
+        } else {
+          if (parentLayoutMode === "VERTICAL") {
+            if (layoutAlign !== "STRETCH") {
+              fixedWidth = { label: "width", width };
+            }
+          } else if (parentLayoutMode === "HORIZONTAL") {
+            if (layoutGrow === 0) {
+              fixedWidth = { label: "width", width };
+            }
+          }
+        }
+      }
+
+      if (counterAxisSizingMode === "FIXED") {
+        const parentLayoutMode = context.secondLatestFromNode?.node.layoutMode;
+        if (parentLayoutMode == null) {
+          fixedHeight = { label: "height", height };
+        } else {
+          if (parentLayoutMode === "VERTICAL") {
+            if (layoutGrow === 0) {
+              fixedHeight = { label: "height", height };
+            }
+          } else if (parentLayoutMode === "HORIZONTAL") {
+            if (layoutAlign !== "STRETCH") {
+              fixedHeight = { label: "height", height };
+            }
+          }
+        }
+      }
+    }
+
+    // Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
+    // IMPORTANT: Determines if the layer should stretch along the parent’s counter axis.
+    if (layoutAlign === "STRETCH") {
+      const parent = context.secondLatestFromNode?.node;
+      assert(parent != null);
+      const { layoutMode: parentLayoutMode } = parent;
+
+      if (parentLayoutMode === "VERTICAL") {
+        maxWidth = { label: "maxWidth", width: ".infinity" };
+      } else if (parentLayoutMode === "HORIZONTAL") {
+        maxHeight = { label: "maxHeight", height: ".infinity" };
+      } else {
+        assert(false, "it is not decide stretch axis when parent without axis");
+      }
+    }
+
+    // Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutgrow/
+    // IMPORTANT: Determines whether a layer should stretch along the parent’s primary axis
+    if (layoutGrow === 1) {
+      const parent = context.secondLatestFromNode?.node;
+      assert(parent != null);
+      const { layoutMode: parentLayoutMode } = parent;
+
+      if (parentLayoutMode === "VERTICAL") {
+        maxHeight = { label: "maxHeight", height: ".infinity" };
+      } else if (parentLayoutMode === "HORIZONTAL") {
+        maxWidth = { label: "maxWidth", width: ".infinity" };
+      } else {
+        assert(false, "it is not decide stretch axis when parent without axis");
+      }
     }
 
     var maximumFrameArgs: string[] = [];
