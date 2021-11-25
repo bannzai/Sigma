@@ -234,27 +234,24 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     walkForTextModifier(context, node);
   }
 
-  const { name, layoutAlign } = node;
-  console.log(JSON.stringify({ name, layoutAlign }));
+  const { name, layoutAlign, layoutGrow } = node;
+  console.log(JSON.stringify({ name, layoutAlign, layoutGrow }));
 
-  if (layoutAlign === "INHERIT") {
+  if (layoutAlign === "STRETCH") {
     const { latestFrameNode } = context;
     if (latestFrameNode != null) {
       const { node: container, frame } = latestFrameNode;
+      console.log(JSON.stringify({ container, frame }));
       if (frame === "VStack") {
-        if (container.layoutAlign === "STRETCH") {
-          context.lineBreak();
-          context.nest();
-          context.add(`.frame(maxWidth: .infinity)\n`);
-          context.unnest();
-        }
+        context.lineBreak();
+        context.nest();
+        context.add(`.frame(maxWidth: .infinity)\n`);
+        context.unnest();
       } else if (frame === "HStack") {
-        if (container.layoutAlign === "STRETCH") {
-          context.lineBreak();
-          context.nest();
-          context.add(`.frame(maxHeight: .infinity)\n`);
-          context.unnest();
-        }
+        context.lineBreak();
+        context.nest();
+        context.add(`.frame(maxHeight: .infinity)\n`);
+        context.unnest();
       }
     }
   }
