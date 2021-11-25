@@ -37,8 +37,6 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
         context.add(
           `.foregroundColor(${mappedSwiftUIColor(color, opacity)})\n`
         );
-      } else {
-        // TODO:
       }
     }
   }

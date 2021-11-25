@@ -335,7 +335,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
           context.unnest();
         }
       } else {
-        const _: never = layoutMode
+        const _: never = layoutMode;
       }
     }
   }
