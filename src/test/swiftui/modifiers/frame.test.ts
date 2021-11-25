@@ -13,7 +13,7 @@ describe("#View.frame(_:)", () => {
 
   describe("for VStack", () => {
     describe("without parent", () => {
-      describe("VStack layout align for IdNHERIT mode", () => {
+      describe("VStack layout align for INHERIT", () => {
         test("VStack primary and counter axis size are FIXED", async () => {
           await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
