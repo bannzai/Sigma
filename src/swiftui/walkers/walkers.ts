@@ -345,22 +345,24 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       context.add("Spacer()\n");
       context.unnest();
     } else {
-      if (layoutMode === "VERTICAL") {
-        if (node.height === context.rootSize.height) {
-          context.lineBreak();
-          context.nest();
-          context.add("Spacer()\n");
-          context.unnest();
+      if (context.root.id !== node.id) {
+        if (layoutMode === "VERTICAL") {
+          if (node.height === context.root.height) {
+            context.lineBreak();
+            context.nest();
+            context.add("Spacer()\n");
+            context.unnest();
+          }
+        } else if (layoutMode === "HORIZONTAL") {
+          if (node.width === context.root.width) {
+            context.lineBreak();
+            context.nest();
+            context.add("Spacer()\n");
+            context.unnest();
+          }
+        } else {
+          const _: never = layoutMode;
         }
-      } else if (layoutMode === "HORIZONTAL") {
-        if (node.width === context.rootSize.width) {
-          context.lineBreak();
-          context.nest();
-          context.add("Spacer()\n");
-          context.unnest();
-        }
-      } else {
-        const _: never = layoutMode;
       }
     }
   }
