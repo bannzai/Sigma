@@ -1,13 +1,34 @@
+export type SwiftUIFrame = "VStack" | "HStack" | "ZStack";
+export interface SwiftUIFrameNode {
+  frame: SwiftUIFrame;
+  node: FrameNode;
+}
+
 export class SwiftUIContext {
   indent: number = 0;
   code: string = "";
+  frameNodeHistories: SwiftUIFrameNode[] = [];
   ignoredIndent: boolean = false;
+  root!: SceneNode;
 
   nest() {
     this.indent += 4;
   }
   unnest() {
     this.indent -= 4;
+  }
+
+  push(node: FrameNode, frame: SwiftUIFrame) {
+    this.frameNodeHistories.push({ node, frame });
+  }
+  pop(): SwiftUIFrameNode | null {
+    return this.frameNodeHistories.pop() ?? null;
+  }
+  get latestFrameNode(): SwiftUIFrameNode | null {
+    if (this.frameNodeHistories.length === 0) {
+      return null;
+    }
+    return this.frameNodeHistories[this.frameNodeHistories.length - 1];
   }
 
   add(

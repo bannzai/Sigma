@@ -7,7 +7,16 @@ import { walkForImage } from "../image";
 import { isBlendMixin } from "../type/type_guards";
 import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
-import { walkForFrame } from "../modifiers/frame";
+import {
+  walkForFixedFrame,
+  walkToFrameNodeForFrameModifier,
+  walkForGropuFrame,
+} from "../modifiers/frame";
+import { walkForBackgroundColor } from "../modifiers/backgroundColor";
+import { walkForBorder } from "../modifiers/border";
+import { walkForPosition } from "../modifiers/position";
+import { walkForFixedSpacer } from "../view/spacer";
+import { mappedSwiftUIColor } from "../../util/mapper";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -79,7 +88,19 @@ export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
-  if (node.name.includes("SwiftUI:Button")) {
+  if (node.name.includes("SwiftUI::Button")) {
+    const { id, name, type, layoutAlign, width, height } = node;
+    console.log(
+      JSON.stringify({
+        id,
+        name,
+        type,
+        layoutAlign,
+        width,
+        height,
+      })
+    );
+
     context.lineBreak();
     context.add("Button(action: { /* TODO */ }) {\n");
     node.children.forEach((child) => {
@@ -89,6 +110,8 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
     });
     context.lineBreak();
     context.add("}");
+
+    walkForGropuFrame(context, node);
   } else {
     const isContainMaskNode = node.children.some(
       (e) => isBlendMixin(e) && e.isMask
@@ -120,11 +143,7 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
         });
       }
 
-      const { width, height } = node;
-      context.lineBreak();
-      context.nest();
-      context.add(`.frame(width: ${width}, height: ${height})`);
-      context.unnest();
+      walkForFixedFrame(context, node);
     } else {
       node.children.forEach((child) => {
         context.nest();
@@ -133,13 +152,31 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
       });
     }
   }
+  walkForPosition(context, node);
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
 }
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
-  walkForImage(context, node);
+  const { name, fills } = node;
+  if (fills !== figma.mixed) {
+    for (const fill of fills) {
+      if (fill.type === "IMAGE") {
+        walkForImage(context, fill, node);
+        if (fill.scaleMode === "FIT") {
+          walkForFixedFrame(context, node);
+        }
+      }
+    }
+  }
+
+  if (name === "SwiftUI::Spacer") {
+    walkForFixedSpacer(context, node);
+  } else {
+    walkForBorder(context, node);
+    walkForPosition(context, node);
+  }
 }
 export function walkToShapeWithText(
   context: SwiftUIContext,
@@ -149,22 +186,75 @@ export function walkToShapeWithText(
 }
 export function walkToText(context: SwiftUIContext, node: TextNode) {
   trace(`#walkToText`, context, node);
+  const { characters, fills } = node;
 
-  const { characters } = node;
-  const stringList = characters.split("\n");
-  if (stringList.length <= 1) {
-    context.add(`Text("${characters}")\n`);
+  if (fills === figma.mixed) {
+    // TODO: Styled mixed pattern
+    // var nextStyleIndex = 0;
+    // var isFirstText = true;
+    // for (var i = nextStyleIndex; i < characters.length; i++) {
+    //   const fillComponent = node.getRangeFills(nextStyleIndex, i + 1);
+    //   if (i !== characters.length - 1 && fillComponent != figma.mixed) {
+    //     continue;
+    //   }
+    //   const componentFills = node.getRangeFills(nextStyleIndex, i - 1);
+    //   if (componentFills === figma.mixed || componentFills.length !== 1) {
+    //     console.log(`[DEBUG] assertion`);
+    //     assert(false);
+    //   }
+    //   const fill = componentFills[0];
+    //   if (fill.type === "SOLID") {
+    //     if (!isFirstText) {
+    //       context.add(" + \n", { withoutIndent: true });
+    //     }
+    //     context.add(`Text("${characters.substring(nextStyleIndex, i)}")\n`);
+    //     context.nest();
+    //     context.add(
+    //       `.foregroundColor(${mappedSwiftUIColor(fill.color, fill.opacity)})`
+    //     );
+    //     context.unnest();
+    //     isFirstText = false;
+    //   }
+    //   nextStyleIndex = i;
+    // }
+    // context.lineBreak();
   } else {
-    context.add(`Text("""\n`);
-    stringList.forEach((string) => {
-      context.nest();
-      context.add(`${string}\n`);
-      context.unnest();
-    });
-    context.add(`""")`);
+    const stringList = characters.split("\n");
+    if (stringList.length <= 1) {
+      context.add(`Text(verbatim: "${characters}")\n`);
+    } else {
+      context.add(`Text(verbatim: """\n`);
+      stringList.forEach((string) => {
+        context.nest();
+        context.add(`${string}\n`);
+        context.unnest();
+      });
+      context.add(`""")`);
+    }
+    walkForTextModifier(context, node);
   }
 
-  walkForTextModifier(context, node);
+  const { name, layoutAlign, layoutGrow } = node;
+  console.log(JSON.stringify({ name, layoutAlign, layoutGrow }));
+
+  if (layoutAlign === "STRETCH") {
+    const { latestFrameNode } = context;
+    if (latestFrameNode != null) {
+      const { node: container, frame } = latestFrameNode;
+      console.log(JSON.stringify({ container, frame }));
+      if (frame === "VStack") {
+        context.lineBreak();
+        context.nest();
+        context.add(`.frame(maxWidth: .infinity)\n`);
+        context.unnest();
+      } else if (frame === "HStack") {
+        context.lineBreak();
+        context.nest();
+        context.add(`.frame(maxHeight: .infinity)\n`);
+        context.unnest();
+      }
+    }
+  }
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -172,13 +262,17 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   const {
     children,
     layoutMode,
+    layoutAlign,
     itemSpacing,
     counterAxisAlignItems,
+    primaryAxisSizingMode,
     primaryAxisAlignItems,
   } = node;
 
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
+    context.push(node, "HStack");
+
     containerCode += "HStack(";
 
     const args: string[] = [];
@@ -192,6 +286,8 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     containerCode += args.join(", ");
     containerCode += ")";
   } else if (layoutMode === "VERTICAL") {
+    context.push(node, "VStack");
+
     containerCode += "VStack(";
 
     const args: string[] = [];
@@ -204,8 +300,13 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
     containerCode += args.join(", ");
     containerCode += ")";
-  } else if (children.length > 1) {
-    containerCode += "ZStack";
+  } else if (layoutMode === "NONE") {
+    if (children.length > 1) {
+      context.push(node, "ZStack");
+      containerCode += "ZStack";
+    }
+  } else {
+    const _: never = layoutMode;
   }
 
   const isExistsContainer = containerCode.length > 0;
@@ -228,6 +329,9 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   children.forEach((child) => {
     context.nest();
     walk(context, child);
+    if (primaryAxisAlignItems === "SPACE_BETWEEN") {
+      context.add(`Spacer()\n`);
+    }
     context.unnest();
   });
 
@@ -235,10 +339,32 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
     primaryAxisAlignItems === "MIN"
   ) {
-    context.lineBreak();
-    context.nest();
-    context.add("Spacer()\n");
-    context.unnest();
+    if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
+      context.lineBreak();
+      context.nest();
+      context.add("Spacer()\n");
+      context.unnest();
+    } else {
+      if (context.root.id !== node.id) {
+        if (layoutMode === "VERTICAL") {
+          if (node.height === context.root.height) {
+            context.lineBreak();
+            context.nest();
+            context.add("Spacer()\n");
+            context.unnest();
+          }
+        } else if (layoutMode === "HORIZONTAL") {
+          if (node.width === context.root.width) {
+            context.lineBreak();
+            context.nest();
+            context.add("Spacer()\n");
+            context.unnest();
+          }
+        } else {
+          const _: never = layoutMode;
+        }
+      }
+    }
   }
 
   if (isExistsContainer) {
@@ -247,5 +373,10 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   }
 
   walkForPadding(context, node);
-  walkForFrame(context, node);
+  walkToFrameNodeForFrameModifier(context, node);
+  walkForBackgroundColor(context, node);
+
+  if (isExistsContainer) {
+    context.pop();
+  }
 }
