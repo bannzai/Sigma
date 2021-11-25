@@ -233,6 +233,31 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     }
     walkForTextModifier(context, node);
   }
+
+  const { name, layoutAlign } = node;
+  console.log(JSON.stringify({ name, layoutAlign }));
+
+  if (layoutAlign === "INHERIT") {
+    const { latestFrameNode } = context;
+    if (latestFrameNode != null) {
+      const { node: container, frame } = latestFrameNode;
+      if (frame === "VStack") {
+        if (container.layoutAlign === "STRETCH") {
+          context.lineBreak();
+          context.nest();
+          context.add(`.frame(maxWidth: .infinity)\n`);
+          context.unnest();
+        }
+      } else if (frame === "HStack") {
+        if (container.layoutAlign === "STRETCH") {
+          context.lineBreak();
+          context.nest();
+          context.add(`.frame(maxHeight: .infinity)\n`);
+          context.unnest();
+        }
+      }
+    }
+  }
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);

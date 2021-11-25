@@ -25,6 +25,8 @@ export function walkToFrameNodeForFrameModifier(
       height,
       primaryAxisSizingMode,
       counterAxisSizingMode,
+      primaryAxisAlignItems,
+      counterAxisAlignItems,
       layoutAlign,
       layoutMode,
       layoutGrow,
