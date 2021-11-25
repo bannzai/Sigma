@@ -32,6 +32,7 @@ describe("#View.frame(_:)", () => {
           vstack.appendChild(createText("1"));
           vstack.appendChild(createText("2"));
           vstack.appendChild(createText("3"));
+          vstack.layoutGrow = 0;
 
           const context = new SwiftUIContext();
           walk(context, vstack);
