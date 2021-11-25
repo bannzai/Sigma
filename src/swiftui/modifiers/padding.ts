@@ -47,7 +47,7 @@ export function walkForPadding(context: SwiftUIContext, node: BaseFrameMixin) {
         if (top !== 0) {
           paddings.set("top", top);
         }
-        if (right !== 0) {
+        if (bottom !== 0) {
           paddings.set("bottom", bottom);
         }
       }
