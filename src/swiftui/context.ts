@@ -32,7 +32,7 @@ export class SwiftUIContext {
     }
     return this.frameNodeHistories[this.frameNodeHistories.length - 1];
   }
-  get secondLatestFromNode(): SwiftUIFrameNode | null {
+  get secondLatestFormNode(): SwiftUIFrameNode | null {
     if (this.frameNodeHistories.length < 2) {
       return null;
     }
