@@ -109,4 +109,102 @@ VStack(alignment: .leading, spacing: 10) {
       });
     });
   });
+  describe("for HStack", () => {
+    describe("without parent", () => {
+      test("HStack primary axis size is FIXED and counter axis size is FIXED", async () => {
+        await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+        const vstack = figma.createFrame();
+        vstack.layoutMode = "HORIZONTAL";
+        vstack.primaryAxisSizingMode = "FIXED";
+        vstack.counterAxisSizingMode = "FIXED";
+        vstack.counterAxisAlignItems = "MIN";
+        vstack.paddingLeft = 0;
+        vstack.paddingTop = 0;
+        vstack.paddingRight = 0;
+        vstack.paddingBottom = 0;
+        vstack.itemSpacing = 10;
+        vstack.resize(100, 200);
+        vstack.appendChild(createText("1"));
+        vstack.appendChild(createText("2"));
+        vstack.appendChild(createText("3"));
+
+        const context = new SwiftUIContext();
+        walk(context, vstack);
+
+        const code = `
+HStack(alignment: .top, spacing: 10) {
+    Text(verbatim: "1")
+    Text(verbatim: "2")
+    Text(verbatim: "3")
+}
+.frame(width: 100, height: 200)
+`;
+        expect(context.code).toEqual(code.slice("\n".length));
+      });
+
+      test("HStack primary axis size is AUTO and counter axis size is FIXED", async () => {
+        await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+        const vstack = figma.createFrame();
+        vstack.layoutMode = "HORIZONTAL";
+        vstack.primaryAxisSizingMode = "AUTO";
+        vstack.counterAxisSizingMode = "FIXED";
+        vstack.counterAxisAlignItems = "MIN";
+        vstack.paddingLeft = 0;
+        vstack.paddingTop = 0;
+        vstack.paddingRight = 0;
+        vstack.paddingBottom = 0;
+        vstack.itemSpacing = 10;
+        vstack.resize(100, 200);
+        vstack.appendChild(createText("1"));
+        vstack.appendChild(createText("2"));
+        vstack.appendChild(createText("3"));
+
+        const context = new SwiftUIContext();
+        walk(context, vstack);
+
+        const code = `
+HStack(alignment: .top, spacing: 10) {
+    Text(verbatim: "1")
+    Text(verbatim: "2")
+    Text(verbatim: "3")
+}
+.frame(height: 200)
+`;
+        expect(context.code).toEqual(code.slice("\n".length));
+      });
+
+      test("HStack primary axis size is AUTO and counter axis size is AUTO", async () => {
+        await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+        const vstack = figma.createFrame();
+        vstack.layoutMode = "HORIZONTAL";
+        vstack.primaryAxisSizingMode = "AUTO";
+        vstack.counterAxisSizingMode = "AUTO";
+        vstack.counterAxisAlignItems = "MIN";
+        vstack.paddingLeft = 0;
+        vstack.paddingTop = 0;
+        vstack.paddingRight = 0;
+        vstack.paddingBottom = 0;
+        vstack.itemSpacing = 10;
+        vstack.resize(100, 200);
+        vstack.appendChild(createText("1"));
+        vstack.appendChild(createText("2"));
+        vstack.appendChild(createText("3"));
+
+        const context = new SwiftUIContext();
+        walk(context, vstack);
+
+        const code = `
+HStack(alignment: .top, spacing: 10) {
+    Text(verbatim: "1")
+    Text(verbatim: "2")
+    Text(verbatim: "3")
+}
+`;
+        expect(context.code).toEqual(code.slice("\n".length));
+      });
+    });
+  });
 });
