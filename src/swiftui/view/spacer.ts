@@ -21,17 +21,21 @@ export function walkForFixedSpacer(
     return;
   }
   if (latestFrameNode.node.layoutMode === "VERTICAL") {
-    context.lineBreak();
-    context.add("Spacer()\n");
-    context.nest();
-    context.add(`.frame(height: ${height})\n`);
-    context.unnest();
+    if (!latestFrameNode.isOnlyOneChild) {
+      context.lineBreak();
+      context.add("Spacer()\n");
+      context.nest();
+      context.add(`.frame(height: ${height})\n`);
+      context.unnest();
+    }
   } else if (latestFrameNode.node.layoutMode === "HORIZONTAL") {
-    context.lineBreak();
-    context.add("Spacer()\n");
-    context.nest();
-    context.add(`.frame(width: ${width})\n`);
-    context.unnest();
+    if (!latestFrameNode.isOnlyOneChild) {
+      context.lineBreak();
+      context.add("Spacer()\n");
+      context.nest();
+      context.add(`.frame(width: ${width})\n`);
+      context.unnest();
+    }
   } else {
     const _: never = latestFrameNode.node.layoutMode;
   }
