@@ -311,8 +311,9 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       containerCode += ")";
     }
   } else if (layoutMode === "NONE") {
+    context.push(node);
+
     if (children.length > 1) {
-      context.push(node);
       containerCode += "ZStack";
     }
   } else {
