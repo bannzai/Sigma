@@ -49,9 +49,13 @@ export function adaptFrameModifierWithFrameNode(
 
     Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
    */
-  assert(node.layoutAlign !== "MIN");
-  assert(node.layoutAlign !== "MAX");
-  assert(node.layoutAlign !== "CENTER");
+  if (
+    node.layoutAlign === "MIN" ||
+    node.layoutAlign === "MAX" ||
+    node.layoutAlign === "CENTER"
+  ) {
+    return;
+  }
 
   context.lineBreak();
 
@@ -262,9 +266,13 @@ export function walkForFixedFrame(
 
     Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
    */
-  assert(layoutAlign !== "MIN");
-  assert(layoutAlign !== "MAX");
-  assert(layoutAlign !== "CENTER");
+  if (
+    layoutAlign === "MIN" ||
+    layoutAlign === "MAX" ||
+    layoutAlign === "CENTER"
+  ) {
+    return;
+  }
 
   if (layoutAlign === "INHERIT") {
     context.lineBreak();
