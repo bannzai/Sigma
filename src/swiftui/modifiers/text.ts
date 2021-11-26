@@ -1,4 +1,4 @@
-import { mappedSwiftUIColor } from "../../util/mapper";
+import { mappedSwiftUIColor } from "../util/mapper";
 import { SwiftUIContext } from "../context";
 
 export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {

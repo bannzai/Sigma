@@ -4,5 +4,6 @@
 export function createText(text: string): TextNode {
   const node = figma.createText();
   node.characters = text;
+  node.fills = [];
   return node;
 }

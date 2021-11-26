@@ -1,7 +1,6 @@
-export type SwiftUIFrame = "VStack" | "HStack" | "ZStack";
 export interface SwiftUIFrameNode {
-  frame: SwiftUIFrame;
   node: FrameNode;
+  isOnlyOneChild: boolean;
 }
 
 export class SwiftUIContext {
@@ -18,8 +17,11 @@ export class SwiftUIContext {
     this.indent -= 4;
   }
 
-  push(node: FrameNode, frame: SwiftUIFrame) {
-    this.frameNodeHistories.push({ node, frame });
+  push(node: FrameNode) {
+    this.frameNodeHistories.push({
+      node,
+      isOnlyOneChild: node.children.length === 1,
+    });
   }
   pop(): SwiftUIFrameNode | null {
     return this.frameNodeHistories.pop() ?? null;
@@ -29,6 +31,12 @@ export class SwiftUIContext {
       return null;
     }
     return this.frameNodeHistories[this.frameNodeHistories.length - 1];
+  }
+  get secondLatestFormNode(): SwiftUIFrameNode | null {
+    if (this.frameNodeHistories.length < 2) {
+      return null;
+    }
+    return this.frameNodeHistories[this.frameNodeHistories.length - 2];
   }
 
   add(

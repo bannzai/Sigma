@@ -13,8 +13,8 @@ export function walkForPosition(
     return;
   }
   if (
-    latestFrameNode.frame === "VStack" ||
-    latestFrameNode.frame === "HStack"
+    latestFrameNode.node.layoutMode === "VERTICAL" ||
+    latestFrameNode.node.layoutMode === "HORIZONTAL"
   ) {
     return;
   }

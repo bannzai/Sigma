@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { trace } from "../../util/tracer";
+import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
@@ -9,14 +9,13 @@ import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
 import {
   walkForFixedFrame,
-  walkToFrameNodeForFrameModifier,
-  walkForGropuFrame,
-} from "../modifiers/frame";
+  adaptFrameModifierWithFrameNode,
+} from "../modifiers/frame/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForBorder } from "../modifiers/border";
 import { walkForPosition } from "../modifiers/position";
 import { walkForFixedSpacer } from "../view/spacer";
-import { mappedSwiftUIColor } from "../../util/mapper";
+import { mappedSwiftUIColor } from "../util/mapper";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -111,7 +110,10 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
     context.lineBreak();
     context.add("}");
 
-    walkForGropuFrame(context, node);
+    const frameNode = context.latestFrameNode?.node;
+    if (frameNode != null) {
+      adaptFrameModifierWithFrameNode(context, frameNode);
+    }
   } else {
     const isContainMaskNode = node.children.some(
       (e) => isBlendMixin(e) && e.isMask
@@ -240,14 +242,14 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
   if (layoutAlign === "STRETCH") {
     const { latestFrameNode } = context;
     if (latestFrameNode != null) {
-      const { node: container, frame } = latestFrameNode;
-      console.log(JSON.stringify({ container, frame }));
-      if (frame === "VStack") {
+      const { node: container } = latestFrameNode;
+
+      if (container.layoutMode === "VERTICAL") {
         context.lineBreak();
         context.nest();
         context.add(`.frame(maxWidth: .infinity)\n`);
         context.unnest();
-      } else if (frame === "HStack") {
+      } else if (container.layoutMode === "HORIZONTAL") {
         context.lineBreak();
         context.nest();
         context.add(`.frame(maxHeight: .infinity)\n`);
@@ -271,7 +273,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
-    context.push(node, "HStack");
+    context.push(node);
 
     containerCode += "HStack(";
 
@@ -286,7 +288,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     containerCode += args.join(", ");
     containerCode += ")";
   } else if (layoutMode === "VERTICAL") {
-    context.push(node, "VStack");
+    context.push(node);
 
     containerCode += "VStack(";
 
@@ -301,8 +303,9 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     containerCode += args.join(", ");
     containerCode += ")";
   } else if (layoutMode === "NONE") {
+    context.push(node);
+
     if (children.length > 1) {
-      context.push(node, "ZStack");
       containerCode += "ZStack";
     }
   } else {
@@ -314,18 +317,23 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.lineBreak();
     context.add(containerCode);
     context.add(" {\n", { withoutIndent: true });
+
+    if (
+      (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+      primaryAxisAlignItems === "MAX"
+    ) {
+      context.lineBreak();
+      context.nest();
+      context.add("Spacer()\n");
+      context.unnest();
+    }
   }
 
-  if (
-    (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
-    primaryAxisAlignItems === "MAX"
-  ) {
-    context.lineBreak();
+  if (primaryAxisAlignItems === "SPACE_BETWEEN") {
     context.nest();
-    context.add("Spacer()\n");
+    context.add(`Spacer()\n`);
     context.unnest();
   }
-
   children.forEach((child) => {
     context.nest();
     walk(context, child);
@@ -335,48 +343,46 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.unnest();
   });
 
-  if (
-    (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
-    primaryAxisAlignItems === "MIN"
-  ) {
-    if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
-      context.lineBreak();
-      context.nest();
-      context.add("Spacer()\n");
-      context.unnest();
-    } else {
-      if (context.root.id !== node.id) {
-        if (layoutMode === "VERTICAL") {
-          if (node.height === context.root.height) {
-            context.lineBreak();
-            context.nest();
-            context.add("Spacer()\n");
-            context.unnest();
+  if (isExistsContainer) {
+    if (
+      (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+      primaryAxisAlignItems === "MIN"
+    ) {
+      if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
+        context.lineBreak();
+        context.nest();
+        context.add("Spacer()\n");
+        context.unnest();
+      } else {
+        if (context.root.id !== node.id) {
+          if (layoutMode === "VERTICAL") {
+            if (node.height === context.root.height) {
+              context.lineBreak();
+              context.nest();
+              context.add("Spacer()\n");
+              context.unnest();
+            }
+          } else if (layoutMode === "HORIZONTAL") {
+            if (node.width === context.root.width) {
+              context.lineBreak();
+              context.nest();
+              context.add("Spacer()\n");
+              context.unnest();
+            }
+          } else {
+            const _: never = layoutMode;
           }
-        } else if (layoutMode === "HORIZONTAL") {
-          if (node.width === context.root.width) {
-            context.lineBreak();
-            context.nest();
-            context.add("Spacer()\n");
-            context.unnest();
-          }
-        } else {
-          const _: never = layoutMode;
         }
       }
     }
-  }
 
-  if (isExistsContainer) {
     context.lineBreak();
     context.add("}\n");
-  }
 
-  walkForPadding(context, node);
-  walkToFrameNodeForFrameModifier(context, node);
-  walkForBackgroundColor(context, node);
+    walkForPadding(context, node);
+    adaptFrameModifierWithFrameNode(context, node);
+    walkForBackgroundColor(context, node);
 
-  if (isExistsContainer) {
     context.pop();
   }
 }
