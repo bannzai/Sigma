@@ -329,6 +329,11 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     }
   }
 
+  if (primaryAxisAlignItems === "SPACE_BETWEEN") {
+    context.nest();
+    context.add(`Spacer()\n`);
+    context.unnest();
+  }
   children.forEach((child) => {
     context.nest();
     walk(context, child);
