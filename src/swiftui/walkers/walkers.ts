@@ -275,37 +275,33 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   if (layoutMode === "HORIZONTAL") {
     context.push(node);
 
-    if (node.children.length > 1) {
-      containerCode += "HStack(";
+    containerCode += "HStack(";
 
-      const args: string[] = [];
-      if (counterAxisAlignItems === "MIN") {
-        args.push("alignment: .top");
-      } else if (counterAxisAlignItems === "MAX") {
-        args.push("alignment: .bottom");
-      }
-      args.push(`spacing: ${itemSpacing}`);
-
-      containerCode += args.join(", ");
-      containerCode += ")";
+    const args: string[] = [];
+    if (counterAxisAlignItems === "MIN") {
+      args.push("alignment: .top");
+    } else if (counterAxisAlignItems === "MAX") {
+      args.push("alignment: .bottom");
     }
+    args.push(`spacing: ${itemSpacing}`);
+
+    containerCode += args.join(", ");
+    containerCode += ")";
   } else if (layoutMode === "VERTICAL") {
     context.push(node);
 
-    if (node.children.length > 1) {
-      containerCode += "VStack(";
+    containerCode += "VStack(";
 
-      const args: string[] = [];
-      if (counterAxisAlignItems === "MIN") {
-        args.push("alignment: .leading");
-      } else if (counterAxisAlignItems === "MAX") {
-        args.push("alignment: .trailing");
-      }
-      args.push(`spacing: ${itemSpacing}`);
-
-      containerCode += args.join(", ");
-      containerCode += ")";
+    const args: string[] = [];
+    if (counterAxisAlignItems === "MIN") {
+      args.push("alignment: .leading");
+    } else if (counterAxisAlignItems === "MAX") {
+      args.push("alignment: .trailing");
     }
+    args.push(`spacing: ${itemSpacing}`);
+
+    containerCode += args.join(", ");
+    containerCode += ")";
   } else if (layoutMode === "NONE") {
     context.push(node);
 
@@ -381,7 +377,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     walkForPadding(context, node);
     adaptFrameModifierWithFrameNode(context, node);
     walkForBackgroundColor(context, node);
-  }
 
-  context.pop();
+    context.pop();
+  }
 }
