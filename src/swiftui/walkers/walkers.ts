@@ -10,7 +10,6 @@ import { walkForClipShape } from "../modifiers/clipShape";
 import {
   walkForFixedFrame,
   adaptFrameModifierWithFrameNode,
-  walkForGropuFrame,
 } from "../modifiers/frame/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForBorder } from "../modifiers/border";
@@ -111,7 +110,10 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
     context.lineBreak();
     context.add("}");
 
-    walkForGropuFrame(context, node);
+    const frameNode = context.latestFrameNode?.node;
+    if (frameNode != null) {
+      adaptFrameModifierWithFrameNode(context, frameNode);
+    }
   } else {
     const isContainMaskNode = node.children.some(
       (e) => isBlendMixin(e) && e.isMask

@@ -17,6 +17,8 @@ export function adaptFrameModifierWithFrameNode(
   assert(node.layoutAlign !== "MAX");
   assert(node.layoutAlign !== "CENTER");
 
+  context.lineBreak();
+
   const { fixedWidth, maxWidth, fixedHeight, maxHeight, alignment } = build(
     context,
     node
@@ -55,59 +57,6 @@ export function adaptFrameModifierWithFrameNode(
   }
 
   context.lineBreak();
-}
-
-export function walkForGropuFrame(
-  context: SwiftUIContext,
-  node: LayoutMixin & BaseNode
-) {
-  const { width, height, layoutAlign, layoutGrow } = node;
-
-  /*
-    NOTE: ⚠️ Previously, layoutAlign also determined counter axis alignment of auto-layout frame children.
-    Counter axis alignment is now set on the auto-layout frame itself through counterAxisAlignItems. Note that this means all layers in an auto-layout frame must now have the same counter axis alignment. 
-    This means "MIN", "CENTER", and "MAX" are now deprecated values of layoutAlign.
-
-    Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
-   */
-  assert(layoutAlign !== "MIN");
-  assert(layoutAlign !== "MAX");
-  assert(layoutAlign !== "CENTER");
-
-  const isFixedMainAxis = layoutGrow === 0;
-  const isStretchMainAxis = layoutGrow === 1;
-
-  const { latestFrameNode } = context;
-  if (latestFrameNode == null) {
-    return;
-  }
-
-  context.lineBreak();
-  if (layoutMode === "VERTICAL") {
-    if (layoutAlign === "STRETCH") {
-      context.add(".frame(maxWidth: .infinity)\n");
-    } else {
-      const _: "INHERIT" = layoutAlign;
-    }
-
-    if (isFixedMainAxis) {
-      context.add(`.frame(height: ${height})\n`);
-    } else if (isStretchMainAxis) {
-      context.add(`.frame(maxHeight: .infinity)\n`);
-    }
-  } else {
-    if (layoutAlign === "STRETCH") {
-      context.add(".frame(maxHeight: .infinity)\n");
-    } else {
-      const _: "INHERIT" = layoutAlign;
-    }
-
-    if (isFixedMainAxis) {
-      context.add(`.frame(width: ${height})\n`);
-    } else if (isStretchMainAxis) {
-      context.add(`.frame(maxWidth: .infinity)\n`);
-    }
-  }
 }
 
 export function walkForFixedFrame(
