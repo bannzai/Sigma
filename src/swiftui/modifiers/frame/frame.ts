@@ -245,38 +245,6 @@ export function adaptFrameModifierWithFrameNode(
     context.add(`.frame(${args})\n`);
   }
 
-  var maximumFrameArgs: string[] = [];
-  if (maxWidth != null) {
-    maximumFrameArgs.push(`maxWidth: ${maxWidth.width}`);
-  }
-  if (maxHeight != null) {
-    maximumFrameArgs.push(`maxHeight: ${maxHeight.height}`);
-  }
-  if (maximumFrameArgs.length > 0) {
-    if (alignment !== "center") {
-      maximumFrameArgs.push(`alignment: .${alignment}`);
-    }
-
-    const args = maximumFrameArgs.join(", ");
-    context.add(`.frame(${args})\n`);
-  }
-
-  var fixedFrameArgs: string[] = [];
-  if (fixedWidth != null) {
-    fixedFrameArgs.push(`width: ${fixedWidth.width}`);
-  }
-  if (fixedHeight != null) {
-    fixedFrameArgs.push(`height: ${fixedHeight.height}`);
-  }
-  if (fixedFrameArgs.length > 0) {
-    if (alignment !== "center") {
-      maximumFrameArgs.push(`alignment: .${alignment}`);
-    }
-
-    const args = fixedFrameArgs.join(", ");
-    context.add(`.frame(${args})\n`);
-  }
-
   context.lineBreak();
 }
 
