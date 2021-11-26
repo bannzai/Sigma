@@ -23,7 +23,6 @@ export function walkForBorder(
               )}, lineWidth: ${strokeWeight}))`
             );
           } else {
-            context.add(`.cornerRadius(${cornerRadius})\n`);
             context.add(
               `.overlay(RoundedRectangle(cornerRadius: ${cornerRadius}).stroke(${mappedSwiftUIColor(
                 stroke.color,
