@@ -273,33 +273,37 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   if (layoutMode === "HORIZONTAL") {
     context.push(node);
 
-    containerCode += "HStack(";
+    if (node.children.length > 1) {
+      containerCode += "HStack(";
 
-    const args: string[] = [];
-    if (counterAxisAlignItems === "MIN") {
-      args.push("alignment: .top");
-    } else if (counterAxisAlignItems === "MAX") {
-      args.push("alignment: .bottom");
+      const args: string[] = [];
+      if (counterAxisAlignItems === "MIN") {
+        args.push("alignment: .top");
+      } else if (counterAxisAlignItems === "MAX") {
+        args.push("alignment: .bottom");
+      }
+      args.push(`spacing: ${itemSpacing}`);
+
+      containerCode += args.join(", ");
+      containerCode += ")";
     }
-    args.push(`spacing: ${itemSpacing}`);
-
-    containerCode += args.join(", ");
-    containerCode += ")";
   } else if (layoutMode === "VERTICAL") {
     context.push(node);
 
-    containerCode += "VStack(";
+    if (node.children.length > 1) {
+      containerCode += "VStack(";
 
-    const args: string[] = [];
-    if (counterAxisAlignItems === "MIN") {
-      args.push("alignment: .leading");
-    } else if (counterAxisAlignItems === "MAX") {
-      args.push("alignment: .trailing");
+      const args: string[] = [];
+      if (counterAxisAlignItems === "MIN") {
+        args.push("alignment: .leading");
+      } else if (counterAxisAlignItems === "MAX") {
+        args.push("alignment: .trailing");
+      }
+      args.push(`spacing: ${itemSpacing}`);
+
+      containerCode += args.join(", ");
+      containerCode += ")";
     }
-    args.push(`spacing: ${itemSpacing}`);
-
-    containerCode += args.join(", ");
-    containerCode += ")";
   } else if (layoutMode === "NONE") {
     if (children.length > 1) {
       context.push(node);
@@ -314,16 +318,16 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.lineBreak();
     context.add(containerCode);
     context.add(" {\n", { withoutIndent: true });
-  }
 
-  if (
-    (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
-    primaryAxisAlignItems === "MAX"
-  ) {
-    context.lineBreak();
-    context.nest();
-    context.add("Spacer()\n");
-    context.unnest();
+    if (
+      (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+      primaryAxisAlignItems === "MAX"
+    ) {
+      context.lineBreak();
+      context.nest();
+      context.add("Spacer()\n");
+      context.unnest();
+    }
   }
 
   children.forEach((child) => {
@@ -335,48 +339,46 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     context.unnest();
   });
 
-  if (
-    (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
-    primaryAxisAlignItems === "MIN"
-  ) {
-    if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
-      context.lineBreak();
-      context.nest();
-      context.add("Spacer()\n");
-      context.unnest();
-    } else {
-      if (context.root.id !== node.id) {
-        if (layoutMode === "VERTICAL") {
-          if (node.height === context.root.height) {
-            context.lineBreak();
-            context.nest();
-            context.add("Spacer()\n");
-            context.unnest();
+  if (isExistsContainer) {
+    if (
+      (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+      primaryAxisAlignItems === "MIN"
+    ) {
+      if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
+        context.lineBreak();
+        context.nest();
+        context.add("Spacer()\n");
+        context.unnest();
+      } else {
+        if (context.root.id !== node.id) {
+          if (layoutMode === "VERTICAL") {
+            if (node.height === context.root.height) {
+              context.lineBreak();
+              context.nest();
+              context.add("Spacer()\n");
+              context.unnest();
+            }
+          } else if (layoutMode === "HORIZONTAL") {
+            if (node.width === context.root.width) {
+              context.lineBreak();
+              context.nest();
+              context.add("Spacer()\n");
+              context.unnest();
+            }
+          } else {
+            const _: never = layoutMode;
           }
-        } else if (layoutMode === "HORIZONTAL") {
-          if (node.width === context.root.width) {
-            context.lineBreak();
-            context.nest();
-            context.add("Spacer()\n");
-            context.unnest();
-          }
-        } else {
-          const _: never = layoutMode;
         }
       }
     }
-  }
 
-  if (isExistsContainer) {
     context.lineBreak();
     context.add("}\n");
-  }
 
-  walkForPadding(context, node);
-  walkToFrameNodeForFrameModifier(context, node);
-  walkForBackgroundColor(context, node);
+    walkForPadding(context, node);
+    walkToFrameNodeForFrameModifier(context, node);
+    walkForBackgroundColor(context, node);
 
-  if (isExistsContainer) {
     context.pop();
   }
 }

@@ -1,5 +1,6 @@
 export interface SwiftUIFrameNode {
   node: FrameNode;
+  isOnlyOneChild: boolean;
 }
 
 export class SwiftUIContext {
@@ -17,7 +18,10 @@ export class SwiftUIContext {
   }
 
   push(node: FrameNode) {
-    this.frameNodeHistories.push({ node });
+    this.frameNodeHistories.push({
+      node,
+      isOnlyOneChild: node.children.length === 1,
+    });
   }
   pop(): SwiftUIFrameNode | null {
     return this.frameNodeHistories.pop() ?? null;
