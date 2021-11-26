@@ -1,5 +1,12 @@
 import * as assert from "assert";
-import { SwiftUIContext } from "../context";
+import { SwiftUIContext } from "../../context";
+import {
+  Alignment,
+  FixedHeight,
+  FixedWidth,
+  MaxHeight,
+  MaxWidth,
+} from "./types";
 
 export function walkToFrameNodeForFrameModifier(
   context: SwiftUIContext,
@@ -34,24 +41,6 @@ export function walkToFrameNodeForFrameModifier(
       layoutMode,
     })
   );
-
-  interface FixedWidth {
-    label: "width";
-    width: number;
-  }
-  interface MaxWidth {
-    label: "maxWidth";
-    width: ".infinity";
-  }
-  interface FixedHeight {
-    label: "height";
-    height: number;
-  }
-  interface MaxHeight {
-    label: "maxHeight";
-    height: ".infinity";
-  }
-
   /*
     NOTE: ⚠️ Previously, layoutAlign also determined counter axis alignment of auto-layout frame children.
     Counter axis alignment is now set on the auto-layout frame itself through counterAxisAlignItems. Note that this means all layers in an auto-layout frame must now have the same counter axis alignment. 
@@ -67,16 +56,7 @@ export function walkToFrameNodeForFrameModifier(
   var maxWidth: MaxWidth | null = null;
   var fixedHeight: FixedHeight | null = null;
   var maxHeight: MaxHeight | null = null;
-  var alignment:
-    | "leading"
-    | "top"
-    | "trailing"
-    | "bottom"
-    | "topLeading"
-    | "topTrailing"
-    | "bottomLeading"
-    | "bottomTrailing"
-    | "center" = "center";
+  var alignment: Alignment = "center";
 
   if (layoutMode === "VERTICAL") {
     if (primaryAxisAlignItems === "MIN") {
@@ -273,24 +253,13 @@ export function walkForGropuFrame(
   assert(layoutAlign !== "MAX");
   assert(layoutAlign !== "CENTER");
 
-  var layoutMode: "VERTICAL" | "HORIZONTAL" | null = null;
-  var parent = node.parent;
-  while (layoutMode == null && parent != null) {
-    if (parent.type === "FRAME") {
-      if (parent.layoutMode !== "NONE") {
-        layoutMode = parent.layoutMode;
-      }
-    }
-
-    parent = parent.parent;
-  }
-
-  if (layoutMode == null) {
-    return;
-  }
-
   const isFixedMainAxis = layoutGrow === 0;
   const isStretchMainAxis = layoutGrow === 1;
+
+  const { latestFrameNode } = context;
+  if (latestFrameNode == null) {
+    return;
+  }
 
   context.lineBreak();
   if (layoutMode === "VERTICAL") {

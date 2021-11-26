@@ -1,4 +1,4 @@
-import { SwiftUIContext } from "../swiftui/context";
+import { SwiftUIContext } from "../context";
 
 export function trace(
   prefix: string = "",
