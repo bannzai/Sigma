@@ -33,6 +33,9 @@ export type Alignment =
   | "center";
 
 export interface FrameModifierArgument {
-  size: FrameModifierSizingArgumentType[];
+  fixedWidth: FixedWidth | null;
+  maxWidth: MaxWidth | null;
+  fixedHeight: FixedHeight | null;
+  maxHeight: MaxHeight | null;
   alignment: Alignment;
 }

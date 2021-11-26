@@ -161,7 +161,10 @@ export function build(
   }
 
   return {
-    size: [fixedWidth, maxWidth, fixedHeight, maxHeight].filter(nonNullable),
+    fixedWidth,
+    maxWidth,
+    fixedHeight,
+    maxHeight,
     alignment,
   };
 }
