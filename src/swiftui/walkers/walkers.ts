@@ -165,7 +165,7 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
 
     if (node.width !== context.root.width) {
       context.nest();
-      context.add(`.frame(width: ${node.width}`);
+      context.add(`.frame(width: ${node.width})\n`);
       context.unnest();
     }
     if
@@ -175,7 +175,7 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
 
     if (node.height !== context.root.height) {
       context.nest();
-      context.add(`.frame(height: ${node.height}`);
+      context.add(`.frame(height: ${node.height})\n`);
       context.unnest();
     }
   }
