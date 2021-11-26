@@ -189,15 +189,16 @@ export function adaptFrameModifierWithFrameNode(
   // IMPORTANT: Determines if the layer should stretch along the parent’s counter axis.
   if (layoutAlign === "STRETCH") {
     const parent = context.secondLatestFromNode?.node;
-    assert(parent != null);
-    const { layoutMode: parentLayoutMode } = parent;
+    if (parent != null) {
+      const { layoutMode: parentLayoutMode } = parent;
 
-    if (parentLayoutMode === "VERTICAL") {
-      maxWidth = { label: "maxWidth", width: ".infinity" };
-    } else if (parentLayoutMode === "HORIZONTAL") {
-      maxHeight = { label: "maxHeight", height: ".infinity" };
-    } else {
-      assert(false, "it is not decide stretch axis when parent without axis");
+      if (parentLayoutMode === "VERTICAL") {
+        maxWidth = { label: "maxWidth", width: ".infinity" };
+      } else if (parentLayoutMode === "HORIZONTAL") {
+        maxHeight = { label: "maxHeight", height: ".infinity" };
+      } else {
+        assert(false, "it is not decide stretch axis when parent without axis");
+      }
     }
   }
 
@@ -205,15 +206,16 @@ export function adaptFrameModifierWithFrameNode(
   // IMPORTANT: Determines whether a layer should stretch along the parent’s primary axis
   if (layoutGrow === 1) {
     const parent = context.secondLatestFromNode?.node;
-    assert(parent != null);
-    const { layoutMode: parentLayoutMode } = parent;
+    if (parent != null) {
+      const { layoutMode: parentLayoutMode } = parent;
 
-    if (parentLayoutMode === "VERTICAL") {
-      maxHeight = { label: "maxHeight", height: ".infinity" };
-    } else if (parentLayoutMode === "HORIZONTAL") {
-      maxWidth = { label: "maxWidth", width: ".infinity" };
-    } else {
-      assert(false, "it is not decide stretch axis when parent without axis");
+      if (parentLayoutMode === "VERTICAL") {
+        maxHeight = { label: "maxHeight", height: ".infinity" };
+      } else if (parentLayoutMode === "HORIZONTAL") {
+        maxWidth = { label: "maxWidth", width: ".infinity" };
+      } else {
+        assert(false, "it is not decide stretch axis when parent without axis");
+      }
     }
   }
 
