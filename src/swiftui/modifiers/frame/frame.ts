@@ -1,15 +1,8 @@
 import * as assert from "assert";
 import { SwiftUIContext } from "../../context";
 import { build } from "./build";
-import {
-  Alignment,
-  FixedHeight,
-  FixedWidth,
-  MaxHeight,
-  MaxWidth,
-} from "./types";
 
-export function walkToFrameNodeForFrameModifier(
+export function adaptFrameModifierWithFrameNode(
   context: SwiftUIContext,
   node: FrameNode
 ) {
