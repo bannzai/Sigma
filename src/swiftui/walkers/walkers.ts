@@ -159,6 +159,9 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
+  context.lineBreak();
+  context.add("Divider()\n");
+  walkForPosition(context, node);
 }
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
