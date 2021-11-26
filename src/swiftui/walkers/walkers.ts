@@ -385,7 +385,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     walkForPadding(context, node);
     adaptFrameModifierWithFrameNode(context, node);
     walkForBackgroundColor(context, node);
-
-    context.pop();
   }
+
+  context.pop();
 }
