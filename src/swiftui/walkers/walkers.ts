@@ -168,7 +168,6 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
       context.add(`.frame(width: ${node.width})\n`);
       context.unnest();
     }
-    if
   } else if (context.latestFrameNode?.node.layoutMode === "HORIZONTAL") {
     context.lineBreak();
     context.add("Divider()\n");
