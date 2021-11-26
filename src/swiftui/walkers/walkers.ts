@@ -235,6 +235,10 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     }
     walkForTextModifier(context, node);
   }
+  const { latestFrameNode } = context;
+  if (latestFrameNode != null && latestFrameNode.isOnlyOneChild) {
+    adaptFrameModifierWithFrameNode(context, latestFrameNode.node);
+  }
 
   const { name, layoutAlign, layoutGrow } = node;
   console.log(JSON.stringify({ name, layoutAlign, layoutGrow }));
