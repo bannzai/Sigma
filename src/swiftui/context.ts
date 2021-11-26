@@ -1,6 +1,4 @@
-export type SwiftUIFrame = "VStack" | "HStack" | "ZStack";
 export interface SwiftUIFrameNode {
-  frame: SwiftUIFrame;
   node: FrameNode;
 }
 
@@ -18,8 +16,8 @@ export class SwiftUIContext {
     this.indent -= 4;
   }
 
-  push(node: FrameNode, frame: SwiftUIFrame) {
-    this.frameNodeHistories.push({ node, frame });
+  push(node: FrameNode) {
+    this.frameNodeHistories.push({ node });
   }
   pop(): SwiftUIFrameNode | null {
     return this.frameNodeHistories.pop() ?? null;

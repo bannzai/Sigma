@@ -240,14 +240,14 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
   if (layoutAlign === "STRETCH") {
     const { latestFrameNode } = context;
     if (latestFrameNode != null) {
-      const { node: container, frame } = latestFrameNode;
-      console.log(JSON.stringify({ container, frame }));
-      if (frame === "VStack") {
+      const { node: container } = latestFrameNode;
+      console.log(JSON.stringify({ container }));
+      if (container.layoutMode === "VERTICAL") {
         context.lineBreak();
         context.nest();
         context.add(`.frame(maxWidth: .infinity)\n`);
         context.unnest();
-      } else if (frame === "HStack") {
+      } else if (container.layoutMode === "HORIZONTAL") {
         context.lineBreak();
         context.nest();
         context.add(`.frame(maxHeight: .infinity)\n`);
@@ -271,7 +271,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   var containerCode: string = "";
   if (layoutMode === "HORIZONTAL") {
-    context.push(node, "HStack");
+    context.push(node);
 
     containerCode += "HStack(";
 
@@ -286,7 +286,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     containerCode += args.join(", ");
     containerCode += ")";
   } else if (layoutMode === "VERTICAL") {
-    context.push(node, "VStack");
+    context.push(node);
 
     containerCode += "VStack(";
 
@@ -302,7 +302,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     containerCode += ")";
   } else if (layoutMode === "NONE") {
     if (children.length > 1) {
-      context.push(node, "ZStack");
+      context.push(node);
       containerCode += "ZStack";
     }
   } else {
