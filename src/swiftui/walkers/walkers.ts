@@ -16,6 +16,7 @@ import { walkForBorder } from "../modifiers/border";
 import { walkForPosition } from "../modifiers/position";
 import { walkForFixedSpacer } from "../view/spacer";
 import { mappedSwiftUIColor } from "../util/mapper";
+import { walkForCornerRadius } from "../modifiers/cornerRadius";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -176,6 +177,7 @@ export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   if (name === "SwiftUI::Spacer") {
     walkForFixedSpacer(context, node);
   } else {
+    walkForCornerRadius(context, node);
     walkForBorder(context, node);
     walkForPosition(context, node);
   }
@@ -382,6 +384,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     walkForPadding(context, node);
     adaptFrameModifierWithFrameNode(context, node);
     walkForBackgroundColor(context, node);
+    walkForCornerRadius(context, node);
 
     context.pop();
   }
