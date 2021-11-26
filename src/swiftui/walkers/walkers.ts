@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { trace } from "../../util/tracer";
+import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
@@ -11,12 +11,12 @@ import {
   walkForFixedFrame,
   walkToFrameNodeForFrameModifier,
   walkForGropuFrame,
-} from "../modifiers/frame";
+} from "../modifiers/frame/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForBorder } from "../modifiers/border";
 import { walkForPosition } from "../modifiers/position";
 import { walkForFixedSpacer } from "../view/spacer";
-import { mappedSwiftUIColor } from "../../util/mapper";
+import { mappedSwiftUIColor } from "../util/mapper";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);

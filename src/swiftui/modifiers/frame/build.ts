@@ -1,4 +1,5 @@
 import { SwiftUIContext } from "../../context";
+import { nonNullable } from "../../util/foundation";
 import {
   Alignment,
   FixedHeight,

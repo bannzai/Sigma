@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { mappedSwiftUIColor } from "../../util/mapper";
+import { mappedSwiftUIColor } from "../util/mapper";
 import { SwiftUIContext } from "../context";
 
 export function walkForBorder(
