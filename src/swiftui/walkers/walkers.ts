@@ -159,8 +159,26 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
 }
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
-  context.lineBreak();
-  context.add("Divider()\n");
+  if (context.latestFrameNode?.node.layoutMode === "VERTICAL") {
+    context.lineBreak();
+    context.add("Divider()\n");
+
+    if (node.width !== context.root.width) {
+      context.nest();
+      context.add(`.frame(width: ${node.width}`);
+      context.unnest();
+    }
+    if
+  } else if (context.latestFrameNode?.node.layoutMode === "HORIZONTAL") {
+    context.lineBreak();
+    context.add("Divider()\n");
+
+    if (node.height !== context.root.height) {
+      context.nest();
+      context.add(`.frame(height: ${node.height}`);
+      context.unnest();
+    }
+  }
   walkForPosition(context, node);
 }
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
