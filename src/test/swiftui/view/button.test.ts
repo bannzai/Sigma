@@ -16,6 +16,10 @@ describe("#Button", () => {
 
     const button = figma.createFrame();
     button.name = "SwiftUI::Button";
+    button.paddingBottom = 0;
+    button.paddingLeft = 0;
+    button.paddingTop = 0;
+    button.paddingRight = 0;
     button.appendChild(createText("1"));
 
     const context = new SwiftUIContext();
