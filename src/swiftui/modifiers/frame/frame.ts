@@ -63,16 +63,7 @@ export function adaptFrameModifierWithFrameNode(
   var maxWidth: MaxWidth | null = null;
   var fixedHeight: FixedHeight | null = null;
   var maxHeight: MaxHeight | null = null;
-  var alignment:
-    | "leading"
-    | "top"
-    | "trailing"
-    | "bottom"
-    | "topLeading"
-    | "topTrailing"
-    | "bottomLeading"
-    | "bottomTrailing"
-    | "center" = "center";
+  var alignment: Alignment = "center";
 
   if (layoutMode === "VERTICAL") {
     if (primaryAxisAlignItems === "MIN") {
