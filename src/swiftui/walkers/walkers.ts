@@ -27,7 +27,7 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
     walkToFigmaNode(context, node);
     context.unnest();
     context.lineBreak();
-    context.add("}");
+    context.add("}\n");
     return;
   } else {
     walkToFigmaNode(context, node);
