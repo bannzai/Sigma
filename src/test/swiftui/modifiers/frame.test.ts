@@ -15,13 +15,13 @@ describe("#View.frame(_:)", () => {
     describe("with VStack parent", () => {
       describe("case for primary axis layout grow", () => {
         describe("layoutGrow is 0", () => {
-          test("child VStack primary axis size is FIXED and counter axis size is FIXED", async () => {
+          test("child VStack primary axis size is FIXED and counter axis size is AUTO", async () => {
             await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
             const vstack = figma.createFrame();
             vstack.layoutMode = "VERTICAL";
             vstack.primaryAxisSizingMode = "FIXED";
-            vstack.counterAxisSizingMode = "FIXED";
+            vstack.counterAxisSizingMode = "AUTO"; // Avoid to add `.frame(width:) to VStack
             vstack.counterAxisAlignItems = "MIN";
             vstack.paddingLeft = 0;
             vstack.paddingTop = 0;
@@ -60,7 +60,7 @@ VStack(alignment: .leading, spacing: 10) {
         Text(verbatim: "2")
         Text(verbatim: "3")
     }
-    .frame(width: 100, height: 200)
+    .frame(height: 200)
     Text(verbatim: "4")
 }
 .frame(width: 300, height: 400)
