@@ -15,6 +15,7 @@ describe("#VStack", () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
     const vstack = figma.createFrame();
+    vstack.name = "Frame 1";
     vstack.layoutMode = "VERTICAL";
     vstack.counterAxisAlignItems = "MIN";
     vstack.paddingLeft = 0;
@@ -43,6 +44,7 @@ VStack(alignment: .leading, spacing: 10) {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
     const vstack = figma.createFrame();
+    vstack.name = "Frame 1";
     vstack.layoutMode = "VERTICAL";
     vstack.counterAxisAlignItems = "MIN";
     vstack.paddingLeft = 20;
