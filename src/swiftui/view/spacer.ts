@@ -2,17 +2,11 @@ import { SwiftUIContext } from "../context";
 
 export function walkForFixedSpacer(
   context: SwiftUIContext,
-  rectangle: RectangleNode
+  rectangle: LayoutMixin & SceneNode
 ) {
-  const { name, width, height, fills } = rectangle;
+  const { name, width, height } = rectangle;
 
   if (name !== "SwiftUI::Spacer") {
-    return;
-  }
-  if (fills === figma.mixed) {
-    return;
-  }
-  if (fills.length !== 0) {
     return;
   }
 
