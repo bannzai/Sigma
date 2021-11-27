@@ -402,7 +402,11 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       context.add("}\n");
 
       walkForPadding(context, node);
-      adaptFrameModifierWithFrameNode(context, node);
+      if (node.parent?.type === "FRAME") {
+        adaptFrameModifierWithFrameNode(context, node, node.parent);
+      } else {
+        adaptFrameModifierWithFrameNode(context, node, null);
+      }
       walkForBackgroundColor(context, node);
       walkForCornerRadius(context, node);
 

@@ -10,7 +10,8 @@ import {
 
 export function adaptFrameModifierWithFrameNode(
   context: SwiftUIContext,
-  node: FrameNode
+  node: FrameNode,
+  parentFrameNode: FrameNode | null
 ) {
   const {
     name,
@@ -107,7 +108,7 @@ export function adaptFrameModifierWithFrameNode(
     // NOTE: "FIXED": The primary axis length is determined by the user or plugins, unless the layoutAlign is set to “STRETCH” or layoutGrow is 1.
     // https://www.figma.com/plugin-docs/api/properties/nodes-primaryaxissizingmode/
     if (primaryAxisSizingMode === "FIXED") {
-      const parentLayoutMode = context.secondLatestFormNode?.node.layoutMode;
+      const parentLayoutMode = parentFrameNode?.layoutMode;
       if (parentLayoutMode == null) {
         fixedHeight = { label: "height", height };
       } else {
@@ -125,7 +126,7 @@ export function adaptFrameModifierWithFrameNode(
     // NOTE: "FIXED": The counter axis length is determined by the user or plugins, unless the layoutAlign is set to “STRETCH” or layoutGrow is 1.
     // https://www.figma.com/plugin-docs/api/properties/nodes-counteraxissizingmode/
     if (counterAxisSizingMode === "FIXED") {
-      const parentLayoutMode = context.secondLatestFormNode?.node.layoutMode;
+      const parentLayoutMode = parentFrameNode?.layoutMode;
       if (parentLayoutMode == null) {
         fixedWidth = { label: "width", width };
       } else {
@@ -142,7 +143,7 @@ export function adaptFrameModifierWithFrameNode(
     }
   } else if (layoutMode === "HORIZONTAL") {
     if (primaryAxisSizingMode === "FIXED") {
-      const parentLayoutMode = context.secondLatestFormNode?.node.layoutMode;
+      const parentLayoutMode = parentFrameNode?.layoutMode;
       if (parentLayoutMode == null) {
         fixedWidth = { label: "width", width };
       } else {
@@ -159,7 +160,7 @@ export function adaptFrameModifierWithFrameNode(
     }
 
     if (counterAxisSizingMode === "FIXED") {
-      const parentLayoutMode = context.secondLatestFormNode?.node.layoutMode;
+      const parentLayoutMode = parentFrameNode?.layoutMode;
       if (parentLayoutMode == null) {
         fixedHeight = { label: "height", height };
       } else {
@@ -179,7 +180,7 @@ export function adaptFrameModifierWithFrameNode(
   // Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
   // IMPORTANT: Determines if the layer should stretch along the parent’s counter axis.
   if (layoutAlign === "STRETCH") {
-    const parent = context.secondLatestFormNode?.node;
+    const parent = parentFrameNode;
     if (parent != null) {
       const { layoutMode: parentLayoutMode } = parent;
 
@@ -196,7 +197,7 @@ export function adaptFrameModifierWithFrameNode(
   // Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutgrow/
   // IMPORTANT: Determines whether a layer should stretch along the parent’s primary axis
   if (layoutGrow === 1) {
-    const parent = context.secondLatestFormNode?.node;
+    const parent = parentFrameNode;
     if (parent != null) {
       const { layoutMode: parentLayoutMode } = parent;
 
