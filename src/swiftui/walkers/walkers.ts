@@ -259,13 +259,11 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   if (name.startsWith("SwiftUI::Button")) {
     context.lineBreak();
     context.add("Button(action: { /* TODO */ }) {\n");
-    context.nest();
     children.forEach((child) => {
       context.nest();
       walk(context, child);
       context.unnest();
     });
-    context.unnest();
     context.lineBreak();
     context.add("}\n");
 
