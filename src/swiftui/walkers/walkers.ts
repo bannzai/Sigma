@@ -20,7 +20,20 @@ import { walkForCornerRadius } from "../modifiers/cornerRadius";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
+  if (node.name.startsWith("SwiftUI::Button")) {
+    context.lineBreak();
+    context.add("Button(action: { /* TODO */ }) {\n");
+    context.nest();
+    walkToFigmaNode(context, node);
+    context.unnest();
+    context.lineBreak();
+    context.add("}");
+    return;
+  }
+}
 
+export function walkToFigmaNode(context: SwiftUIContext, node: SceneNode) {
+  // trace(`#walkToFigmaNode`, context, node);
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip
   } else if (node.type === "CODE_BLOCK") {
@@ -88,72 +101,43 @@ export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
-  if (node.name.includes("SwiftUI::Button")) {
-    const { id, name, type, layoutAlign, width, height } = node;
-    console.log(
-      JSON.stringify({
-        id,
-        name,
-        type,
-        layoutAlign,
-        width,
-        height,
-      })
-    );
+  const isContainMaskNode = node.children.some(
+    (e) => isBlendMixin(e) && e.isMask
+  );
+  if (isContainMaskNode) {
+    if (node.children.length === 2) {
+      const reversed = Array.from(node.children).reverse();
+      const target = reversed[0];
+      walk(context, target);
 
-    context.lineBreak();
-    context.add("Button(action: { /* TODO */ }) {\n");
+      const { id, width, height } = target;
+      console.log(JSON.stringify({ id, width, height }));
+
+      const maskNode = reversed[1] as BlendMixin & SceneNode;
+      walkForClipShape(context, target, maskNode);
+    } else {
+      const reversed = Array.from(node.children).reverse();
+      const target = reversed[0];
+      walk(context, target);
+
+      reversed.slice(1).forEach((child) => {
+        context.nest();
+        if (isBlendMixin(child)) {
+          walkForMask(context, target, child);
+        } else {
+          assert(false, "unexpected is not mask node");
+        }
+        context.unnest();
+      });
+    }
+
+    walkForFixedFrame(context, node);
+  } else {
     node.children.forEach((child) => {
       context.nest();
       walk(context, child);
       context.unnest();
     });
-    context.lineBreak();
-    context.add("}");
-
-    const frameNode = context.latestFrameNode?.node;
-    if (frameNode != null) {
-      adaptFrameModifierWithFrameNode(context, frameNode);
-    }
-  } else {
-    const isContainMaskNode = node.children.some(
-      (e) => isBlendMixin(e) && e.isMask
-    );
-    if (isContainMaskNode) {
-      if (node.children.length === 2) {
-        const reversed = Array.from(node.children).reverse();
-        const target = reversed[0];
-        walk(context, target);
-
-        const { id, width, height } = target;
-        console.log(JSON.stringify({ id, width, height }));
-
-        const maskNode = reversed[1] as BlendMixin & SceneNode;
-        walkForClipShape(context, target, maskNode);
-      } else {
-        const reversed = Array.from(node.children).reverse();
-        const target = reversed[0];
-        walk(context, target);
-
-        reversed.slice(1).forEach((child) => {
-          context.nest();
-          if (isBlendMixin(child)) {
-            walkForMask(context, target, child);
-          } else {
-            assert(false, "unexpected is not mask node");
-          }
-          context.unnest();
-        });
-      }
-
-      walkForFixedFrame(context, node);
-    } else {
-      node.children.forEach((child) => {
-        context.nest();
-        walk(context, child);
-        context.unnest();
-      });
-    }
   }
   walkForPosition(context, node);
 }
