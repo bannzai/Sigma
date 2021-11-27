@@ -18,13 +18,15 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       const text = figma.createText();
       text.characters = "Hello";
       text.textDecoration = "UNDERLINE";
+      text.fills = [];
 
       const context = new SwiftUIContext();
       walk(context, text);
 
       const code = `
 Text(verbatim: "Hello")
-    .underline()`;
+    .underline()
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
@@ -36,13 +38,15 @@ Text(verbatim: "Hello")
       const text = figma.createText();
       text.characters = "Hello";
       text.textDecoration = "STRIKETHROUGH";
+      text.fills = [];
 
       const context = new SwiftUIContext();
       walk(context, text);
 
       const code = `
 Text(verbatim: "Hello")
-    .strikethrough()`;
+    .strikethrough()
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
