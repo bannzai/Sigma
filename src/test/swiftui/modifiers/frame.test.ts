@@ -11,6 +11,21 @@ describe("#View.frame(_:)", () => {
   // @ts-ignore for some reason, need to override this for figma.mixed to work
   global.figma = figma;
 
+  jest.mock(
+    "../../../../node_modules/@figma/plugin-typings/plugin-api.d.ts",
+    () => {
+      return {
+        __esModule: true,
+        createFrame: jest.fn(() => {
+          return {
+            id: "id",
+            type: "FRAME",
+          };
+        }),
+      };
+    }
+  );
+
   describe("for VStack", () => {
     describe("with VStack parent", () => {
       describe("case for primary axis layout grow", () => {
@@ -53,6 +68,7 @@ describe("#View.frame(_:)", () => {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = vstack;
             walk(context, parent);
 
             const code = `
@@ -109,6 +125,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -168,6 +185,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -225,6 +243,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -285,6 +304,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -341,6 +361,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -400,6 +421,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -457,6 +479,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -497,6 +520,7 @@ HStack(alignment: .top, spacing: 10) {
         vstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
+        context.root = vstack;
         walk(context, vstack);
 
         const code = `
@@ -530,6 +554,7 @@ VStack(alignment: .leading, spacing: 10) {
         vstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
+        context.root = vstack;
         walk(context, vstack);
 
         const code = `
@@ -563,6 +588,7 @@ VStack(alignment: .leading, spacing: 10) {
         vstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
+        context.root = vstack;
         walk(context, vstack);
 
         const code = `
@@ -619,6 +645,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -675,6 +702,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -734,6 +762,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -791,6 +820,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -851,6 +881,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -907,6 +938,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -966,6 +998,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -1023,6 +1056,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
+            context.root = parent;
             walk(context, parent);
 
             const code = `
@@ -1063,6 +1097,7 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
+        context.root = hstack;
         walk(context, hstack);
 
         const code = `
@@ -1096,6 +1131,7 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
+        context.root = hstack;
         walk(context, hstack);
 
         const code = `
@@ -1129,6 +1165,7 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
+        context.root = hstack;
         walk(context, hstack);
 
         const code = `
