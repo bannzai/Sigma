@@ -29,7 +29,8 @@ describe("#Button", () => {
     const code = `
 Button(action: { /* TODO */ }) {
     Text(verbatim: "1")
-}`;
+}
+`;
     expect(context.code).toEqual(code.slice("\n".length));
   });
 });
