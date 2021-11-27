@@ -85,8 +85,24 @@ VStack(alignment: .leading, spacing: 10) {
           vstack.appendChild(createText("2"));
           vstack.appendChild(createText("3"));
 
+          const parent = figma.createFrame();
+          parent.layoutMode = "VERTICAL";
+          // Any values: BEGIN
+          parent.primaryAxisSizingMode = "FIXED";
+          parent.counterAxisSizingMode = "FIXED";
+          parent.counterAxisAlignItems = "MIN";
+          parent.paddingLeft = 0;
+          parent.paddingTop = 0;
+          parent.paddingRight = 0;
+          parent.paddingBottom = 0;
+          parent.itemSpacing = 10;
+          parent.resize(300, 400);
+          // Any values: END
+          parent.appendChild(vstack);
+          parent.appendChild(createText("4"));
+
           const context = new SwiftUIContext();
-          walk(context, vstack);
+          walk(context, parent);
 
           const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -117,8 +133,24 @@ VStack(alignment: .leading, spacing: 10) {
           vstack.appendChild(createText("2"));
           vstack.appendChild(createText("3"));
 
+          const parent = figma.createFrame();
+          parent.layoutMode = "VERTICAL";
+          // Any values: BEGIN
+          parent.primaryAxisSizingMode = "FIXED";
+          parent.counterAxisSizingMode = "FIXED";
+          parent.counterAxisAlignItems = "MIN";
+          parent.paddingLeft = 0;
+          parent.paddingTop = 0;
+          parent.paddingRight = 0;
+          parent.paddingBottom = 0;
+          parent.itemSpacing = 10;
+          parent.resize(300, 400);
+          // Any values: END
+          parent.appendChild(vstack);
+          parent.appendChild(createText("4"));
+
           const context = new SwiftUIContext();
-          walk(context, vstack);
+          walk(context, parent);
 
           const code = `
 VStack(alignment: .leading, spacing: 10) {
