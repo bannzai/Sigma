@@ -28,6 +28,7 @@ describe("#HStack", () => {
     hstack.appendChild(createText("3"));
 
     const context = new SwiftUIContext();
+    context.root = hstack;
     walk(context, hstack);
 
     const code = `
@@ -57,6 +58,7 @@ HStack(alignment: .top, spacing: 10) {
     hstack.appendChild(createText("3"));
 
     const context = new SwiftUIContext();
+    context.root = hstack;
     walk(context, hstack);
 
     const code = `
