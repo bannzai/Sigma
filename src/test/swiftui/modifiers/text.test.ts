@@ -25,7 +25,7 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       const code = `
 Text(verbatim: "Hello")
     .underline()`;
-      expect(code.slice("\n".length)).toEqual(context.code);
+      expect(context.code).toEqual(code.slice("\n".length));
     });
   });
 
@@ -43,7 +43,7 @@ Text(verbatim: "Hello")
       const code = `
 Text(verbatim: "Hello")
     .strikethrough()`;
-      expect(code.slice("\n".length)).toEqual(context.code);
+      expect(context.code).toEqual(code.slice("\n".length));
     });
   });
 
@@ -62,7 +62,7 @@ Text(verbatim: "Hello")
 Text(verbatim: "Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0))
 `;
-      expect(code.slice("\n".length)).toEqual(context.code);
+      expect(context.code).toEqual(code.slice("\n".length));
     });
 
     test("with opacity", async () => {
@@ -81,7 +81,7 @@ Text(verbatim: "Hello")
 Text(verbatim: "Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
-      expect(code.slice("\n".length)).toEqual(context.code);
+      expect(context.code).toEqual(code.slice("\n".length));
     });
   });
 
@@ -104,7 +104,7 @@ Text(verbatim: "Hello")
     .strikethrough()
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
-      expect(code.slice("\n".length)).toEqual(context.code);
+      expect(context.code).toEqual(code.slice("\n".length));
     });
   });
 });

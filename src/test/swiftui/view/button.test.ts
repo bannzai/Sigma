@@ -25,6 +25,6 @@ describe("#Button", () => {
 Button(action: { /* TODO */ }) {
     Text("1")
 }`;
-    expect(code.slice("\n".length)).toEqual(context.code);
+    expect(context.code).toEqual(code.slice("\n".length));
   });
 });

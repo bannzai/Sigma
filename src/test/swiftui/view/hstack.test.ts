@@ -36,7 +36,7 @@ HStack(alignment: .top, spacing: 10) {
     Text("3")
 }
 `;
-    expect(code.slice("\n".length)).toEqual(context.code);
+    expect(context.code).toEqual(code.slice("\n".length));
   });
 
   test("HStack with padding", async () => {
@@ -65,6 +65,6 @@ HStack(alignment: .top, spacing: 10) {
 }
 .padding(.all, 20)
 `;
-    expect(code.slice("\n".length)).toEqual(context.code);
+    expect(context.code).toEqual(code.slice("\n".length));
   });
 });

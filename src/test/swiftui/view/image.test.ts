@@ -24,7 +24,7 @@ describe("#Image", () => {
 Image("image")
     .resizable()
 `;
-    expect(code.slice("\n".length)).toEqual(context.code);
+    expect(context.code).toEqual(code.slice("\n".length));
   });
 
   test("Image for scaleMode to FILL", async () => {
@@ -39,6 +39,6 @@ Image("image")
     const code = `
 Image("image")
 `;
-    expect(code.slice("\n".length)).toEqual(context.code);
+    expect(context.code).toEqual(code.slice("\n".length));
   });
 });
