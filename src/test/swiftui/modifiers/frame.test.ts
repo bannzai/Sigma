@@ -124,7 +124,7 @@ VStack(alignment: .leading, spacing: 10) {
         });
       });
       describe("case for counter axis stretch patern", () => {
-        describe("layoutAlign is AUTO", () => {
+        describe("layoutAlign is INHERIT", () => {
           test("child VStack primary axis size is AUTO and counter axis size is FIXED", async () => {
             await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
@@ -143,6 +143,7 @@ VStack(alignment: .leading, spacing: 10) {
             vstack.appendChild(createText("2"));
             vstack.appendChild(createText("3"));
             vstack.layoutGrow = 0;
+            vstack.layoutAlign = "INHERIT";
 
             const parent = figma.createFrame();
             parent.layoutMode = "VERTICAL";
