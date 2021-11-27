@@ -240,27 +240,7 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     walkForTextModifier(context, node);
   }
 
-  const { name, layoutAlign, layoutGrow } = node;
-  console.log(JSON.stringify({ name, layoutAlign, layoutGrow }));
-
-  if (layoutAlign === "STRETCH") {
-    const { latestFrameNode } = context;
-    if (latestFrameNode != null) {
-      const { node: container } = latestFrameNode;
-
-      if (container.layoutMode === "VERTICAL") {
-        context.lineBreak();
-        context.nest();
-        context.add(`.frame(maxWidth: .infinity)\n`);
-        context.unnest();
-      } else if (container.layoutMode === "HORIZONTAL") {
-        context.lineBreak();
-        context.nest();
-        context.add(`.frame(maxHeight: .infinity)\n`);
-        context.unnest();
-      }
-    }
-  }
+  adaptFrameModifierWithFrameNode(context, node);
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
