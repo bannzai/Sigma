@@ -15,8 +15,8 @@ describe("#Button", () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
     const button = figma.createFrame();
-    button.appendChild(createText("1"));
     button.name = "SwiftUI::Button";
+    button.appendChild(createText("1"));
 
     const context = new SwiftUIContext();
     walk(context, button);
