@@ -38,7 +38,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.all, 20)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(code.slice("\n".length)).toEqual(context.code);
     });
 
     test("all padding values is zero", async () => {
@@ -66,7 +66,7 @@ VStack(alignment: .leading, spacing: 10) {
     Text("3")
 }
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(code.slice("\n".length)).toEqual(context.code);
     });
 
     test("When specify only top", async () => {
@@ -95,7 +95,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.top, 10)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(code.slice("\n".length)).toEqual(context.code);
     });
 
     test("When specify same value for top and left", async () => {
@@ -124,7 +124,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding([.left, .top], 10)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(code.slice("\n".length)).toEqual(context.code);
     });
 
     test("When specify same value for top and bottom", async () => {
@@ -153,7 +153,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.vertical, 10)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(code.slice("\n".length)).toEqual(context.code);
     });
 
     test("When specify same value for left and right", async () => {
@@ -182,7 +182,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.horizontal, 10)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(code.slice("\n".length)).toEqual(context.code);
     });
 
     test("All different values", async () => {
@@ -214,7 +214,7 @@ VStack(alignment: .leading, spacing: 10) {
 .padding(.right, 3)
 .padding(.bottom, 4)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(code.slice("\n".length)).toEqual(context.code);
     });
   });
 });

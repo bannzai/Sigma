@@ -65,7 +65,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
         describe("layoutGrow is 1", () => {
@@ -119,7 +119,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
       });
@@ -176,7 +176,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
         describe("layoutAlign is STRETCH", () => {
@@ -231,7 +231,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
       });
@@ -289,7 +289,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
         describe("layoutGrow is 1", () => {
@@ -343,7 +343,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
       });
@@ -400,7 +400,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
         describe("layoutAlign is STRETCH", () => {
@@ -455,7 +455,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
       });
@@ -490,7 +490,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 100, height: 200)
 `;
-        expect(context.code).toEqual(code.slice("\n".length));
+        expect(code.slice("\n".length)).toEqual(context.code);
       });
 
       test("VStack primary axis size is AUTO and counter axis size is FIXED", async () => {
@@ -522,7 +522,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 100)
 `;
-        expect(context.code).toEqual(code.slice("\n".length));
+        expect(code.slice("\n".length)).toEqual(context.code);
       });
 
       test("VStack primary axis size is AUTO and counter axis size is AUTO", async () => {
@@ -553,7 +553,7 @@ VStack(alignment: .leading, spacing: 10) {
     Text(verbatim: "3")
 }
 `;
-        expect(context.code).toEqual(code.slice("\n".length));
+        expect(code.slice("\n".length)).toEqual(context.code);
       });
     });
   });
@@ -612,7 +612,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
         describe("layoutGrow is 1", () => {
@@ -666,7 +666,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
       });
@@ -723,7 +723,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
         describe("layoutAlign is STRETCH", () => {
@@ -778,7 +778,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
       });
@@ -836,7 +836,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
         describe("layoutGrow is 1", () => {
@@ -890,7 +890,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
       });
@@ -947,7 +947,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
         describe("layoutAlign is STRETCH", () => {
@@ -1002,7 +1002,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 300, height: 400)
 `;
-            expect(context.code).toEqual(code.slice("\n".length));
+            expect(code.slice("\n".length)).toEqual(context.code);
           });
         });
       });
@@ -1037,7 +1037,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(width: 100, height: 200)
 `;
-        expect(context.code).toEqual(code.slice("\n".length));
+        expect(code.slice("\n".length)).toEqual(context.code);
       });
 
       test("HStack primary axis size is AUTO and counter axis size is FIXED", async () => {
@@ -1069,7 +1069,7 @@ HStack(alignment: .top, spacing: 10) {
 }
 .frame(height: 200)
 `;
-        expect(context.code).toEqual(code.slice("\n".length));
+        expect(code.slice("\n".length)).toEqual(context.code);
       });
 
       test("HStack primary axis size is AUTO and counter axis size is AUTO", async () => {
@@ -1100,7 +1100,7 @@ HStack(alignment: .top, spacing: 10) {
     Text(verbatim: "3")
 }
 `;
-        expect(context.code).toEqual(code.slice("\n".length));
+        expect(code.slice("\n".length)).toEqual(context.code);
       });
     });
   });

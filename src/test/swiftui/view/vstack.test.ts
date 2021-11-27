@@ -36,7 +36,7 @@ VStack(alignment: .leading, spacing: 10) {
     Text("3")
 }
 `;
-    expect(context.code).toEqual(code.slice("\n".length));
+    expect(code.slice("\n".length)).toEqual(context.code);
   });
 
   test("VStack with padding", async () => {
@@ -65,6 +65,6 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.all, 20)
 `;
-    expect(context.code).toEqual(code.slice("\n".length));
+    expect(code.slice("\n".length)).toEqual(context.code);
   });
 });
