@@ -164,20 +164,21 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
   const { name, fills } = node;
-  if (fills !== figma.mixed) {
-    for (const fill of fills) {
-      if (fill.type === "IMAGE") {
-        walkForImage(context, fill, node);
-        if (fill.scaleMode === "FIT") {
-          walkForFixedFrame(context, node);
-        }
-      }
-    }
-  }
 
   if (name === "SwiftUI::Spacer") {
     walkForFixedSpacer(context, node);
   } else {
+    if (fills !== figma.mixed) {
+      for (const fill of fills) {
+        if (fill.type === "IMAGE") {
+          walkForImage(context, fill, node);
+          if (fill.scaleMode === "FIT") {
+            walkForFixedFrame(context, node);
+          }
+        }
+      }
+    }
+
     walkForCornerRadius(context, node);
     walkForBorder(context, node);
     walkForPosition(context, node);
