@@ -6,9 +6,12 @@ export function walkForPosition(
   node: LayoutMixin & SceneNode
 ) {
   const { latestFrameNode } = context;
-
   const { type, name } = node;
   console.log(JSON.stringify({ name, type, latestFrameNode }));
+
+  if (context.root.id === node.id) {
+    return;
+  }
   if (latestFrameNode == null) {
     return;
   }

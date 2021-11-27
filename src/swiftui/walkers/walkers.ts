@@ -273,6 +273,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     walkForBackgroundColor(context, node);
     walkForCornerRadius(context, node);
     adaptFrameModifierWithFrameNode(context, node);
+    walkForPosition(context, node);
   } else {
     var containerCode: string = "";
     if (layoutMode === "HORIZONTAL") {
@@ -386,6 +387,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       adaptFrameModifierWithFrameNode(context, node);
       walkForBackgroundColor(context, node);
       walkForCornerRadius(context, node);
+      walkForPosition(context, node);
 
       context.pop();
     }
