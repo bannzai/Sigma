@@ -87,6 +87,11 @@ export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
+  if (node.name === "SwiftUI::Spacer") {
+    walkForFixedSpacer(context, node);
+    return;
+  }
+
   const isContainMaskNode = node.children.some(
     (e) => isBlendMixin(e) && e.isMask
   );
@@ -256,7 +261,9 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     primaryAxisAlignItems,
   } = node;
 
-  if (name.startsWith("SwiftUI::Button")) {
+  if (name === "SwiftUI::Spacer") {
+    walkForFixedSpacer(context, node);
+  } else if (name.startsWith("SwiftUI::Button")) {
     context.lineBreak();
     context.add("Button(action: { /* TODO */ }) {\n");
     context.nest();
