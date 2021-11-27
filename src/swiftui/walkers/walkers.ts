@@ -8,8 +8,8 @@ import { isBlendMixin } from "../type/type_guards";
 import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
 import {
-  walkForFixedFrame,
   adaptFrameModifierWithFrameNode,
+  walkForFixedFrame,
 } from "../modifiers/frame/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForBorder } from "../modifiers/border";
@@ -402,11 +402,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       context.add("}\n");
 
       walkForPadding(context, node);
-      if (node.parent?.type === "FRAME") {
-        adaptFrameModifierWithFrameNode(context, node, node.parent);
-      } else {
-        adaptFrameModifierWithFrameNode(context, node, null);
-      }
+      adaptFrameModifierWithFrameNode(context, node);
       walkForBackgroundColor(context, node);
       walkForCornerRadius(context, node);
 
