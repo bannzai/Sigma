@@ -23,7 +23,7 @@ describe("#Button", () => {
 
     const code = `
 Button(action: { /* TODO */ }) {
-    Text("1")
+    Text(verbatim: "1")
 }`;
     expect(context.code).toEqual(code.slice("\n".length));
   });

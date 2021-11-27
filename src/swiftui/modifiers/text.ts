@@ -6,10 +6,10 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
 
   if (node.textDecoration === "UNDERLINE") {
     context.lineBreak();
-    context.add(".underline()");
+    context.add(".underline()\n");
   } else if (node.textDecoration === "STRIKETHROUGH") {
     context.lineBreak();
-    context.add(".strikethrough()");
+    context.add(".strikethrough()\n");
   }
 
   // NOTE: Sigma only supports single font member on Text
@@ -17,12 +17,12 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
     const fontWeight = mappedFontWeight(node.fontName);
     if (fontWeight != null) {
       context.lineBreak();
-      context.add(`.fontWeight(.${fontWeight})`);
+      context.add(`.fontWeight(.${fontWeight})\n`);
     }
 
     const fontSize = node.fontSize;
     context.lineBreak();
-    context.add(`.font(.system(size: ${fontSize}))`);
+    context.add(`.font(.system(size: ${fontSize}))\n`);
 
     // TOOD: Mapping to SwiftUI FontFamily
     // const fontFamily = node.fontName.family;

@@ -18,13 +18,15 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       const text = figma.createText();
       text.characters = "Hello";
       text.textDecoration = "UNDERLINE";
+      text.fills = [];
 
       const context = new SwiftUIContext();
       walk(context, text);
 
       const code = `
-Text("Hello")
-    .underline()`;
+Text(verbatim: "Hello")
+    .underline()
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
@@ -36,13 +38,15 @@ Text("Hello")
       const text = figma.createText();
       text.characters = "Hello";
       text.textDecoration = "STRIKETHROUGH";
+      text.fills = [];
 
       const context = new SwiftUIContext();
       walk(context, text);
 
       const code = `
-Text("Hello")
-    .strikethrough()`;
+Text(verbatim: "Hello")
+    .strikethrough()
+`;
       expect(context.code).toEqual(code.slice("\n".length));
     });
   });
@@ -59,7 +63,7 @@ Text("Hello")
       walk(context, text);
 
       const code = `
-Text("Hello")
+Text(verbatim: "Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0))
 `;
       expect(context.code).toEqual(code.slice("\n".length));
@@ -78,7 +82,7 @@ Text("Hello")
       walk(context, text);
 
       const code = `
-Text("Hello")
+Text(verbatim: "Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
       expect(context.code).toEqual(code.slice("\n".length));
@@ -100,7 +104,7 @@ Text("Hello")
       walk(context, text);
 
       const code = `
-Text("Hello")
+Text(verbatim: "Hello")
     .strikethrough()
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
