@@ -51,9 +51,9 @@ export function adaptFrameModifierWithFrameNode(
     Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
    */
   if (
-    node.layoutAlign === "MIN" ||
-    node.layoutAlign === "MAX" ||
-    node.layoutAlign === "CENTER"
+    layoutAlign === "MIN" ||
+    layoutAlign === "MAX" ||
+    layoutAlign === "CENTER"
   ) {
     return;
   }
