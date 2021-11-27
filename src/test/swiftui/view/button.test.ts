@@ -14,8 +14,8 @@ describe("#Button", () => {
   test("it is besically pattern. For Text Button", async () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
-    const root = figma.createFrame();
-    const button = figma.group([createText("1")], root);
+    const button = figma.createFrame();
+    button.appendChild(createText("1"));
     button.name = "SwiftUI::Button";
 
     const context = new SwiftUIContext();
