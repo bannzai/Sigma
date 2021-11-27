@@ -14,20 +14,22 @@ describe("#HStack", () => {
   test("it is besically pattern. HStack has three text", async () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
-    const vstack = figma.createFrame();
-    vstack.layoutMode = "HORIZONTAL";
-    vstack.counterAxisAlignItems = "MIN";
-    vstack.paddingLeft = 0;
-    vstack.paddingTop = 0;
-    vstack.paddingRight = 0;
-    vstack.paddingBottom = 0;
-    vstack.itemSpacing = 10;
-    vstack.appendChild(createText("1"));
-    vstack.appendChild(createText("2"));
-    vstack.appendChild(createText("3"));
+    const hstack = figma.createFrame();
+    hstack.name = "Frame 1";
+    hstack.layoutMode = "HORIZONTAL";
+    hstack.counterAxisAlignItems = "MIN";
+    hstack.paddingLeft = 0;
+    hstack.paddingTop = 0;
+    hstack.paddingRight = 0;
+    hstack.paddingBottom = 0;
+    hstack.itemSpacing = 10;
+    hstack.appendChild(createText("1"));
+    hstack.appendChild(createText("2"));
+    hstack.appendChild(createText("3"));
 
     const context = new SwiftUIContext();
-    walk(context, vstack);
+    context.root = hstack;
+    walk(context, hstack);
 
     const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -42,20 +44,22 @@ HStack(alignment: .top, spacing: 10) {
   test("HStack with padding", async () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
-    const vstack = figma.createFrame();
-    vstack.layoutMode = "HORIZONTAL";
-    vstack.counterAxisAlignItems = "MIN";
-    vstack.paddingLeft = 20;
-    vstack.paddingTop = 20;
-    vstack.paddingRight = 20;
-    vstack.paddingBottom = 20;
-    vstack.itemSpacing = 10;
-    vstack.appendChild(createText("1"));
-    vstack.appendChild(createText("2"));
-    vstack.appendChild(createText("3"));
+    const hstack = figma.createFrame();
+    hstack.name = "Frame 1";
+    hstack.layoutMode = "HORIZONTAL";
+    hstack.counterAxisAlignItems = "MIN";
+    hstack.paddingLeft = 20;
+    hstack.paddingTop = 20;
+    hstack.paddingRight = 20;
+    hstack.paddingBottom = 20;
+    hstack.itemSpacing = 10;
+    hstack.appendChild(createText("1"));
+    hstack.appendChild(createText("2"));
+    hstack.appendChild(createText("3"));
 
     const context = new SwiftUIContext();
-    walk(context, vstack);
+    context.root = hstack;
+    walk(context, hstack);
 
     const code = `
 HStack(alignment: .top, spacing: 10) {

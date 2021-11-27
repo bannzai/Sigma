@@ -16,6 +16,7 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const text = figma.createText();
+      text.name = "Text 1";
       text.characters = "Hello";
       text.textDecoration = "UNDERLINE";
       text.fills = [];
@@ -36,6 +37,7 @@ Text(verbatim: "Hello")
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const text = figma.createText();
+      text.name = "Text 1";
       text.characters = "Hello";
       text.textDecoration = "STRIKETHROUGH";
       text.fills = [];
@@ -56,6 +58,7 @@ Text(verbatim: "Hello")
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const text = figma.createText();
+      text.name = "Text 1";
       text.characters = "Hello";
       text.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 0 } }];
 
@@ -73,6 +76,7 @@ Text(verbatim: "Hello")
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const text = figma.createText();
+      text.name = "Text 1";
       text.characters = "Hello";
       text.fills = [
         { type: "SOLID", color: { r: 1, g: 1, b: 0 }, opacity: 0.1 },
@@ -94,6 +98,7 @@ Text(verbatim: "Hello")
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const text = figma.createText();
+      text.name = "Text 1";
       text.characters = "Hello";
       text.textDecoration = "STRIKETHROUGH";
       text.fills = [

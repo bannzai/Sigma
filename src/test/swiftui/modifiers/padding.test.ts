@@ -16,6 +16,7 @@ describe("#View.padding(_:)", () => {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const vstack = figma.createFrame();
+      vstack.name = "Frame 1";
       vstack.layoutMode = "VERTICAL";
       vstack.counterAxisAlignItems = "MIN";
       vstack.paddingLeft = 20;
@@ -28,6 +29,7 @@ describe("#View.padding(_:)", () => {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
+      context.root = vstack;
       walk(context, vstack);
 
       const code = `
@@ -45,6 +47,7 @@ VStack(alignment: .leading, spacing: 10) {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const vstack = figma.createFrame();
+      vstack.name = "Frame 1";
       vstack.layoutMode = "VERTICAL";
       vstack.counterAxisAlignItems = "MIN";
       vstack.paddingLeft = 0;
@@ -57,6 +60,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
+      context.root = vstack;
       walk(context, vstack);
 
       const code = `
@@ -73,6 +77,7 @@ VStack(alignment: .leading, spacing: 10) {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const vstack = figma.createFrame();
+      vstack.name = "Frame 1";
       vstack.layoutMode = "VERTICAL";
       vstack.counterAxisAlignItems = "MIN";
       vstack.paddingLeft = 0;
@@ -85,6 +90,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
+      context.root = vstack;
       walk(context, vstack);
 
       const code = `
@@ -102,6 +108,7 @@ VStack(alignment: .leading, spacing: 10) {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const vstack = figma.createFrame();
+      vstack.name = "Frame 1";
       vstack.layoutMode = "VERTICAL";
       vstack.counterAxisAlignItems = "MIN";
       vstack.paddingLeft = 10;
@@ -114,6 +121,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
+      context.root = vstack;
       walk(context, vstack);
 
       const code = `
@@ -131,6 +139,7 @@ VStack(alignment: .leading, spacing: 10) {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const vstack = figma.createFrame();
+      vstack.name = "Frame 1";
       vstack.layoutMode = "VERTICAL";
       vstack.counterAxisAlignItems = "MIN";
       vstack.paddingLeft = 0;
@@ -143,6 +152,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
+      context.root = vstack;
       walk(context, vstack);
 
       const code = `
@@ -160,6 +170,7 @@ VStack(alignment: .leading, spacing: 10) {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const vstack = figma.createFrame();
+      vstack.name = "Frame 1";
       vstack.layoutMode = "VERTICAL";
       vstack.counterAxisAlignItems = "MIN";
       vstack.paddingLeft = 10;
@@ -172,6 +183,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
+      context.root = vstack;
       walk(context, vstack);
 
       const code = `
@@ -189,6 +201,7 @@ VStack(alignment: .leading, spacing: 10) {
       await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
       const vstack = figma.createFrame();
+      vstack.name = "Frame 1";
       vstack.layoutMode = "VERTICAL";
       vstack.counterAxisAlignItems = "MIN";
       vstack.paddingLeft = 1;
@@ -201,6 +214,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
+      context.root = vstack;
       walk(context, vstack);
 
       const code = `

@@ -8,8 +8,8 @@ import { isBlendMixin } from "../type/type_guards";
 import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
 import {
-  walkForFixedFrame,
   adaptFrameModifierWithFrameNode,
+  walkForFixedFrame,
 } from "../modifiers/frame/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForBorder } from "../modifiers/border";
@@ -20,7 +20,6 @@ import { walkForCornerRadius } from "../modifiers/cornerRadius";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
-
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip
   } else if (node.type === "CODE_BLOCK") {
@@ -88,72 +87,43 @@ export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
-  if (node.name.includes("SwiftUI::Button")) {
-    const { id, name, type, layoutAlign, width, height } = node;
-    console.log(
-      JSON.stringify({
-        id,
-        name,
-        type,
-        layoutAlign,
-        width,
-        height,
-      })
-    );
+  const isContainMaskNode = node.children.some(
+    (e) => isBlendMixin(e) && e.isMask
+  );
+  if (isContainMaskNode) {
+    if (node.children.length === 2) {
+      const reversed = Array.from(node.children).reverse();
+      const target = reversed[0];
+      walk(context, target);
 
-    context.lineBreak();
-    context.add("Button(action: { /* TODO */ }) {\n");
+      const { id, width, height } = target;
+      console.log(JSON.stringify({ id, width, height }));
+
+      const maskNode = reversed[1] as BlendMixin & SceneNode;
+      walkForClipShape(context, target, maskNode);
+    } else {
+      const reversed = Array.from(node.children).reverse();
+      const target = reversed[0];
+      walk(context, target);
+
+      reversed.slice(1).forEach((child) => {
+        context.nest();
+        if (isBlendMixin(child)) {
+          walkForMask(context, target, child);
+        } else {
+          assert(false, "unexpected is not mask node");
+        }
+        context.unnest();
+      });
+    }
+
+    walkForFixedFrame(context, node);
+  } else {
     node.children.forEach((child) => {
       context.nest();
       walk(context, child);
       context.unnest();
     });
-    context.lineBreak();
-    context.add("}");
-
-    const frameNode = context.latestFrameNode?.node;
-    if (frameNode != null) {
-      adaptFrameModifierWithFrameNode(context, frameNode);
-    }
-  } else {
-    const isContainMaskNode = node.children.some(
-      (e) => isBlendMixin(e) && e.isMask
-    );
-    if (isContainMaskNode) {
-      if (node.children.length === 2) {
-        const reversed = Array.from(node.children).reverse();
-        const target = reversed[0];
-        walk(context, target);
-
-        const { id, width, height } = target;
-        console.log(JSON.stringify({ id, width, height }));
-
-        const maskNode = reversed[1] as BlendMixin & SceneNode;
-        walkForClipShape(context, target, maskNode);
-      } else {
-        const reversed = Array.from(node.children).reverse();
-        const target = reversed[0];
-        walk(context, target);
-
-        reversed.slice(1).forEach((child) => {
-          context.nest();
-          if (isBlendMixin(child)) {
-            walkForMask(context, target, child);
-          } else {
-            assert(false, "unexpected is not mask node");
-          }
-          context.unnest();
-        });
-      }
-
-      walkForFixedFrame(context, node);
-    } else {
-      node.children.forEach((child) => {
-        context.nest();
-        walk(context, child);
-        context.unnest();
-      });
-    }
   }
   walkForPosition(context, node);
 }
@@ -194,20 +164,21 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
   const { name, fills } = node;
-  if (fills !== figma.mixed) {
-    for (const fill of fills) {
-      if (fill.type === "IMAGE") {
-        walkForImage(context, fill, node);
-        if (fill.scaleMode === "FIT") {
-          walkForFixedFrame(context, node);
-        }
-      }
-    }
-  }
 
   if (name === "SwiftUI::Spacer") {
     walkForFixedSpacer(context, node);
   } else {
+    if (fills !== figma.mixed) {
+      for (const fill of fills) {
+        if (fill.type === "IMAGE") {
+          walkForImage(context, fill, node);
+          if (fill.scaleMode === "FIT") {
+            walkForFixedFrame(context, node);
+          }
+        }
+      }
+    }
+
     walkForCornerRadius(context, node);
     walkForBorder(context, node);
     walkForPosition(context, node);
@@ -269,32 +240,13 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     walkForTextModifier(context, node);
   }
 
-  const { name, layoutAlign, layoutGrow } = node;
-  console.log(JSON.stringify({ name, layoutAlign, layoutGrow }));
-
-  if (layoutAlign === "STRETCH") {
-    const { latestFrameNode } = context;
-    if (latestFrameNode != null) {
-      const { node: container } = latestFrameNode;
-
-      if (container.layoutMode === "VERTICAL") {
-        context.lineBreak();
-        context.nest();
-        context.add(`.frame(maxWidth: .infinity)\n`);
-        context.unnest();
-      } else if (container.layoutMode === "HORIZONTAL") {
-        context.lineBreak();
-        context.nest();
-        context.add(`.frame(maxHeight: .infinity)\n`);
-        context.unnest();
-      }
-    }
-  }
+  adaptFrameModifierWithFrameNode(context, node);
 }
 export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
 
   const {
+    name,
     children,
     layoutMode,
     layoutAlign,
@@ -304,119 +256,138 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     primaryAxisAlignItems,
   } = node;
 
-  var containerCode: string = "";
-  if (layoutMode === "HORIZONTAL") {
-    context.push(node);
-
-    containerCode += "HStack(";
-
-    const args: string[] = [];
-    if (counterAxisAlignItems === "MIN") {
-      args.push("alignment: .top");
-    } else if (counterAxisAlignItems === "MAX") {
-      args.push("alignment: .bottom");
-    }
-    args.push(`spacing: ${itemSpacing}`);
-
-    containerCode += args.join(", ");
-    containerCode += ")";
-  } else if (layoutMode === "VERTICAL") {
-    context.push(node);
-
-    containerCode += "VStack(";
-
-    const args: string[] = [];
-    if (counterAxisAlignItems === "MIN") {
-      args.push("alignment: .leading");
-    } else if (counterAxisAlignItems === "MAX") {
-      args.push("alignment: .trailing");
-    }
-    args.push(`spacing: ${itemSpacing}`);
-
-    containerCode += args.join(", ");
-    containerCode += ")";
-  } else if (layoutMode === "NONE") {
-    context.push(node);
-
-    if (children.length > 1) {
-      containerCode += "ZStack";
-    }
-  } else {
-    const _: never = layoutMode;
-  }
-
-  const isExistsContainer = containerCode.length > 0;
-  if (isExistsContainer) {
+  if (name.startsWith("SwiftUI::Button")) {
     context.lineBreak();
-    context.add(containerCode);
-    context.add(" {\n", { withoutIndent: true });
-
-    if (
-      (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
-      primaryAxisAlignItems === "MAX"
-    ) {
-      context.lineBreak();
+    context.add("Button(action: { /* TODO */ }) {\n");
+    children.forEach((child) => {
       context.nest();
-      context.add("Spacer()\n");
+      walk(context, child);
       context.unnest();
-    }
-  }
-
-  if (primaryAxisAlignItems === "SPACE_BETWEEN") {
-    context.nest();
-    context.add(`Spacer()\n`);
-    context.unnest();
-  }
-  children.forEach((child) => {
-    context.nest();
-    walk(context, child);
-    if (primaryAxisAlignItems === "SPACE_BETWEEN") {
-      context.add(`Spacer()\n`);
-    }
-    context.unnest();
-  });
-
-  if (isExistsContainer) {
-    if (
-      (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
-      primaryAxisAlignItems === "MIN"
-    ) {
-      if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
-        context.lineBreak();
-        context.nest();
-        context.add("Spacer()\n");
-        context.unnest();
-      } else {
-        if (context.root.id !== node.id) {
-          if (layoutMode === "VERTICAL") {
-            if (node.height === context.root.height) {
-              context.lineBreak();
-              context.nest();
-              context.add("Spacer()\n");
-              context.unnest();
-            }
-          } else if (layoutMode === "HORIZONTAL") {
-            if (node.width === context.root.width) {
-              context.lineBreak();
-              context.nest();
-              context.add("Spacer()\n");
-              context.unnest();
-            }
-          } else {
-            const _: never = layoutMode;
-          }
-        }
-      }
-    }
-
+    });
     context.lineBreak();
     context.add("}\n");
 
     walkForPadding(context, node);
-    adaptFrameModifierWithFrameNode(context, node);
     walkForBackgroundColor(context, node);
     walkForCornerRadius(context, node);
+    adaptFrameModifierWithFrameNode(context, node);
+    walkForPosition(context, node);
+  } else {
+    var containerCode: string = "";
+    if (layoutMode === "HORIZONTAL") {
+      context.push(node);
 
-    context.pop();
+      containerCode += "HStack(";
+
+      const args: string[] = [];
+      if (counterAxisAlignItems === "MIN") {
+        args.push("alignment: .top");
+      } else if (counterAxisAlignItems === "MAX") {
+        args.push("alignment: .bottom");
+      }
+      args.push(`spacing: ${itemSpacing}`);
+
+      containerCode += args.join(", ");
+      containerCode += ")";
+    } else if (layoutMode === "VERTICAL") {
+      context.push(node);
+
+      containerCode += "VStack(";
+
+      const args: string[] = [];
+      if (counterAxisAlignItems === "MIN") {
+        args.push("alignment: .leading");
+      } else if (counterAxisAlignItems === "MAX") {
+        args.push("alignment: .trailing");
+      }
+      args.push(`spacing: ${itemSpacing}`);
+
+      containerCode += args.join(", ");
+      containerCode += ")";
+    } else if (layoutMode === "NONE") {
+      context.push(node);
+
+      if (children.length > 1) {
+        containerCode += "ZStack";
+      }
+    } else {
+      const _: never = layoutMode;
+    }
+
+    const isExistsContainer = containerCode.length > 0;
+    if (isExistsContainer) {
+      context.lineBreak();
+      context.add(containerCode);
+      context.add(" {\n", { withoutIndent: true });
+
+      if (
+        (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+        primaryAxisAlignItems === "MAX"
+      ) {
+        context.lineBreak();
+        context.nest();
+        context.add("Spacer()\n");
+        context.unnest();
+      }
+    }
+
+    if (primaryAxisAlignItems === "SPACE_BETWEEN") {
+      context.nest();
+      context.add(`Spacer()\n`);
+      context.unnest();
+    }
+    children.forEach((child) => {
+      context.nest();
+      walk(context, child);
+      if (primaryAxisAlignItems === "SPACE_BETWEEN") {
+        context.add(`Spacer()\n`);
+      }
+      context.unnest();
+    });
+
+    if (isExistsContainer) {
+      if (
+        (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
+        primaryAxisAlignItems === "MIN"
+      ) {
+        if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
+          context.lineBreak();
+          context.nest();
+          context.add("Spacer()\n");
+          context.unnest();
+        } else {
+          if (context.root.id !== node.id) {
+            if (layoutMode === "VERTICAL") {
+              if (node.height === context.root.height) {
+                context.lineBreak();
+                context.nest();
+                context.add("Spacer()\n");
+                context.unnest();
+              }
+            } else if (layoutMode === "HORIZONTAL") {
+              if (node.width === context.root.width) {
+                context.lineBreak();
+                context.nest();
+                context.add("Spacer()\n");
+                context.unnest();
+              }
+            } else {
+              const _: never = layoutMode;
+            }
+          }
+        }
+      }
+
+      context.lineBreak();
+      context.add("}\n");
+
+      walkForPadding(context, node);
+      adaptFrameModifierWithFrameNode(context, node);
+      walkForBackgroundColor(context, node);
+      walkForCornerRadius(context, node);
+      walkForPosition(context, node);
+
+      context.pop();
+    }
   }
 }

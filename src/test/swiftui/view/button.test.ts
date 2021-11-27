@@ -14,17 +14,23 @@ describe("#Button", () => {
   test("it is besically pattern. For Text Button", async () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
-    const root = figma.createFrame();
-    const button = figma.group([createText("1")], root);
+    const button = figma.createFrame();
     button.name = "SwiftUI::Button";
+    button.paddingBottom = 0;
+    button.paddingLeft = 0;
+    button.paddingTop = 0;
+    button.paddingRight = 0;
+    button.appendChild(createText("1"));
 
     const context = new SwiftUIContext();
+    context.root = button;
     walk(context, button);
 
     const code = `
 Button(action: { /* TODO */ }) {
     Text(verbatim: "1")
-}`;
+}
+`;
     expect(context.code).toEqual(code.slice("\n".length));
   });
 });
