@@ -1,3 +1,4 @@
+import { ImageModifier } from "./imageModifier";
 import { Modifier } from "./modifiers";
 import { TextModifier } from "./textModifier";
 
@@ -75,4 +76,11 @@ export interface RoundedRectangle extends View, Shape {
   readonly type: "RoundedRectangle";
 
   readonly cornerRadius: number;
+}
+
+export interface Image extends View {
+  readonly type: "Image";
+  modifiers: (Modifier | ImageModifier)[];
+
+  name: string;
 }

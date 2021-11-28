@@ -1,6 +1,8 @@
 import { SwiftUIContext } from "../context";
+import { ImageModifier } from "../types/imageModifier";
+import { Image } from "../types/views";
 
-export type ImageNode = MinimalFillsMixin & BaseNode & LayoutMixin;
+export type ImageNode = MinimalFillsMixin & SceneNode & LayoutMixin;
 
 export function walkForImage(
   context: SwiftUIContext,
@@ -9,15 +11,17 @@ export function walkForImage(
 ) {
   const { name } = node;
 
-  context.lineBreak();
-  context.add(`Image("${name}")\n`);
-
-  context.nest();
-
+  let modifiers: ImageModifier[] = [];
   if (fill.scaleMode === "FIT") {
-    context.lineBreak();
-    context.add(".resizable()\n");
+    modifiers.push({ type: "resizable" });
   }
 
-  context.unnest();
+  const image: Image = {
+    type: "Image",
+    name,
+    modifiers,
+    parent: context.container,
+    node: node,
+  };
+  context.addChild(image);
 }
