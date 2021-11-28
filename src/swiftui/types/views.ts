@@ -84,3 +84,7 @@ export interface Image extends View {
 
   name: string;
 }
+
+export interface Divier extends View {
+  readonly type: "Divider";
+}

@@ -1,39 +1,39 @@
 import { trace } from "../util/tracer";
-import { SwiftUIContext } from "../context";
+import { isFakeRootView, SwiftUIContext } from "../context";
 import { walkForPosition } from "../modifiers/position";
-
+import { FrameModifier } from "../types/modifiers";
+import { Divier, isAxisView } from "../types/views";
 
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
 
-  const { latestFrameNode } = context;
+  const frame: FrameModifier = {
+    type: "frame",
+    alignment: "center",
+  };
 
-  if (latestFrameNode != null) {
-    if (latestFrameNode.node.layoutMode === "VERTICAL") {
-      context.lineBreak();
-      context.add("Divider()\n");
-
-      if (node.width !== context.root.width) {
-        context.nest();
-        context.add(`.frame(width: ${node.width})\n`);
-        context.unnest();
+  if (isFakeRootView(context.root)) {
+    return;
+  }
+  if (isAxisView(context.container)) {
+    if (context.container.axis === "V") {
+      if (context.container.node?.width !== context.root.node?.width) {
+        frame.width = node.width;
       }
-    } else if (latestFrameNode.node.layoutMode === "HORIZONTAL") {
-      context.lineBreak();
-      context.add("Divider()\n");
-
-      if (node.height !== context.root.height) {
-        context.nest();
-        context.add(`.frame(height: ${node.height})\n`);
-        context.unnest();
+    } else if (context.container.axis === "H") {
+      if (context.container.node?.height !== context.root.node?.height) {
+        frame.height = node.height;
       }
-    } else if (latestFrameNode.node.layoutMode === "NONE") {
-      context.lineBreak();
-      context.add("Divider()\n");
-
+    } else if (context.container.axis === "Z") {
       walkForPosition(context, node);
-    } else {
-      const _: never = latestFrameNode.node.layoutMode;
     }
   }
+
+  const divider: Divier = {
+    type: "Divider",
+    modifiers: [frame],
+    parent: context.container,
+    node: node,
+  };
+  context.addChild(divider);
 }
