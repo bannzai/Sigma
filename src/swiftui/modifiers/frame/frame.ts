@@ -1,12 +1,13 @@
 import * as assert from "assert";
 import { SwiftUIContext } from "../../context";
+import { FrameModifier } from "../../types/modifiers";
 import {
   Alignment,
   FixedHeight,
   FixedWidth,
   MaxHeight,
   MaxWidth,
-} from "./types";
+} from "../../types/frameModifierTypes";
 
 export function adaptFrameModifierWithFrameNode(
   context: SwiftUIContext,
@@ -75,8 +76,6 @@ export function adaptFrameModifierWithFrameNode(
     ) {
       return;
     }
-
-    context.lineBreak();
 
     if (layoutMode === "VERTICAL") {
       if (primaryAxisAlignItems === "MIN") {
@@ -209,9 +208,9 @@ export function adaptFrameModifierWithFrameNode(
       const { layoutMode: parentLayoutMode } = parent;
 
       if (parentLayoutMode === "VERTICAL") {
-        maxWidth = { label: "maxWidth", width: ".infinity" };
+        maxWidth = { label: "maxWidth", width: "infinity" };
       } else if (parentLayoutMode === "HORIZONTAL") {
-        maxHeight = { label: "maxHeight", height: ".infinity" };
+        maxHeight = { label: "maxHeight", height: "infinity" };
       } else {
         assert(false, "it is not decide stretch axis when parent without axis");
       }
@@ -226,48 +225,32 @@ export function adaptFrameModifierWithFrameNode(
       const { layoutMode: parentLayoutMode } = parent;
 
       if (parentLayoutMode === "VERTICAL") {
-        maxHeight = { label: "maxHeight", height: ".infinity" };
+        maxHeight = { label: "maxHeight", height: "infinity" };
       } else if (parentLayoutMode === "HORIZONTAL") {
-        maxWidth = { label: "maxWidth", width: ".infinity" };
+        maxWidth = { label: "maxWidth", width: "infinity" };
       } else {
         assert(false, "it is not decide stretch axis when parent without axis");
       }
     }
   }
 
-  var maximumFrameArgs: string[] = [];
+  const frameModifier: FrameModifier = {
+    type: "frame",
+  };
   if (maxWidth != null) {
-    maximumFrameArgs.push(`maxWidth: ${maxWidth.width}`);
+    frameModifier.maxWidth = maxWidth.width;
   }
   if (maxHeight != null) {
-    maximumFrameArgs.push(`maxHeight: ${maxHeight.height}`);
-  }
-  if (maximumFrameArgs.length > 0) {
-    if (alignment !== "center") {
-      maximumFrameArgs.push(`alignment: .${alignment}`);
-    }
-
-    const args = maximumFrameArgs.join(", ");
-    context.add(`.frame(${args})\n`);
+    frameModifier.maxHeight = maxHeight.height;
   }
 
-  var fixedFrameArgs: string[] = [];
   if (fixedWidth != null) {
-    fixedFrameArgs.push(`width: ${fixedWidth.width}`);
+    frameModifier.width = fixedWidth.width;
   }
   if (fixedHeight != null) {
-    fixedFrameArgs.push(`height: ${fixedHeight.height}`);
+    frameModifier.height = fixedHeight.height;
   }
-  if (fixedFrameArgs.length > 0) {
-    if (alignment !== "center") {
-      maximumFrameArgs.push(`alignment: .${alignment}`);
-    }
-
-    const args = fixedFrameArgs.join(", ");
-    context.add(`.frame(${args})\n`);
-  }
-
-  context.lineBreak();
+  frameModifier.alignment = alignment;
 }
 
 export function walkForFixedFrame(

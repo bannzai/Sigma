@@ -1,3 +1,4 @@
+import { Alignment } from "./frameModifierTypes";
 import { Color, Shape, View } from "./views";
 
 export interface Modifier {
@@ -10,6 +11,7 @@ export interface FrameModifier extends Modifier {
   height?: number;
   maxWidth?: "infinity";
   maxHeight?: "infinity";
+  alignment: Alignment;
 }
 
 export interface PaddingModifier extends Modifier {
