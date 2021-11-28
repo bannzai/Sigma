@@ -33,9 +33,9 @@ describe("#VStack", () => {
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 `;
     expect(context.code).toEqual(code.slice("\n".length));
@@ -63,9 +63,9 @@ VStack(alignment: .leading, spacing: 10) {
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding(.all, 20)
 `;

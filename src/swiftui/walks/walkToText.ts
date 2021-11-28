@@ -3,7 +3,6 @@ import { SwiftUIContext } from "../context";
 import { walkForTextModifier } from "../modifiers/text";
 import { adaptFrameModifierWithFrameNode } from "../modifiers/frame/frame";
 
-
 export function walkToText(context: SwiftUIContext, node: TextNode) {
   trace(`#walkToText`, context, node);
   const { characters, fills } = node;
@@ -41,9 +40,9 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
   } else {
     const stringList = characters.split("\n");
     if (stringList.length <= 1) {
-      context.add(`Text(verbatim: "${characters}")\n`);
+      context.add(`Text("${characters}")\n`);
     } else {
-      context.add(`Text(verbatim: """\n`);
+      context.add(`Text("""\n`);
       stringList.forEach((string) => {
         context.nest();
         context.add(`${string}\n`);

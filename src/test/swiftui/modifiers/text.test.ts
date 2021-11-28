@@ -25,7 +25,7 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       walk(context, text);
 
       const code = `
-Text(verbatim: "Hello")
+Text("Hello")
     .underline()
 `;
       expect(context.code).toEqual(code.slice("\n".length));
@@ -46,7 +46,7 @@ Text(verbatim: "Hello")
       walk(context, text);
 
       const code = `
-Text(verbatim: "Hello")
+Text("Hello")
     .strikethrough()
 `;
       expect(context.code).toEqual(code.slice("\n".length));
@@ -66,7 +66,7 @@ Text(verbatim: "Hello")
       walk(context, text);
 
       const code = `
-Text(verbatim: "Hello")
+Text("Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0))
 `;
       expect(context.code).toEqual(code.slice("\n".length));
@@ -86,7 +86,7 @@ Text(verbatim: "Hello")
       walk(context, text);
 
       const code = `
-Text(verbatim: "Hello")
+Text("Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
       expect(context.code).toEqual(code.slice("\n".length));
@@ -109,7 +109,7 @@ Text(verbatim: "Hello")
       walk(context, text);
 
       const code = `
-Text(verbatim: "Hello")
+Text("Hello")
     .strikethrough()
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;

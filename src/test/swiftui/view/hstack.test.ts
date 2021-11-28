@@ -33,9 +33,9 @@ describe("#HStack", () => {
 
     const code = `
 HStack(alignment: .top, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 `;
     expect(context.code).toEqual(code.slice("\n".length));
@@ -63,9 +63,9 @@ HStack(alignment: .top, spacing: 10) {
 
     const code = `
 HStack(alignment: .top, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding(.all, 20)
 `;
