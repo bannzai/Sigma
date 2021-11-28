@@ -3,6 +3,9 @@ import { Modifier } from "./modifiers";
 export interface View {
   readonly name: string;
   modifiers: Modifier[];
+  readonly parent: View & ContainerMixin;
+
+  readonly node: SceneNode;
 }
 
 export interface ChildrenMixin {
