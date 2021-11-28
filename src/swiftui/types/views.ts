@@ -46,6 +46,7 @@ export interface Text extends View {
   readonly name: "Text";
 
   readonly text: string;
+  readonly multipleLineSyntax: boolean;
 }
 
 export interface Spacer extends View {

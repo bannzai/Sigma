@@ -2,6 +2,7 @@ import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForTextModifier } from "../modifiers/text";
 import { adaptFrameModifierWithFrameNode } from "../modifiers/frame/frame";
+import { Text } from "../types/views";
 
 export function walkToText(context: SwiftUIContext, node: TextNode) {
   trace(`#walkToText`, context, node);
@@ -38,18 +39,16 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     // }
     // context.lineBreak();
   } else {
-    const stringList = characters.split("\n");
-    if (stringList.length <= 1) {
-      context.add(`Text("${characters}")\n`);
-    } else {
-      context.add(`Text("""\n`);
-      stringList.forEach((string) => {
-        context.nest();
-        context.add(`${string}\n`);
-        context.unnest();
-      });
-      context.add(`""")`);
-    }
+    const text: Text = {
+      name: "Text",
+      text: characters,
+      multipleLineSyntax: characters.split("\n").length > 1,
+      modifiers: [],
+      parent: context.container,
+      node: node,
+    };
+    context.addChild(text);
+
     walkForTextModifier(context, node);
   }
 
