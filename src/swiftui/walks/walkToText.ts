@@ -49,7 +49,7 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     };
     context.addChild(text);
 
-    walkForTextModifier(context, node);
+    walkForTextModifier(context, node, text);
   }
 
   adaptFrameModifierWithFrameNode(context, node);
