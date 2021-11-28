@@ -1,5 +1,5 @@
 import { Modifier } from "./types/modifiers";
-import { View } from "./types/views";
+import { ContainerMixin, View } from "./types/views";
 
 export interface SwiftUIFrameNode {
   node: FrameNode;
@@ -12,6 +12,9 @@ export class SwiftUIContext {
   frameNodeHistories: SwiftUIFrameNode[] = [];
   ignoredIndent: boolean = false;
   root!: SceneNode;
+  // TODO: Rename to root
+  rootView!: View & ContainerMixin;
+  containerHistories: (View & ContainerMixin)[] = [];
 
   nest() {
     this.indent += 4;
@@ -39,6 +42,20 @@ export class SwiftUIContext {
   // TODO: Rename to add(view:)
   view(view: View) {}
   adapt(modifier: Modifier) {}
+
+  get container(): (View & ContainerMixin) | null {
+    if (this.containerHistories.length <= 0) {
+      return null;
+    }
+    return this.containerHistories[this.containerHistories.length - 1];
+  }
+  setContainer(container: View & ContainerMixin) {
+    this.container?.children.push(container);
+    this.containerHistories.push(container);
+  }
+  popContainer(): (View & ContainerMixin) | null {
+    return this.containerHistories.pop() ?? null;
+  }
 
   add(
     code: string,
