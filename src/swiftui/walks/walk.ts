@@ -66,5 +66,3 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
     const _: never = node;
   }
 }
-
-

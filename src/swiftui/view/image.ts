@@ -1,4 +1,4 @@
-import { SwiftUIContext } from "./context";
+import { SwiftUIContext } from "../context";
 
 export type ImageNode = MinimalFillsMixin & BaseNode & LayoutMixin;
 

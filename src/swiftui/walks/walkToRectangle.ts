@@ -1,6 +1,6 @@
 import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
-import { walkForImage } from "../image";
+import { walkForImage } from "../view/image";
 import { walkForFixedFrame } from "../modifiers/frame/frame";
 import { walkForBorder } from "../modifiers/border";
 import { walkForPosition } from "../modifiers/position";
