@@ -2,7 +2,7 @@ import { Modifier } from "./modifiers";
 import { TextModifier } from "./textModifier";
 
 export interface View {
-  readonly name: string;
+  readonly type: string;
   modifiers: Modifier[];
   readonly parent: (View & ChildrenMixin) | null;
 
@@ -20,7 +20,7 @@ export interface AxisMixin {
 export const isAxisView = (args: any): args is AxisMixin => "axis" in args;
 
 export interface VStack extends View, ChildrenMixin, AxisMixin {
-  readonly name: "VStack";
+  readonly type: "VStack";
   readonly axis: "V";
 
   alignment: "leading" | "center" | "trailing";
@@ -28,7 +28,7 @@ export interface VStack extends View, ChildrenMixin, AxisMixin {
 }
 
 export interface HStack extends View, ChildrenMixin, AxisMixin {
-  readonly name: "HStack";
+  readonly type: "HStack";
   readonly axis: "H";
 
   alignment: "top" | "center" | "bottom";
@@ -36,16 +36,16 @@ export interface HStack extends View, ChildrenMixin, AxisMixin {
 }
 
 export interface ZStack extends View, ChildrenMixin, AxisMixin {
-  readonly name: "ZStack";
+  readonly type: "ZStack";
   readonly axis: "Z";
 }
 
 export interface Button extends View, ChildrenMixin {
-  readonly name: "Button";
+  readonly type: "Button";
 }
 
 export interface Text extends View {
-  readonly name: "Text";
+  readonly type: "Text";
   modifiers: (Modifier | TextModifier)[];
 
   readonly text: string;
@@ -53,11 +53,11 @@ export interface Text extends View {
 }
 
 export interface Spacer extends View {
-  readonly name: "Spacer";
+  readonly type: "Spacer";
 }
 
 export interface Color {
-  readonly name: "Color";
+  readonly type: "Color";
 
   red: number;
   green: number;
@@ -68,11 +68,11 @@ export interface Color {
 export interface Shape {}
 
 export interface Rectangle extends View, Shape {
-  readonly name: "Rectangle";
+  readonly type: "Rectangle";
 }
 
 export interface RoundedRectangle extends View, Shape {
-  readonly name: "RoundedRectangle";
+  readonly type: "RoundedRectangle";
 
   readonly cornerRadius: number;
 }
