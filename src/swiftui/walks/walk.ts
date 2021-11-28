@@ -17,6 +17,7 @@ import { walkForCornerRadius } from "../modifiers/cornerRadius";
 import { walkToComponent } from "./walkToComponent";
 import { walkToEllipse } from "./walkToEllipse";
 import { walkToGroup } from "./walkToGroup";
+import { walkToLine } from "./walkToLine";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -75,40 +76,6 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   }
 }
 
-export function walkToLine(context: SwiftUIContext, node: LineNode) {
-  trace(`#walkToLine`, context, node);
-
-  const { latestFrameNode } = context;
-
-  if (latestFrameNode != null) {
-    if (latestFrameNode.node.layoutMode === "VERTICAL") {
-      context.lineBreak();
-      context.add("Divider()\n");
-
-      if (node.width !== context.root.width) {
-        context.nest();
-        context.add(`.frame(width: ${node.width})\n`);
-        context.unnest();
-      }
-    } else if (latestFrameNode.node.layoutMode === "HORIZONTAL") {
-      context.lineBreak();
-      context.add("Divider()\n");
-
-      if (node.height !== context.root.height) {
-        context.nest();
-        context.add(`.frame(height: ${node.height})\n`);
-        context.unnest();
-      }
-    } else if (latestFrameNode.node.layoutMode === "NONE") {
-      context.lineBreak();
-      context.add("Divider()\n");
-
-      walkForPosition(context, node);
-    } else {
-      const _: never = latestFrameNode.node.layoutMode;
-    }
-  }
-}
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
   const { name, fills } = node;
