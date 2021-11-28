@@ -1,15 +1,15 @@
 import { Color } from "./views";
 
 export interface TextModifier {
-  name: string;
+  type: string;
 }
 
 export interface UnderlineTextModifier extends TextModifier {
-  name: "underline";
+  type: "underline";
 }
 
 export interface StrikethroughTextModifier extends TextModifier {
-  name: "strikethrough";
+  type: "strikethrough";
 }
 
 export type NamedFontWeight =
@@ -24,20 +24,20 @@ export type NamedFontWeight =
   | "heavy"
   | "black";
 export interface FontWeightTextModifier extends TextModifier {
-  name: "fontWeight";
+  type: "fontWeight";
 
   fontWeight: NamedFontWeight;
 }
 
 export interface FontTextModifier extends TextModifier {
-  name: "font";
+  type: "font";
 
   namedType: "system";
   size?: number;
 }
 
 export interface ForegorundTextModifier extends TextModifier {
-  name: "foregroundColor";
+  type: "foregroundColor";
 
   color: Color;
 }

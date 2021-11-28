@@ -32,7 +32,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
   if (name.startsWith("SwiftUI::Button")) {
     const button: Button = {
-      name: "Button",
+      type: "Button",
       node: node,
       parent: context.container,
       modifiers: [],
@@ -54,7 +54,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     let containerReference!: ChildrenMixin & View;
     if (layoutMode === "HORIZONTAL") {
       const hstack: HStack = {
-        name: "HStack",
+        type: "HStack",
         axis: "H",
         modifiers: [],
         parent: context.container,
@@ -75,7 +75,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       containerReference = hstack;
     } else if (layoutMode === "VERTICAL") {
       const vstack: VStack = {
-        name: "VStack",
+        type: "VStack",
         axis: "V",
         modifiers: [],
         parent: context.container,
@@ -96,7 +96,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       containerReference = vstack;
     } else if (layoutMode === "NONE") {
       const zstack: ZStack = {
-        name: "ZStack",
+        type: "ZStack",
         axis: "Z",
         modifiers: [],
         parent: context.container,
@@ -114,7 +114,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       primaryAxisAlignItems === "MAX"
     ) {
       const spacer: Spacer = {
-        name: "Spacer",
+        type: "Spacer",
         modifiers: [],
         parent: containerReference,
         node: null,
@@ -124,7 +124,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
 
     if (primaryAxisAlignItems === "SPACE_BETWEEN") {
       const spacer: Spacer = {
-        name: "Spacer",
+        type: "Spacer",
         modifiers: [],
         parent: containerReference,
         node: null,
@@ -136,7 +136,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       walk(context, child);
       if (primaryAxisAlignItems === "SPACE_BETWEEN") {
         const spacer: Spacer = {
-          name: "Spacer",
+          type: "Spacer",
           modifiers: [],
           parent: containerReference,
           node: null,
@@ -152,7 +152,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
       // NOTE: This conditional expression may be wrong. I do not remember
       if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
         const spacer: Spacer = {
-          name: "Spacer",
+          type: "Spacer",
           modifiers: [],
           parent: containerReference,
           node: null,
@@ -166,7 +166,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
           if (layoutMode === "VERTICAL") {
             if (node.height === context.root.node?.height) {
               const spacer: Spacer = {
-                name: "Spacer",
+                type: "Spacer",
                 modifiers: [],
                 parent: containerReference,
                 node: null,
@@ -176,7 +176,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
           } else if (layoutMode === "HORIZONTAL") {
             if (node.width === context.root.node?.width) {
               const spacer: Spacer = {
-                name: "Spacer",
+                type: "Spacer",
                 modifiers: [],
                 parent: containerReference,
                 node: null,
