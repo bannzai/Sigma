@@ -21,9 +21,7 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   } else if (node.type === "COMPONENT_SET") {
     assert(!node.children.every((component) => component.type === "COMPONENT"));
     node.children.forEach((child) => {
-      context.nest();
       walkToComponent(context, child as ComponentNode);
-      context.unnest();
     });
   } else if (node.type === "CONNECTOR") {
     // NOTE: Skip because it is figjam property
