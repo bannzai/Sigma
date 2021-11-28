@@ -10,13 +10,13 @@ const run = async () => {
 
 const traversed = (root: SceneNode): SwiftUIContext => {
   const context = new SwiftUIContext();
-  context.root = root;
+  context.rootView = {};
   walk(context, root);
   return context;
 };
 
 const print = (context: SwiftUIContext) => {
-  console.log(context.code);
+  // console.log(context.code);
 };
 
 run();

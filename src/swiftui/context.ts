@@ -1,9 +1,11 @@
 import { Modifier } from "./types/modifiers";
 import { ContainerMixin, View } from "./types/views";
 
+export interface FakeRootView {}
+
 export class SwiftUIContext {
   // TODO: Rename to root
-  rootView!: View & ContainerMixin;
+  rootView!: (View & ContainerMixin) | FakeRootView;
   containerHistories: (View & ContainerMixin)[] = [];
 
   // TODO: Rename to add(view:)
