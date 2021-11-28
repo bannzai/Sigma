@@ -3,7 +3,7 @@ import { Modifier } from "./modifiers";
 export interface View {
   readonly name: string;
   modifiers: Modifier[];
-  readonly parent: View & ContainerMixin;
+  readonly parent: (View & ChildrenMixin) | null;
 
   readonly node: SceneNode;
 }
@@ -17,19 +17,17 @@ export interface AxisMixin {
   readonly axis: Axis;
 }
 
-export interface ContainerMixin extends ChildrenMixin, AxisMixin {}
-
-export interface VStack extends View, ContainerMixin {
+export interface VStack extends View, ChildrenMixin, AxisMixin {
   readonly name: "VStack";
   readonly axis: "V";
 }
 
-export interface HStack extends View, ContainerMixin {
+export interface HStack extends View, ChildrenMixin, AxisMixin {
   readonly name: "HStack";
   readonly axis: "H";
 }
 
-export interface ZStack extends View, ContainerMixin {
+export interface ZStack extends View, ChildrenMixin, AxisMixin {
   readonly name: "ZStack";
   readonly axis: "Z";
 }
