@@ -1,4 +1,4 @@
-import { SwiftUIContext } from "./swiftui/context";
+import { FakeRootView, SwiftUIContext } from "./swiftui/context";
 import { walk } from "./swiftui/walks/walk";
 
 const run = async () => {
@@ -10,7 +10,7 @@ const run = async () => {
 
 const traversed = (root: SceneNode): SwiftUIContext => {
   const context = new SwiftUIContext();
-  context.rootView = {};
+  context.root = {} as FakeRootView;
   walk(context, root);
   return context;
 };
