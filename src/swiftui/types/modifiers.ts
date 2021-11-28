@@ -16,9 +16,9 @@ export interface PaddingModifier extends Modifier {
   readonly type: "padding";
 
   top?: number;
-  leading?: number;
+  left?: number;
   bottom?: number;
-  trailing?: number;
+  right?: number;
 }
 
 export interface BackgroundModifier extends Modifier {
