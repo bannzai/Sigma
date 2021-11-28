@@ -3,21 +3,16 @@ import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
-import { walkForImage } from "../image";
-import {
-  adaptFrameModifierWithFrameNode,
-  walkForFixedFrame,
-} from "../modifiers/frame/frame";
+import { adaptFrameModifierWithFrameNode } from "../modifiers/frame/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
-import { walkForBorder } from "../modifiers/border";
 import { walkForPosition } from "../modifiers/position";
-import { walkForFixedSpacer } from "../view/spacer";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { walkForCornerRadius } from "../modifiers/cornerRadius";
 import { walkToComponent } from "./walkToComponent";
 import { walkToEllipse } from "./walkToEllipse";
 import { walkToGroup } from "./walkToGroup";
 import { walkToLine } from "./walkToLine";
+import { walkToRectangle } from "./walkToRectangle";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -76,29 +71,6 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   }
 }
 
-export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
-  trace(`#walkToRectangle`, context, node);
-  const { name, fills } = node;
-
-  if (name === "SwiftUI::Spacer") {
-    walkForFixedSpacer(context, node);
-  } else {
-    if (fills !== figma.mixed) {
-      for (const fill of fills) {
-        if (fill.type === "IMAGE") {
-          walkForImage(context, fill, node);
-          if (fill.scaleMode === "FIT") {
-            walkForFixedFrame(context, node);
-          }
-        }
-      }
-    }
-
-    walkForCornerRadius(context, node);
-    walkForBorder(context, node);
-    walkForPosition(context, node);
-  }
-}
 export function walkToShapeWithText(
   context: SwiftUIContext,
   node: ShapeWithTextNode
