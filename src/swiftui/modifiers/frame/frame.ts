@@ -237,6 +237,7 @@ export function adaptFrameModifierWithFrameNode(
 
   const frameModifier: FrameModifier = {
     type: "frame",
+    alignment: "center",
   };
   if (maxWidth != null) {
     frameModifier.maxWidth = maxWidth.width;
@@ -281,6 +282,7 @@ export function walkForFixedFrame(
       type: "frame",
       width,
       height,
+      alignment: "center",
     };
     context.adapt(modifier);
   } else if (layoutAlign === "STRETCH") {

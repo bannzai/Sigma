@@ -24,22 +24,24 @@ export function walkForFixedSpacer(
 
   if (context.container.axis === "V") {
     const frame: FrameModifier = {
-      name: "frame",
+      type: "frame",
       height,
+      alignment: "center",
     };
     context.addChild({
-      name: "Spacer",
+      type: "Spacer",
       modifiers: [frame],
       parent: null,
       node: null,
     });
   } else if (context.container.axis === "H") {
     const frame: FrameModifier = {
-      name: "frame",
+      type: "frame",
       width,
+      alignment: "center",
     };
     context.addChild({
-      name: "Spacer",
+      type: "Spacer",
       modifiers: [frame],
       parent: null,
       node: null,
