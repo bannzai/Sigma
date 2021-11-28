@@ -1,11 +1,11 @@
 import { Color, Shape, View } from "./views";
 
 export interface Modifier {
-  readonly name: string;
+  readonly type: string;
 }
 
 export interface FrameModifier extends Modifier {
-  readonly name: "frame";
+  readonly type: "frame";
   width?: number;
   height?: number;
   maxWidth?: "infinity";
@@ -13,7 +13,7 @@ export interface FrameModifier extends Modifier {
 }
 
 export interface PaddingModifier extends Modifier {
-  readonly name: "padding";
+  readonly type: "padding";
 
   top?: number;
   leading?: number;
@@ -22,35 +22,41 @@ export interface PaddingModifier extends Modifier {
 }
 
 export interface BackgroundModifier extends Modifier {
-  readonly name: "background";
+  readonly type: "background";
   view: Color;
 }
 
 // TODO: Rename to BorderModifierContainer and build from BorderModifierContainer to .overlay(_:lineWidth:)
 export interface OverlayModifier extends Modifier {
-  readonly name: "overlay";
+  readonly type: "overlay";
   shape: View & Shape;
   lineWidth: number;
 }
 
 export interface StrokeModifier extends Modifier {
-  name: "stroke";
+  type: "stroke";
   color: Color;
 }
 
 export interface ClipShapeModifier extends Modifier {
-  name: "clipShape";
+  type: "clipShape";
+  // TOOD: Replace to Shape
+  shapeNode: BlendMixin & SceneNode;
+}
+
+export interface MaskModifier extends Modifier {
+  type: "mask";
   // TOOD: Replace to Shape
   shapeNode: BlendMixin & SceneNode;
 }
 
 export interface CornerRadiusModifier extends Modifier {
-  name: "cornerRadius";
+  type: "cornerRadius";
   cornerRadius: number;
 }
 
 export interface PositionModifier extends Modifier {
-  name: "position";
+  type: "position";
   x: number;
   y: number;
 }

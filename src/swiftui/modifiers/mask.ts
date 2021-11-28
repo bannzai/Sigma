@@ -1,4 +1,5 @@
 import { SwiftUIContext } from "../context";
+import { MaskModifier } from "../types/modifiers";
 import { walk } from "../walks/walk";
 
 export function walkForMask(
@@ -6,14 +7,9 @@ export function walkForMask(
   maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode
 ) {
-  const temporaryContext = new SwiftUIContext();
-  temporaryContext.ignoredIndent = true;
-  walk(temporaryContext, maskingNode);
-
-  if (temporaryContext.code.length > 0) {
-    context.nest();
-    context.lineBreak();
-    context.add(`.mask(${temporaryContext.code})\n`);
-    context.unnest();
-  }
+  const modifier: MaskModifier = {
+    type: "mask",
+    shapeNode: maskingNode,
+  };
+  context.adapt(modifier);
 }
