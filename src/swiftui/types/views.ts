@@ -17,6 +17,7 @@ export type Axis = "V" | "H" | "Z";
 export interface AxisMixin {
   readonly axis: Axis;
 }
+export const isAxisView = (args: any): args is AxisMixin => "axis" in args;
 
 export interface VStack extends View, ChildrenMixin, AxisMixin {
   readonly name: "VStack";
