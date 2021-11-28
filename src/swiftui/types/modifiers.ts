@@ -37,3 +37,9 @@ export interface StrokeModifier extends Modifier {
   name: "stroke";
   color: Color;
 }
+
+export interface ClipShapeModifier extends Modifier {
+  name: "clipShape";
+  // TOOD: Replace to Shape
+  shapeNode: BlendMixin & SceneNode;
+}
