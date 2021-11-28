@@ -5,7 +5,7 @@ export interface View {
   modifiers: Modifier[];
   readonly parent: (View & ChildrenMixin) | null;
 
-  readonly node: SceneNode;
+  readonly node: SceneNode | null;
 }
 
 export interface ChildrenMixin {
@@ -20,11 +20,17 @@ export interface AxisMixin {
 export interface VStack extends View, ChildrenMixin, AxisMixin {
   readonly name: "VStack";
   readonly axis: "V";
+
+  alignment: "leading" | "center" | "trailing";
+  spacing: number;
 }
 
 export interface HStack extends View, ChildrenMixin, AxisMixin {
   readonly name: "HStack";
   readonly axis: "H";
+
+  alignment: "top" | "center" | "bottom";
+  spacing: number;
 }
 
 export interface ZStack extends View, ChildrenMixin, AxisMixin {
@@ -36,10 +42,14 @@ export interface Button extends View, ChildrenMixin {
   readonly name: "Button";
 }
 
-export interface Text {
+export interface Text extends View {
   readonly name: "Text";
 
   readonly text: string;
+}
+
+export interface Spacer extends View {
+  readonly name: "Spacer";
 }
 
 export interface Color {
