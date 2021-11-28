@@ -9,8 +9,9 @@ export interface ChildrenMixin {
   children: View[];
 }
 
+export type Axis = "V" | "H" | "Z";
 export interface AxisMixin {
-  readonly axis: "V" | "H" | "Z";
+  readonly axis: Axis;
 }
 
 export interface ContainerMixin extends ChildrenMixin, AxisMixin {}
