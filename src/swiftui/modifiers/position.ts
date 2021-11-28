@@ -5,8 +5,7 @@ import { ZStack } from "../types/views";
 
 export function walkForPosition(
   context: SwiftUIContext,
-  node: LayoutMixin & SceneNode,
-  _zstack: ZStack
+  node: LayoutMixin & SceneNode
 ) {
   if (isFakeRootView(context.root)) {
     return;
@@ -17,7 +16,7 @@ export function walkForPosition(
 
   const { x, y, width, height } = node;
   const position: PositionModifier = {
-    name: "position",
+    type: "position",
     x: x + width / 2,
     y: y + height / 2,
   };
