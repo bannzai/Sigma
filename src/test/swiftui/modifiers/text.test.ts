@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "../../../swiftui/context";
-import { walk } from "../../../swiftui/walkers/walkers";
+import { walk } from "../../../swiftui/walks/walks";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 

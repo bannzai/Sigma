@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "./swiftui/context";
-import { walk } from "./swiftui/walkers/walkers";
+import { walk } from "./swiftui/walks/walks";
 
 const run = async () => {
   const root = figma.currentPage.selection[0];
