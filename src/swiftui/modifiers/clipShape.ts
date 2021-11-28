@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "../context";
-import { walk } from "../walks/walks";
+import { walk } from "../walks/walk";
 
 export function walkForClipShape(
   context: SwiftUIContext,
