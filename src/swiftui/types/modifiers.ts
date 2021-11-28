@@ -43,3 +43,8 @@ export interface ClipShapeModifier extends Modifier {
   // TOOD: Replace to Shape
   shapeNode: BlendMixin & SceneNode;
 }
+
+export interface CornerRadiusModifier extends Modifier {
+  name: "cornerRadius";
+  cornerRadius: number;
+}
