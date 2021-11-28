@@ -4,9 +4,6 @@ import { SwiftUIContext } from "../context";
 import { walkForPadding } from "../modifiers/padding";
 import { walkForTextModifier } from "../modifiers/text";
 import { walkForImage } from "../image";
-import { isBlendMixin } from "../type/type_guards";
-import { walkForMask } from "../modifiers/mask";
-import { walkForClipShape } from "../modifiers/clipShape";
 import {
   adaptFrameModifierWithFrameNode,
   walkForFixedFrame,
@@ -19,6 +16,7 @@ import { mappedSwiftUIColor } from "../util/mapper";
 import { walkForCornerRadius } from "../modifiers/cornerRadius";
 import { walkToComponent } from "./walkToComponent";
 import { walkToEllipse } from "./walkToEllipse";
+import { walkToGroup } from "./walkToGroup";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -77,49 +75,6 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   }
 }
 
-export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
-  trace(`#walkToGroup`, context, node);
-
-  const isContainMaskNode = node.children.some(
-    (e) => isBlendMixin(e) && e.isMask
-  );
-  if (isContainMaskNode) {
-    if (node.children.length === 2) {
-      const reversed = Array.from(node.children).reverse();
-      const target = reversed[0];
-      walk(context, target);
-
-      const { id, width, height } = target;
-      console.log(JSON.stringify({ id, width, height }));
-
-      const maskNode = reversed[1] as BlendMixin & SceneNode;
-      walkForClipShape(context, target, maskNode);
-    } else {
-      const reversed = Array.from(node.children).reverse();
-      const target = reversed[0];
-      walk(context, target);
-
-      reversed.slice(1).forEach((child) => {
-        context.nest();
-        if (isBlendMixin(child)) {
-          walkForMask(context, target, child);
-        } else {
-          assert(false, "unexpected is not mask node");
-        }
-        context.unnest();
-      });
-    }
-
-    walkForFixedFrame(context, node);
-  } else {
-    node.children.forEach((child) => {
-      context.nest();
-      walk(context, child);
-      context.unnest();
-    });
-  }
-  walkForPosition(context, node);
-}
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
 
