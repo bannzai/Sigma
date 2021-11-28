@@ -48,3 +48,9 @@ export interface CornerRadiusModifier extends Modifier {
   name: "cornerRadius";
   cornerRadius: number;
 }
+
+export interface PositionModifier extends Modifier {
+  name: "position";
+  x: number;
+  y: number;
+}
