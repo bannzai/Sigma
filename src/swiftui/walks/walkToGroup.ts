@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
-import { isBlendMixin } from "../type/type_guards";
+import { isBlendMixin } from "../util/type_guards";
 import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
 import { walkForFixedFrame } from "../modifiers/frame/frame";
