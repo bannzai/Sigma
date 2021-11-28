@@ -8,7 +8,6 @@ import { walkForFixedFrame } from "../modifiers/frame/frame";
 import { walkForPosition } from "../modifiers/position";
 import { walk } from "./walk";
 
-
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
@@ -32,22 +31,18 @@ export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
       walk(context, target);
 
       reversed.slice(1).forEach((child) => {
-        context.nest();
         if (isBlendMixin(child)) {
           walkForMask(context, target, child);
         } else {
           assert(false, "unexpected is not mask node");
         }
-        context.unnest();
       });
     }
 
     walkForFixedFrame(context, node);
   } else {
     node.children.forEach((child) => {
-      context.nest();
       walk(context, child);
-      context.unnest();
     });
   }
   walkForPosition(context, node);
