@@ -26,6 +26,7 @@ export interface BackgroundModifier extends Modifier {
   view: Color;
 }
 
+// TODO: Rename to BorderModifierContainer and build from BorderModifierContainer to .overlay(_:lineWidth:)
 export interface OverlayModifier extends Modifier {
   readonly name: "overlay";
   shape: View & Shape;
