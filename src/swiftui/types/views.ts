@@ -34,5 +34,14 @@ export interface Button extends View, ChildrenMixin {
 
 export interface Text {
   readonly name: "Text";
+
   readonly text: string;
+}
+
+export interface Color {
+  readonly name: "Color";
+
+  red: number;
+  green: number;
+  blue: number;
 }
