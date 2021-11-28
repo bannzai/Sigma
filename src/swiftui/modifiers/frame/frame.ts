@@ -5,6 +5,7 @@ import {
   Alignment,
   FixedHeight,
   FixedWidth,
+  FrameModifierArgument,
   MaxHeight,
   MaxWidth,
 } from "../../types/frameModifierTypes";
@@ -276,10 +277,12 @@ export function walkForFixedFrame(
   }
 
   if (layoutAlign === "INHERIT") {
-    context.lineBreak();
-    context.nest();
-    context.add(`.frame(width: ${width}, height: ${height})`);
-    context.unnest();
+    const modifier: FrameModifier = {
+      type: "frame",
+      width,
+      height,
+    };
+    context.adapt(modifier);
   } else if (layoutAlign === "STRETCH") {
     assert(false, "unknown pattern");
   } else {
