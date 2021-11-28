@@ -1,4 +1,5 @@
 import { Modifier } from "./modifiers";
+import { TextModifier } from "./textModifier";
 
 export interface View {
   readonly name: string;
@@ -44,6 +45,7 @@ export interface Button extends View, ChildrenMixin {
 
 export interface Text extends View {
   readonly name: "Text";
+  modifiers: (Modifier | TextModifier)[];
 
   readonly text: string;
   readonly multipleLineSyntax: boolean;

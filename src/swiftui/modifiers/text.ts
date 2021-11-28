@@ -1,28 +1,42 @@
 import { mappedSwiftUIColor } from "../util/mapper";
 import { SwiftUIContext } from "../context";
+import { Color, Text } from "../types/views";
+import {
+  FontTextModifier,
+  FontWeightTextModifier,
+  ForegorundTextModifier,
+  NamedFontWeight,
+} from "../types/textModifier";
 
-export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
-  context.nest();
-
+export function walkForTextModifier(
+  context: SwiftUIContext,
+  node: TextNode,
+  text: Text
+) {
   if (node.textDecoration === "UNDERLINE") {
-    context.lineBreak();
-    context.add(".underline()\n");
+    text.modifiers.push({ name: "underline" });
   } else if (node.textDecoration === "STRIKETHROUGH") {
-    context.lineBreak();
-    context.add(".strikethrough()\n");
+    text.modifiers.push({ name: "strikethrough" });
   }
 
   // NOTE: Sigma only supports single font member on Text
   if (node.fontName !== figma.mixed && node.fontSize !== figma.mixed) {
     const fontWeight = mappedFontWeight(node.fontName);
     if (fontWeight != null) {
-      context.lineBreak();
-      context.add(`.fontWeight(.${fontWeight})\n`);
+      const modifier: FontWeightTextModifier = {
+        name: "fontWeight",
+        fontWeight: fontWeight,
+      };
+      text.modifiers.push(modifier);
     }
 
     const fontSize = node.fontSize;
-    context.lineBreak();
-    context.add(`.font(.system(size: ${fontSize}))\n`);
+    const modifier: FontTextModifier = {
+      name: "font",
+      namedType: "system",
+      size: node.fontSize,
+    };
+    text.modifiers.push(modifier);
 
     // TOOD: Mapping to SwiftUI FontFamily
     // const fontFamily = node.fontName.family;
@@ -33,15 +47,21 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
     for (const fill of node.fills) {
       if (fill.type === "SOLID") {
         const { color, opacity } = fill;
-        context.lineBreak();
-        context.add(
-          `.foregroundColor(${mappedSwiftUIColor(color, opacity)})\n`
-        );
+        const modifier: ForegorundTextModifier = {
+          name: "foregroundColor",
+          color: {
+            name: "Color",
+            red: color.r,
+            green: color.g,
+            blue: color.b,
+            opacity: opacity,
+          },
+        };
+
+        text.modifiers.push(modifier);
       }
     }
   }
-
-  context.unnest();
 }
 
 /**
@@ -61,8 +81,8 @@ export function walkForTextModifier(context: SwiftUIContext, node: TextNode) {
  }
 */
 
-function mappedFontWeight(fontName: FontName): string | null {
-  const mapOfFigmaAndSwiftUIFontWeight: { [key: string]: string } = {
+function mappedFontWeight(fontName: FontName): NamedFontWeight | null {
+  const mapOfFigmaAndSwiftUIFontWeight: { [key: string]: NamedFontWeight } = {
     thin: "ultraLight",
     extralight: "thin",
     light: "light",
