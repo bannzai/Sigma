@@ -5,25 +5,27 @@ export interface View {
   modifiers: Modifier[];
 }
 
-interface ChildrenMixin {
+export interface ChildrenMixin {
   children: View[];
 }
 
-interface AxisMixin {
+export interface AxisMixin {
   readonly axis: "V" | "H" | "Z";
 }
 
-export interface VStack extends View, ChildrenMixin, AxisMixin {
+export interface ContainerMixin extends ChildrenMixin, AxisMixin {}
+
+export interface VStack extends View, ContainerMixin {
   readonly name: "VStack";
   readonly axis: "V";
 }
 
-export interface HStack extends View, ChildrenMixin, AxisMixin {
+export interface HStack extends View, ContainerMixin {
   readonly name: "HStack";
   readonly axis: "H";
 }
 
-export interface ZStack extends View, ChildrenMixin, AxisMixin {
+export interface ZStack extends View, ContainerMixin {
   readonly name: "ZStack";
   readonly axis: "Z";
 }

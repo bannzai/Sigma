@@ -1,3 +1,6 @@
+import { Modifier } from "./types/modifiers";
+import { View } from "./types/views";
+
 export interface SwiftUIFrameNode {
   node: FrameNode;
   isOnlyOneChild: boolean;
@@ -32,6 +35,10 @@ export class SwiftUIContext {
     }
     return this.frameNodeHistories[this.frameNodeHistories.length - 1];
   }
+
+  // TODO: Rename to add(view:)
+  view(view: View) {}
+  adapt(modifier: Modifier) {}
 
   add(
     code: string,
