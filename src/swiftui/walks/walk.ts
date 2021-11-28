@@ -18,6 +18,7 @@ import { walkForFixedSpacer } from "../view/spacer";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { walkForCornerRadius } from "../modifiers/cornerRadius";
 import { walkToComponent } from "./walkToComponent";
+import { walkToEllipse } from "./walkToEllipse";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -76,10 +77,6 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   }
 }
 
-export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
-  trace(`#walkToEllipse`, context, node);
-  context.add("Ellipse()");
-}
 export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
