@@ -13,6 +13,7 @@ import { walkToEllipse } from "./walkToEllipse";
 import { walkToGroup } from "./walkToGroup";
 import { walkToLine } from "./walkToLine";
 import { walkToRectangle } from "./walkToRectangle";
+import { walkToShapeWithText } from "./walkToShapeWithText";
 
 export function walk(context: SwiftUIContext, node: SceneNode) {
   // trace(`#walk`, context, node);
@@ -71,12 +72,6 @@ export function walk(context: SwiftUIContext, node: SceneNode) {
   }
 }
 
-export function walkToShapeWithText(
-  context: SwiftUIContext,
-  node: ShapeWithTextNode
-) {
-  trace(`#walkToShapeWithText`, context, node);
-}
 export function walkToText(context: SwiftUIContext, node: TextNode) {
   trace(`#walkToText`, context, node);
   const { characters, fills } = node;
