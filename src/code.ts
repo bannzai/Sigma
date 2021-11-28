@@ -1,4 +1,3 @@
-import clipboardCopy from "clipboard-copy";
 import { SwiftUIContext } from "./swiftui/context";
 import { walk } from "./swiftui/walkers/walkers";
 
@@ -6,7 +5,6 @@ const run = async () => {
   const root = figma.currentPage.selection[0];
   const traversedContext = traversed(root);
   print(traversedContext);
-  await clipboardCopy(traversedContext.code);
   figma.closePlugin();
 };
 
