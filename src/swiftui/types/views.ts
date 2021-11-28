@@ -60,3 +60,15 @@ export interface Color {
   blue: number;
   opacity?: number;
 }
+
+export interface Shape {}
+
+export interface Rectangle extends View, Shape {
+  readonly name: "Rectangle";
+}
+
+export interface RoundedRectangle extends View, Shape {
+  readonly name: "RoundedRectangle";
+
+  readonly cornerRadius: number;
+}

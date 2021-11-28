@@ -1,4 +1,4 @@
-import { Color } from "./views";
+import { Color, Shape, View } from "./views";
 
 export interface Modifier {
   readonly name: string;
@@ -24,4 +24,15 @@ export interface PaddingModifier extends Modifier {
 export interface BackgroundModifier extends Modifier {
   readonly name: "background";
   view: Color;
+}
+
+export interface OverlayModifier extends Modifier {
+  readonly name: "overlay";
+  shape: View & Shape;
+  lineWidth: number;
+}
+
+export interface StrokeModifier extends Modifier {
+  name: "stroke";
+  color: Color;
 }
