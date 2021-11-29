@@ -4,6 +4,4 @@ import { BuildContext } from "./context";
 export function walkToModifier(
   context: BuildContext,
   modifier: SwiftUIViewModifier
-) {
-
-}
+) {}

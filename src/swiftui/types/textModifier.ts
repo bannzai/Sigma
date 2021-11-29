@@ -1,3 +1,4 @@
+import { Modifier } from "./modifiers";
 import { Color } from "./views";
 
 export type SwiftUITextModifier =
@@ -6,6 +7,19 @@ export type SwiftUITextModifier =
   | FontWeightTextModifier
   | FontTextModifier
   | ForegorundTextModifier;
+
+const textModifierTypes = [
+  "underline",
+  "strikethrough",
+  "fontWeight",
+  "font",
+  "foregroundColor",
+];
+export function isSwiftUITextModifier(
+  args: Modifier | SwiftUITextModifier
+): args is SwiftUITextModifier {
+  return textModifierTypes.includes(args.type);
+}
 
 export interface TextModifier {
   readonly type: string;

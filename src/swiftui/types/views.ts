@@ -1,6 +1,6 @@
 import { ImageModifier } from "./imageModifier";
-import { Modifier } from "./modifiers";
-import { TextModifier } from "./textModifier";
+import { Modifier, SwiftUIViewModifier } from "./modifiers";
+import { SwiftUITextModifier, TextModifier } from "./textModifier";
 
 export type SwiftUIViewType =
   | VStack
@@ -60,7 +60,7 @@ export interface Button extends View, ChildrenMixin {
 
 export interface Text extends View {
   readonly type: "Text";
-  modifiers: (Modifier | TextModifier)[];
+  modifiers: (SwiftUIViewModifier | SwiftUITextModifier)[];
 
   readonly text: string;
   readonly multipleLineSyntax: boolean;
