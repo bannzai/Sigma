@@ -1,3 +1,4 @@
+import * as assert from "assert";
 import { isSwiftUIModifier, SwiftUIViewModifier } from "../types/modifiers";
 import { isSwiftUIViewShape, SwiftUIViewShape } from "../types/shape";
 import {
@@ -16,15 +17,7 @@ import { walkToShapeModifier } from "./shapeModifier";
 import { walkToTextModifier } from "./textModifier";
 import { walkToView } from "./view";
 
-export function walk(
-  context: BuildContext,
-  view:
-    | SwiftUIViewType
-    | SwiftUIViewShape
-    | SwiftUIViewModifier
-    | SwiftUITextModifier
-    | SwiftUIViewShapeModifier
-) {
+export function walk(context: BuildContext, view: { type: string }) {
   if (isSwiftUIViewType(view)) {
     walkToView(context, view);
   } else if (isSwiftUIViewShape(view)) {
@@ -36,6 +29,6 @@ export function walk(
   } else if (isSwiftUIViewShapeModifier(view)) {
     walkToShapeModifier(context, view);
   } else {
-    const _: never = view;
+    assert(false, JSON.stringify({ view }));
   }
 }
