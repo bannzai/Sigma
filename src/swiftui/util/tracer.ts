@@ -6,6 +6,5 @@ export function trace(
   node: SceneNode
 ) {
   const { id, name, type } = node;
-  const { indent } = context;
-  console.log(`${prefix} ${JSON.stringify({ indent, id, name, type })}`);
+  console.log(`${prefix} ${JSON.stringify({ id, name, type })}`);
 }
