@@ -1,5 +1,6 @@
 import { Alignment } from "./frameModifierTypes";
-import { Color, SwiftUIViewShape } from "./views";
+import { Color } from "./views";
+import { SwiftUIViewShape } from "./shape";
 
 export type SwiftUIViewModifier =
   | FrameModifier

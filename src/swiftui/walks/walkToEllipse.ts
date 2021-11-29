@@ -1,6 +1,6 @@
 import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
-import { Ellipse } from "../types/views";
+import { Ellipse } from "../types/shape";
 
 export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
   trace(`#walkToEllipse`, context, node);
