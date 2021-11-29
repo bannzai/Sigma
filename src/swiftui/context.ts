@@ -30,7 +30,7 @@ export class SwiftUIContext {
     return this.containerHistories.pop() ?? null;
   }
 
-  addChild(view: View) {
+  addChild(view: { type: string }) {
     this.container?.children.push(view);
   }
   adapt(modifier: Modifier) {}

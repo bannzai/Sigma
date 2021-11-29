@@ -11,10 +11,27 @@ export type SwiftUIViewType =
   | Text
   | Color
   | Image
-  | Divier;
+  | Spacer
+  | Divider;
 
+const swiftUIViewType = [
+  "VStack",
+  "HStack",
+  "ZStack",
+  "Button",
+  "Text",
+  "Color",
+  "Image",
+  "Spacer",
+  "Divider",
+] as const;
+export function isSwiftUIViewType(args: {
+  type: string;
+}): args is SwiftUIViewType {
+  return (swiftUIViewType as Readonly<string[]>).includes(args.type);
+}
 export interface View {
-  readonly type: string;
+  readonly type: typeof swiftUIViewType[number];
   modifiers: { type: string }[];
   readonly parent: (View & ChildrenMixin) | null;
 
@@ -22,7 +39,7 @@ export interface View {
 }
 
 export interface ChildrenMixin {
-  children: View[];
+  children: { type: string }[];
 }
 
 export type Axis = "V" | "H" | "Z";
@@ -82,6 +99,6 @@ export interface Image extends View {
   name: string;
 }
 
-export interface Divier extends View {
+export interface Divider extends View {
   readonly type: "Divider";
 }

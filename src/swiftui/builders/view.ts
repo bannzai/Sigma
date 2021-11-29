@@ -16,6 +16,7 @@ export function walkToView(context: BuildContext, view: SwiftUIViewType) {
   } else if (view.type === "Text") {
     walkToText(context, view);
   } else if (view.type === "Divider") {
+  } else if (view.type === "Spacer") {
   } else {
     const _: never = view;
   }
