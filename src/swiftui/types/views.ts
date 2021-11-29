@@ -15,7 +15,7 @@ export type SwiftUIViewType =
 
 export interface View {
   readonly type: string;
-  modifiers: Modifier[];
+  modifiers: { type: string }[];
   readonly parent: (View & ChildrenMixin) | null;
 
   readonly node: SceneNode | null;
@@ -58,7 +58,6 @@ export interface Button extends View, ChildrenMixin {
 
 export interface Text extends View {
   readonly type: "Text";
-  modifiers: (SwiftUIViewModifier | SwiftUITextModifier)[];
 
   readonly text: string;
   readonly multipleLineSyntax: boolean;
@@ -79,7 +78,6 @@ export interface Color {
 
 export interface Image extends View {
   readonly type: "Image";
-  modifiers: (Modifier | ImageModifier)[];
 
   name: string;
 }

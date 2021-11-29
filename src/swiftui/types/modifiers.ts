@@ -1,6 +1,7 @@
 import { Alignment } from "./frameModifierTypes";
 import { Color } from "./views";
 import { SwiftUIViewShape } from "./shape";
+import { isSwiftUITextModifier } from "./textModifier";
 
 export type SwiftUIViewModifier =
   | FrameModifier
@@ -12,8 +13,24 @@ export type SwiftUIViewModifier =
   | CornerRadiusModifier
   | PositionModifier;
 
+const swiftUIModifierType = [
+  "frame",
+  "padding",
+  "background",
+  "overlay",
+  "clipshape",
+  "mask",
+  "clipShape",
+  "cornerRadius",
+  "position",
+] as const;
 export interface Modifier {
-  readonly type: string;
+  readonly type: typeof swiftUIModifierType[number];
+}
+export function isSwiftUIModifier(args: {
+  type: string;
+}): args is SwiftUIViewModifier {
+  return (swiftUIModifierType as Readonly<string[]>).includes(args.type);
 }
 
 export interface FrameModifier extends Modifier {

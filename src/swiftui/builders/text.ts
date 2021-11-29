@@ -1,3 +1,4 @@
+import { isSwiftUIModifier } from "../types/modifiers";
 import { isSwiftUITextModifier } from "../types/textModifier";
 import { Text } from "../types/views";
 import { BuildContext } from "./context";
@@ -10,7 +11,7 @@ export function walkToText(context: BuildContext, text: Text) {
   text.modifiers.forEach((e) => {
     if (isSwiftUITextModifier(e)) {
       walkToTextModifier(context, e);
-    } else {
+    } else if (isSwiftUIModifier(e)) {
       walkToModifier(context, e);
     }
   });
