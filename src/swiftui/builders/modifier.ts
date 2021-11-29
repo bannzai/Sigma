@@ -1,12 +1,14 @@
 import { SwiftUIViewModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
 import { walkToPadding } from "./padding";
+import { walkToFrame } from "./frame";
 
 export function walkToModifier(
   context: BuildContext,
   modifier: SwiftUIViewModifier
 ) {
   if (modifier.type === "frame") {
+    walkToFrame(context, modifier);
   } else if (modifier.type === "padding") {
     walkToPadding(context, modifier);
   } else if (modifier.type === "background") {
