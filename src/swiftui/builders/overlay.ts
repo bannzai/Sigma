@@ -9,4 +9,5 @@ export function overlay(context: BuildContext, overlay: OverlayModifier) {
   walkToShape(context, overlay.shape);
   context.enableIndent();
   context.enableLineBreak();
+  context.add(`)`);
 }
