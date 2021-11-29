@@ -1,5 +1,12 @@
 import { Color } from "./views";
 
+export type SwiftUITextModifier =
+  | UnderlineTextModifier
+  | StrikethroughTextModifier
+  | FontWeightTextModifier
+  | FontTextModifier
+  | ForegorundTextModifier;
+
 export interface TextModifier {
   readonly type: string;
 }
