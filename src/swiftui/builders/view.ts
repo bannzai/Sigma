@@ -13,8 +13,25 @@ export function walkToView(context: BuildContext, view: SwiftUIViewType) {
       walk(context, e);
     });
     context.unnest();
+    context.add("}");
   } else if (view.type === "HStack") {
+    context.add(
+      `HStack(alignment: ${view.alignment}, spacing: ${view.spacing}) {`
+    );
+    context.nest();
+    view.children.forEach((e) => {
+      walk(context, e);
+    });
+    context.unnest();
+    context.add("}");
   } else if (view.type === "ZStack") {
+    context.add(`ZStack {`);
+    context.nest();
+    view.children.forEach((e) => {
+      walk(context, e);
+    });
+    context.unnest();
+    context.add("}");
   } else if (view.type === "Button") {
   } else if (view.type === "Color") {
   } else if (view.type === "Image") {
