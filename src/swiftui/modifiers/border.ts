@@ -1,5 +1,4 @@
 import * as assert from "assert";
-import { mappedSwiftUIColor } from "../util/mapper";
 import { SwiftUIContext } from "../context";
 import { OverlayModifier, StrokeModifier } from "../types/modifiers";
 import { Rectangle, RoundedRectangle } from "../types/views";

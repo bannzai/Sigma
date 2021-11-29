@@ -1,4 +1,3 @@
-import { mappedSwiftUIColor } from "../util/mapper";
 import { SwiftUIContext } from "../context";
 import { Color, Text } from "../types/views";
 import {

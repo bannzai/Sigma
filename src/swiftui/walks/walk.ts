@@ -1,6 +1,5 @@
 import * as assert from "assert";
 import { SwiftUIContext } from "../context";
-import { mappedSwiftUIColor } from "../util/mapper";
 import { walkToComponent } from "./walkToComponent";
 import { walkToEllipse } from "./walkToEllipse";
 import { walkToGroup } from "./walkToGroup";

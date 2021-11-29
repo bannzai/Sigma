@@ -1,5 +1,3 @@
-import * as assert from "assert";
-import { mappedSwiftUIColor } from "../util/mapper";
 import { SwiftUIContext } from "../context";
 import { CornerRadiusModifier } from "../types/modifiers";
 

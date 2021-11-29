@@ -1,10 +1,9 @@
-export function mappedSwiftUIColor(
-  color: RGB,
-  opacity: number | undefined
-): string {
-  if (opacity !== undefined && opacity !== 1) {
-    return `Color(red: ${color.r}, green: ${color.g}, blue: ${color.b}, opacity: ${opacity})`;
+import { Color } from "../types/views";
+
+export function mappedSwiftUIColor(color: Color): string {
+  if (color.opacity != null && color.opacity !== 1) {
+    return `Color(red: ${color.red}, green: ${color.green}, blue: ${color.blue}, opacity: ${color.opacity})`;
   } else {
-    return `Color(red: ${color.r}, green: ${color.g}, blue: ${color.b})`;
+    return `Color(red: ${color.red}, green: ${color.green}, blue: ${color.blue})`;
   }
 }
