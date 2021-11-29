@@ -8,8 +8,10 @@ export const isFakeRootView = (args: any): args is FakeRootView =>
   "isFake" in args && args.isFake === true;
 
 export class SwiftUIContext {
-  root!: (View & ChildrenMixin) | FakeRootView;
+  root: (View & ChildrenMixin) | FakeRootView = {} as FakeRootView;
   containerHistories: (View & ChildrenMixin)[] = [];
+  // TODO: Remove to build tree method
+  readonly code: string = "";
 
   get container(): (View & ChildrenMixin) | null {
     if (this.containerHistories.length <= 0) {

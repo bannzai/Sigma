@@ -10,7 +10,6 @@ const run = async () => {
 
 const traversed = (root: SceneNode): SwiftUIContext => {
   const context = new SwiftUIContext();
-  context.root = {} as FakeRootView;
   walk(context, root);
   return context;
 };
