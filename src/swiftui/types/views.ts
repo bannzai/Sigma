@@ -27,7 +27,7 @@ const swiftUIViewType = [
 ] as const;
 export function isSwiftUIViewType(args: {
   type: string;
-}): args is SwiftUIViewType {
+}): args is SwiftUIViewType & View {
   return (swiftUIViewType as Readonly<string[]>).includes(args.type);
 }
 export interface View {

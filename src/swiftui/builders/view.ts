@@ -1,9 +1,12 @@
-import { SwiftUIViewType } from "../types/views";
+import { SwiftUIViewType, View } from "../types/views";
+import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 import { walk } from "./entrypoint";
-import { walkToText } from "./text";
 
-export function walkToView(context: BuildContext, view: SwiftUIViewType) {
+export function walkToView(
+  context: BuildContext,
+  view: SwiftUIViewType & View
+) {
   if (view.type === "VStack") {
     context.add(
       `VStack(alignment: ${view.alignment}, spacing: ${view.spacing}) {`
@@ -33,13 +36,34 @@ export function walkToView(context: BuildContext, view: SwiftUIViewType) {
     context.unnest();
     context.add("}");
   } else if (view.type === "Button") {
+    context.add(`Button(action: { /* TODO */, label: {`);
+    context.nest();
+    view.children.forEach((e) => {
+      walk(context, e);
+    });
+    context.unnest();
   } else if (view.type === "Color") {
+    context.add(`${mappedSwiftUIColor(view)}`);
   } else if (view.type === "Image") {
+    context.add(`Image("${view.name}")`);
   } else if (view.type === "Text") {
-    walkToText(context, view);
+    context.add(`Text("${view.text}")`);
+    context.nest();
+    view.modifiers.forEach((e) => {
+      walk(context, e);
+    });
+    context.unnest();
   } else if (view.type === "Divider") {
+    context.add(`Divier()`);
   } else if (view.type === "Spacer") {
+    context.add(`Spacer()`);
   } else {
     const _: never = view;
   }
+
+  context.nest();
+  view.modifiers.forEach((e) => {
+    walk(context, e);
+  });
+  context.unnest();
 }
