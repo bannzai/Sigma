@@ -23,7 +23,6 @@ describe("#Button", () => {
     button.appendChild(createText("1"));
 
     const context = new SwiftUIContext();
-    context.root = button;
     walk(context, button);
 
     const code = `
