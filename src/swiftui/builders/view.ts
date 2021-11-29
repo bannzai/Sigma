@@ -1,5 +1,6 @@
 import { SwiftUIViewType } from "../types/views";
 import { BuildContext } from "./context";
+import { walk } from "./entrypoint";
 import { walkToText } from "./text";
 
 export function walkToView(context: BuildContext, view: SwiftUIViewType) {
@@ -7,7 +8,11 @@ export function walkToView(context: BuildContext, view: SwiftUIViewType) {
     context.add(
       `VStack(alignment: ${view.alignment}, spacing: ${view.spacing}) {`
     );
-    view.children.forEach((e) => {});
+    context.nest();
+    view.children.forEach((e) => {
+      walk(context, e);
+    });
+    context.unnest();
   } else if (view.type === "HStack") {
   } else if (view.type === "ZStack") {
   } else if (view.type === "Button") {
