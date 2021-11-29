@@ -1,6 +1,8 @@
 import * as assert from "assert";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { SwiftUIContext } from "../context";
+import { OverlayModifier, StrokeModifier } from "../types/modifiers";
+import { Rectangle, RoundedRectangle } from "../types/views";
 
 export function walkForBorder(
   context: SwiftUIContext,
@@ -10,28 +12,69 @@ export function walkForBorder(
 
   for (const stroke of strokes) {
     if (stroke.type === "SOLID") {
-      context.lineBreak();
-
       if (strokeAlign === "INSIDE") {
-        context.nest();
         if (cornerRadius !== figma.mixed) {
           if (cornerRadius === 0) {
-            context.add(
-              `.overlay(Rectangle().stroke(${mappedSwiftUIColor(
-                stroke.color,
-                stroke.opacity
-              )}, lineWidth: ${strokeWeight}))`
-            );
+            const overlay: OverlayModifier = {
+              name: "overlay",
+              shape: (function (): Rectangle {
+                return {
+                  name: "Rectangle",
+                  parent: null,
+                  modifiers: [
+                    (function (): StrokeModifier {
+                      return {
+                        name: "stroke",
+                        color: (function () {
+                          return {
+                            name: "Color",
+                            red: stroke.color.r,
+                            green: stroke.color.g,
+                            blue: stroke.color.b,
+                            opacity: stroke.opacity,
+                          };
+                        })(),
+                      };
+                    })(),
+                  ],
+                  node: null,
+                };
+              })(),
+              lineWidth: strokeWeight,
+            };
+            context.adapt(overlay);
           } else {
-            context.add(
-              `.overlay(RoundedRectangle(cornerRadius: ${cornerRadius}).stroke(${mappedSwiftUIColor(
-                stroke.color,
-                stroke.opacity
-              )}, lineWidth: ${strokeWeight}))`
-            );
+            const overlay: OverlayModifier = {
+              name: "overlay",
+              shape: (function (): RoundedRectangle {
+                return {
+                  name: "RoundedRectangle",
+                  parent: null,
+                  modifiers: [
+                    (function (): StrokeModifier {
+                      return {
+                        name: "stroke",
+                        color: (function () {
+                          return {
+                            name: "Color",
+                            red: stroke.color.r,
+                            green: stroke.color.g,
+                            blue: stroke.color.b,
+                            opacity: stroke.opacity,
+                          };
+                        })(),
+                      };
+                    })(),
+                  ],
+                  node: null,
+                  cornerRadius: cornerRadius,
+                };
+              })(),
+              lineWidth: strokeWeight,
+            };
+            context.adapt(overlay);
           }
         }
-        context.unnest();
       } else {
         assert(
           false,

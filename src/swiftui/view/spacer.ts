@@ -1,4 +1,6 @@
 import { SwiftUIContext } from "../context";
+import { FrameModifier } from "../types/modifiers";
+import { isAxisView } from "../types/views";
 
 export function walkForFixedSpacer(
   context: SwiftUIContext,
@@ -16,27 +18,33 @@ export function walkForFixedSpacer(
     return;
   }
 
-  const { latestFrameNode } = context;
-  if (latestFrameNode == null || latestFrameNode.node.layoutMode === "NONE") {
+  if (!isAxisView(context.container)) {
     return;
   }
-  if (latestFrameNode.node.layoutMode === "VERTICAL") {
-    if (!latestFrameNode.isOnlyOneChild) {
-      context.lineBreak();
-      context.add("Spacer()\n");
-      context.nest();
-      context.add(`.frame(height: ${height})\n`);
-      context.unnest();
-    }
-  } else if (latestFrameNode.node.layoutMode === "HORIZONTAL") {
-    if (!latestFrameNode.isOnlyOneChild) {
-      context.lineBreak();
-      context.add("Spacer()\n");
-      context.nest();
-      context.add(`.frame(width: ${width})\n`);
-      context.unnest();
-    }
-  } else {
-    const _: never = latestFrameNode.node.layoutMode;
+
+  if (context.container.axis === "V") {
+    const frame: FrameModifier = {
+      type: "frame",
+      height,
+      alignment: "center",
+    };
+    context.addChild({
+      type: "Spacer",
+      modifiers: [frame],
+      parent: null,
+      node: null,
+    });
+  } else if (context.container.axis === "H") {
+    const frame: FrameModifier = {
+      type: "frame",
+      width,
+      alignment: "center",
+    };
+    context.addChild({
+      type: "Spacer",
+      modifiers: [frame],
+      parent: null,
+      node: null,
+    });
   }
 }

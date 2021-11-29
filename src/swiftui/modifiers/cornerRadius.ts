@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { SwiftUIContext } from "../context";
+import { CornerRadiusModifier } from "../types/modifiers";
 
 export function walkForCornerRadius(
   context: SwiftUIContext,
@@ -9,7 +10,11 @@ export function walkForCornerRadius(
   const { cornerRadius } = node;
   if (cornerRadius !== figma.mixed) {
     if (cornerRadius !== 0) {
-      context.add(`.cornerRadius(${cornerRadius})\n`);
+      const modifier: CornerRadiusModifier = {
+        name: "cornerRadius",
+        cornerRadius,
+      };
+      context.adapt(modifier);
     }
   }
 }

@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "../../../swiftui/context";
-import { walk } from "../../../swiftui/walkers/walkers";
+import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 
@@ -23,12 +23,11 @@ describe("#Button", () => {
     button.appendChild(createText("1"));
 
     const context = new SwiftUIContext();
-    context.root = button;
     walk(context, button);
 
     const code = `
 Button(action: { /* TODO */ }) {
-    Text(verbatim: "1")
+    Text("1")
 }
 `;
     expect(context.code).toEqual(code.slice("\n".length));

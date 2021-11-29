@@ -1,65 +1,37 @@
-export interface SwiftUIFrameNode {
-  node: FrameNode;
-  isOnlyOneChild: boolean;
+import { Modifier } from "./types/modifiers";
+import { ChildrenMixin, View } from "./types/views";
+
+export interface FakeRootView {
+  readonly isFake: true;
 }
+export const isFakeRootView = (args: any): args is FakeRootView =>
+  "isFake" in args && args.isFake === true;
 
 export class SwiftUIContext {
-  indent: number = 0;
-  code: string = "";
-  frameNodeHistories: SwiftUIFrameNode[] = [];
-  ignoredIndent: boolean = false;
-  root!: SceneNode;
+  root: (View & ChildrenMixin) | FakeRootView = {} as FakeRootView;
+  containerHistories: (View & ChildrenMixin)[] = [];
+  // TODO: Remove to build tree method
+  readonly code: string = "";
 
-  nest() {
-    this.indent += 4;
-  }
-  unnest() {
-    this.indent -= 4;
-  }
-
-  push(node: FrameNode) {
-    this.frameNodeHistories.push({
-      node,
-      isOnlyOneChild: node.children.length === 1,
-    });
-  }
-  pop(): SwiftUIFrameNode | null {
-    return this.frameNodeHistories.pop() ?? null;
-  }
-  get latestFrameNode(): SwiftUIFrameNode | null {
-    if (this.frameNodeHistories.length === 0) {
+  get container(): (View & ChildrenMixin) | null {
+    if (this.containerHistories.length <= 0) {
       return null;
     }
-    return this.frameNodeHistories[this.frameNodeHistories.length - 1];
+    return this.containerHistories[this.containerHistories.length - 1];
+  }
+  nestContainer(container: View & ChildrenMixin) {
+    if (isFakeRootView(this.root)) {
+      this.root = container;
+    }
+    this.container?.children.push(container);
+    this.containerHistories.push(container);
+  }
+  unnestContainer(): (View & ChildrenMixin) | null {
+    return this.containerHistories.pop() ?? null;
   }
 
-  add(
-    code: string,
-    options?: {
-      withoutIndent?: boolean;
-    }
-  ) {
-    var withoutIndent = options?.withoutIndent ?? false;
-    if (code === "\n") {
-      withoutIndent = true;
-    }
-
-    const indent = withoutIndent ? "" : this._indent();
-    this.code += `${indent}${code}`;
+  addChild(view: View) {
+    this.container?.children.push(view);
   }
-
-  lineBreak(isForceLineBreak: boolean = false) {
-    if (isForceLineBreak) {
-      this.add("\n");
-    } else if (this.code.length > 0 && !this.code.endsWith("\n")) {
-      this.add("\n");
-    }
-  }
-
-  _indent(): string {
-    if (this.ignoredIndent) {
-      return "";
-    }
-    return Array(this.indent).fill(" ").join("");
-  }
+  adapt(modifier: Modifier) {}
 }

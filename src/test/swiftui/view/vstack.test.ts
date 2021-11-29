@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "../../../swiftui/context";
-import { walk } from "../../../swiftui/walkers/walkers";
+import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 
@@ -28,14 +28,13 @@ describe("#VStack", () => {
     vstack.appendChild(createText("3"));
 
     const context = new SwiftUIContext();
-    context.root = vstack;
     walk(context, vstack);
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 `;
     expect(context.code).toEqual(code.slice("\n".length));
@@ -58,14 +57,13 @@ VStack(alignment: .leading, spacing: 10) {
     vstack.appendChild(createText("3"));
 
     const context = new SwiftUIContext();
-    context.root = vstack;
     walk(context, vstack);
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding(.all, 20)
 `;

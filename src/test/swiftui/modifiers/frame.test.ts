@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "../../../swiftui/context";
-import { walk } from "../../../swiftui/walkers/walkers";
+import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 
@@ -68,18 +68,17 @@ describe("#View.frame(_:)", () => {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = vstack;
             walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(height: 200)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -125,18 +124,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(maxHeight: .infinity)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -185,18 +183,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(width: 100)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -243,18 +240,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(maxWidth: .infinity)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -304,18 +300,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(width: 100)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -361,18 +356,17 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(maxWidth: .infinity)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -421,18 +415,17 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(height: 200)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -479,18 +472,17 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(maxHeight: .infinity)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -520,14 +512,13 @@ HStack(alignment: .top, spacing: 10) {
         vstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
-        context.root = vstack;
         walk(context, vstack);
 
         const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .frame(width: 100, height: 200)
 `;
@@ -554,14 +545,13 @@ VStack(alignment: .leading, spacing: 10) {
         vstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
-        context.root = vstack;
         walk(context, vstack);
 
         const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .frame(width: 100)
 `;
@@ -588,14 +578,13 @@ VStack(alignment: .leading, spacing: 10) {
         vstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
-        context.root = vstack;
         walk(context, vstack);
 
         const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 `;
         expect(context.code).toEqual(code.slice("\n".length));
@@ -645,18 +634,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(width: 100)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -702,18 +690,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(maxHeight: .infinity)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -762,18 +749,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(height: 200)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -820,18 +806,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(maxWidth: .infinity)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -881,18 +866,17 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(height: 200)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -938,18 +922,17 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(maxWidth: .infinity)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -998,18 +981,17 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(height: 200)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -1056,18 +1038,17 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(createText("4"));
 
             const context = new SwiftUIContext();
-            context.root = parent;
             walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
-        Text(verbatim: "1")
-        Text(verbatim: "2")
-        Text(verbatim: "3")
+        Text("1")
+        Text("2")
+        Text("3")
     }
     .frame(maxHeight: .infinity)
-    Text(verbatim: "4")
+    Text("4")
 }
 .frame(width: 300, height: 400)
 `;
@@ -1097,14 +1078,13 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
-        context.root = hstack;
         walk(context, hstack);
 
         const code = `
 HStack(alignment: .top, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .frame(width: 100, height: 200)
 `;
@@ -1131,14 +1111,13 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
-        context.root = hstack;
         walk(context, hstack);
 
         const code = `
 HStack(alignment: .top, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .frame(height: 200)
 `;
@@ -1165,14 +1144,13 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("3"));
 
         const context = new SwiftUIContext();
-        context.root = hstack;
         walk(context, hstack);
 
         const code = `
 HStack(alignment: .top, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 `;
         expect(context.code).toEqual(code.slice("\n".length));

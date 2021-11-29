@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "../../../swiftui/context";
-import { walk } from "../../../swiftui/walkers/walkers";
+import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 
@@ -29,14 +29,13 @@ describe("#View.padding(_:)", () => {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
-      context.root = vstack;
       walk(context, vstack);
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding(.all, 20)
 `;
@@ -60,14 +59,13 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
-      context.root = vstack;
       walk(context, vstack);
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 `;
       expect(context.code).toEqual(code.slice("\n".length));
@@ -90,14 +88,13 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
-      context.root = vstack;
       walk(context, vstack);
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding(.top, 10)
 `;
@@ -121,14 +118,13 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
-      context.root = vstack;
       walk(context, vstack);
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding([.left, .top], 10)
 `;
@@ -152,14 +148,13 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
-      context.root = vstack;
       walk(context, vstack);
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding(.vertical, 10)
 `;
@@ -183,14 +178,13 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
-      context.root = vstack;
       walk(context, vstack);
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding(.horizontal, 10)
 `;
@@ -214,14 +208,13 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("3"));
 
       const context = new SwiftUIContext();
-      context.root = vstack;
       walk(context, vstack);
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
-    Text(verbatim: "1")
-    Text(verbatim: "2")
-    Text(verbatim: "3")
+    Text("1")
+    Text("2")
+    Text("3")
 }
 .padding(.left, 1)
 .padding(.top, 2)

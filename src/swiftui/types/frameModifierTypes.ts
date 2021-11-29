@@ -4,7 +4,7 @@ export interface FixedWidth {
 }
 export interface MaxWidth {
   label: "maxWidth";
-  width: ".infinity";
+  width: "infinity";
 }
 export interface FixedHeight {
   label: "height";
@@ -12,7 +12,7 @@ export interface FixedHeight {
 }
 export interface MaxHeight {
   label: "maxHeight";
-  height: ".infinity";
+  height: "infinity";
 }
 
 export type FrameModifierSizingArgumentType =

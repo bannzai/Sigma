@@ -1,5 +1,5 @@
 import { SwiftUIContext } from "../../../swiftui/context";
-import { walk } from "../../../swiftui/walkers/walkers";
+import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 
@@ -18,7 +18,6 @@ describe("#Image", () => {
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash: "" }];
 
     const context = new SwiftUIContext();
-    context.root = rectangle;
     walk(context, rectangle);
 
     const code = `
@@ -35,7 +34,6 @@ Image("image")
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: "" }];
 
     const context = new SwiftUIContext();
-    context.root = rectangle;
     walk(context, rectangle);
 
     const code = `

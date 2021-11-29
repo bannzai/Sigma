@@ -1,0 +1,39 @@
+import { trace } from "../util/tracer";
+import { isFakeRootView, SwiftUIContext } from "../context";
+import { walkForPosition } from "../modifiers/position";
+import { FrameModifier } from "../types/modifiers";
+import { Divier, isAxisView } from "../types/views";
+
+export function walkToLine(context: SwiftUIContext, node: LineNode) {
+  trace(`#walkToLine`, context, node);
+
+  const frame: FrameModifier = {
+    type: "frame",
+    alignment: "center",
+  };
+
+  if (isFakeRootView(context.root)) {
+    return;
+  }
+  if (isAxisView(context.container)) {
+    if (context.container.axis === "V") {
+      if (context.container.node?.width !== context.root.node?.width) {
+        frame.width = node.width;
+      }
+    } else if (context.container.axis === "H") {
+      if (context.container.node?.height !== context.root.node?.height) {
+        frame.height = node.height;
+      }
+    } else if (context.container.axis === "Z") {
+      walkForPosition(context, node);
+    }
+  }
+
+  const divider: Divier = {
+    type: "Divider",
+    modifiers: [frame],
+    parent: context.container,
+    node: node,
+  };
+  context.addChild(divider);
+}
