@@ -1,4 +1,7 @@
-import { Modifier } from "../types/modifiers";
+import { SwiftUIViewModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
 
-export function walkToModifier(context: BuildContext, modifier: Modifier) {}
+export function walkToModifier(
+  context: BuildContext,
+  modifier: SwiftUIViewModifier
+) {}

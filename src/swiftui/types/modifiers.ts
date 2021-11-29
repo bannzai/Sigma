@@ -1,6 +1,17 @@
 import { Alignment } from "./frameModifierTypes";
 import { Color, Shape, View } from "./views";
 
+export type SwiftUIViewModifier =
+  | FrameModifier
+  | PaddingModifier
+  | BackgroundModifier
+  | OverlayModifier
+  | StrokeModifier
+  | ClipShapeModifier
+  | MaskModifier
+  | CornerRadiusModifier
+  | PositionModifier;
+
 export interface Modifier {
   readonly type: string;
 }
