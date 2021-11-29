@@ -1,12 +1,28 @@
 export class BuildContext {
   code: string = "";
   indent: number = 0;
+  withoutIndent: boolean = false;
+  withoutLineBreak: boolean = false;
 
   nest() {
     this.indent += 4;
   }
   unnest() {
     this.indent -= 4;
+  }
+
+  disableIndent() {
+    this.withoutIndent = true;
+  }
+  enableIndent() {
+    this.withoutIndent = false;
+  }
+
+  disableLineBreak() {
+    this.withoutLineBreak = true;
+  }
+  enableLineBreak() {
+    this.withoutLineBreak = false;
   }
 
   add(
@@ -16,8 +32,8 @@ export class BuildContext {
       withoutLineBreak?: boolean;
     }
   ) {
-    let withoutIndent = options?.withoutIndent ?? false;
-    let withoutLineBreak = options?.withoutLineBreak ?? false;
+    let withoutIndent = options?.withoutIndent ?? this.withoutIndent;
+    let withoutLineBreak = options?.withoutLineBreak ?? this.withoutLineBreak;
     if (code === "\n") {
       withoutIndent = true;
       withoutLineBreak = true;
