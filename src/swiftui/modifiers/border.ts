@@ -16,18 +16,18 @@ export function walkForBorder(
         if (cornerRadius !== figma.mixed) {
           if (cornerRadius === 0) {
             const overlay: OverlayModifier = {
-              name: "overlay",
+              type: "overlay",
               shape: (function (): Rectangle {
                 return {
-                  name: "Rectangle",
+                  type: "Rectangle",
                   parent: null,
                   modifiers: [
                     (function (): StrokeModifier {
                       return {
-                        name: "stroke",
+                        type: "stroke",
                         color: (function () {
                           return {
-                            name: "Color",
+                            type: "Color",
                             red: stroke.color.r,
                             green: stroke.color.g,
                             blue: stroke.color.b,
@@ -45,18 +45,18 @@ export function walkForBorder(
             context.adapt(overlay);
           } else {
             const overlay: OverlayModifier = {
-              name: "overlay",
+              type: "overlay",
               shape: (function (): RoundedRectangle {
                 return {
-                  name: "RoundedRectangle",
+                  type: "RoundedRectangle",
                   parent: null,
                   modifiers: [
                     (function (): StrokeModifier {
                       return {
-                        name: "stroke",
+                        type: "stroke",
                         color: (function () {
                           return {
-                            name: "Color",
+                            type: "Color",
                             red: stroke.color.r,
                             green: stroke.color.g,
                             blue: stroke.color.b,

@@ -14,9 +14,9 @@ export function walkForTextModifier(
   text: Text
 ) {
   if (node.textDecoration === "UNDERLINE") {
-    text.modifiers.push({ name: "underline" });
+    text.modifiers.push({ type: "underline" });
   } else if (node.textDecoration === "STRIKETHROUGH") {
-    text.modifiers.push({ name: "strikethrough" });
+    text.modifiers.push({ type: "strikethrough" });
   }
 
   // NOTE: Sigma only supports single font member on Text
@@ -24,7 +24,7 @@ export function walkForTextModifier(
     const fontWeight = mappedFontWeight(node.fontName);
     if (fontWeight != null) {
       const modifier: FontWeightTextModifier = {
-        name: "fontWeight",
+        type: "fontWeight",
         fontWeight: fontWeight,
       };
       text.modifiers.push(modifier);
@@ -32,7 +32,7 @@ export function walkForTextModifier(
 
     const fontSize = node.fontSize;
     const modifier: FontTextModifier = {
-      name: "font",
+      type: "font",
       namedType: "system",
       size: node.fontSize,
     };
@@ -48,9 +48,9 @@ export function walkForTextModifier(
       if (fill.type === "SOLID") {
         const { color, opacity } = fill;
         const modifier: ForegorundTextModifier = {
-          name: "foregroundColor",
+          type: "foregroundColor",
           color: {
-            name: "Color",
+            type: "Color",
             red: color.r,
             green: color.g,
             blue: color.b,

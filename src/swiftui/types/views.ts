@@ -86,7 +86,7 @@ export interface Image extends View {
   readonly type: "Image";
   modifiers: (Modifier | ImageModifier)[];
 
-  name: string;
+  type: string;
 }
 
 export interface Divier extends View {

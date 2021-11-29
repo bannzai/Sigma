@@ -8,7 +8,7 @@ export function walkForClipShape(
   maskingNode: BlendMixin & SceneNode
 ) {
   const clipShape: ClipShapeModifier = {
-    name: "clipShape",
+    type: "clipShape",
     shapeNode: maskingNode,
   };
   context.adapt(clipShape);

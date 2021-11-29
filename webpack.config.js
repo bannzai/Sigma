@@ -3,6 +3,7 @@ const webpack = require("webpack");
 
 module.exports = (env, argv) => ({
   entry: "./src/code.ts",
+  cache: false,
   mode: argv.mode === "production" ? "production" : "development",
   devtool: argv.mode === "production" ? false : "inline-source-map",
   module: {

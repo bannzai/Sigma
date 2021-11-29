@@ -11,7 +11,7 @@ export function walkForCornerRadius(
   if (cornerRadius !== figma.mixed) {
     if (cornerRadius !== 0) {
       const modifier: CornerRadiusModifier = {
-        name: "cornerRadius",
+        type: "cornerRadius",
         cornerRadius,
       };
       context.adapt(modifier);
