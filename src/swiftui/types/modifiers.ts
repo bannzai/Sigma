@@ -28,10 +28,10 @@ export interface FrameModifier extends Modifier {
 export interface PaddingModifier extends Modifier {
   readonly type: "padding";
 
-  top?: number;
-  left?: number;
-  bottom?: number;
-  right?: number;
+  top: number;
+  left: number;
+  bottom: number;
+  right: number;
 }
 
 export interface BackgroundModifier extends Modifier {
