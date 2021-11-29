@@ -1,7 +1,7 @@
 export interface ImageModifier {
-  type: string;
+  readonly type: string;
 }
 
 export interface ResizableImageModifier extends ImageModifier {
-  type: "resizable";
+  readonly type: "resizable";
 }

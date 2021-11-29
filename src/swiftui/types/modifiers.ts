@@ -36,29 +36,29 @@ export interface OverlayModifier extends Modifier {
 }
 
 export interface StrokeModifier extends Modifier {
-  type: "stroke";
+  readonly type: "stroke";
   color: Color;
 }
 
 export interface ClipShapeModifier extends Modifier {
-  type: "clipShape";
+  readonly type: "clipShape";
   // TOOD: Replace to Shape
   shapeNode: BlendMixin & SceneNode;
 }
 
 export interface MaskModifier extends Modifier {
-  type: "mask";
+  readonly type: "mask";
   // TOOD: Replace to Shape
   shapeNode: BlendMixin & SceneNode;
 }
 
 export interface CornerRadiusModifier extends Modifier {
-  type: "cornerRadius";
+  readonly type: "cornerRadius";
   cornerRadius: number;
 }
 
 export interface PositionModifier extends Modifier {
-  type: "position";
+  readonly type: "position";
   x: number;
   y: number;
 }
