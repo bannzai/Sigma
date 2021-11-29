@@ -3,6 +3,7 @@ import { BuildContext } from "./context";
 import { walkToPadding } from "./padding";
 import { walkToFrame } from "./frame";
 import { walkToBackground } from "./background";
+import { walkToOverlay } from "./overlay";
 
 export function walkToModifier(
   context: BuildContext,
@@ -15,6 +16,7 @@ export function walkToModifier(
   } else if (modifier.type === "background") {
     walkToBackground(context, modifier);
   } else if (modifier.type === "overlay") {
+    walkToOverlay(context, modifier);
   } else if (modifier.type === "clipShape") {
   } else if (modifier.type === "mask") {
   } else if (modifier.type === "cornerRadius") {
