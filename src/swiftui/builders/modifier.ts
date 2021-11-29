@@ -2,6 +2,7 @@ import { SwiftUIViewModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
 import { walkToPadding } from "./padding";
 import { walkToFrame } from "./frame";
+import { walkToBackground } from "./background";
 
 export function walkToModifier(
   context: BuildContext,
@@ -12,6 +13,7 @@ export function walkToModifier(
   } else if (modifier.type === "padding") {
     walkToPadding(context, modifier);
   } else if (modifier.type === "background") {
+    walkToBackground(context, modifier);
   } else if (modifier.type === "overlay") {
   } else if (modifier.type === "stroke") {
   } else if (modifier.type === "clipShape") {
