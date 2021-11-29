@@ -11,9 +11,6 @@ export type SwiftUIViewType =
   | Text
   | Color
   | Image
-  | Ellipse
-  | Rectangle
-  | RoundedRectangle
   | Divier;
 
 export interface View {
@@ -78,26 +75,6 @@ export interface Color {
   green: number;
   blue: number;
   opacity?: number;
-}
-
-export interface Shape {}
-export type SwiftUIViewShape = Rectangle | RoundedRectangle | Ellipse;
-
-export interface Rectangle extends View, Shape {
-  readonly type: "Rectangle";
-  modifiers: (SwiftUIViewModifier | SwiftUIViewShapeModifier)[];
-}
-
-export interface RoundedRectangle extends View, Shape {
-  readonly type: "RoundedRectangle";
-  modifiers: (SwiftUIViewModifier | SwiftUIViewShapeModifier)[];
-
-  readonly cornerRadius: number;
-}
-
-export interface Ellipse extends View, Shape {
-  readonly type: "Ellipse";
-  modifiers: (SwiftUIViewModifier | SwiftUIViewShapeModifier)[];
 }
 
 export interface Image extends View {
