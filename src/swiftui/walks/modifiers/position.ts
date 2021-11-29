@@ -1,7 +1,7 @@
 import * as assert from "assert";
-import { isFakeRootView, SwiftUIContext } from "../context";
-import { PositionModifier } from "../types/modifiers";
-import { ZStack } from "../types/views";
+import { isFakeRootView, SwiftUIContext } from "../../context";
+import { PositionModifier } from "../../types/modifiers";
+import { ZStack } from "../../types/views";
 
 export function walkForPosition(
   context: SwiftUIContext,

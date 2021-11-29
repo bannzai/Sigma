@@ -1,6 +1,6 @@
-import { SwiftUIContext } from "../context";
-import { ClipShapeModifier } from "../types/modifiers";
-import { walk } from "../walks/walk";
+import { SwiftUIContext } from "../../context";
+import { ClipShapeModifier } from "../../types/modifiers";
+import { walk } from "../walk";
 
 export function walkForClipShape(
   context: SwiftUIContext,

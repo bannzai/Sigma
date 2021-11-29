@@ -1,7 +1,7 @@
 import * as assert from "assert";
-import { SwiftUIContext } from "../context";
-import { OverlayModifier, StrokeModifier } from "../types/modifiers";
-import { Rectangle, RoundedRectangle } from "../types/views";
+import { SwiftUIContext } from "../../context";
+import { OverlayModifier, StrokeModifier } from "../../types/modifiers";
+import { Rectangle, RoundedRectangle } from "../../types/views";
 
 export function walkForBorder(
   context: SwiftUIContext,

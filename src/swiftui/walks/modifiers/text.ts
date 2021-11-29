@@ -1,11 +1,11 @@
-import { SwiftUIContext } from "../context";
-import { Color, Text } from "../types/views";
+import { SwiftUIContext } from "../../context";
+import { Color, Text } from "../../types/views";
 import {
   FontTextModifier,
   FontWeightTextModifier,
   ForegorundTextModifier,
   NamedFontWeight,
-} from "../types/textModifier";
+} from "../../types/textModifier";
 
 export function walkForTextModifier(
   context: SwiftUIContext,

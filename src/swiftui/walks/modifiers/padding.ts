@@ -1,5 +1,5 @@
-import { SwiftUIContext } from "../context";
-import { PaddingModifier } from "../types/modifiers";
+import { SwiftUIContext } from "../../context";
+import { PaddingModifier } from "../../types/modifiers";
 
 export function walkForPadding(context: SwiftUIContext, node: BaseFrameMixin) {
   const {

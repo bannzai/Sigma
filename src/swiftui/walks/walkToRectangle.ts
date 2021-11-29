@@ -1,11 +1,11 @@
 import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForImage } from "../view/image";
-import { walkForFixedFrame } from "../modifiers/frame/frame";
-import { walkForBorder } from "../modifiers/border";
-import { walkForPosition } from "../modifiers/position";
+import { walkForFixedFrame } from "./modifiers/frame/frame";
+import { walkForBorder } from "./modifiers/border";
+import { walkForPosition } from "./modifiers/position";
 import { walkForFixedSpacer } from "../view/spacer";
-import { walkForCornerRadius } from "../modifiers/cornerRadius";
+import { walkForCornerRadius } from "./modifiers/cornerRadius";
 
 
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {

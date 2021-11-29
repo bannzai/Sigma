@@ -1,5 +1,5 @@
-import { SwiftUIContext } from "../context";
-import { CornerRadiusModifier } from "../types/modifiers";
+import { SwiftUIContext } from "../../context";
+import { CornerRadiusModifier } from "../../types/modifiers";
 
 export function walkForCornerRadius(
   context: SwiftUIContext,

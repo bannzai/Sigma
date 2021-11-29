@@ -1,6 +1,6 @@
 import * as assert from "assert";
-import { SwiftUIContext } from "../../context";
-import { FrameModifier } from "../../types/modifiers";
+import { SwiftUIContext } from "../../../context";
+import { FrameModifier } from "../../../types/modifiers";
 import {
   Alignment,
   FixedHeight,
@@ -8,7 +8,7 @@ import {
   FrameModifierArgument,
   MaxHeight,
   MaxWidth,
-} from "../../types/frameModifierTypes";
+} from "../../../types/frameModifierTypes";
 
 export function adaptFrameModifierWithFrameNode(
   context: SwiftUIContext,

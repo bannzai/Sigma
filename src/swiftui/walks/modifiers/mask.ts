@@ -1,6 +1,6 @@
-import { SwiftUIContext } from "../context";
-import { MaskModifier } from "../types/modifiers";
-import { walk } from "../walks/walk";
+import { SwiftUIContext } from "../../context";
+import { MaskModifier } from "../../types/modifiers";
+import { walk } from "../walk";
 
 export function walkForMask(
   context: SwiftUIContext,

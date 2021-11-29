@@ -1,10 +1,10 @@
 import { trace } from "../util/tracer";
 import { isFakeRootView, SwiftUIContext } from "../context";
-import { walkForPadding } from "../modifiers/padding";
-import { adaptFrameModifierWithFrameNode } from "../modifiers/frame/frame";
-import { walkForBackgroundColor } from "../modifiers/backgroundColor";
-import { walkForPosition } from "../modifiers/position";
-import { walkForCornerRadius } from "../modifiers/cornerRadius";
+import { walkForPadding } from "./modifiers/padding";
+import { adaptFrameModifierWithFrameNode } from "./modifiers/frame/frame";
+import { walkForBackgroundColor } from "./modifiers/backgroundColor";
+import { walkForPosition } from "./modifiers/position";
+import { walkForCornerRadius } from "./modifiers/cornerRadius";
 import { walk } from "./walk";
 import {
   Button,

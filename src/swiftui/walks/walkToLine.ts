@@ -1,6 +1,6 @@
 import { trace } from "../util/tracer";
 import { isFakeRootView, SwiftUIContext } from "../context";
-import { walkForPosition } from "../modifiers/position";
+import { walkForPosition } from "./modifiers/position";
 import { FrameModifier } from "../types/modifiers";
 import { Divier, isAxisView } from "../types/views";
 

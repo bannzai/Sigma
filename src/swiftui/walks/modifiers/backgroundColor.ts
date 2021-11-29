@@ -1,6 +1,6 @@
-import { SwiftUIContext } from "../context";
-import { Color } from "../types/views";
-import { BackgroundModifier } from "../types/modifiers";
+import { SwiftUIContext } from "../../context";
+import { Color } from "../../types/views";
+import { BackgroundModifier } from "../../types/modifiers";
 
 export function walkForBackgroundColor(
   context: SwiftUIContext,
