@@ -18,7 +18,7 @@ export function walkToTextModifier(
       args.push(`size: ${textModifier.size}`);
     }
     const fontArgument = args.join(", ");
-    context.add(`.font(.${textModifier.type}(${fontArgument}))`);
+    context.add(`.font(.${textModifier.namedType}(${fontArgument}))`);
   } else if (textModifier.type === "foregroundColor") {
     context.add(`.foregroundColor(${mappedSwiftUIColor(textModifier.color)})`);
   } else {
