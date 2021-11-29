@@ -2,6 +2,19 @@ import { ImageModifier } from "./imageModifier";
 import { Modifier } from "./modifiers";
 import { TextModifier } from "./textModifier";
 
+export type SwiftUIViewType =
+  | VStack
+  | HStack
+  | ZStack
+  | Button
+  | Text
+  | Color
+  | Image
+  | Ellipse
+  | Rectangle
+  | RoundedRectangle
+  | Divier;
+
 export interface View {
   readonly type: string;
   modifiers: Modifier[];
