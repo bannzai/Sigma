@@ -12,14 +12,14 @@ export function walkForBackgroundColor(
       if (fill.type === "SOLID") {
         const { color, opacity } = fill;
         const colorView: Color = {
-          name: "Color",
-          red: 0,
-          green: 0,
-          blue: 0,
+          type: "Color",
+          red: color.r,
+          green: color.g,
+          blue: color.b,
           opacity: opacity,
         };
         const background: BackgroundModifier = {
-          name: "background",
+          type: "background",
           view: colorView,
         };
         context.adapt(background);
