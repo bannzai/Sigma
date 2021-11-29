@@ -1,6 +1,7 @@
 import { ImageModifier } from "./imageModifier";
 import { Modifier, SwiftUIViewModifier } from "./modifiers";
 import { SwiftUITextModifier, TextModifier } from "./textModifier";
+import { ShapeModifier, SwiftUIViewShapeModifier } from "./shapeModifier";
 
 export type SwiftUIViewType =
   | VStack
@@ -80,19 +81,23 @@ export interface Color {
 }
 
 export interface Shape {}
+export type SwiftUIViewShape = Rectangle | RoundedRectangle | Ellipse;
 
 export interface Rectangle extends View, Shape {
   readonly type: "Rectangle";
+  modifiers: (SwiftUIViewModifier | SwiftUIViewShapeModifier)[];
 }
 
 export interface RoundedRectangle extends View, Shape {
   readonly type: "RoundedRectangle";
+  modifiers: (SwiftUIViewModifier | SwiftUIViewShapeModifier)[];
 
   readonly cornerRadius: number;
 }
 
 export interface Ellipse extends View, Shape {
   readonly type: "Ellipse";
+  modifiers: (SwiftUIViewModifier | SwiftUIViewShapeModifier)[];
 }
 
 export interface Image extends View {

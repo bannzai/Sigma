@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import { SwiftUIContext } from "../../context";
-import { OverlayModifier, StrokeModifier } from "../../types/modifiers";
+import { OverlayModifier } from "../../types/modifiers";
+import { StrokeModifier } from "../../types/shapeModifier";
 import { Rectangle, RoundedRectangle } from "../../types/views";
 
 export function walkForBorder(
@@ -24,6 +25,7 @@ export function walkForBorder(
                     (function (): StrokeModifier {
                       return {
                         type: "stroke",
+                        lineWidth: strokeWeight,
                         color: (function () {
                           return {
                             type: "Color",
@@ -39,7 +41,6 @@ export function walkForBorder(
                   node: null,
                 };
               })(),
-              lineWidth: strokeWeight,
             };
             context.adapt(overlay);
           } else {
@@ -53,6 +54,7 @@ export function walkForBorder(
                     (function (): StrokeModifier {
                       return {
                         type: "stroke",
+                        lineWidth: strokeWeight,
                         color: (function () {
                           return {
                             type: "Color",
@@ -69,7 +71,6 @@ export function walkForBorder(
                   cornerRadius: cornerRadius,
                 };
               })(),
-              lineWidth: strokeWeight,
             };
             context.adapt(overlay);
           }

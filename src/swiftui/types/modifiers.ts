@@ -1,12 +1,11 @@
 import { Alignment } from "./frameModifierTypes";
-import { Color, Shape, View } from "./views";
+import { Color, SwiftUIViewShape } from "./views";
 
 export type SwiftUIViewModifier =
   | FrameModifier
   | PaddingModifier
   | BackgroundModifier
   | OverlayModifier
-  | StrokeModifier
   | ClipShapeModifier
   | MaskModifier
   | CornerRadiusModifier
@@ -42,13 +41,7 @@ export interface BackgroundModifier extends Modifier {
 // TODO: Rename to BorderModifierContainer and build from BorderModifierContainer to .overlay(_:lineWidth:)
 export interface OverlayModifier extends Modifier {
   readonly type: "overlay";
-  shape: View & Shape;
-  lineWidth: number;
-}
-
-export interface StrokeModifier extends Modifier {
-  readonly type: "stroke";
-  color: Color;
+  shape: SwiftUIViewShape;
 }
 
 export interface ClipShapeModifier extends Modifier {

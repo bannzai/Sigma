@@ -15,7 +15,6 @@ export function walkToModifier(
   } else if (modifier.type === "background") {
     walkToBackground(context, modifier);
   } else if (modifier.type === "overlay") {
-  } else if (modifier.type === "stroke") {
   } else if (modifier.type === "clipShape") {
   } else if (modifier.type === "mask") {
   } else if (modifier.type === "cornerRadius") {
