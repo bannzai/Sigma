@@ -78,6 +78,10 @@ export interface RoundedRectangle extends View, Shape {
   readonly cornerRadius: number;
 }
 
+export interface Ellipse extends View, Shape {
+  readonly type: "Ellipse";
+}
+
 export interface Image extends View {
   readonly type: "Image";
   modifiers: (Modifier | ImageModifier)[];

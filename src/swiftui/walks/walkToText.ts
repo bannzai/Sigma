@@ -40,7 +40,7 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     // context.lineBreak();
   } else {
     const text: Text = {
-      name: "Text",
+      type: "Text",
       text: characters,
       multipleLineSyntax: characters.split("\n").length > 1,
       modifiers: [],
