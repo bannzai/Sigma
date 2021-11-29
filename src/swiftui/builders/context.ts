@@ -13,15 +13,19 @@ export class BuildContext {
     code: string,
     options?: {
       withoutIndent?: boolean;
+      withoutLineBreak?: boolean;
     }
   ) {
-    var withoutIndent = options?.withoutIndent ?? false;
+    let withoutIndent = options?.withoutIndent ?? false;
+    let withoutLineBreak = options?.withoutLineBreak ?? false;
     if (code === "\n") {
       withoutIndent = true;
+      withoutLineBreak = true;
     }
 
     const indent = withoutIndent ? "" : this._indent();
-    this.code += `${indent}${code}`;
+    const linebreak = withoutLineBreak ? "" : "\n";
+    this.code += `${indent}${code}${linebreak}`;
   }
 
   _indent(): string {
