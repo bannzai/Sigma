@@ -2,6 +2,7 @@ import { SwiftUIContext } from "../../../swiftui/context";
 import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
+import { run } from "../../../run";
 
 describe("#Button", () => {
   const figma = createFigma({
@@ -27,6 +28,6 @@ Button(action: { /* TODO */ }) {
     Text("1")
 }
 `;
-    expect(context.code).toEqual(code.slice("\n".length));
+    expect(run(button)).toEqual(code.slice("\n".length));
   });
 });
