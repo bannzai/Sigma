@@ -2,7 +2,7 @@ import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
 import { walkForPosition } from "./modifiers/position";
 import { FrameModifier } from "../types/modifiers";
-import { Divier, isAxisView } from "../types/views";
+import { Divider, isAxisView } from "../types/views";
 
 export function walkToLine(context: SwiftUIContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
@@ -29,7 +29,7 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
     }
   }
 
-  const divider: Divier = {
+  const divider: Divider = {
     type: "Divider",
     modifiers: [frame],
     parent: context.container,

@@ -54,7 +54,7 @@ export function walkToView(
     });
     context.unnest();
   } else if (view.type === "Divider") {
-    context.add(`Divier()`);
+    context.add(`Divider()`);
   } else if (view.type === "Spacer") {
     context.add(`Spacer()`);
   } else {
