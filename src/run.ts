@@ -10,6 +10,6 @@ export const run = (root: SceneNode): string => {
   assert(figmaContext.root != null, "it is necessary root");
 
   const buildContext = new BuildContext();
-  walkToSwiftUI(buildContext, root);
+  walkToSwiftUI(buildContext, figmaContext.root);
   return buildContext.code;
 };
