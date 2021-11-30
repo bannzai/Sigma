@@ -2,7 +2,7 @@ import { Modifier } from "./types/modifiers";
 import { ChildrenMixin, isContainerType, View } from "./types/views";
 
 export class SwiftUIContext {
-  root!: View & ChildrenMixin;
+  root!: { type: string; node: SceneNode | null };
   containerHistories: (View & ChildrenMixin)[] = [];
 
   get container(): (View & ChildrenMixin) | null {
@@ -22,8 +22,8 @@ export class SwiftUIContext {
     return this.containerHistories.pop() ?? null;
   }
 
-  addChild(view: { type: string }) {
-    if (this.root == null && isContainerType(view)) {
+  addChild(view: { type: string; node: SceneNode | null }) {
+    if (this.root == null) {
       this.root = view;
     } else {
       this.container?.children.push(view);
