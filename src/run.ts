@@ -7,7 +7,7 @@ import { walk as walkToFigma } from "./swiftui/walks/walk";
 export const run = (root: SceneNode): string => {
   const figmaContext = new SwiftUIContext();
   walkToFigma(figmaContext, root);
-  assert(figmaContext.root != null);
+  assert(figmaContext.root != null, "it is necessary root");
 
   const buildContext = new BuildContext();
   walkToSwiftUI(buildContext, root);
