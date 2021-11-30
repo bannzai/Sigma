@@ -48,11 +48,6 @@ export function walkToView(
     context.add(`Image("${view.name}")`);
   } else if (view.type === "Text") {
     context.add(`Text("${view.text}")`);
-    context.nest();
-    view.modifiers.forEach((e) => {
-      walk(context, e);
-    });
-    context.unnest();
   } else if (view.type === "Divider") {
     context.add(`Divider()`);
   } else if (view.type === "Spacer") {
