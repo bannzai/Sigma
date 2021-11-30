@@ -35,7 +35,9 @@ export function walkToModifier(
     context.enableIndent();
     context.add(`)`);
   } else if (modifier.type === "cornerRadius") {
+    context.add(`.cornerRadius(${modifier.cornerRadius})`);
   } else if (modifier.type === "position") {
+    context.add(`.position(x: ${modifier.x}, y: ${modifier.y})`);
   } else {
     const _: never = modifier;
   }
