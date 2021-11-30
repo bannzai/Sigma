@@ -9,6 +9,7 @@ const run = async () => {
   const traversedContext = traversed(root);
   assert(!isFakeRootView(traversedContext.root));
   const code = build(traversedContext.root);
+  console.log(code);
   figma.closePlugin();
 };
 
@@ -22,10 +23,6 @@ const build = (root: { type: string }): string => {
   const context = new BuildContext();
   walkToSwiftUI(context, root);
   return context.code;
-};
-
-const print = (context: SwiftUIContext) => {
-  // console.log(context.code);
 };
 
 run();
