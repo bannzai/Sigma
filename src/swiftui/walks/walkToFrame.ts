@@ -1,5 +1,5 @@
 import { trace } from "../util/tracer";
-import { isFakeRootView, SwiftUIContext } from "../context";
+import { SwiftUIContext } from "../context";
 import { walkForPadding } from "./modifiers/padding";
 import { adaptFrameModifierWithFrameNode } from "./modifiers/frame/frame";
 import { walkForBackgroundColor } from "./modifiers/backgroundColor";
@@ -159,10 +159,7 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
         };
         context.addChild(spacer);
       } else {
-        if (
-          !isFakeRootView(context.root) &&
-          context.root.node?.id !== node.id
-        ) {
+        if (context.root != null && context.root.node?.id !== node.id) {
           if (layoutMode === "VERTICAL") {
             if (node.height === context.root.node?.height) {
               const spacer: Spacer = {

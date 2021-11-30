@@ -1,22 +1,21 @@
 import * as assert from "assert";
 import { BuildContext } from "./swiftui/builders/context";
 import { walk as walkToSwiftUI } from "./swiftui/builders/entrypoint";
-import { isFakeRootView, SwiftUIContext } from "./swiftui/context";
+import { SwiftUIContext } from "./swiftui/context";
 import { walk as walkToFigma } from "./swiftui/walks/walk";
 
 const run = async () => {
   const root = figma.currentPage.selection[0];
-  const traversedContext = traversed(root);
-  assert(!isFakeRootView(traversedContext.root));
+  const figmaContext = new SwiftUIContext();
+  traversed(figmaContext, root);
+  assert(figmaContext.root != null);
   const code = build(traversedContext.root);
   console.log(code);
   figma.closePlugin();
 };
 
-const traversed = (root: SceneNode): SwiftUIContext => {
-  const context = new SwiftUIContext();
+const traversed = (context: SwiftUIContext, root: SceneNode) => {
   walkToFigma(context, root);
-  return context;
 };
 
 const build = (root: { type: string }): string => {

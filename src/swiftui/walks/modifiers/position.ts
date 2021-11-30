@@ -1,12 +1,12 @@
 import * as assert from "assert";
-import { isFakeRootView, SwiftUIContext } from "../../context";
+import { SwiftUIContext } from "../../context";
 import { PositionModifier } from "../../types/modifiers";
 
 export function walkForPosition(
   context: SwiftUIContext,
   node: LayoutMixin & SceneNode
 ) {
-  if (isFakeRootView(context.root)) {
+  if (context.root == null) {
     return;
   }
   if (context.root.node?.id === node.id) {

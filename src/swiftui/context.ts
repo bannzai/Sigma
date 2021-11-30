@@ -1,14 +1,8 @@
 import { Modifier } from "./types/modifiers";
 import { ChildrenMixin, View } from "./types/views";
 
-export interface FakeRootView {
-  readonly isFake: true;
-}
-export const isFakeRootView = (args: any): args is FakeRootView =>
-  "isFake" in args && args.isFake === true;
-
 export class SwiftUIContext {
-  root: (View & ChildrenMixin) | FakeRootView = {} as FakeRootView;
+  root!: View & ChildrenMixin;
   containerHistories: (View & ChildrenMixin)[] = [];
 
   get container(): (View & ChildrenMixin) | null {
@@ -18,7 +12,7 @@ export class SwiftUIContext {
     return this.containerHistories[this.containerHistories.length - 1];
   }
   nestContainer(container: View & ChildrenMixin) {
-    if (isFakeRootView(this.root)) {
+    if (this.root == null) {
       this.root = container;
     }
     this.container?.children.push(container);
