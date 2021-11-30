@@ -27,6 +27,13 @@ export function walkToModifier(
     context.enableIndent();
     context.add(`)`);
   } else if (modifier.type === "mask") {
+    context.add(`.mask(`, { withoutLineBreak: false });
+    context.disableLineBreak();
+    context.disableIndent();
+    walk(context, modifier.shapeNode);
+    context.enableLineBreak();
+    context.enableIndent();
+    context.add(`)`);
   } else if (modifier.type === "cornerRadius") {
   } else if (modifier.type === "position") {
   } else {
