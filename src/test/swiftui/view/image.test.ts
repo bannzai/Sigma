@@ -1,6 +1,3 @@
-import { SwiftUIContext } from "../../../swiftui/context";
-import { walk } from "../../../swiftui/walks/walk";
-import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 import { run } from "../../../run";
 
