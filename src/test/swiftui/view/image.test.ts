@@ -2,6 +2,7 @@ import { SwiftUIContext } from "../../../swiftui/context";
 import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
+import { run } from "../../../run";
 
 describe("#Image", () => {
   const figma = createFigma({
@@ -21,7 +22,7 @@ describe("#Image", () => {
 Image("image")
     .resizable()
 `;
-    expect(context.code).toEqual(code.slice("\n".length));
+    expect(run(rectangle)).toEqual(code.slice("\n".length));
   });
 
   test("Image for scaleMode to FILL", async () => {
@@ -33,6 +34,6 @@ Image("image")
     const code = `
 Image("image")
 `;
-    expect(context.code).toEqual(code.slice("\n".length));
+    expect(run(rectangle)).toEqual(code.slice("\n".length));
   });
 });
