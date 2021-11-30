@@ -17,9 +17,6 @@ describe("#Image", () => {
     rectangle.strokes = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash: "" }];
 
-    const context = new SwiftUIContext();
-    walk(context, rectangle);
-
     const code = `
 Image("image")
     .resizable()
@@ -32,9 +29,6 @@ Image("image")
     rectangle.name = "image";
     rectangle.strokes = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: "" }];
-
-    const context = new SwiftUIContext();
-    walk(context, rectangle);
 
     const code = `
 Image("image")

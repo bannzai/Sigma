@@ -22,9 +22,6 @@ describe("#Button", () => {
     button.paddingRight = 0;
     button.appendChild(createText("1"));
 
-    const context = new SwiftUIContext();
-    walk(context, button);
-
     const code = `
 Button(action: { /* TODO */ }) {
     Text("1")

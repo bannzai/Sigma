@@ -27,9 +27,6 @@ describe("#VStack", () => {
     vstack.appendChild(createText("2"));
     vstack.appendChild(createText("3"));
 
-    const context = new SwiftUIContext();
-    walk(context, vstack);
-
     const code = `
 VStack(alignment: .leading, spacing: 10) {
     Text("1")
@@ -55,9 +52,6 @@ VStack(alignment: .leading, spacing: 10) {
     vstack.appendChild(createText("1"));
     vstack.appendChild(createText("2"));
     vstack.appendChild(createText("3"));
-
-    const context = new SwiftUIContext();
-    walk(context, vstack);
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {

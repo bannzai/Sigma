@@ -67,9 +67,6 @@ describe("#View.frame(_:)", () => {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
@@ -122,9 +119,6 @@ VStack(alignment: .leading, spacing: 10) {
             // Any values: END
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
-
-            const context = new SwiftUIContext();
-            walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -182,9 +176,6 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
@@ -238,9 +229,6 @@ VStack(alignment: .leading, spacing: 10) {
             // Any values: END
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
-
-            const context = new SwiftUIContext();
-            walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -299,9 +287,6 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 HStack(alignment: .top, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
@@ -354,9 +339,6 @@ HStack(alignment: .top, spacing: 10) {
             // Any values: END
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
-
-            const context = new SwiftUIContext();
-            walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -414,9 +396,6 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 HStack(alignment: .top, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
@@ -471,9 +450,6 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 HStack(alignment: .top, spacing: 10) {
     VStack(alignment: .leading, spacing: 10) {
@@ -511,9 +487,6 @@ HStack(alignment: .top, spacing: 10) {
         vstack.appendChild(createText("2"));
         vstack.appendChild(createText("3"));
 
-        const context = new SwiftUIContext();
-        walk(context, vstack);
-
         const code = `
 VStack(alignment: .leading, spacing: 10) {
     Text("1")
@@ -544,9 +517,6 @@ VStack(alignment: .leading, spacing: 10) {
         vstack.appendChild(createText("2"));
         vstack.appendChild(createText("3"));
 
-        const context = new SwiftUIContext();
-        walk(context, vstack);
-
         const code = `
 VStack(alignment: .leading, spacing: 10) {
     Text("1")
@@ -576,9 +546,6 @@ VStack(alignment: .leading, spacing: 10) {
         vstack.appendChild(createText("1"));
         vstack.appendChild(createText("2"));
         vstack.appendChild(createText("3"));
-
-        const context = new SwiftUIContext();
-        walk(context, vstack);
 
         const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -633,9 +600,6 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
@@ -688,9 +652,6 @@ VStack(alignment: .leading, spacing: 10) {
             // Any values: END
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
-
-            const context = new SwiftUIContext();
-            walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -748,9 +709,6 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 VStack(alignment: .leading, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
@@ -804,9 +762,6 @@ VStack(alignment: .leading, spacing: 10) {
             // Any values: END
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
-
-            const context = new SwiftUIContext();
-            walk(context, parent);
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -865,9 +820,6 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 HStack(alignment: .top, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
@@ -920,9 +872,6 @@ HStack(alignment: .top, spacing: 10) {
             // Any values: END
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
-
-            const context = new SwiftUIContext();
-            walk(context, parent);
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -980,9 +929,6 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 HStack(alignment: .top, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
@@ -1037,9 +983,6 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
 
-            const context = new SwiftUIContext();
-            walk(context, parent);
-
             const code = `
 HStack(alignment: .top, spacing: 10) {
     HStack(alignment: .top, spacing: 10) {
@@ -1077,9 +1020,6 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("2"));
         hstack.appendChild(createText("3"));
 
-        const context = new SwiftUIContext();
-        walk(context, hstack);
-
         const code = `
 HStack(alignment: .top, spacing: 10) {
     Text("1")
@@ -1110,9 +1050,6 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("2"));
         hstack.appendChild(createText("3"));
 
-        const context = new SwiftUIContext();
-        walk(context, hstack);
-
         const code = `
 HStack(alignment: .top, spacing: 10) {
     Text("1")
@@ -1142,9 +1079,6 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("1"));
         hstack.appendChild(createText("2"));
         hstack.appendChild(createText("3"));
-
-        const context = new SwiftUIContext();
-        walk(context, hstack);
 
         const code = `
 HStack(alignment: .top, spacing: 10) {
