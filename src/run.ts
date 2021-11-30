@@ -1,4 +1,4 @@
-import * as assert from "assert";
+const assert = require("assert");
 import { BuildContext } from "./swiftui/builders/context";
 import { walk as walkToSwiftUI } from "./swiftui/builders/entrypoint";
 import { SwiftUIContext } from "./swiftui/context";

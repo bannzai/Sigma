@@ -1,4 +1,4 @@
-import * as assert from "assert";
+const assert = require("assert");
 import { SwiftUIContext } from "../../context";
 import { PositionModifier } from "../../types/modifiers";
 

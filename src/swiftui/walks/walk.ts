@@ -1,4 +1,4 @@
-import * as assert from "assert";
+const assert = require("assert");
 import { SwiftUIContext } from "../context";
 import { walkToComponent } from "./walkToComponent";
 import { walkToEllipse } from "./walkToEllipse";

@@ -1,4 +1,4 @@
-import * as assert from "assert";
+const assert = require("assert");
 import { isSwiftUIModifier, SwiftUIViewModifier } from "../types/modifiers";
 import { isSwiftUIViewShape, SwiftUIViewShape } from "../types/shape";
 import {
@@ -29,6 +29,7 @@ export function walk(context: BuildContext, view: { type: string }) {
   } else if (isSwiftUIViewShapeModifier(view)) {
     walkToShapeModifier(context, view);
   } else {
-    assert(false, JSON.stringify({ view }));
+    const { type } = view;
+    assert(false, JSON.stringify({ type }));
   }
 }

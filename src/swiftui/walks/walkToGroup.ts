@@ -1,4 +1,4 @@
-import * as assert from "assert";
+const assert = require("assert");
 import { trace } from "../util/tracer";
 import { SwiftUIContext } from "../context";
 import { isBlendMixin } from "../util/type_guards";

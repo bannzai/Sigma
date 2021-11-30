@@ -1,4 +1,4 @@
-import * as assert from "assert";
+const assert = require("assert");
 import { SwiftUIContext } from "../../context";
 import { OverlayModifier } from "../../types/modifiers";
 import { StrokeModifier } from "../../types/shapeModifier";
