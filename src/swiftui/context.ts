@@ -1,5 +1,5 @@
 import { Modifier } from "./types/modifiers";
-import { ChildrenMixin, View } from "./types/views";
+import { ChildrenMixin, isContainerType, View } from "./types/views";
 
 export class SwiftUIContext {
   root!: View & ChildrenMixin;
@@ -23,7 +23,11 @@ export class SwiftUIContext {
   }
 
   addChild(view: { type: string }) {
-    this.container?.children.push(view);
+    if (this.root == null && isContainerType(view)) {
+      this.root = view;
+    } else {
+      this.container?.children.push(view);
+    }
   }
   adapt(modifier: Modifier) {}
 }

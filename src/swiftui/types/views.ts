@@ -38,6 +38,13 @@ export interface View {
   readonly node: SceneNode | null;
 }
 
+export function isContainerType(args: any): args is View & ChildrenMixin {
+  return (
+    (args as ChildrenMixin).children !== undefined &&
+    (args as View).type !== undefined &&
+    swiftUIViewType.includes(args.type)
+  );
+}
 export interface ChildrenMixin {
   children: { type: string }[];
 }
