@@ -2,6 +2,7 @@ import { SwiftUIContext } from "../../../swiftui/context";
 import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
+import { run } from "../../../run";
 
 describe("#View.padding(_:)", () => {
   const figma = createFigma({
@@ -36,7 +37,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.all, 20)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(vstack)).toEqual(code.slice("\n".length));
     });
 
     test("all padding values is zero", async () => {
@@ -62,7 +63,7 @@ VStack(alignment: .leading, spacing: 10) {
     Text("3")
 }
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(vstack)).toEqual(code.slice("\n".length));
     });
 
     test("When specify only top", async () => {
@@ -89,7 +90,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.top, 10)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(vstack)).toEqual(code.slice("\n".length));
     });
 
     test("When specify same value for top and left", async () => {
@@ -116,7 +117,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding([.left, .top], 10)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(vstack)).toEqual(code.slice("\n".length));
     });
 
     test("When specify same value for top and bottom", async () => {
@@ -143,7 +144,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.vertical, 10)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(vstack)).toEqual(code.slice("\n".length));
     });
 
     test("When specify same value for left and right", async () => {
@@ -170,7 +171,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.horizontal, 10)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(vstack)).toEqual(code.slice("\n".length));
     });
 
     test("All different values", async () => {
@@ -200,7 +201,7 @@ VStack(alignment: .leading, spacing: 10) {
 .padding(.right, 3)
 .padding(.bottom, 4)
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(vstack)).toEqual(code.slice("\n".length));
     });
   });
 });
