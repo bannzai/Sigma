@@ -2,6 +2,7 @@ import { SwiftUIContext } from "../../../swiftui/context";
 import { walk } from "../../../swiftui/walks/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
+import { run } from "../../../run";
 
 describe("Text.modifier(ANY_MODIFIER)", () => {
   const figma = createFigma({
@@ -21,14 +22,11 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       text.textDecoration = "UNDERLINE";
       text.fills = [];
 
-      const context = new SwiftUIContext();
-      walk(context, text);
-
       const code = `
 Text("Hello")
     .underline()
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -42,14 +40,11 @@ Text("Hello")
       text.textDecoration = "STRIKETHROUGH";
       text.fills = [];
 
-      const context = new SwiftUIContext();
-      walk(context, text);
-
       const code = `
 Text("Hello")
     .strikethrough()
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -62,14 +57,11 @@ Text("Hello")
       text.characters = "Hello";
       text.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 0 } }];
 
-      const context = new SwiftUIContext();
-      walk(context, text);
-
       const code = `
 Text("Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0))
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(text)).toEqual(code.slice("\n".length));
     });
 
     test("with opacity", async () => {
@@ -82,14 +74,11 @@ Text("Hello")
         { type: "SOLID", color: { r: 1, g: 1, b: 0 }, opacity: 0.1 },
       ];
 
-      const context = new SwiftUIContext();
-      walk(context, text);
-
       const code = `
 Text("Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -105,15 +94,12 @@ Text("Hello")
         { type: "SOLID", color: { r: 1, g: 1, b: 0 }, opacity: 0.1 },
       ];
 
-      const context = new SwiftUIContext();
-      walk(context, text);
-
       const code = `
 Text("Hello")
     .strikethrough()
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
-      expect(context.code).toEqual(code.slice("\n".length));
+      expect(run(text)).toEqual(code.slice("\n".length));
     });
   });
 });
