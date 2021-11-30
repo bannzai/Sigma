@@ -4,6 +4,7 @@ import { walkToPadding } from "./padding";
 import { walkToFrame } from "./frame";
 import { walkToBackground } from "./background";
 import { walkToOverlay } from "./overlay";
+import { walk } from "./entrypoint";
 
 export function walkToModifier(
   context: BuildContext,
@@ -18,6 +19,13 @@ export function walkToModifier(
   } else if (modifier.type === "overlay") {
     walkToOverlay(context, modifier);
   } else if (modifier.type === "clipShape") {
+    context.add(`.clipShape(`, { withoutLineBreak: false });
+    context.disableLineBreak();
+    context.disableIndent();
+    walk(context, modifier.shapeNode);
+    context.enableLineBreak();
+    context.enableIndent();
+    context.add(`)`);
   } else if (modifier.type === "mask") {
   } else if (modifier.type === "cornerRadius") {
   } else if (modifier.type === "position") {
