@@ -7,11 +7,11 @@ export function walkToTextModifier(
   textModifier: SwiftUITextModifier
 ) {
   if (textModifier.type === "underline") {
-    context.add(`underline()`);
+    context.add(`.underline()`);
   } else if (textModifier.type === "strikethrough") {
-    context.add(`strikethrough()`);
+    context.add(`.strikethrough()`);
   } else if (textModifier.type === "fontWeight") {
-    context.add(`fontWeight(.${textModifier.fontWeight})`);
+    context.add(`.fontWeight(.${textModifier.fontWeight})`);
   } else if (textModifier.type === "font") {
     var args: string[] = [];
     if (textModifier.size != null) {
