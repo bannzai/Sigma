@@ -1,10 +1,10 @@
-import { trace } from "../util/tracer";
+import { trace } from "../../util/tracer";
 import { FigmaContext } from "../context";
-import { walkForPadding } from "./modifiers/padding";
-import { adaptFrameModifierWithFrameNode } from "./modifiers/frame";
-import { walkForBackgroundColor } from "./modifiers/backgroundColor";
-import { walkForPosition } from "./modifiers/position";
-import { walkForCornerRadius } from "./modifiers/cornerRadius";
+import { walkForPadding } from "../modifiers/padding";
+import { adaptFrameModifierWithFrameNode } from "../modifiers/frame";
+import { walkForBackgroundColor } from "../modifiers/backgroundColor";
+import { walkForPosition } from "../modifiers/position";
+import { walkForCornerRadius } from "../modifiers/cornerRadius";
 import { walk } from "../entrypoint";
 import {
   Button,
@@ -14,7 +14,7 @@ import {
   View,
   VStack,
   ZStack,
-} from "../types/views";
+} from "../../types/views";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);

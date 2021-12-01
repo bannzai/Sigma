@@ -1,6 +1,3 @@
-import { FigmaContext } from "../../reader/context";
-import { walk } from "../../reader/entrypoint";
-import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 import { run } from "../../run";
 

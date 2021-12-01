@@ -1,9 +1,3 @@
-import { ImageModifier } from "./imageModifier";
-import { Modifier, SwiftUIViewModifier } from "./modifiers";
-import { SwiftUITextModifier, TextModifier } from "./textModifier";
-import { ShapeModifier, SwiftUIViewShapeModifier } from "./shapeModifier";
-import { Shape } from "./shape";
-
 export type SwiftUIViewType =
   | VStack
   | HStack

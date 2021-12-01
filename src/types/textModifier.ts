@@ -1,4 +1,3 @@
-import { Modifier, SwiftUIViewModifier } from "./modifiers";
 import { Color } from "./views";
 
 export type SwiftUITextModifier =

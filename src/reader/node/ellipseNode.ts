@@ -1,6 +1,6 @@
-import { trace } from "../util/tracer";
-import { FigmaContext } from "../context";
-import { Ellipse } from "../types/shape";
+import { trace } from "../../util/tracer";
+import { FigmaContext } from "../../reader/context";
+import { Ellipse } from "../../types/shape";
 
 export function walkToEllipse(context: FigmaContext, node: EllipseNode) {
   trace(`#walkToEllipse`, context, node);

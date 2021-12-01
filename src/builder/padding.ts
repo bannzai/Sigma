@@ -1,4 +1,4 @@
-import { PaddingModifier, SwiftUIViewModifier } from "../types/modifiers";
+import { PaddingModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
 
 export function walkToPadding(context: BuildContext, padding: PaddingModifier) {

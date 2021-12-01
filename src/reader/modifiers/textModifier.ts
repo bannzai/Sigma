@@ -1,5 +1,5 @@
 import { FigmaContext } from "../context";
-import { Color, Text } from "../../types/views";
+import { Text } from "../../types/views";
 import {
   FontTextModifier,
   FontWeightTextModifier,
