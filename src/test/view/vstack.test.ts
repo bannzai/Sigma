@@ -1,8 +1,8 @@
-import { FigmaContext } from "../../../reader/context";
-import { walk } from "../../../reader/entrypoint";
+import { FigmaContext } from "../../reader/context";
+import { walk } from "../../reader/entrypoint";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
-import { run } from "../../../run";
+import { run } from "../../run";
 
 describe("#VStack", () => {
   const figma = createFigma({
