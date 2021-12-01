@@ -1,4 +1,4 @@
-import { SwiftUIViewType, View } from "../types/views";
+import { isContainerType, SwiftUIViewType, View } from "../types/views";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 import { walk } from "./entrypoint";
@@ -56,7 +56,15 @@ export function walkToView(
     const _: never = view;
   }
 
-  view.modifiers.forEach((e) => {
-    walk(context, e);
-  });
+  if (isContainerType(view)) {
+    view.modifiers.forEach((e) => {
+      walk(context, e);
+    });
+  } else {
+    context.nest();
+    view.modifiers.forEach((e) => {
+      walk(context, e);
+    });
+    context.unnest();
+  }
 }
