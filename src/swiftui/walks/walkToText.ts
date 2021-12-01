@@ -52,5 +52,5 @@ export function walkToText(context: SwiftUIContext, node: TextNode) {
     walkForTextModifier(context, node, text);
   }
 
-  adaptFrameModifierWithFrameNode(context, node);
+  adaptFrameModifierWithFrameNode(context, context.findBy(node), node);
 }

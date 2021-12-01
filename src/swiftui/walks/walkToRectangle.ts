@@ -19,14 +19,14 @@ export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
         if (fill.type === "IMAGE") {
           walkForImage(context, fill, node);
           if (fill.scaleMode === "FIT") {
-            walkForFixedFrame(context, node);
+            walkForFixedFrame(context, context.findBy(node), node);
           }
         }
       }
     }
 
-    walkForCornerRadius(context, node);
+    walkForCornerRadius(context, context.findBy(node), node);
     walkForBorder(context, node);
-    walkForPosition(context, node);
+    walkForPosition(context, context.findBy(node), node);
   }
 }

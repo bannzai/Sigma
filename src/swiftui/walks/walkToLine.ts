@@ -25,7 +25,7 @@ export function walkToLine(context: SwiftUIContext, node: LineNode) {
         frame.height = node.height;
       }
     } else if (context.container.axis === "Z") {
-      walkForPosition(context, node);
+      walkForPosition(context, context.findBy(node), node);
     }
   }
 
