@@ -1,4 +1,4 @@
-import { FigmaContext } from "../../reader/context";
+import { FigmaContext } from "../context";
 import { FrameModifier } from "../../types/modifiers";
 import { isAxisView } from "../../types/views";
 
