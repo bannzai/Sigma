@@ -1,6 +1,3 @@
-import * as assert from "assert";
-import { Modifier } from "./types/modifiers";
-import { Shape } from "./types/shape";
 import { ChildrenMixin, isContainerType, View } from "./types/views";
 
 export class SwiftUIContext {
@@ -35,7 +32,6 @@ export class SwiftUIContext {
   findBy(target: SceneNode): View {
     const root = this.root;
 
-    assert(root != null);
     if (root.node?.id === target.id) {
       return root;
     }
