@@ -1,5 +1,5 @@
 import { trace } from "../util/tracer";
-import { FigmaContext } from "./context";
+import { FigmaContext } from "../context";
 
 
 export function walkToShapeWithText(
