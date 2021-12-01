@@ -7,7 +7,7 @@ export function walkToOverlay(context: BuildContext, overlay: OverlayModifier) {
   context.disableIndent();
   context.disableLineBreak();
   walkToShape(context, overlay.shape);
-  context.enableIndent();
   context.enableLineBreak();
   context.add(`)`);
+  context.enableIndent();
 }

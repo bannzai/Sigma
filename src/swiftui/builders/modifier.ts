@@ -24,8 +24,8 @@ export function walkToModifier(
     context.disableIndent();
     walk(context, modifier.shapeNode);
     context.enableLineBreak();
-    context.enableIndent();
     context.add(`)`);
+    context.enableIndent();
   } else if (modifier.type === "mask") {
     context.add(`.mask(`, { withoutLineBreak: false });
     context.disableLineBreak();
