@@ -1,8 +1,8 @@
-import { trace } from "../util/tracer";
+import { trace } from "../../util/tracer";
 import { FigmaContext } from "../context";
-import { walkForTextModifier } from "./modifiers/textModifier";
-import { adaptFrameModifierWithFrameNode } from "./modifiers/frame";
-import { Text } from "../types/views";
+import { walkForTextModifier } from "../modifiers/textModifier";
+import { adaptFrameModifierWithFrameNode } from "../modifiers/frame";
+import { Text } from "../../types/views";
 
 export function walkToText(context: FigmaContext, node: TextNode) {
   trace(`#walkToText`, context, node);

@@ -1,11 +1,11 @@
 const assert = require("assert");
-import { trace } from "../util/tracer";
 import { FigmaContext } from "../context";
-import { isBlendMixin } from "../util/type_guards";
-import { walkForMask } from "./modifiers/mask";
-import { walkForClipShape } from "./modifiers/clipShape";
-import { walkForFixedFrame } from "./modifiers/frame";
-import { walkForPosition } from "./modifiers/position";
+import { trace } from "../../util/tracer";
+import { isBlendMixin } from "../../util/type_guards";
+import { walkForMask } from "../modifiers/mask";
+import { walkForClipShape } from "../modifiers/clipShape";
+import { walkForFixedFrame } from "../modifiers/frame";
+import { walkForPosition } from "../modifiers/position";
 import { walk } from "../entrypoint";
 
 export function walkToGroup(context: FigmaContext, node: GroupNode) {
