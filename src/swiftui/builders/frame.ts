@@ -5,10 +5,10 @@ export function walkToFrame(context: BuildContext, frame: FrameModifier) {
   const maximumFrameArguments: string[] = [];
   if (frame.maxWidth != null || frame.maxHeight != null) {
     if (frame.maxWidth != null) {
-      maximumFrameArguments.push(`maxWidth: .ininify`);
+      maximumFrameArguments.push(`maxWidth: .infinity`);
     }
     if (frame.maxHeight != null) {
-      maximumFrameArguments.push(`maxHeight: .ininify`);
+      maximumFrameArguments.push(`maxHeight: .infinity`);
     }
   }
   const fixedFrameArguments: string[] = [];
@@ -22,9 +22,9 @@ export function walkToFrame(context: BuildContext, frame: FrameModifier) {
   }
   if (frame.alignment != "center") {
     if (maximumFrameArguments.length > 0) {
-      maximumFrameArguments.push(`alignment: ${frame.alignment})`);
+      maximumFrameArguments.push(`alignment: .${frame.alignment})`);
     } else if (fixedFrameArguments.length > 0) {
-      fixedFrameArguments.push(`alignment: ${frame.alignment})`);
+      fixedFrameArguments.push(`alignment: .${frame.alignment})`);
     }
   }
 

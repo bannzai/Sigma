@@ -9,7 +9,7 @@ export function walkToView(
 ) {
   if (view.type === "VStack") {
     context.add(
-      `VStack(alignment: ${view.alignment}, spacing: ${view.spacing}) {`
+      `VStack(alignment: .${view.alignment}, spacing: ${view.spacing}) {`
     );
     context.nest();
     view.children.forEach((e) => {
@@ -19,7 +19,7 @@ export function walkToView(
     context.add("}");
   } else if (view.type === "HStack") {
     context.add(
-      `HStack(alignment: ${view.alignment}, spacing: ${view.spacing}) {`
+      `HStack(alignment: .${view.alignment}, spacing: ${view.spacing}) {`
     );
     context.nest();
     view.children.forEach((e) => {
