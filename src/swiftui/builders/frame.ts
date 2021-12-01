@@ -22,9 +22,9 @@ export function walkToFrame(context: BuildContext, frame: FrameModifier) {
   }
   if (frame.alignment != "center") {
     if (maximumFrameArguments.length > 0) {
-      maximumFrameArguments.push(`alignment: .${frame.alignment})`);
+      maximumFrameArguments.push(`alignment: .${frame.alignment}`);
     } else if (fixedFrameArguments.length > 0) {
-      fixedFrameArguments.push(`alignment: .${frame.alignment})`);
+      fixedFrameArguments.push(`alignment: .${frame.alignment}`);
     }
   }
 
