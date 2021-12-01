@@ -1,7 +1,7 @@
 import { trace } from "../util/tracer";
 import { FigmaContext } from "./context";
 import { walkForImage } from "../swiftui/view/image";
-import { walkForFixedFrame } from "./modifiers/frame/frame";
+import { walkForFixedFrame } from "./modifiers/frame";
 import { walkForBorder } from "./modifiers/border";
 import { walkForPosition } from "./modifiers/position";
 import { walkForFixedSpacer } from "../swiftui/view/spacer";

@@ -4,7 +4,7 @@ import { FigmaContext } from "./context";
 import { isBlendMixin } from "../util/type_guards";
 import { walkForMask } from "./modifiers/mask";
 import { walkForClipShape } from "./modifiers/clipShape";
-import { walkForFixedFrame } from "./modifiers/frame/frame";
+import { walkForFixedFrame } from "./modifiers/frame";
 import { walkForPosition } from "./modifiers/position";
 import { walk } from "./entrypoint";
 
