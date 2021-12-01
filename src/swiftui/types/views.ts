@@ -2,6 +2,7 @@ import { ImageModifier } from "./imageModifier";
 import { Modifier, SwiftUIViewModifier } from "./modifiers";
 import { SwiftUITextModifier, TextModifier } from "./textModifier";
 import { ShapeModifier, SwiftUIViewShapeModifier } from "./shapeModifier";
+import { Shape } from "./shape";
 
 export type SwiftUIViewType =
   | VStack
@@ -46,7 +47,7 @@ export function isContainerType(args: any): args is View & ChildrenMixin {
   );
 }
 export interface ChildrenMixin {
-  children: { type: string }[];
+  children: (View | Shape)[];
 }
 
 export type Axis = "V" | "H" | "Z";
