@@ -1,11 +1,11 @@
 import { FigmaContext } from "../context";
-import { Color, Text } from "../../../types/views";
+import { Color, Text } from "../../types/views";
 import {
   FontTextModifier,
   FontWeightTextModifier,
   ForegorundTextModifier,
   NamedFontWeight,
-} from "../../../types/textModifier";
+} from "../../types/textModifier";
 
 export function walkForTextModifier(
   context: FigmaContext,

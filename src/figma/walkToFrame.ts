@@ -1,4 +1,4 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../util/tracer";
 import { FigmaContext } from "./context";
 import { walkForPadding } from "./modifiers/padding";
 import { adaptFrameModifierWithFrameNode } from "./modifiers/frame/frame";
@@ -14,7 +14,7 @@ import {
   View,
   VStack,
   ZStack,
-} from "../../types/views";
+} from "../types/views";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);

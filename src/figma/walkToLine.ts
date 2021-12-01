@@ -1,8 +1,8 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../util/tracer";
 import { FigmaContext } from "./context";
 import { walkForPosition } from "./modifiers/position";
-import { FrameModifier } from "../../types/modifiers";
-import { Divider, isAxisView } from "../../types/views";
+import { FrameModifier } from "../types/modifiers";
+import { Divider, isAxisView } from "../types/views";
 
 export function walkToLine(context: FigmaContext, node: LineNode) {
   trace(`#walkToLine`, context, node);

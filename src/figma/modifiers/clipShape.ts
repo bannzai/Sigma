@@ -1,6 +1,6 @@
 import { FigmaContext } from "../context";
-import { ClipShapeModifier } from "../../../types/modifiers";
-import { View } from "../../../types/views";
+import { ClipShapeModifier } from "../../types/modifiers";
+import { View } from "../../types/views";
 import { walk } from "../walk";
 
 export function walkForClipShape(

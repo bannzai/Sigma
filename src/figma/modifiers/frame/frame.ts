@@ -1,15 +1,15 @@
 const assert = require("assert");
 import { FigmaContext } from "../../context";
-import { FrameModifier } from "../../../../types/modifiers";
+import { FrameModifier } from "../../../types/modifiers";
 import {
   Alignment,
   FixedHeight,
   FixedWidth,
   MaxHeight,
   MaxWidth,
-} from "../../../../types/frameModifierTypes";
-import { View } from "../../../../types/views";
-import { trace } from "../../../../util/tracer";
+} from "../../../types/frameModifierTypes";
+import { View } from "../../../types/views";
+import { trace } from "../../../util/tracer";
 
 export function adaptFrameModifierWithFrameNode(
   context: FigmaContext,

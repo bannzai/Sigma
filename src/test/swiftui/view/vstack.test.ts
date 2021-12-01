@@ -1,5 +1,5 @@
-import { FigmaContext } from "../../../swiftui/figma/context";
-import { walk } from "../../../swiftui/figma/walk";
+import { FigmaContext } from "../../../figma/context";
+import { walk } from "../../../figma/walk";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 import { run } from "../../../run";

@@ -1,10 +1,10 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../util/tracer";
 import { FigmaContext } from "./context";
-import { walkForImage } from "../view/image";
+import { walkForImage } from "../swiftui/view/image";
 import { walkForFixedFrame } from "./modifiers/frame/frame";
 import { walkForBorder } from "./modifiers/border";
 import { walkForPosition } from "./modifiers/position";
-import { walkForFixedSpacer } from "../view/spacer";
+import { walkForFixedSpacer } from "../swiftui/view/spacer";
 import { walkForCornerRadius } from "./modifiers/cornerRadius";
 
 export function walkToRectangle(context: FigmaContext, node: RectangleNode) {

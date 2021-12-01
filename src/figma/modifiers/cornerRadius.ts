@@ -1,6 +1,6 @@
 import { FigmaContext } from "../context";
-import { CornerRadiusModifier } from "../../../types/modifiers";
-import { View } from "../../../types/views";
+import { CornerRadiusModifier } from "../../types/modifiers";
+import { View } from "../../types/views";
 
 export function walkForCornerRadius(
   context: FigmaContext,
