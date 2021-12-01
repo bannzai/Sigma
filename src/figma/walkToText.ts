@@ -1,6 +1,6 @@
 import { trace } from "../util/tracer";
 import { FigmaContext } from "./context";
-import { walkForTextModifier } from "./modifiers/text";
+import { walkForTextModifier } from "./modifiers/textModifier";
 import { adaptFrameModifierWithFrameNode } from "./modifiers/frame/frame";
 import { Text } from "../types/views";
 
