@@ -62,6 +62,6 @@ HStack(alignment: .top, spacing: 10) {
 }
 .padding(.all, 20)
 `;
-    expect(hstack).toEqual(code.slice("\n".length));
+    expect(run(hstack)).toEqual(code.slice("\n".length));
   });
 });
