@@ -1,4 +1,4 @@
-import { trace } from "../util/tracer";
+import { trace } from "../../util/tracer";
 import { FigmaContext } from "../context";
 import { walkForTextModifier } from "./modifiers/text";
 import { adaptFrameModifierWithFrameNode } from "./modifiers/frame/frame";

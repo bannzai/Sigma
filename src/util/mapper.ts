@@ -1,4 +1,4 @@
-import { Color } from "../../types/views";
+import { Color } from "../types/views";
 
 export function mappedSwiftUIColor(color: Color): string {
   if (color.opacity != null && color.opacity !== 1) {

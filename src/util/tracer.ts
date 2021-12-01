@@ -1,4 +1,4 @@
-import { FigmaContext } from "../context";
+import { FigmaContext } from "../swiftui/context";
 
 export function trace(
   prefix: string = "",
