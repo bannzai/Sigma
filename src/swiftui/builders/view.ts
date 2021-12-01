@@ -11,23 +11,29 @@ export function walkToView(
     context.add(
       `VStack(alignment: .${view.alignment}, spacing: ${view.spacing}) {`
     );
+    context.nest();
     view.children.forEach((e) => {
       walk(context, e);
     });
+    context.unnest();
     context.add("}");
   } else if (view.type === "HStack") {
     context.add(
       `HStack(alignment: .${view.alignment}, spacing: ${view.spacing}) {`
     );
+    context.nest();
     view.children.forEach((e) => {
       walk(context, e);
     });
+    context.unnest();
     context.add("}");
   } else if (view.type === "ZStack") {
     context.add(`ZStack {`);
+    context.nest();
     view.children.forEach((e) => {
       walk(context, e);
     });
+    context.unnest();
     context.add("}");
   } else if (view.type === "Button") {
     context.add(`Button(action: { /* TODO */, label: {`);
@@ -50,9 +56,7 @@ export function walkToView(
     const _: never = view;
   }
 
-  context.nest();
   view.modifiers.forEach((e) => {
     walk(context, e);
   });
-  context.unnest();
 }
