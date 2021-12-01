@@ -6,7 +6,7 @@ import { walkForMask } from "./modifiers/mask";
 import { walkForClipShape } from "./modifiers/clipShape";
 import { walkForFixedFrame } from "./modifiers/frame";
 import { walkForPosition } from "./modifiers/position";
-import { walk } from "./entrypoint";
+import { walk } from "../entrypoint";
 
 export function walkToGroup(context: FigmaContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
