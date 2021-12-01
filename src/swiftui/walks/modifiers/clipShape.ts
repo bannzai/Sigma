@@ -1,4 +1,4 @@
-import { FigmaContext } from "../../context";
+import { FigmaContext } from "../context";
 import { ClipShapeModifier } from "../../../types/modifiers";
 import { View } from "../../../types/views";
 import { walk } from "../walk";

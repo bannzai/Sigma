@@ -1,5 +1,5 @@
 import { trace } from "../../util/tracer";
-import { FigmaContext } from "../context";
+import { FigmaContext } from "./context";
 import { walkForPosition } from "./modifiers/position";
 import { FrameModifier } from "../../types/modifiers";
 import { Divider, isAxisView } from "../../types/views";

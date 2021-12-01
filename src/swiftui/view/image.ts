@@ -1,4 +1,4 @@
-import { FigmaContext } from "../context";
+import { FigmaContext } from "../walks/context";
 import { ImageModifier } from "../../types/imageModifier";
 import { Image } from "../../types/views";
 

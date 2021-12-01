@@ -1,6 +1,6 @@
 const assert = require("assert");
 import { trace } from "../../util/tracer";
-import { FigmaContext } from "../context";
+import { FigmaContext } from "./context";
 import { isBlendMixin } from "../../util/type_guards";
 import { walkForMask } from "./modifiers/mask";
 import { walkForClipShape } from "./modifiers/clipShape";

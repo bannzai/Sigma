@@ -1,5 +1,5 @@
 const assert = require("assert");
-import { FigmaContext } from "../context";
+import { FigmaContext } from "./context";
 import { walkToComponent } from "./walkToComponent";
 import { walkToEllipse } from "./walkToEllipse";
 import { walkToGroup } from "./walkToGroup";

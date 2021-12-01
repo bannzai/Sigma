@@ -1,4 +1,4 @@
-import { FigmaContext } from "../../context";
+import { FigmaContext } from "../context";
 import { Color, Text } from "../../../types/views";
 import {
   FontTextModifier,

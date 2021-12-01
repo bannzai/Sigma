@@ -1,5 +1,5 @@
 import { trace } from "../../util/tracer";
-import { FigmaContext } from "../context";
+import { FigmaContext } from "./context";
 import { walkForImage } from "../view/image";
 import { walkForFixedFrame } from "./modifiers/frame/frame";
 import { walkForBorder } from "./modifiers/border";

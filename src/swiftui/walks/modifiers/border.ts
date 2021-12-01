@@ -1,5 +1,5 @@
 const assert = require("assert");
-import { FigmaContext } from "../../context";
+import { FigmaContext } from "../context";
 import { OverlayModifier } from "../../../types/modifiers";
 import { StrokeModifier } from "../../../types/shapeModifier";
 import { Rectangle, RoundedRectangle } from "../../../types/shape";

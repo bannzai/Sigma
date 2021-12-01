@@ -1,4 +1,4 @@
-import { FigmaContext } from "../../context";
+import { FigmaContext } from "../context";
 import { PaddingModifier } from "../../../types/modifiers";
 import { View } from "../../../types/views";
 
