@@ -6,5 +6,5 @@ import { walkForPadding } from "./modifiers/padding";
 export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {
   trace(`#walkToComponent`, context, node);
 
-  walkForPadding(context, node);
+  walkForPadding(context, context.findBy(node), node);
 }

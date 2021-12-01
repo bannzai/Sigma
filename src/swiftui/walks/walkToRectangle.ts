@@ -26,7 +26,7 @@ export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
     }
 
     walkForCornerRadius(context, context.findBy(node), node);
-    walkForBorder(context, node);
+    walkForBorder(context, context.findBy(node), node);
     walkForPosition(context, context.findBy(node), node);
   }
 }

@@ -3,9 +3,11 @@ import { SwiftUIContext } from "../../context";
 import { OverlayModifier } from "../../types/modifiers";
 import { StrokeModifier } from "../../types/shapeModifier";
 import { Rectangle, RoundedRectangle } from "../../types/shape";
+import { View } from "../../types/views";
 
 export function walkForBorder(
   context: SwiftUIContext,
+  view: View,
   node: MinimalStrokesMixin & CornerMixin & SceneNode
 ) {
   const { strokes, strokeAlign, strokeWeight, cornerRadius } = node;
@@ -42,7 +44,7 @@ export function walkForBorder(
                 };
               })(),
             };
-            context.adapt(overlay);
+            view.modifiers.push(overlay);
           } else {
             const overlay: OverlayModifier = {
               type: "overlay",
@@ -72,7 +74,7 @@ export function walkForBorder(
                 };
               })(),
             };
-            context.adapt(overlay);
+            view.modifiers.push(overlay);
           }
         }
       } else {
