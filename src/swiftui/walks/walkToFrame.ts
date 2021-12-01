@@ -185,14 +185,14 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
           }
         }
       }
-
-      walkForPadding(context, containerReference, node);
-      adaptFrameModifierWithFrameNode(context, containerReference, node);
-      walkForBackgroundColor(context, containerReference, node);
-      walkForCornerRadius(context, containerReference, node);
-      walkForPosition(context, containerReference, node);
-
-      context.unnestContainer();
     }
+
+    walkForPadding(context, containerReference, node);
+    adaptFrameModifierWithFrameNode(context, containerReference, node);
+    walkForBackgroundColor(context, containerReference, node);
+    walkForCornerRadius(context, containerReference, node);
+    walkForPosition(context, containerReference, node);
+
+    context.unnestContainer();
   }
 }
