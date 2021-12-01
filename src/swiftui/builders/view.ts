@@ -36,12 +36,13 @@ export function walkToView(
     context.unnest();
     context.add("}");
   } else if (view.type === "Button") {
-    context.add(`Button(action: { /* TODO */, label: {`);
+    context.add(`Button(action: { /* TODO */ }) {`);
     context.nest();
     view.children.forEach((e) => {
       walk(context, e);
     });
     context.unnest();
+    context.add("}");
   } else if (view.type === "Color") {
     context.add(`${mappedSwiftUIColor(view)}`);
   } else if (view.type === "Image") {
