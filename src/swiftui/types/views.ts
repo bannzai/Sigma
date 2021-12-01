@@ -32,22 +32,27 @@ export function isSwiftUIViewType(args: {
   return (swiftUIViewType as Readonly<string[]>).includes(args.type);
 }
 export interface View {
-  readonly type: typeof swiftUIViewType[number];
+  readonly type: string;
   modifiers: { type: string }[];
   readonly parent: (View & ChildrenMixin) | null;
 
   readonly node: SceneNode | null;
 }
+export interface PrimitiveView extends View {
+  readonly type: typeof swiftUIViewType[number];
+}
 
-export function isContainerType(args: any): args is View & ChildrenMixin {
+export function isContainerType(
+  args: any
+): args is PrimitiveView & ChildrenMixin {
   return (
     (args as ChildrenMixin).children !== undefined &&
-    (args as View).type !== undefined &&
+    (args as PrimitiveView).type !== undefined &&
     swiftUIViewType.includes(args.type)
   );
 }
 export interface ChildrenMixin {
-  children: (View | Shape)[];
+  children: (PrimitiveView | Shape)[];
 }
 
 export type Axis = "V" | "H" | "Z";
@@ -56,7 +61,7 @@ export interface AxisMixin {
 }
 export const isAxisView = (args: any): args is AxisMixin => "axis" in args;
 
-export interface VStack extends View, ChildrenMixin, AxisMixin {
+export interface VStack extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "VStack";
   readonly axis: "V";
 
@@ -64,7 +69,7 @@ export interface VStack extends View, ChildrenMixin, AxisMixin {
   spacing: number;
 }
 
-export interface HStack extends View, ChildrenMixin, AxisMixin {
+export interface HStack extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "HStack";
   readonly axis: "H";
 
@@ -72,23 +77,23 @@ export interface HStack extends View, ChildrenMixin, AxisMixin {
   spacing: number;
 }
 
-export interface ZStack extends View, ChildrenMixin, AxisMixin {
+export interface ZStack extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "ZStack";
   readonly axis: "Z";
 }
 
-export interface Button extends View, ChildrenMixin {
+export interface Button extends PrimitiveView, ChildrenMixin {
   readonly type: "Button";
 }
 
-export interface Text extends View {
+export interface Text extends PrimitiveView {
   readonly type: "Text";
 
   readonly text: string;
   readonly multipleLineSyntax: boolean;
 }
 
-export interface Spacer extends View {
+export interface Spacer extends PrimitiveView {
   readonly type: "Spacer";
 }
 
@@ -101,12 +106,12 @@ export interface Color {
   opacity?: number;
 }
 
-export interface Image extends View {
+export interface Image extends PrimitiveView {
   readonly type: "Image";
 
   name: string;
 }
 
-export interface Divider extends View {
+export interface Divider extends PrimitiveView {
   readonly type: "Divider";
 }
