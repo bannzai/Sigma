@@ -4,7 +4,7 @@ import { Shape } from "./types/shape";
 import { ChildrenMixin, isContainerType, View } from "./types/views";
 
 export class SwiftUIContext {
-  root!: View | Shape;
+  root!: View;
   containerHistories: (View & ChildrenMixin)[] = [];
 
   get container(): (View & ChildrenMixin) | null {
@@ -24,7 +24,7 @@ export class SwiftUIContext {
     return this.containerHistories.pop() ?? null;
   }
 
-  addChild(view: View | Shape) {
+  addChild(view: View) {
     if (this.root == null) {
       this.root = view;
     } else {
@@ -32,7 +32,7 @@ export class SwiftUIContext {
     }
   }
 
-  findBy(target: SceneNode): View | Shape {
+  findBy(target: SceneNode): View {
     const root = this.root;
 
     assert(root != null);
@@ -43,7 +43,7 @@ export class SwiftUIContext {
     return this._findBy(root, target)!;
   }
 
-  _findBy(view: View | Shape, target: SceneNode): View | Shape | null {
+  _findBy(view: View, target: SceneNode): View | null {
     if (isContainerType(view)) {
       for (const child of view.children) {
         if (child.node?.id === target.id) {

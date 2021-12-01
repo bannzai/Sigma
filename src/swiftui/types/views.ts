@@ -52,7 +52,7 @@ export function isContainerType(
   );
 }
 export interface ChildrenMixin {
-  children: (PrimitiveView | Shape)[];
+  children: PrimitiveView[];
 }
 
 export type Axis = "V" | "H" | "Z";

@@ -9,7 +9,7 @@ export function isSwiftUIViewShape(args: {
 }): args is SwiftUIViewShape {
   return (swiftUIShapeType as Readonly<string[]>).includes(args.type);
 }
-export interface Shape {
+export interface Shape extends View {
   readonly type: typeof swiftUIShapeType[number];
   modifiers: (SwiftUIViewModifier | SwiftUIViewShapeModifier)[];
   readonly parent: (View & ChildrenMixin) | null;
