@@ -9,12 +9,15 @@ import {
   MaxWidth,
 } from "../../../types/frameModifierTypes";
 import { View } from "../../../types/views";
+import { trace } from "../../../util/tracer";
 
 export function adaptFrameModifierWithFrameNode(
   context: SwiftUIContext,
   view: View,
   node: LayoutMixin & SceneNode
 ) {
+  trace("adaptFrameModifierWithFrameNode", context, node);
+
   let parentFrameNode: FrameNode | null;
   if (node.parent?.type === "FRAME") {
     parentFrameNode = node.parent;

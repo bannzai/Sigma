@@ -1,7 +1,7 @@
 const assert = require("assert");
 import { SwiftUIContext } from "../../context";
 import { PositionModifier } from "../../types/modifiers";
-import { View } from "../../types/views";
+import { isAxisView, View } from "../../types/views";
 
 export function walkForPosition(
   context: SwiftUIContext,
@@ -12,6 +12,13 @@ export function walkForPosition(
     return;
   }
   if (context.root.node?.id === node.id) {
+    return;
+  }
+  if (
+    view.parent == null ||
+    !isAxisView(view.parent) ||
+    view.parent.axis !== "Z"
+  ) {
     return;
   }
 
