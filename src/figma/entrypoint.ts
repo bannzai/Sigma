@@ -1,13 +1,13 @@
 const assert = require("assert");
 import { FigmaContext } from "./context";
-import { walkToComponent } from "./node/componentNode";
-import { walkToEllipse } from "./node/ellipseNode";
-import { walkToGroup } from "./node/groupNode";
-import { walkToLine } from "./node/lineNode";
-import { walkToRectangle } from "./node/rectangleNode";
-import { walkToShapeWithText } from "./node/shapeWithTextNode";
-import { walkToText } from "./node/textNode";
-import { walkToFrame } from "./node/frameNode";
+import { walkToComponent } from "./componentNode";
+import { walkToEllipse } from "./ellipseNode";
+import { walkToGroup } from "./groupNode";
+import { walkToLine } from "./lineNode";
+import { walkToRectangle } from "./rectangleNode";
+import { walkToShapeWithText } from "./shapeWithTextNode";
+import { walkToText } from "./textNode";
+import { walkToFrame } from "./frameNode";
 
 export function walk(context: FigmaContext, node: SceneNode) {
   // trace(`#walk`, context, node);

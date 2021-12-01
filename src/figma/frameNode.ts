@@ -5,7 +5,7 @@ import { adaptFrameModifierWithFrameNode } from "./modifiers/frame";
 import { walkForBackgroundColor } from "./modifiers/backgroundColor";
 import { walkForPosition } from "./modifiers/position";
 import { walkForCornerRadius } from "./modifiers/cornerRadius";
-import { walk } from "../entrypoint";
+import { walk } from "./entrypoint";
 import {
   Button,
   ChildrenMixin,

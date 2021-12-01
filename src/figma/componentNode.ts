@@ -1,6 +1,6 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../util/tracer";
 import { FigmaContext } from "./context";
-import { walkForPadding } from "../modifiers/padding";
+import { walkForPadding } from "./modifiers/padding";
 
 
 export function walkToComponent(context: FigmaContext, node: ComponentNode) {
