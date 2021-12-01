@@ -1,7 +1,7 @@
 import { FigmaContext } from "../context";
 import { MaskModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
-import { walk } from "../walk";
+import { walk } from "../entrypoint";
 
 export function walkForMask(
   context: FigmaContext,

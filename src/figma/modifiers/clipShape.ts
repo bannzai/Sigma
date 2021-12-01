@@ -1,7 +1,7 @@
 import { FigmaContext } from "../context";
 import { ClipShapeModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
-import { walk } from "../walk";
+import { walk } from "../entrypoint";
 
 export function walkForClipShape(
   context: FigmaContext,

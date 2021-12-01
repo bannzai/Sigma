@@ -1,5 +1,5 @@
 import { FigmaContext } from "../../../figma/context";
-import { walk } from "../../../figma/walk";
+import { walk } from "../../../figma/entrypoint";
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 import { run } from "../../../run";
