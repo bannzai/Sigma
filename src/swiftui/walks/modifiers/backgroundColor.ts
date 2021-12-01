@@ -1,9 +1,10 @@
 import { SwiftUIContext } from "../../context";
-import { Color } from "../../types/views";
+import { Color, View } from "../../types/views";
 import { BackgroundModifier } from "../../types/modifiers";
 
 export function walkForBackgroundColor(
   context: SwiftUIContext,
+  view: View,
   node: MinimalFillsMixin & BaseNode
 ) {
   if (node.fills !== figma.mixed) {
@@ -21,7 +22,7 @@ export function walkForBackgroundColor(
           type: "background",
           view: colorView,
         };
-        context.adapt(background);
+        view.modifiers.push(background);
       } else {
         // TODO:
       }

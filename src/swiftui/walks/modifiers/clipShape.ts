@@ -1,9 +1,11 @@
 import { SwiftUIContext } from "../../context";
 import { ClipShapeModifier } from "../../types/modifiers";
+import { View } from "../../types/views";
 import { walk } from "../walk";
 
 export function walkForClipShape(
   context: SwiftUIContext,
+  view: View,
   maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode
 ) {
@@ -11,5 +13,5 @@ export function walkForClipShape(
     type: "clipShape",
     shapeNode: maskingNode,
   };
-  context.adapt(clipShape);
+  view.modifiers.push(clipShape);
 }

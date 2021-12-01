@@ -1,9 +1,11 @@
 const assert = require("assert");
 import { SwiftUIContext } from "../../context";
 import { PositionModifier } from "../../types/modifiers";
+import { View } from "../../types/views";
 
 export function walkForPosition(
   context: SwiftUIContext,
+  view: View,
   node: LayoutMixin & SceneNode
 ) {
   if (context.root == null) {
@@ -19,5 +21,5 @@ export function walkForPosition(
     x: x + width / 2,
     y: y + height / 2,
   };
-  context.adapt(position);
+  view.modifiers.push(position);
 }

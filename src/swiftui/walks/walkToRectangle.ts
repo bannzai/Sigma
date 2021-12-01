@@ -7,7 +7,6 @@ import { walkForPosition } from "./modifiers/position";
 import { walkForFixedSpacer } from "../view/spacer";
 import { walkForCornerRadius } from "./modifiers/cornerRadius";
 
-
 export function walkToRectangle(context: SwiftUIContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
   const { name, fills } = node;

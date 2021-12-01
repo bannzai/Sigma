@@ -29,5 +29,4 @@ export class SwiftUIContext {
       this.container?.children.push(view);
     }
   }
-  adapt(modifier: Modifier) {}
 }

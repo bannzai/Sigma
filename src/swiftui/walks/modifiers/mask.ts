@@ -1,9 +1,11 @@
 import { SwiftUIContext } from "../../context";
 import { MaskModifier } from "../../types/modifiers";
+import { View } from "../../types/views";
 import { walk } from "../walk";
 
 export function walkForMask(
   context: SwiftUIContext,
+  view: View,
   maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode
 ) {
@@ -11,5 +13,5 @@ export function walkForMask(
     type: "mask",
     shapeNode: maskingNode,
   };
-  context.adapt(modifier);
+  view.modifiers.push(modifier);
 }

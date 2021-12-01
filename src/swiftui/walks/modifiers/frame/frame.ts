@@ -5,13 +5,14 @@ import {
   Alignment,
   FixedHeight,
   FixedWidth,
-  FrameModifierArgument,
   MaxHeight,
   MaxWidth,
 } from "../../../types/frameModifierTypes";
+import { View } from "../../../types/views";
 
 export function adaptFrameModifierWithFrameNode(
   context: SwiftUIContext,
+  view: View,
   node: LayoutMixin & SceneNode
 ) {
   let parentFrameNode: FrameNode | null;
@@ -253,10 +254,13 @@ export function adaptFrameModifierWithFrameNode(
     frameModifier.height = fixedHeight.height;
   }
   frameModifier.alignment = alignment;
+
+  view.modifiers.push(frameModifier);
 }
 
 export function walkForFixedFrame(
   context: SwiftUIContext,
+  view: View,
   node: LayoutMixin & BaseNode
 ) {
   const { name, width, height, layoutAlign } = node;
@@ -284,7 +288,7 @@ export function walkForFixedFrame(
       height,
       alignment: "center",
     };
-    context.adapt(modifier);
+    view.modifiers.push(modifier);
   } else if (layoutAlign === "STRETCH") {
     assert(false, "unknown pattern");
   } else {

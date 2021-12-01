@@ -45,11 +45,11 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
     });
     context.unnestContainer();
 
-    walkForPadding(context, node);
-    walkForBackgroundColor(context, node);
-    walkForCornerRadius(context, node);
-    adaptFrameModifierWithFrameNode(context, node);
-    walkForPosition(context, node);
+    walkForPadding(context, button, node);
+    walkForBackgroundColor(context, button, node);
+    walkForCornerRadius(context, button, node);
+    adaptFrameModifierWithFrameNode(context, button, node);
+    walkForPosition(context, button, node);
   } else {
     let containerReference!: ChildrenMixin & View;
     if (layoutMode === "HORIZONTAL") {
@@ -186,11 +186,11 @@ export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
         }
       }
 
-      walkForPadding(context, node);
-      adaptFrameModifierWithFrameNode(context, node);
-      walkForBackgroundColor(context, node);
-      walkForCornerRadius(context, node);
-      walkForPosition(context, node);
+      walkForPadding(context, containerReference, node);
+      adaptFrameModifierWithFrameNode(context, containerReference, node);
+      walkForBackgroundColor(context, containerReference, node);
+      walkForCornerRadius(context, containerReference, node);
+      walkForPosition(context, containerReference, node);
 
       context.unnestContainer();
     }

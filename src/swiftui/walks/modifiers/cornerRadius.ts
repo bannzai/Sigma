@@ -1,8 +1,10 @@
 import { SwiftUIContext } from "../../context";
 import { CornerRadiusModifier } from "../../types/modifiers";
+import { View } from "../../types/views";
 
 export function walkForCornerRadius(
   context: SwiftUIContext,
+  view: View,
   node: CornerMixin & SceneNode
 ) {
   const { cornerRadius } = node;
@@ -12,7 +14,7 @@ export function walkForCornerRadius(
         type: "cornerRadius",
         cornerRadius,
       };
-      context.adapt(modifier);
+      view.modifiers.push(modifier);
     }
   }
 }
