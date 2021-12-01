@@ -1,8 +1,8 @@
 const assert = require("assert");
 import { BuildContext } from "./builders/context";
 import { walk as walkToSwiftUI } from "./builders/entrypoint";
-import { FigmaContext } from "./figma/context";
-import { walk as walkToFigma } from "./figma/entrypoint";
+import { FigmaContext } from "./reader/context";
+import { walk as walkToFigma } from "./reader/entrypoint";
 
 export const run = (root: SceneNode): string => {
   const figmaContext = new FigmaContext();
