@@ -1,4 +1,4 @@
-import { FigmaContext } from "../walks/context";
+import { FigmaContext } from "../figma/context";
 import { FrameModifier } from "../../types/modifiers";
 import { isAxisView } from "../../types/views";
 
