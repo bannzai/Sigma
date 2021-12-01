@@ -1,4 +1,4 @@
-import { ChildrenMixin, isContainerType, View } from "./types/views";
+import { ChildrenMixin, isContainerType, View } from "../types/views";
 
 export class FigmaContext {
   root!: View;

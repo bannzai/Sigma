@@ -1,4 +1,4 @@
-import { OverlayModifier } from "../swiftui/types/modifiers";
+import { OverlayModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
 import { walkToShape } from "./shape";
 

@@ -1,6 +1,6 @@
 import { FigmaContext } from "../context";
-import { ImageModifier } from "../types/imageModifier";
-import { Image } from "../types/views";
+import { ImageModifier } from "../../types/imageModifier";
+import { Image } from "../../types/views";
 
 export type ImageNode = MinimalFillsMixin & SceneNode & LayoutMixin;
 

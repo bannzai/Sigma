@@ -1,5 +1,5 @@
 import { BuildContext } from "./context";
-import { FrameModifier } from "../swiftui/types/modifiers";
+import { FrameModifier } from "../types/modifiers";
 
 export function walkToFrame(context: BuildContext, frame: FrameModifier) {
   const maximumFrameArguments: string[] = [];

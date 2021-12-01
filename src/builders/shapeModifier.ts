@@ -1,4 +1,4 @@
-import { SwiftUIViewShapeModifier } from "../swiftui/types/shapeModifier";
+import { SwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { mappedSwiftUIColor } from "../swiftui/util/mapper";
 import { BuildContext } from "./context";
 

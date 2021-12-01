@@ -1,4 +1,4 @@
-import { ImageModifier } from "../swiftui/types/imageModifier";
+import { ImageModifier } from "../types/imageModifier";
 import { mappedSwiftUIColor } from "../swiftui/util/mapper";
 import { BuildContext } from "./context";
 

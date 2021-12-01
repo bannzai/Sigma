@@ -1,4 +1,4 @@
-import { SwiftUITextModifier } from "../swiftui/types/textModifier";
+import { SwiftUITextModifier } from "../types/textModifier";
 import { mappedSwiftUIColor } from "../swiftui/util/mapper";
 import { BuildContext } from "./context";
 

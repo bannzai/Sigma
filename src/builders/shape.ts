@@ -1,5 +1,5 @@
-import { isSwiftUIViewShapeModifier } from "../swiftui/types/shapeModifier";
-import { SwiftUIViewShape } from "../swiftui/types/shape";
+import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
+import { SwiftUIViewShape } from "../types/shape";
 import { BuildContext } from "./context";
 import { walk } from "./entrypoint";
 

@@ -1,6 +1,6 @@
 import { FigmaContext } from "../context";
-import { FrameModifier } from "../types/modifiers";
-import { isAxisView } from "../types/views";
+import { FrameModifier } from "../../types/modifiers";
+import { isAxisView } from "../../types/views";
 
 export function walkForFixedSpacer(
   context: FigmaContext,

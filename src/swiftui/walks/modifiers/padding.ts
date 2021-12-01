@@ -1,6 +1,6 @@
 import { FigmaContext } from "../../context";
-import { PaddingModifier } from "../../types/modifiers";
-import { View } from "../../types/views";
+import { PaddingModifier } from "../../../types/modifiers";
+import { View } from "../../../types/views";
 
 export function walkForPadding(
   context: FigmaContext,

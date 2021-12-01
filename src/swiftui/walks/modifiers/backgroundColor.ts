@@ -1,6 +1,6 @@
 import { FigmaContext } from "../../context";
-import { Color, View } from "../../types/views";
-import { BackgroundModifier } from "../../types/modifiers";
+import { Color, View } from "../../../types/views";
+import { BackgroundModifier } from "../../../types/modifiers";
 
 export function walkForBackgroundColor(
   context: FigmaContext,

@@ -14,7 +14,7 @@ import {
   View,
   VStack,
   ZStack,
-} from "../types/views";
+} from "../../types/views";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
