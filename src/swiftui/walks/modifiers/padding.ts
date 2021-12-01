@@ -1,9 +1,9 @@
-import { SwiftUIContext } from "../../context";
+import { FigmaContext } from "../../context";
 import { PaddingModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 
 export function walkForPadding(
-  context: SwiftUIContext,
+  context: FigmaContext,
   view: View,
   node: BaseFrameMixin
 ) {

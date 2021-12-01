@@ -1,5 +1,5 @@
 const assert = require("assert");
-import { SwiftUIContext } from "../../../context";
+import { FigmaContext } from "../../../context";
 import { FrameModifier } from "../../../types/modifiers";
 import {
   Alignment,
@@ -12,7 +12,7 @@ import { View } from "../../../types/views";
 import { trace } from "../../../util/tracer";
 
 export function adaptFrameModifierWithFrameNode(
-  context: SwiftUIContext,
+  context: FigmaContext,
   view: View,
   node: LayoutMixin & SceneNode
 ) {
@@ -262,7 +262,7 @@ export function adaptFrameModifierWithFrameNode(
 }
 
 export function walkForFixedFrame(
-  context: SwiftUIContext,
+  context: FigmaContext,
   view: View,
   node: LayoutMixin & BaseNode
 ) {

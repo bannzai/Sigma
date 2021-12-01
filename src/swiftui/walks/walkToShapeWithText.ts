@@ -1,9 +1,9 @@
 import { trace } from "../util/tracer";
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 
 
 export function walkToShapeWithText(
-  context: SwiftUIContext,
+  context: FigmaContext,
   node: ShapeWithTextNode
 ) {
   trace(`#walkToShapeWithText`, context, node);

@@ -1,6 +1,6 @@
 const assert = require("assert");
 import { trace } from "../util/tracer";
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 import { isBlendMixin } from "../util/type_guards";
 import { walkForMask } from "./modifiers/mask";
 import { walkForClipShape } from "./modifiers/clipShape";
@@ -8,7 +8,7 @@ import { walkForFixedFrame } from "./modifiers/frame/frame";
 import { walkForPosition } from "./modifiers/position";
 import { walk } from "./walk";
 
-export function walkToGroup(context: SwiftUIContext, node: GroupNode) {
+export function walkToGroup(context: FigmaContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
 
   const isContainMaskNode = node.children.some(

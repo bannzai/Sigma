@@ -1,10 +1,10 @@
 import { trace } from "../util/tracer";
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 import { walkForPosition } from "./modifiers/position";
 import { FrameModifier } from "../types/modifiers";
 import { Divider, isAxisView } from "../types/views";
 
-export function walkToLine(context: SwiftUIContext, node: LineNode) {
+export function walkToLine(context: FigmaContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
 
   const frame: FrameModifier = {

@@ -1,10 +1,10 @@
-import { SwiftUIContext } from "../../context";
+import { FigmaContext } from "../../context";
 import { ClipShapeModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 import { walk } from "../walk";
 
 export function walkForClipShape(
-  context: SwiftUIContext,
+  context: FigmaContext,
   view: View,
   maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode

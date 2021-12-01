@@ -1,8 +1,8 @@
 import { trace } from "../util/tracer";
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 import { Ellipse } from "../types/shape";
 
-export function walkToEllipse(context: SwiftUIContext, node: EllipseNode) {
+export function walkToEllipse(context: FigmaContext, node: EllipseNode) {
   trace(`#walkToEllipse`, context, node);
   const ellipse: Ellipse = {
     type: "Ellipse",

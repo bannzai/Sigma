@@ -1,10 +1,10 @@
-import { SwiftUIContext } from "../../context";
+import { FigmaContext } from "../../context";
 import { MaskModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 import { walk } from "../walk";
 
 export function walkForMask(
-  context: SwiftUIContext,
+  context: FigmaContext,
   view: View,
   maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode

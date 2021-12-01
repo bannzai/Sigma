@@ -1,5 +1,5 @@
 const assert = require("assert");
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 import { walkToComponent } from "./walkToComponent";
 import { walkToEllipse } from "./walkToEllipse";
 import { walkToGroup } from "./walkToGroup";
@@ -9,7 +9,7 @@ import { walkToShapeWithText } from "./walkToShapeWithText";
 import { walkToText } from "./walkToText";
 import { walkToFrame } from "./walkToFrame";
 
-export function walk(context: SwiftUIContext, node: SceneNode) {
+export function walk(context: FigmaContext, node: SceneNode) {
   // trace(`#walk`, context, node);
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip

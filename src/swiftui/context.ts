@@ -1,6 +1,6 @@
 import { ChildrenMixin, isContainerType, View } from "./types/views";
 
-export class SwiftUIContext {
+export class FigmaContext {
   root!: View;
   containerHistories: (View & ChildrenMixin)[] = [];
 

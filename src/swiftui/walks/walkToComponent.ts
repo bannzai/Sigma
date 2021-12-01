@@ -1,9 +1,9 @@
 import { trace } from "../util/tracer";
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 import { walkForPadding } from "./modifiers/padding";
 
 
-export function walkToComponent(context: SwiftUIContext, node: ComponentNode) {
+export function walkToComponent(context: FigmaContext, node: ComponentNode) {
   trace(`#walkToComponent`, context, node);
 
   walkForPadding(context, context.findBy(node), node);

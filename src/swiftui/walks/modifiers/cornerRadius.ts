@@ -1,9 +1,9 @@
-import { SwiftUIContext } from "../../context";
+import { FigmaContext } from "../../context";
 import { CornerRadiusModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 
 export function walkForCornerRadius(
-  context: SwiftUIContext,
+  context: FigmaContext,
   view: View,
   node: CornerMixin & SceneNode
 ) {

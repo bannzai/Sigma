@@ -1,10 +1,10 @@
 const assert = require("assert");
-import { SwiftUIContext } from "../../context";
+import { FigmaContext } from "../../context";
 import { PositionModifier } from "../../types/modifiers";
 import { isAxisView, View } from "../../types/views";
 
 export function walkForPosition(
-  context: SwiftUIContext,
+  context: FigmaContext,
   view: View,
   node: LayoutMixin & SceneNode
 ) {

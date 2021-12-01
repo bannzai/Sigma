@@ -1,8 +1,8 @@
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 
 export function trace(
   prefix: string = "",
-  context: SwiftUIContext,
+  context: FigmaContext,
   node: SceneNode
 ) {
   const { id, name, type } = node;

@@ -1,5 +1,5 @@
 import { trace } from "../util/tracer";
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 import { walkForPadding } from "./modifiers/padding";
 import { adaptFrameModifierWithFrameNode } from "./modifiers/frame/frame";
 import { walkForBackgroundColor } from "./modifiers/backgroundColor";
@@ -16,7 +16,7 @@ import {
   ZStack,
 } from "../types/views";
 
-export function walkToFrame(context: SwiftUIContext, node: FrameNode) {
+export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
 
   const {

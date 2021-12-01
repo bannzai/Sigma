@@ -1,10 +1,10 @@
 import { trace } from "../util/tracer";
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 import { walkForTextModifier } from "./modifiers/text";
 import { adaptFrameModifierWithFrameNode } from "./modifiers/frame/frame";
 import { Text } from "../types/views";
 
-export function walkToText(context: SwiftUIContext, node: TextNode) {
+export function walkToText(context: FigmaContext, node: TextNode) {
   trace(`#walkToText`, context, node);
   const { characters, fills } = node;
 

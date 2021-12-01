@@ -1,9 +1,9 @@
-import { SwiftUIContext } from "../context";
+import { FigmaContext } from "../context";
 import { FrameModifier } from "../types/modifiers";
 import { isAxisView } from "../types/views";
 
 export function walkForFixedSpacer(
-  context: SwiftUIContext,
+  context: FigmaContext,
   rectangle: RectangleNode
 ) {
   const { name, width, height, fills } = rectangle;
