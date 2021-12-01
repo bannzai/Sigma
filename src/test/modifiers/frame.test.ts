@@ -11,7 +11,7 @@ describe("#View.frame(_:)", () => {
   global.figma = figma;
 
   jest.mock(
-    "../../../../node_modules/@figma/plugin-typings/plugin-api.d.ts",
+    "../../../node_modules/@figma/plugin-typings/plugin-api.d.ts",
     () => {
       return {
         __esModule: true,
