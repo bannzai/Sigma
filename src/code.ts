@@ -1,21 +1,10 @@
-import { FakeRootView, SwiftUIContext } from "./swiftui/context";
-import { walk } from "./swiftui/walks/walk";
+import { run } from "./run";
 
-const run = async () => {
+const main = async () => {
   const root = figma.currentPage.selection[0];
-  const traversedContext = traversed(root);
-  print(traversedContext);
+  const code = run(root);
+  console.log(code);
   figma.closePlugin();
 };
 
-const traversed = (root: SceneNode): SwiftUIContext => {
-  const context = new SwiftUIContext();
-  walk(context, root);
-  return context;
-};
-
-const print = (context: SwiftUIContext) => {
-  // console.log(context.code);
-};
-
-run();
+main();
