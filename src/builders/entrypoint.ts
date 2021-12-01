@@ -1,16 +1,16 @@
 const assert = require("assert");
-import { isSwiftUIImageModifier } from "../types/imageModifier";
-import { isSwiftUIModifier, SwiftUIViewModifier } from "../types/modifiers";
-import { isSwiftUIViewShape, SwiftUIViewShape } from "../types/shape";
+import { isSwiftUIImageModifier } from "../swiftui/types/imageModifier";
+import { isSwiftUIModifier, SwiftUIViewModifier } from "../swiftui/types/modifiers";
+import { isSwiftUIViewShape, SwiftUIViewShape } from "../swiftui/types/shape";
 import {
   isSwiftUIViewShapeModifier,
   SwiftUIViewShapeModifier,
-} from "../types/shapeModifier";
+} from "../swiftui/types/shapeModifier";
 import {
   isSwiftUITextModifier,
   SwiftUITextModifier,
-} from "../types/textModifier";
-import { isSwiftUIViewType, SwiftUIViewType } from "../types/views";
+} from "../swiftui/types/textModifier";
+import { isSwiftUIViewType, SwiftUIViewType } from "../swiftui/types/views";
 import { BuildContext } from "./context";
 import { walkToImageModifier } from "./imageModifier";
 import { walkToModifier } from "./modifier";

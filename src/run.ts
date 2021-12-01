@@ -1,6 +1,6 @@
 const assert = require("assert");
-import { BuildContext } from "./swiftui/builders/context";
-import { walk as walkToSwiftUI } from "./swiftui/builders/entrypoint";
+import { BuildContext } from "./builders/context";
+import { walk as walkToSwiftUI } from "./builders/entrypoint";
 import { FigmaContext } from "./swiftui/context";
 import { walk as walkToFigma } from "./swiftui/walks/walk";
 

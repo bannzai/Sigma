@@ -1,5 +1,5 @@
-import { ImageModifier } from "../types/imageModifier";
-import { mappedSwiftUIColor } from "../util/mapper";
+import { ImageModifier } from "../swiftui/types/imageModifier";
+import { mappedSwiftUIColor } from "../swiftui/util/mapper";
 import { BuildContext } from "./context";
 
 export function walkToImageModifier(

@@ -1,5 +1,5 @@
-import { SwiftUITextModifier } from "../types/textModifier";
-import { mappedSwiftUIColor } from "../util/mapper";
+import { SwiftUITextModifier } from "../swiftui/types/textModifier";
+import { mappedSwiftUIColor } from "../swiftui/util/mapper";
 import { BuildContext } from "./context";
 
 export function walkToTextModifier(

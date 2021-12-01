@@ -1,4 +1,4 @@
-import { SwiftUIViewModifier } from "../types/modifiers";
+import { SwiftUIViewModifier } from "../swiftui/types/modifiers";
 import { BuildContext } from "./context";
 import { walkToPadding } from "./padding";
 import { walkToFrame } from "./frame";

@@ -1,5 +1,5 @@
-import { isContainerType, SwiftUIViewType, View } from "../types/views";
-import { mappedSwiftUIColor } from "../util/mapper";
+import { isContainerType, SwiftUIViewType, View } from "../swiftui/types/views";
+import { mappedSwiftUIColor } from "../swiftui/util/mapper";
 import { BuildContext } from "./context";
 import { walk } from "./entrypoint";
 
