@@ -46,7 +46,11 @@ export function walkToView(
   } else if (view.type === "Color") {
     context.add(`${mappedSwiftUIColor(view)}`);
   } else if (view.type === "Image") {
-    context.add(`Image("${view.name}")`);
+    if (view.name != null) {
+      context.add(`Image("${view.name}")`);
+    } else if (view.systemName != null) {
+      context.add(`Image(systemName: "${view.systemName}")`);
+    }
   } else if (view.type === "Text") {
     context.add(`Text("${view.text}")`);
   } else if (view.type === "Divider") {

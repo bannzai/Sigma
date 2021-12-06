@@ -122,19 +122,12 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       context.addChild(spacer);
     }
 
-    if (primaryAxisAlignItems === "SPACE_BETWEEN") {
-      const spacer: Spacer = {
-        type: "Spacer",
-        modifiers: [],
-        parent: containerReference,
-        node: null,
-      };
-      context.addChild(spacer);
-    }
-
-    children.forEach((child) => {
+    children.forEach((child, index) => {
       walk(context, child);
-      if (primaryAxisAlignItems === "SPACE_BETWEEN") {
+      if (
+        primaryAxisAlignItems === "SPACE_BETWEEN" &&
+        index !== children.length - 1
+      ) {
         const spacer: Spacer = {
           type: "Spacer",
           modifiers: [],
