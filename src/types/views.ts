@@ -103,7 +103,8 @@ export interface Color {
 export interface Image extends PrimitiveView {
   readonly type: "Image";
 
-  name: string;
+  name?: string;
+  systemName?: string;
 }
 
 export interface Divider extends PrimitiveView {
