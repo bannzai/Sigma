@@ -33,4 +33,16 @@ Image("image")
 `;
     expect(run(rectangle)).toEqual(code.slice("\n".length));
   });
+
+  test("Image with special marker for SFSymbol", async () => {
+    const rectangle = figma.createRectangle();
+    rectangle.name = "SFSymbols#star";
+    rectangle.strokes = [];
+    rectangle.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: "" }];
+
+    const code = `
+Image(systemName: "star")
+`;
+    expect(run(rectangle)).toEqual(code.slice("\n".length));
+  });
 });
