@@ -8,9 +8,11 @@ import { walkToRectangle } from "./node/rectangleNode";
 import { walkToShapeWithText } from "./node/shapeWithTextNode";
 import { walkToText } from "./node/textNode";
 import { walkToFrame } from "./node/frameNode";
+import { trace } from "../util/tracer";
 
 export function walk(context: FigmaContext, node: SceneNode) {
-  // trace(`#walk`, context, node);
+  trace(`#walk`, context, node);
+
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip
   } else if (node.type === "CODE_BLOCK") {
