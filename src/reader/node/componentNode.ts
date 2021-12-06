@@ -4,9 +4,10 @@ import { walkForPadding } from "../modifiers/padding";
 
 export function walkToComponent(context: FigmaContext, node: ComponentNode) {
   trace(`#walkToComponent`, context, node);
-  const { documentationLinks } = node;
+  const { documentationLinks, remote } = node;
+  console.log(JSON.stringify({ documentationLinks, remote }));
 
-  if (documentationLinks.length === 0) {
+  if (documentationLinks.length === 0 || remote) {
     return;
   }
 
