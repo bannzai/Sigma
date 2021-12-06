@@ -1,45 +1,33 @@
 import { FigmaContext } from "../context";
-import { Text } from "../../types/views";
+import { View } from "../../types/views";
 import {
-  FontTextModifier,
-  FontWeightTextModifier,
   ForegorundTextModifier,
   NamedFontWeight,
 } from "../../types/textModifier";
 
-export function walkForTextModifier(
+export function walkForForegroundColor(
   context: FigmaContext,
-  node: TextNode,
-  text: Text
+  node: DefaultShapeMixin,
+  text: View
 ) {
-  if (node.textDecoration === "UNDERLINE") {
-    text.modifiers.push({ type: "underline" });
-  } else if (node.textDecoration === "STRIKETHROUGH") {
-    text.modifiers.push({ type: "strikethrough" });
-  }
+  if (node.fills !== figma.mixed) {
+    for (const fill of node.fills) {
+      if (fill.type === "SOLID") {
+        const { color, opacity } = fill;
+        const modifier: ForegorundTextModifier = {
+          type: "foregroundColor",
+          color: {
+            type: "Color",
+            red: color.r,
+            green: color.g,
+            blue: color.b,
+            opacity: opacity,
+          },
+        };
 
-  // NOTE: Sigma only supports single font member on Text
-  if (node.fontName !== figma.mixed && node.fontSize !== figma.mixed) {
-    const fontWeight = mappedFontWeight(node.fontName);
-    if (fontWeight != null) {
-      const modifier: FontWeightTextModifier = {
-        type: "fontWeight",
-        fontWeight: fontWeight,
-      };
-      text.modifiers.push(modifier);
+        text.modifiers.push(modifier);
+      }
     }
-
-    const fontSize = node.fontSize;
-    const modifier: FontTextModifier = {
-      type: "font",
-      namedType: "system",
-      size: node.fontSize,
-    };
-    text.modifiers.push(modifier);
-
-    // TOOD: Mapping to SwiftUI FontFamily
-    // const fontFamily = node.fontName.family;
-    // console.log(JSON.stringify({ fontFamily, fontSize }));
   }
 }
 
