@@ -49,7 +49,7 @@ export function walkToView(
     if (view.name != null) {
       context.add(`Image("${view.name}")`);
     } else if (view.systemName != null) {
-      context.add(`Image("${view.systemName}")`);
+      context.add(`Image(systemName: "${view.systemName}")`);
     }
   } else if (view.type === "Text") {
     context.add(`Text("${view.text}")`);

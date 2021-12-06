@@ -9,6 +9,7 @@ import { walkToShapeWithText } from "./node/shapeWithTextNode";
 import { walkToText } from "./node/textNode";
 import { walkToFrame } from "./node/frameNode";
 import { trace } from "../util/tracer";
+import { walkToStar } from "./node/starNode";
 
 export function walk(context: FigmaContext, node: SceneNode) {
   trace(`#walk`, context, node);
@@ -51,7 +52,7 @@ export function walk(context: FigmaContext, node: SceneNode) {
   } else if (node.type === "STAMP") {
     // NOTE: Skip
   } else if (node.type === "STAR") {
-    // TODO:
+    walkToStar(context, node);
   } else if (node.type === "STICKY") {
     // NOTE: Skip
   } else if (node.type === "TEXT") {
