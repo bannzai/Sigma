@@ -3,6 +3,7 @@ import { FigmaContext } from "../context";
 import { walkForTextModifier } from "../modifiers/textModifier";
 import { adaptFrameModifierWithFrameNode } from "../modifiers/frame";
 import { Image, Text } from "../../types/views";
+import { walkForForegroundColor } from "../modifiers/foregroundColor";
 
 export function walkToStar(context: FigmaContext, node: StarNode) {
   trace(`#walkToText`, context, node);
@@ -17,6 +18,7 @@ export function walkToStar(context: FigmaContext, node: StarNode) {
       node: node,
     };
     context.addChild(image);
+    walkForForegroundColor(context, node, image);
   } else if (fills !== figma.mixed) {
     const fill = fills[0];
     if (fill.type === "SOLID") {
@@ -28,6 +30,7 @@ export function walkToStar(context: FigmaContext, node: StarNode) {
         node: node,
       };
       context.addChild(image);
+      walkForForegroundColor(context, node, image);
     }
   }
 
