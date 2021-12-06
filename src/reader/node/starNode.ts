@@ -6,7 +6,7 @@ import { Image, Text } from "../../types/views";
 import { walkForForegroundColor } from "../modifiers/foregroundColor";
 
 export function walkToStar(context: FigmaContext, node: StarNode) {
-  trace(`#walkToText`, context, node);
+  trace(`#walkToStar`, context, node);
   const { fills, strokes } = node;
 
   if (strokes.length > 0) {
