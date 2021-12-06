@@ -33,6 +33,4 @@ export function walkToStar(context: FigmaContext, node: StarNode) {
       walkForForegroundColor(context, node, image);
     }
   }
-
-  adaptFrameModifierWithFrameNode(context, context.findBy(node), node);
 }

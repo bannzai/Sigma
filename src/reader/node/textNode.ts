@@ -53,6 +53,4 @@ export function walkToText(context: FigmaContext, node: TextNode) {
     walkForTextModifier(context, node, text);
     walkForForegroundColor(context, node, text);
   }
-
-  adaptFrameModifierWithFrameNode(context, context.findBy(node), node);
 }
