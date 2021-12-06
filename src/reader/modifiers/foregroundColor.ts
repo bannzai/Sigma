@@ -8,7 +8,7 @@ import {
 export function walkForForegroundColor(
   context: FigmaContext,
   node: DefaultShapeMixin,
-  text: View
+  view: View
 ) {
   if (node.fills !== figma.mixed) {
     for (const fill of node.fills) {
@@ -25,7 +25,7 @@ export function walkForForegroundColor(
           },
         };
 
-        text.modifiers.push(modifier);
+        view.modifiers.push(modifier);
       }
     }
   }

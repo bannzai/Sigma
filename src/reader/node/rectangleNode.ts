@@ -18,9 +18,6 @@ export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
       for (const fill of fills) {
         if (fill.type === "IMAGE") {
           walkForImage(context, fill, node);
-          if (fill.scaleMode === "FIT") {
-            walkForFixedFrame(context, context.findBy(node), node);
-          }
         }
       }
     }

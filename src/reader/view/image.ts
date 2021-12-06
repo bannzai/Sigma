@@ -1,8 +1,10 @@
 import { FigmaContext } from "../context";
 import { ImageModifier } from "../../types/imageModifier";
 import { Image } from "../../types/views";
+import { walkForForegroundColor } from "../modifiers/foregroundColor";
+import { walkForFixedFrame } from "../modifiers/frame";
 
-export type ImageNode = MinimalFillsMixin & SceneNode & LayoutMixin;
+export type ImageNode = DefaultShapeMixin & SceneNode;
 
 export function walkForImage(
   context: FigmaContext,
@@ -11,17 +13,48 @@ export function walkForImage(
 ) {
   const { name } = node;
 
-  let modifiers: ImageModifier[] = [];
-  if (fill.scaleMode === "FIT") {
-    modifiers.push({ type: "resizable" });
+  let image: Image;
+  if (name.startsWith("SFSymbols#")) {
+    const systemName = name.slice("SFSymbols#".length);
+    image = {
+      type: "Image",
+      systemName,
+      modifiers: [],
+      parent: context.container,
+      node: node,
+    };
+    context.addChild(image);
+  } else {
+    image = {
+      type: "Image",
+      name,
+      modifiers: [],
+      parent: context.container,
+      node: node,
+    };
+    context.addChild(image);
   }
+
+  if (fill.scaleMode === "FIT") {
+    image.modifiers.push({ type: "resizable" });
+    walkForFixedFrame(context, context.findBy(node), node);
+  }
+  walkForForegroundColor(context, node, image);
+}
+
+export function walkForSFSymbols(context: FigmaContext, node: ImageNode) {
+  const { name } = node;
+
+  const systemName = name.slice("SFSymbols#".length);
 
   const image: Image = {
     type: "Image",
-    name,
-    modifiers,
+    systemName,
+    modifiers: [],
     parent: context.container,
     node: node,
   };
   context.addChild(image);
+
+  walkForForegroundColor(context, node, image);
 }
