@@ -1,0 +1,111 @@
+* {
+  font-family: sans-serif;
+  color: #424347;
+  box-sizing: border-box;
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+input {
+  margin: 0;
+}
+
+.code {
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.settings {
+  padding: 20px;
+}
+
+.heading {
+  margin: 0;
+}
+
+.optionList {
+  display: flex;
+}
+
+.optionList > div:not(:last-child) {
+  margin-right: 8px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+}
+
+.option > label {
+  margin-left: 4px;
+}
+
+/* position this far outside of the window since it's used only for copy to clipboard functionality */
+.textareaForClipboard {
+  opacity: 0;
+  position: absolute;
+  top: -9999px;
+}
+
+.generatedCode {
+  background-color: #1d1d1d;
+  border-radius: 8px;
+  border: 2px #ddd solid;
+  padding: 16px 20px;
+  width: 100%;
+
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  color: #5497c3;
+  white-space: pre-wrap;
+
+  max-height: 240px;
+  overflow: auto;
+}
+
+.buttonLayout {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.copyButton {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: #16949f;
+  color: #fff;
+  cursor: pointer;
+}
+
+.defaultText {
+  color: #5497c3;
+}
+.variableName {
+  color: #cccca8;
+}
+.functionText {
+  color: #93c3ef;
+}
+.returnText {
+  color: #b586b2;
+}
+.expressionText {
+  color: #fff;
+}
+.typeText {
+  color: #4fccb0;
+}
+.tagText {
+  color: #777;
+}
+.tagNameText {
+  color: #4fccb0;
+}
+.stringText {
+  color: #cb9178;
+}
