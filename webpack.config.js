@@ -29,7 +29,7 @@ module.exports = (env, argv) => ({
   },
   resolve: { extensions: [".tsx", ".ts", ".jsx", ".js"] },
   output: {
-    filename: "code.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "lib"),
   },
   plugins: [
