@@ -15,6 +15,7 @@ import {
   VStack,
   ZStack,
 } from "../../types/views";
+import { adaptModifier } from "../modifiers/adaptModifier";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -45,11 +46,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     });
     context.unnestContainer();
 
-    walkForPadding(context, button, node);
-    walkForBackgroundColor(context, button, node);
-    walkForCornerRadius(context, button, node);
-    adaptFrameModifierWithFrameNode(context, button, node);
-    walkForPosition(context, button, node);
+    adaptModifier(context, button, node);
   } else {
     let containerReference!: ChildrenMixin & View;
     if (layoutMode === "HORIZONTAL") {
@@ -178,11 +175,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       }
     }
 
-    walkForPadding(context, containerReference, node);
-    adaptFrameModifierWithFrameNode(context, containerReference, node);
-    walkForBackgroundColor(context, containerReference, node);
-    walkForCornerRadius(context, containerReference, node);
-    walkForPosition(context, containerReference, node);
+    adaptModifier(context, containerReference, node);
 
     context.unnestContainer();
   }
