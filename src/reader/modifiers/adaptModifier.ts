@@ -3,7 +3,7 @@ import { FigmaContext } from "../context";
 import { walkForBackgroundColor } from "./backgroundColor";
 import { walkForCornerRadius } from "./cornerRadius";
 import { adaptFrameModifierWithFrameNode } from "./frame";
-import { walkForPadding as adaptPadding } from "./padding";
+import { adaptPadding } from "./padding";
 import { walkForPosition } from "./position";
 
 export function adaptModifier(

@@ -2,7 +2,7 @@ import { FigmaContext } from "../context";
 import { PaddingModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 
-export function walkForPadding(
+export function adaptPadding(
   context: FigmaContext,
   view: View,
   node: BaseFrameMixin
