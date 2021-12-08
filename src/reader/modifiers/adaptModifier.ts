@@ -18,6 +18,9 @@ export function adaptModifier(
     // NOTE: Unsupported
   } else if (node.type === "COMPONENT") {
     appendPadding(context, context.findBy(node), node);
+    appendBackgroundColor(context, view, node);
+    appendCornerRadius(context, view, node);
+    appendPosition(context, view, node);
   } else if (node.type === "COMPONENT_SET") {
     // NOTE: Skip. Because adapt modifier via node.type === 'COMPONENT'
   } else if (node.type === "CONNECTOR") {
