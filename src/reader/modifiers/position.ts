@@ -3,7 +3,7 @@ import { FigmaContext } from "../context";
 import { PositionModifier } from "../../types/modifiers";
 import { isAxisView, View } from "../../types/views";
 
-export function walkForPosition(
+export function appendPosition(
   context: FigmaContext,
   view: View,
   node: LayoutMixin & SceneNode

@@ -5,7 +5,7 @@ import { isBlendMixin } from "../../util/type_guards";
 import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
 import { walkForFixedFrame } from "../modifiers/frame";
-import { walkForPosition } from "../modifiers/position";
+import { appendPosition } from "../modifiers/position";
 import { traverse } from "../entrypoint";
 
 export function walkToGroup(context: FigmaContext, node: GroupNode) {
@@ -45,5 +45,5 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
       traverse(context, child);
     });
   }
-  walkForPosition(context, context.findBy(node), node);
+  appendPosition(context, context.findBy(node), node);
 }
