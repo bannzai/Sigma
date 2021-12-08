@@ -71,7 +71,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         })(),
         spacing: itemSpacing,
       };
-      context.nestContainer(hstack);
       containerReference = hstack;
     } else if (layoutMode === "VERTICAL") {
       const vstack: VStack = {
@@ -92,7 +91,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         })(),
         spacing: itemSpacing,
       };
-      context.nestContainer(vstack);
       containerReference = vstack;
     } else if (layoutMode === "NONE") {
       const zstack: ZStack = {
@@ -103,12 +101,12 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         node: node,
         children: [],
       };
-      context.nestContainer(zstack);
       containerReference = zstack;
     } else {
       const _: never = layoutMode;
     }
 
+    context.nestContainer(containerReference);
     if (
       (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
       primaryAxisAlignItems === "MAX"
