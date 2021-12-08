@@ -2,7 +2,7 @@ import { SwiftUIViewShape } from "../types/shape";
 import { BuildContext } from "./context";
 import { walk } from "./entrypoint";
 
-export function walkToShape(context: BuildContext, shape: SwiftUIViewShape) {
+export function buildShape(context: BuildContext, shape: SwiftUIViewShape) {
   if (shape.type === "Rectangle") {
     context.add(`Rectangle()`);
     context.nest();
