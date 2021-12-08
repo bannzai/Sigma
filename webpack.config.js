@@ -31,21 +31,16 @@ module.exports = (env, argv) => ({
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "lib"),
-    // Workaround: https://github.com/DustinJackson/html-webpack-inline-source-plugin/issues/57#issuecomment-603218420
-    publicPath: "",
   },
   plugins: [
     new webpack.ProvidePlugin({
       process: "process/browser",
     }),
     new HtmlWebpackPlugin({
-      inject: true,
       template: "./src/ui.html",
       filename: "ui.html",
       inlineSource: ".(js|css)$",
-      cache: false,
-      minify: false,
     }),
-    new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
+    new HtmlWebpackInlineSourcePlugin(),
   ],
 });
