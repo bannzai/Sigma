@@ -22,5 +22,7 @@ export function adaptModifier(
     appendBackgroundColor(context, view, node);
     appendCornerRadius(context, view, node);
     appendPosition(context, view, node);
+  } else if (node.type === "COMPONENT") {
+    appendPadding(context, context.findBy(node), node);
   }
 }
