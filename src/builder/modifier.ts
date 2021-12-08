@@ -1,28 +1,28 @@
 import { SwiftUIViewModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
-import { walkToPadding } from "./padding";
-import { walkToFrame } from "./frame";
-import { walkToBackground } from "./background";
-import { walkToOverlay } from "./overlay";
-import { walk } from "./entrypoint";
+import { buildPadding } from "./padding";
+import { buildFrame } from "./frame";
+import { buildBackground } from "./background";
+import { buildOverlay } from "./overlay";
+import { build } from "./entrypoint";
 
-export function walkToModifier(
+export function buildModifier(
   context: BuildContext,
   modifier: SwiftUIViewModifier
 ) {
   if (modifier.type === "frame") {
-    walkToFrame(context, modifier);
+    buildFrame(context, modifier);
   } else if (modifier.type === "padding") {
-    walkToPadding(context, modifier);
+    buildPadding(context, modifier);
   } else if (modifier.type === "background") {
-    walkToBackground(context, modifier);
+    buildBackground(context, modifier);
   } else if (modifier.type === "overlay") {
-    walkToOverlay(context, modifier);
+    buildOverlay(context, modifier);
   } else if (modifier.type === "clipShape") {
     context.add(`.clipShape(`, { withoutLineBreak: false });
     context.disableLineBreak();
     context.disableIndent();
-    walk(context, modifier.shapeNode);
+    build(context, modifier.shapeNode);
     context.enableLineBreak();
     context.add(`)`);
     context.enableIndent();
@@ -30,7 +30,7 @@ export function walkToModifier(
     context.add(`.mask(`, { withoutLineBreak: false });
     context.disableLineBreak();
     context.disableIndent();
-    walk(context, modifier.shapeNode);
+    build(context, modifier.shapeNode);
     context.enableLineBreak();
     context.enableIndent();
     context.add(`)`);

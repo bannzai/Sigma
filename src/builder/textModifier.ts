@@ -2,7 +2,7 @@ import { SwiftUITextModifier } from "../types/textModifier";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 
-export function walkToTextModifier(
+export function buildTextModifier(
   context: BuildContext,
   textModifier: SwiftUITextModifier
 ) {

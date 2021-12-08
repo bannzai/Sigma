@@ -1,7 +1,7 @@
 import { BuildContext } from "./context";
 import { FrameModifier } from "../types/modifiers";
 
-export function walkToFrame(context: BuildContext, frame: FrameModifier) {
+export function buildFrame(context: BuildContext, frame: FrameModifier) {
   const maximumFrameArguments: string[] = [];
   if (frame.maxWidth != null || frame.maxHeight != null) {
     if (frame.maxWidth != null) {

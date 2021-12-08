@@ -6,7 +6,7 @@ import { walkForMask } from "../modifiers/mask";
 import { walkForClipShape } from "../modifiers/clipShape";
 import { walkForFixedFrame } from "../modifiers/frame";
 import { walkForPosition } from "../modifiers/position";
-import { walk } from "../entrypoint";
+import { traverse } from "../entrypoint";
 
 export function walkToGroup(context: FigmaContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
@@ -18,7 +18,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
     if (node.children.length === 2) {
       const reversed = Array.from(node.children).reverse();
       const target = reversed[0];
-      walk(context, target);
+      traverse(context, target);
 
       const { id, width, height } = target;
       console.log(JSON.stringify({ id, width, height }));
@@ -28,7 +28,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
     } else {
       const reversed = Array.from(node.children).reverse();
       const target = reversed[0];
-      walk(context, target);
+      traverse(context, target);
 
       reversed.slice(1).forEach((child) => {
         if (isBlendMixin(child)) {
@@ -42,7 +42,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
     walkForFixedFrame(context, context.findBy(node), node);
   } else {
     node.children.forEach((child) => {
-      walk(context, child);
+      traverse(context, child);
     });
   }
   walkForPosition(context, context.findBy(node), node);

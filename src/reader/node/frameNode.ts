@@ -5,7 +5,7 @@ import { adaptFrameModifierWithFrameNode } from "../modifiers/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForPosition } from "../modifiers/position";
 import { walkForCornerRadius } from "../modifiers/cornerRadius";
-import { walk } from "../entrypoint";
+import { traverse } from "../entrypoint";
 import {
   Button,
   ChildrenMixin,
@@ -41,7 +41,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
 
     context.nestContainer(button);
     children.forEach((child) => {
-      walk(context, child);
+      traverse(context, child);
     });
     context.unnestContainer();
 
@@ -123,7 +123,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     }
 
     children.forEach((child, index) => {
-      walk(context, child);
+      traverse(context, child);
       if (
         primaryAxisAlignItems === "SPACE_BETWEEN" &&
         index !== children.length - 1

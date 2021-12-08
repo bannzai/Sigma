@@ -1,7 +1,7 @@
 import { PaddingModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
 
-export function walkToPadding(context: BuildContext, padding: PaddingModifier) {
+export function buildPadding(context: BuildContext, padding: PaddingModifier) {
   const { left, top, right, bottom } = padding;
   if ([left, top, right, bottom].every((e) => e === 0)) {
     return;

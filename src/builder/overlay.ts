@@ -1,12 +1,12 @@
 import { OverlayModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
-import { walkToShape } from "./shape";
+import { buildShape } from "./shape";
 
-export function walkToOverlay(context: BuildContext, overlay: OverlayModifier) {
+export function buildOverlay(context: BuildContext, overlay: OverlayModifier) {
   context.add(`.overlay(`, { withoutLineBreak: true });
   context.disableIndent();
   context.disableLineBreak();
-  walkToShape(context, overlay.shape);
+  buildShape(context, overlay.shape);
   context.enableLineBreak();
   context.add(`)`);
   context.enableIndent();

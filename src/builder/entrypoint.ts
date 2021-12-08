@@ -6,26 +6,26 @@ import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
 import { isSwiftUIViewType, SwiftUIViewType } from "../types/views";
 import { BuildContext } from "./context";
-import { walkToImageModifier } from "./imageModifier";
-import { walkToModifier } from "./modifier";
-import { walkToShape } from "./shape";
-import { walkToShapeModifier } from "./shapeModifier";
-import { walkToTextModifier } from "./textModifier";
-import { walkToView } from "./view";
+import { buildImageModifier } from "./imageModifier";
+import { buildModifier } from "./modifier";
+import { buildShape } from "./shape";
+import { buildShapeModifier } from "./shapeModifier";
+import { buildTextModifier } from "./textModifier";
+import { buildView } from "./view";
 
-export function walk(context: BuildContext, view: { type: string }) {
+export function build(context: BuildContext, view: { type: string }) {
   if (isSwiftUIViewType(view)) {
-    walkToView(context, view);
+    buildView(context, view);
   } else if (isSwiftUIViewShape(view)) {
-    walkToShape(context, view);
+    buildShape(context, view);
   } else if (isSwiftUIModifier(view)) {
-    walkToModifier(context, view);
+    buildModifier(context, view);
   } else if (isSwiftUITextModifier(view)) {
-    walkToTextModifier(context, view);
+    buildTextModifier(context, view);
   } else if (isSwiftUIViewShapeModifier(view)) {
-    walkToShapeModifier(context, view);
+    buildShapeModifier(context, view);
   } else if (isSwiftUIImageModifier(view)) {
-    walkToImageModifier(context, view);
+    buildImageModifier(context, view);
   } else {
     const { type } = view;
     assert(false, JSON.stringify({ type }));
