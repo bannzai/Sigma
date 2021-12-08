@@ -1,6 +1,6 @@
 import { SwiftUIViewModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
-import { walkToPadding } from "./padding";
+import { buildPadding } from "./padding";
 import { walkToFrame } from "./frame";
 import { walkToBackground } from "./background";
 import { walkToOverlay } from "./overlay";
@@ -13,7 +13,7 @@ export function walkToModifier(
   if (modifier.type === "frame") {
     walkToFrame(context, modifier);
   } else if (modifier.type === "padding") {
-    walkToPadding(context, modifier);
+    buildPadding(context, modifier);
   } else if (modifier.type === "background") {
     walkToBackground(context, modifier);
   } else if (modifier.type === "overlay") {
