@@ -10,9 +10,9 @@ on:
     branches: [ main, feature/* ]
 
 jobs:
-  env:
-    NODE_OPTIONS: --openssl-legacy-provider
   build:
+    env:
+      NODE_OPTIONS: --openssl-legacy-provider
     timeout-minutes: 1
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.pull_request.title, '[Skip CI]') }}
@@ -24,6 +24,8 @@ jobs:
     - run: npm install
     - run: npm run build
   test:
+    env:
+      NODE_OPTIONS: --openssl-legacy-provider
     timeout-minutes: 5
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.pull_request.title, '[Skip CI]') }}
