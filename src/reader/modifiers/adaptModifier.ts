@@ -12,15 +12,6 @@ export function adaptModifier(
   view: View,
   node: SceneNode
 ) {
-  if (node.type === "FRAME") {
-  } else if (node.type === "RECTANGLE") {
-    appendFrameModifierWithFrameNode(context, view, node);
-    appendBackgroundColor(context, view, node);
-    appendCornerRadius(context, view, node);
-    appendPosition(context, view, node);
-  } else if (node.type === "COMPONENT") {
-  }
-
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Unsupported
   } else if (node.type === "CODE_BLOCK") {
@@ -32,7 +23,7 @@ export function adaptModifier(
   } else if (node.type === "CONNECTOR") {
     // NOTE: Unsupported because it is figjam property
   } else if (node.type === "ELLIPSE") {
-    walkToEllipse(context, node);
+    // TODO:
   } else if (node.type === "FRAME") {
     appendPadding(context, view, node);
     appendFrameModifierWithFrameNode(context, view, node);
@@ -40,15 +31,15 @@ export function adaptModifier(
     appendCornerRadius(context, view, node);
     appendPosition(context, view, node);
   } else if (node.type === "GROUP") {
-    walkToGroup(context, node);
+    // TODO:
   } else if (node.type === "INSTANCE") {
     if (node.mainComponent != null) {
-      walkToComponent(context, node.mainComponent);
+      // NOTE: Skip. Because adapt modifier via node.type === 'COMPONENT'
     } else {
       // TODO: Fill placeholder
     }
   } else if (node.type === "LINE") {
-    walkToLine(context, node);
+    // TODO:
   } else if (node.type === "POLYGON") {
     // TODO:
   } else if (node.type === "RECTANGLE") {
@@ -57,17 +48,17 @@ export function adaptModifier(
     appendCornerRadius(context, view, node);
     appendPosition(context, view, node);
   } else if (node.type === "SHAPE_WITH_TEXT") {
-    walkToShapeWithText(context, node);
+    // TODO:
   } else if (node.type === "SLICE") {
     // NOTE: Unsupported
   } else if (node.type === "STAMP") {
     // NOTE: Unsupported
   } else if (node.type === "STAR") {
-    walkToStar(context, node);
+    // TODO:
   } else if (node.type === "STICKY") {
     // NOTE: Unsupported
   } else if (node.type === "TEXT") {
-    walkToText(context, node);
+    // TODO:
   } else if (node.type === "VECTOR") {
     // TODO:
   } else if (node.type === "WIDGET") {
