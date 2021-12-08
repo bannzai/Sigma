@@ -10,7 +10,8 @@ on:
     branches: [ main, feature/* ]
 
 jobs:
-  env: NODE_OPTIONS: --openssl-legacy-provider
+  env:
+    NODE_OPTIONS: --openssl-legacy-provider
   build:
     timeout-minutes: 1
     runs-on: ubuntu-latest
