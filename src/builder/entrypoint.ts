@@ -11,11 +11,11 @@ import { walkToModifier } from "./modifier";
 import { walkToShape } from "./shape";
 import { walkToShapeModifier } from "./shapeModifier";
 import { walkToTextModifier } from "./textModifier";
-import { walkToView } from "./view";
+import { buildView } from "./view";
 
 export function walk(context: BuildContext, view: { type: string }) {
   if (isSwiftUIViewType(view)) {
-    walkToView(context, view);
+    buildView(context, view);
   } else if (isSwiftUIViewShape(view)) {
     walkToShape(context, view);
   } else if (isSwiftUIModifier(view)) {

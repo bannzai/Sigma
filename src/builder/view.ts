@@ -3,7 +3,7 @@ import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 import { walk } from "./entrypoint";
 
-export function walkToView(
+export function buildView(
   context: BuildContext,
   view: SwiftUIViewType & View
 ) {
