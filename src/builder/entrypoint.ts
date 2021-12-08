@@ -7,7 +7,7 @@ import { isSwiftUITextModifier } from "../types/textModifier";
 import { isSwiftUIViewType, SwiftUIViewType } from "../types/views";
 import { BuildContext } from "./context";
 import { walkToImageModifier } from "./imageModifier";
-import { walkToModifier } from "./modifier";
+import { buildModifier } from "./modifier";
 import { buildShape } from "./shape";
 import { buildShapeModifier } from "./shapeModifier";
 import { buildTextModifier } from "./textModifier";
@@ -19,7 +19,7 @@ export function walk(context: BuildContext, view: { type: string }) {
   } else if (isSwiftUIViewShape(view)) {
     buildShape(context, view);
   } else if (isSwiftUIModifier(view)) {
-    walkToModifier(context, view);
+    buildModifier(context, view);
   } else if (isSwiftUITextModifier(view)) {
     buildTextModifier(context, view);
   } else if (isSwiftUIViewShapeModifier(view)) {

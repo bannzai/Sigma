@@ -6,7 +6,7 @@ import { walkToBackground } from "./background";
 import { buildOverlay } from "./overlay";
 import { walk } from "./entrypoint";
 
-export function walkToModifier(
+export function buildModifier(
   context: BuildContext,
   modifier: SwiftUIViewModifier
 ) {
