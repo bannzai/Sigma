@@ -10,7 +10,7 @@ import { walkToImageModifier } from "./imageModifier";
 import { walkToModifier } from "./modifier";
 import { walkToShape } from "./shape";
 import { walkToShapeModifier } from "./shapeModifier";
-import { walkToTextModifier } from "./textModifier";
+import { buildTextModifier } from "./textModifier";
 import { buildView } from "./view";
 
 export function walk(context: BuildContext, view: { type: string }) {
@@ -21,7 +21,7 @@ export function walk(context: BuildContext, view: { type: string }) {
   } else if (isSwiftUIModifier(view)) {
     walkToModifier(context, view);
   } else if (isSwiftUITextModifier(view)) {
-    walkToTextModifier(context, view);
+    buildTextModifier(context, view);
   } else if (isSwiftUIViewShapeModifier(view)) {
     walkToShapeModifier(context, view);
   } else if (isSwiftUIImageModifier(view)) {
