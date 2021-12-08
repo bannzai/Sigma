@@ -11,8 +11,8 @@ import { walkToFrame } from "./node/frameNode";
 import { trace } from "../util/tracer";
 import { walkToStar } from "./node/starNode";
 
-export function walk(context: FigmaContext, node: SceneNode) {
-  trace(`#walk`, context, node);
+export function traverse(context: FigmaContext, node: SceneNode) {
+  trace(`#traverse`, context, node);
 
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Skip
