@@ -4,7 +4,7 @@ import { appendPadding } from "../modifiers/padding";
 import { appendFrameModifierWithFrameNode } from "../modifiers/frame";
 import { appendBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForPosition } from "../modifiers/position";
-import { walkForCornerRadius } from "../modifiers/cornerRadius";
+import { appendCornerRadius } from "../modifiers/cornerRadius";
 import { traverse } from "../entrypoint";
 import {
   Button,
