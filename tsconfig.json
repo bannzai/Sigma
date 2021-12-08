@@ -1,17 +1,12 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": ["es6"],
+    "lib": ["es6", "dom"],
     "outDir": "lib",
     "typeRoots": ["./node_modules/@types", "./node_modules/@figma"],
     "sourceMap": true,
     "strict": true,
+    "jsx": "react",
     "moduleResolution": "node"
-  },
-  "include": [
-    "src/*.ts",
-    "src/**/*.ts",
-    "src/test/*.test.ts",
-    "src/test/**/*.test.ts"
-  ]
+  }
 }
