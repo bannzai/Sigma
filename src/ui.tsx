@@ -24,14 +24,13 @@ const App: React.VFC = () => {
 
   return (
     <div>
-      <div className={styles.code}>
-        <textarea
-          className={styles.textareaForClipboard}
-          ref={textRef}
-          value={code}
-          readOnly
-        />
-
+      <textarea
+        className={styles.nonDisplayedTextArea}
+        ref={textRef}
+        value={code}
+        readOnly
+      />
+      <div className={styles.box}>
         <p className={styles.generatedCode}>{code}</p>
 
         <VSpace height={12} />
