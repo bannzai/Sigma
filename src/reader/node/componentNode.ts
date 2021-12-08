@@ -8,8 +8,7 @@ import { appendPadding } from "../modifiers/padding";
 
 export function walkToComponent(context: FigmaContext, node: ComponentNode) {
   trace(`#walkToComponent`, context, node);
-  const { children, remote, variantProperties } = node;
-  console.log(JSON.stringify({ children, remote, variantProperties }));
+  const { children, remote } = node;
 
   if (remote) {
     return;
@@ -33,6 +32,7 @@ export function walkToComponent(context: FigmaContext, node: ComponentNode) {
     context.unnestContainer();
 
     adaptModifier(context, zstack, node);
+    appendBackgroundColor(context, zstack, node);
   } else {
     const child = children[0];
     traverse(context, child);
