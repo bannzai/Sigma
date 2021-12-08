@@ -31,5 +31,5 @@ jobs:
       with:
         node-version: '17.0.1'
     - run: npm install
-    - run: npm run build
-    - run: npm run test
+    - run: NODE_OPTIONS=--openssl-legacy-provider npm run build
+    - run: NODE_OPTIONS=--openssl-legacy-provider npm run test
