@@ -2,7 +2,7 @@ import { View } from "../../types/views";
 import { FigmaContext } from "../context";
 import { walkForBackgroundColor } from "./backgroundColor";
 import { walkForCornerRadius } from "./cornerRadius";
-import { adaptFrameModifierWithFrameNode } from "./frame";
+import { appendFrameModifierWithFrameNode } from "./frame";
 import { appendPadding } from "./padding";
 import { walkForPosition } from "./position";
 
@@ -13,12 +13,12 @@ export function adaptModifier(
 ) {
   if (node.type === "FRAME") {
     appendPadding(context, view, node);
-    adaptFrameModifierWithFrameNode(context, view, node);
+    appendFrameModifierWithFrameNode(context, view, node);
     walkForBackgroundColor(context, view, node);
     walkForCornerRadius(context, view, node);
     walkForPosition(context, view, node);
   } else if (node.type === "RECTANGLE") {
-    adaptFrameModifierWithFrameNode(context, view, node);
+    appendFrameModifierWithFrameNode(context, view, node);
     walkForBackgroundColor(context, view, node);
     walkForCornerRadius(context, view, node);
     walkForPosition(context, view, node);

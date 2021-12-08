@@ -1,7 +1,7 @@
 import { trace } from "../../util/tracer";
 import { FigmaContext } from "../context";
 import { walkForTextModifier } from "../modifiers/textModifier";
-import { adaptFrameModifierWithFrameNode } from "../modifiers/frame";
+import { appendFrameModifierWithFrameNode } from "../modifiers/frame";
 import { Image, Text } from "../../types/views";
 import { walkForForegroundColor } from "../modifiers/foregroundColor";
 

@@ -11,7 +11,7 @@ import {
 import { View } from "../../types/views";
 import { trace } from "../../util/tracer";
 
-export function adaptFrameModifierWithFrameNode(
+export function appendFrameModifierWithFrameNode(
   context: FigmaContext,
   view: View,
   node: LayoutMixin & SceneNode
