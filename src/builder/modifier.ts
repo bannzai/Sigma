@@ -3,7 +3,7 @@ import { BuildContext } from "./context";
 import { buildPadding } from "./padding";
 import { walkToFrame } from "./frame";
 import { walkToBackground } from "./background";
-import { walkToOverlay } from "./overlay";
+import { buildOverlay } from "./overlay";
 import { walk } from "./entrypoint";
 
 export function walkToModifier(
@@ -17,7 +17,7 @@ export function walkToModifier(
   } else if (modifier.type === "background") {
     walkToBackground(context, modifier);
   } else if (modifier.type === "overlay") {
-    walkToOverlay(context, modifier);
+    buildOverlay(context, modifier);
   } else if (modifier.type === "clipShape") {
     context.add(`.clipShape(`, { withoutLineBreak: false });
     context.disableLineBreak();

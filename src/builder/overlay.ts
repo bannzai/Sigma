@@ -2,7 +2,7 @@ import { OverlayModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
 import { buildShape } from "./shape";
 
-export function walkToOverlay(context: BuildContext, overlay: OverlayModifier) {
+export function buildOverlay(context: BuildContext, overlay: OverlayModifier) {
   context.add(`.overlay(`, { withoutLineBreak: true });
   context.disableIndent();
   context.disableLineBreak();
