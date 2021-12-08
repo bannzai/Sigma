@@ -10,7 +10,7 @@ export function walkToComponent(context: FigmaContext, node: ComponentNode) {
     JSON.stringify({ documentationLinks, remote, variantProperties })
   );
 
-  if (documentationLinks.length === 0 || remote) {
+  if (remote) {
     return;
   }
 
