@@ -15,9 +15,9 @@ export function traverse(context: FigmaContext, node: SceneNode) {
   trace(`#traverse`, context, node);
 
   if (node.type === "BOOLEAN_OPERATION") {
-    // NOTE: Skip
+    // NOTE: Unsupported
   } else if (node.type === "CODE_BLOCK") {
-    // NOTE: Skip
+    // NOTE: Unsupported
   } else if (node.type === "COMPONENT") {
     walkToComponent(context, node);
   } else if (node.type === "COMPONENT_SET") {
@@ -26,7 +26,7 @@ export function traverse(context: FigmaContext, node: SceneNode) {
       walkToComponent(context, child as ComponentNode);
     });
   } else if (node.type === "CONNECTOR") {
-    // NOTE: Skip because it is figjam property
+    // NOTE: Unsupported because it is figjam property
   } else if (node.type === "ELLIPSE") {
     walkToEllipse(context, node);
   } else if (node.type === "FRAME") {
@@ -48,19 +48,19 @@ export function traverse(context: FigmaContext, node: SceneNode) {
   } else if (node.type === "SHAPE_WITH_TEXT") {
     walkToShapeWithText(context, node);
   } else if (node.type === "SLICE") {
-    // NOTE: Skip
+    // NOTE: Unsupported
   } else if (node.type === "STAMP") {
-    // NOTE: Skip
+    // NOTE: Unsupported
   } else if (node.type === "STAR") {
     walkToStar(context, node);
   } else if (node.type === "STICKY") {
-    // NOTE: Skip
+    // NOTE: Unsupported
   } else if (node.type === "TEXT") {
     walkToText(context, node);
   } else if (node.type === "VECTOR") {
     // TODO:
   } else if (node.type === "WIDGET") {
-    // NOTE: Skip because it is figjam property
+    // NOTE: Unsupported because it is figjam property
   } else {
     // NOTE: Check if all cases are covered
     const _: never = node;
