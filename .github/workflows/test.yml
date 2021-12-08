@@ -20,7 +20,7 @@ jobs:
       with:
         node-version: '17.0.1'
     - run: npm install
-    - run: npm run build
+    - run: NODE_OPTIONS=--openssl-legacy-provider npm run build
   test:
     timeout-minutes: 5
     runs-on: ubuntu-latest
