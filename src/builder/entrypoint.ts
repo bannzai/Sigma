@@ -9,7 +9,7 @@ import { BuildContext } from "./context";
 import { walkToImageModifier } from "./imageModifier";
 import { walkToModifier } from "./modifier";
 import { walkToShape } from "./shape";
-import { walkToShapeModifier } from "./shapeModifier";
+import { buildShapeModifier } from "./shapeModifier";
 import { buildTextModifier } from "./textModifier";
 import { buildView } from "./view";
 
@@ -23,7 +23,7 @@ export function walk(context: BuildContext, view: { type: string }) {
   } else if (isSwiftUITextModifier(view)) {
     buildTextModifier(context, view);
   } else if (isSwiftUIViewShapeModifier(view)) {
-    walkToShapeModifier(context, view);
+    buildShapeModifier(context, view);
   } else if (isSwiftUIImageModifier(view)) {
     walkToImageModifier(context, view);
   } else {
