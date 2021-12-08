@@ -1,6 +1,6 @@
 import { trace } from "../../util/tracer";
 import { FigmaContext } from "../context";
-import { adaptPadding } from "../modifiers/padding";
+import { appendPadding } from "../modifiers/padding";
 
 export function walkToComponent(context: FigmaContext, node: ComponentNode) {
   trace(`#walkToComponent`, context, node);
@@ -13,5 +13,5 @@ export function walkToComponent(context: FigmaContext, node: ComponentNode) {
     return;
   }
 
-  adaptPadding(context, context.findBy(node), node);
+  appendPadding(context, context.findBy(node), node);
 }

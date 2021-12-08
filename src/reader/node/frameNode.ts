@@ -1,6 +1,6 @@
 import { trace } from "../../util/tracer";
 import { FigmaContext } from "../context";
-import { adaptPadding } from "../modifiers/padding";
+import { appendPadding } from "../modifiers/padding";
 import { adaptFrameModifierWithFrameNode } from "../modifiers/frame";
 import { walkForBackgroundColor } from "../modifiers/backgroundColor";
 import { walkForPosition } from "../modifiers/position";
