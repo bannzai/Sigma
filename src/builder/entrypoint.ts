@@ -13,7 +13,7 @@ import { buildShapeModifier } from "./shapeModifier";
 import { buildTextModifier } from "./textModifier";
 import { buildView } from "./view";
 
-export function walk(context: BuildContext, view: { type: string }) {
+export function build(context: BuildContext, view: { type: string }) {
   if (isSwiftUIViewType(view)) {
     buildView(context, view);
   } else if (isSwiftUIViewShape(view)) {

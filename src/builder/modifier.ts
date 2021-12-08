@@ -4,7 +4,7 @@ import { buildPadding } from "./padding";
 import { buildFrame } from "./frame";
 import { walkToBackground } from "./background";
 import { buildOverlay } from "./overlay";
-import { walk } from "./entrypoint";
+import { build } from "./entrypoint";
 
 export function buildModifier(
   context: BuildContext,
@@ -22,7 +22,7 @@ export function buildModifier(
     context.add(`.clipShape(`, { withoutLineBreak: false });
     context.disableLineBreak();
     context.disableIndent();
-    walk(context, modifier.shapeNode);
+    build(context, modifier.shapeNode);
     context.enableLineBreak();
     context.add(`)`);
     context.enableIndent();
@@ -30,7 +30,7 @@ export function buildModifier(
     context.add(`.mask(`, { withoutLineBreak: false });
     context.disableLineBreak();
     context.disableIndent();
-    walk(context, modifier.shapeNode);
+    build(context, modifier.shapeNode);
     context.enableLineBreak();
     context.enableIndent();
     context.add(`)`);
