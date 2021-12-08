@@ -2,7 +2,7 @@ import { BackgroundModifier } from "../types/modifiers";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 
-export function walkToBackground(
+export function buildBackground(
   context: BuildContext,
   background: BackgroundModifier
 ) {

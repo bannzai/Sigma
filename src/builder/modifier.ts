@@ -2,7 +2,7 @@ import { SwiftUIViewModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
 import { buildPadding } from "./padding";
 import { buildFrame } from "./frame";
-import { walkToBackground } from "./background";
+import { buildBackground } from "./background";
 import { buildOverlay } from "./overlay";
 import { build } from "./entrypoint";
 
@@ -15,7 +15,7 @@ export function buildModifier(
   } else if (modifier.type === "padding") {
     buildPadding(context, modifier);
   } else if (modifier.type === "background") {
-    walkToBackground(context, modifier);
+    buildBackground(context, modifier);
   } else if (modifier.type === "overlay") {
     buildOverlay(context, modifier);
   } else if (modifier.type === "clipShape") {
