@@ -6,7 +6,7 @@ import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
 import { isSwiftUIViewType, SwiftUIViewType } from "../types/views";
 import { BuildContext } from "./context";
-import { walkToImageModifier } from "./imageModifier";
+import { buildImageModifier } from "./imageModifier";
 import { buildModifier } from "./modifier";
 import { buildShape } from "./shape";
 import { buildShapeModifier } from "./shapeModifier";
@@ -25,7 +25,7 @@ export function walk(context: BuildContext, view: { type: string }) {
   } else if (isSwiftUIViewShapeModifier(view)) {
     buildShapeModifier(context, view);
   } else if (isSwiftUIImageModifier(view)) {
-    walkToImageModifier(context, view);
+    buildImageModifier(context, view);
   } else {
     const { type } = view;
     assert(false, JSON.stringify({ type }));

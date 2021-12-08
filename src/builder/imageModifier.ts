@@ -1,7 +1,7 @@
 import { ImageModifier } from "../types/imageModifier";
 import { BuildContext } from "./context";
 
-export function walkToImageModifier(
+export function buildImageModifier(
   context: BuildContext,
   modifier: ImageModifier
 ) {
