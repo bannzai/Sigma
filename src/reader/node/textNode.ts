@@ -3,7 +3,7 @@ import { FigmaContext } from "../context";
 import { walkForTextModifier } from "../modifiers/textModifier";
 import { appendFrameModifierWithFrameNode } from "../modifiers/frame";
 import { Text } from "../../types/views";
-import { walkForForegroundColor } from "../modifiers/foregroundColor";
+import { appendForegroundColor } from "../modifiers/foregroundColor";
 
 export function walkToText(context: FigmaContext, node: TextNode) {
   trace(`#walkToText`, context, node);
@@ -51,6 +51,6 @@ export function walkToText(context: FigmaContext, node: TextNode) {
     context.addChild(text);
 
     walkForTextModifier(context, node, text);
-    walkForForegroundColor(context, node, text);
+    appendForegroundColor(context, node, text);
   }
 }

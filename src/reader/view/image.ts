@@ -1,7 +1,7 @@
 import { FigmaContext } from "../context";
 import { ImageModifier } from "../../types/imageModifier";
 import { Image } from "../../types/views";
-import { walkForForegroundColor } from "../modifiers/foregroundColor";
+import { appendForegroundColor } from "../modifiers/foregroundColor";
 import { appendFixedFrame } from "../modifiers/frame";
 
 export type ImageNode = DefaultShapeMixin & SceneNode;
@@ -39,7 +39,7 @@ export function walkForImage(
     image.modifiers.push({ type: "resizable" });
     appendFixedFrame(context, context.findBy(node), node);
   }
-  walkForForegroundColor(context, node, image);
+  appendForegroundColor(context, node, image);
 }
 
 export function walkForSFSymbols(context: FigmaContext, node: ImageNode) {
@@ -56,5 +56,5 @@ export function walkForSFSymbols(context: FigmaContext, node: ImageNode) {
   };
   context.addChild(image);
 
-  walkForForegroundColor(context, node, image);
+  appendForegroundColor(context, node, image);
 }

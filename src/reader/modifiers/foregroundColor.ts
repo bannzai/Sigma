@@ -5,7 +5,7 @@ import {
   NamedFontWeight,
 } from "../../types/textModifier";
 
-export function walkForForegroundColor(
+export function appendForegroundColor(
   context: FigmaContext,
   node: DefaultShapeMixin,
   view: View
