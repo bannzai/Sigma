@@ -1,7 +1,7 @@
 import { isContainerType, SwiftUIViewType, View } from "../types/views";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
-import { build } from "./entrypoint";
+import { buildBody } from "./entrypoint";
 
 export function buildView(
   context: BuildContext,
@@ -13,7 +13,7 @@ export function buildView(
     );
     context.nest();
     view.children.forEach((e) => {
-      build(context, e);
+      buildBody(context, e);
     });
     context.unnest();
     context.add("}");
@@ -23,7 +23,7 @@ export function buildView(
     );
     context.nest();
     view.children.forEach((e) => {
-      build(context, e);
+      buildBody(context, e);
     });
     context.unnest();
     context.add("}");
@@ -31,7 +31,7 @@ export function buildView(
     context.add(`ZStack {`);
     context.nest();
     view.children.forEach((e) => {
-      build(context, e);
+      buildBody(context, e);
     });
     context.unnest();
     context.add("}");
@@ -39,7 +39,7 @@ export function buildView(
     context.add(`Button(action: { /* TODO */ }) {`);
     context.nest();
     view.children.forEach((e) => {
-      build(context, e);
+      buildBody(context, e);
     });
     context.unnest();
     context.add("}");
@@ -63,12 +63,12 @@ export function buildView(
 
   if (isContainerType(view)) {
     view.modifiers.forEach((e) => {
-      build(context, e);
+      buildBody(context, e);
     });
   } else {
     context.nest();
     view.modifiers.forEach((e) => {
-      build(context, e);
+      buildBody(context, e);
     });
     context.unnest();
   }
