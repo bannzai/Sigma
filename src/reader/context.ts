@@ -1,3 +1,4 @@
+import { AppView } from "../types/app";
 import { ChildrenMixin, isContainerType, View } from "../types/views";
 
 export class FigmaContext {
