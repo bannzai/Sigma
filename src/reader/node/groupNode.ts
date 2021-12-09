@@ -2,7 +2,7 @@ const assert = require("assert");
 import { FigmaContext } from "../context";
 import { trace } from "../../util/tracer";
 import { isBlendMixin } from "../../util/type_guards";
-import { walkForMask } from "../modifiers/mask";
+import { walkForMask as appendMask } from "../modifiers/mask";
 import { appendClipShape } from "../modifiers/clipShape";
 import { walkForFixedFrame } from "../modifiers/frame";
 import { appendPosition } from "../modifiers/position";
@@ -32,7 +32,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
 
       reversed.slice(1).forEach((child) => {
         if (isBlendMixin(child)) {
-          walkForMask(context, context.findBy(target), target, child);
+          appendMask(context, context.findBy(target), target, child);
         } else {
           assert(false, "unexpected is not mask node");
         }
