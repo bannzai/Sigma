@@ -16,6 +16,7 @@ import {
   ZStack,
 } from "../../types/views";
 import { adaptModifier } from "../modifiers/adaptModifier";
+import { appendBorder } from "../modifiers/border";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -46,7 +47,12 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     });
     context.unnestContainer();
 
-    adaptModifier(context, button, node);
+    appendPadding(context, button, node);
+    appendFrameModifierWithFrameNode(context, button, node);
+    appendBackgroundColor(context, button, node);
+    appendCornerRadius(context, button, node);
+    appendBorder(context, button, node);
+    appendPosition(context, button, node);
   } else {
     let containerReference!: ChildrenMixin & View;
     if (layoutMode === "HORIZONTAL") {
@@ -175,7 +181,12 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       }
     }
 
-    adaptModifier(context, containerReference, node);
+    appendPadding(context, containerReference, node);
+    appendFrameModifierWithFrameNode(context, containerReference, node);
+    appendBackgroundColor(context, containerReference, node);
+    appendCornerRadius(context, containerReference, node);
+    appendBorder(context, containerReference, node);
+    appendPosition(context, containerReference, node);
 
     context.unnestContainer();
   }
