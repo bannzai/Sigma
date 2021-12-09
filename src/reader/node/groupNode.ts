@@ -3,7 +3,7 @@ import { FigmaContext } from "../context";
 import { trace } from "../../util/tracer";
 import { isBlendMixin } from "../../util/type_guards";
 import { walkForMask } from "../modifiers/mask";
-import { walkForClipShape } from "../modifiers/clipShape";
+import { appendClipShape } from "../modifiers/clipShape";
 import { walkForFixedFrame } from "../modifiers/frame";
 import { appendPosition } from "../modifiers/position";
 import { traverse } from "../entrypoint";
@@ -24,7 +24,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
       console.log(JSON.stringify({ id, width, height }));
 
       const maskNode = reversed[1] as BlendMixin & SceneNode;
-      walkForClipShape(context, context.findBy(target), target, maskNode);
+      appendClipShape(context, context.findBy(target), target, maskNode);
     } else {
       const reversed = Array.from(node.children).reverse();
       const target = reversed[0];
