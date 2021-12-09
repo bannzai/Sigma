@@ -40,12 +40,23 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       modifiers: [],
       parent: context.container,
       node: node,
+      children: [],
     };
 
-    context.addChild(appComponent);
-  }
+    context.nestContainer(appComponent);
+    children.forEach((child) => {
+      traverse(context, child);
+    });
 
-  if (name.startsWith("SwiftUI::Button")) {
+    appendPadding(context, appComponent, node);
+    appendFrameModifierWithFrameNode(context, appComponent, node);
+    appendBackgroundColor(context, appComponent, node);
+    appendCornerRadius(context, appComponent, node);
+    appendBorder(context, appComponent, node);
+    appendPosition(context, appComponent, node);
+
+    context.unnestContainer();
+  } else if (name.startsWith("SwiftUI::Button")) {
     const button: Button = {
       type: "Button",
       node: node,
