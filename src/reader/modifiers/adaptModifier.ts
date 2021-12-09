@@ -30,6 +30,7 @@ export function adaptModifier(
     appendFrameModifierWithFrameNode(context, view, node);
     appendBackgroundColor(context, view, node);
     appendCornerRadius(context, view, node);
+    appendBorder(context, view, node);
     appendPosition(context, view, node);
   } else if (node.type === "GROUP") {
     // Skip. Because adapt modifier only chlidren
