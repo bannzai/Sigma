@@ -261,7 +261,7 @@ export function appendFrameModifierWithFrameNode(
   view.modifiers.push(frameModifier);
 }
 
-export function walkForFixedFrame(
+export function appendFixedFrame(
   context: FigmaContext,
   view: View,
   node: LayoutMixin & BaseNode

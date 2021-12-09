@@ -2,7 +2,7 @@ import { FigmaContext } from "../context";
 import { ImageModifier } from "../../types/imageModifier";
 import { Image } from "../../types/views";
 import { walkForForegroundColor } from "../modifiers/foregroundColor";
-import { walkForFixedFrame } from "../modifiers/frame";
+import { appendFixedFrame } from "../modifiers/frame";
 
 export type ImageNode = DefaultShapeMixin & SceneNode;
 
@@ -37,7 +37,7 @@ export function walkForImage(
 
   if (fill.scaleMode === "FIT") {
     image.modifiers.push({ type: "resizable" });
-    walkForFixedFrame(context, context.findBy(node), node);
+    appendFixedFrame(context, context.findBy(node), node);
   }
   walkForForegroundColor(context, node, image);
 }

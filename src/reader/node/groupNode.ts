@@ -4,7 +4,7 @@ import { trace } from "../../util/tracer";
 import { isBlendMixin } from "../../util/type_guards";
 import { walkForMask as appendMask } from "../modifiers/mask";
 import { appendClipShape } from "../modifiers/clipShape";
-import { walkForFixedFrame } from "../modifiers/frame";
+import { appendFixedFrame } from "../modifiers/frame";
 import { appendPosition } from "../modifiers/position";
 import { traverse } from "../entrypoint";
 
@@ -39,7 +39,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
       });
     }
 
-    walkForFixedFrame(context, context.findBy(node), node);
+    appendFixedFrame(context, context.findBy(node), node);
   } else {
     node.children.forEach((child) => {
       traverse(context, child);
