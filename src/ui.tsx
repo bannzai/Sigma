@@ -2,7 +2,7 @@ import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import { render } from "react-dom";
 import styles from "./ui.css";
-import { VSpace } from "./ui/Space";
+import { VSpacer } from "./ui/Spacer";
 
 const App: React.VFC = () => {
   const [code, setCode] = useState("");
@@ -33,7 +33,7 @@ const App: React.VFC = () => {
       <div className={styles.box}>
         <p className={styles.generatedCode}>{code}</p>
 
-        <VSpace height={12} />
+        <VSpacer height={12} />
 
         <div className={styles.buttonLayout}>
           <button className={styles.copyButton} onClick={copyToClipboard}>
