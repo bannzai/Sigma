@@ -15,7 +15,6 @@ import {
   VStack,
   ZStack,
 } from "../../types/views";
-import { adaptModifier } from "../modifiers/adaptModifier";
 import { appendBorder } from "../modifiers/border";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {

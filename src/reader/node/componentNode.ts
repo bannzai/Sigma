@@ -2,9 +2,7 @@ import { ZStack } from "../../types/views";
 import { trace } from "../../util/tracer";
 import { FigmaContext } from "../context";
 import { traverse } from "../entrypoint";
-import { adaptModifier } from "../modifiers/adaptModifier";
 import { appendBackgroundColor } from "../modifiers/backgroundColor";
-import { appendPadding } from "../modifiers/padding";
 
 export function walkToComponent(context: FigmaContext, node: ComponentNode) {
   trace(`#walkToComponent`, context, node);
