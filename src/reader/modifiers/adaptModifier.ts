@@ -31,7 +31,7 @@ export function adaptModifier(
     appendCornerRadius(context, view, node);
     appendPosition(context, view, node);
   } else if (node.type === "GROUP") {
-    // TODO:
+    // Skip. Because adapt modifier only chlidren
   } else if (node.type === "INSTANCE") {
     if (node.mainComponent != null) {
       // NOTE: Skip. Because adapt modifier via node.type === 'COMPONENT'
