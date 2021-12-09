@@ -17,7 +17,7 @@ export function adaptModifier(
   } else if (node.type === "CODE_BLOCK") {
     // NOTE: Unsupported
   } else if (node.type === "COMPONENT") {
-    // NOTE: Special pattern
+    appendBackgroundColor(context, view, node);
   } else if (node.type === "COMPONENT_SET") {
     // NOTE: Skip. Because adapt modifier via node.type === 'COMPONENT'
   } else if (node.type === "CONNECTOR") {

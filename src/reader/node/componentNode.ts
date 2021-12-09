@@ -32,10 +32,9 @@ export function walkToComponent(context: FigmaContext, node: ComponentNode) {
     context.unnestContainer();
 
     adaptModifier(context, zstack, node);
-    appendBackgroundColor(context, zstack, node);
   } else {
     const child = children[0];
     traverse(context, child);
-    appendBackgroundColor(context, context.findBy(child), node);
+    adaptModifier(context, context.findBy(child), node);
   }
 }
