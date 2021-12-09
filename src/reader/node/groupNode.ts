@@ -45,5 +45,4 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
       traverse(context, child);
     });
   }
-  appendPosition(context, context.findBy(node), node);
 }
