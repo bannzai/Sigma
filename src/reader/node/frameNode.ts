@@ -16,6 +16,7 @@ import {
   ZStack,
 } from "../../types/views";
 import { appendBorder } from "../modifiers/border";
+import { AppView } from "../../types/app";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -30,6 +31,19 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     primaryAxisSizingMode,
     primaryAxisAlignItems,
   } = node;
+
+  if (name.startsWith("App::")) {
+    const appComponentName = name.slice(0, "App::".length);
+    const appComponent: AppView = {
+      type: "App",
+      name: appComponentName,
+      modifiers: [],
+      parent: context.container,
+      node: node,
+    };
+
+    context.addChild(appComponent);
+  }
 
   if (name.startsWith("SwiftUI::Button")) {
     const button: Button = {
