@@ -5,7 +5,7 @@ import { StrokeModifier } from "../../types/shapeModifier";
 import { Rectangle, RoundedRectangle } from "../../types/shape";
 import { View } from "../../types/views";
 
-export function walkForBorder(
+export function appendBorder(
   context: FigmaContext,
   view: View,
   node: MinimalStrokesMixin & CornerMixin & SceneNode

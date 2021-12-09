@@ -1,7 +1,7 @@
 import { trace } from "../../util/tracer";
 import { FigmaContext } from "../context";
 import { appendFixedFrame } from "../modifiers/frame";
-import { walkForBorder } from "../modifiers/border";
+import { appendBorder } from "../modifiers/border";
 import { appendPosition } from "../modifiers/position";
 import { appendCornerRadius } from "../modifiers/cornerRadius";
 import { walkForImage } from "../view/image";
@@ -23,7 +23,7 @@ export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
     }
 
     appendCornerRadius(context, context.findBy(node), node);
-    walkForBorder(context, context.findBy(node), node);
+    appendBorder(context, context.findBy(node), node);
     appendPosition(context, context.findBy(node), node);
   }
 }
