@@ -2,6 +2,7 @@ import * as assert from "assert";
 import { View } from "../../types/views";
 import { FigmaContext } from "../context";
 import { appendBackgroundColor } from "./backgroundColor";
+import { appendBorder } from "./border";
 import { appendCornerRadius } from "./cornerRadius";
 import { appendFrameModifierWithFrameNode } from "./frame";
 import { appendPadding } from "./padding";
@@ -46,6 +47,7 @@ export function adaptModifier(
     appendFrameModifierWithFrameNode(context, view, node);
     appendBackgroundColor(context, view, node);
     appendCornerRadius(context, view, node);
+    appendBorder(context, view, node);
     appendPosition(context, view, node);
   } else if (node.type === "SHAPE_WITH_TEXT") {
     // TODO:
