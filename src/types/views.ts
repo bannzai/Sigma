@@ -26,10 +26,9 @@ export function isSwiftUIViewType(args: {
   return (swiftUIViewType as Readonly<string[]>).includes(args.type);
 }
 export interface View {
-  readonly id: string;
   readonly type: string;
   modifiers: { type: string }[];
-  readonly parentID: string | null;
+  readonly parent: (View & ChildrenMixin) | null;
 
   readonly node: SceneNode | null;
 }
