@@ -39,7 +39,7 @@ export function walkForImage(
 
   if (fill.scaleMode === "FIT") {
     image.modifiers.push({ type: "resizable" });
-    appendFixedFrame(context, context.findBy(node), node);
+    appendFixedFrame(context, image, node);
   }
   appendForegroundColor(context, node, image);
 }
