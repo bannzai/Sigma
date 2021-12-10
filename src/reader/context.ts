@@ -31,7 +31,7 @@ export class FigmaContext {
     }
   }
 
-  findBy(target: SceneNode): View {
+  findBy(target: BaseNode): View {
     const root = this.root;
 
     if (root.node?.id === target.id) {
@@ -43,7 +43,7 @@ export class FigmaContext {
     return result!;
   }
 
-  _findBy(view: View, target: SceneNode): View | null {
+  _findBy(view: View, target: BaseNode): View | null {
     if (view.node?.id === target.id) {
       return view;
     }
