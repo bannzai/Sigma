@@ -39,10 +39,6 @@ export function build(
       buildContext.unnest();
     });
 
-    view.modifiers.forEach((e) => {
-      buildBody(buildContext, e);
-    });
-
     buildContext.add(`}`);
     buildContext.unnest();
     buildContext.add(`}`);
