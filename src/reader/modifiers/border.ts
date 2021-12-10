@@ -4,7 +4,7 @@ import { OverlayModifier } from "../../types/modifiers";
 import { StrokeModifier } from "../../types/shapeModifier";
 import { Rectangle, RoundedRectangle } from "../../types/shape";
 import { View } from "../../types/views";
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 
 export function appendBorder(
   context: FigmaContext,

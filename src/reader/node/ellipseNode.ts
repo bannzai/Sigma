@@ -1,4 +1,4 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 import { FigmaContext } from "../../reader/context";
 import { Ellipse } from "../../types/shape";
 

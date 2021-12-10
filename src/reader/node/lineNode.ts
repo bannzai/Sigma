@@ -1,4 +1,4 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 import { FigmaContext } from "../context";
 import { appendPosition } from "../modifiers/position";
 import { FrameModifier } from "../../types/modifiers";

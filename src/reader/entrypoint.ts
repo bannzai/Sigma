@@ -8,7 +8,7 @@ import { walkToRectangle } from "./node/rectangleNode";
 import { walkToShapeWithText } from "./node/shapeWithTextNode";
 import { walkToText } from "./node/textNode";
 import { walkToFrame } from "./node/frameNode";
-import { trace } from "../util/tracer";
+import { trace } from "./tracer";
 import { walkToStar } from "./node/starNode";
 
 export function traverse(context: FigmaContext, node: SceneNode) {

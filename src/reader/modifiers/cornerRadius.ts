@@ -1,7 +1,7 @@
 import { FigmaContext } from "../context";
 import { CornerRadiusModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 
 export function appendCornerRadius(
   context: FigmaContext,

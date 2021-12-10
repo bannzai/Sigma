@@ -4,7 +4,7 @@ import {
   ForegorundTextModifier,
   NamedFontWeight,
 } from "../../types/textModifier";
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 
 export function appendForegroundColor(
   context: FigmaContext,

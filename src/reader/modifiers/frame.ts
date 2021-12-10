@@ -9,7 +9,7 @@ import {
   MaxWidth,
 } from "../../types/frameModifierTypes";
 import { View } from "../../types/views";
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 
 export function appendFrameModifierWithFrameNode(
   context: FigmaContext,
