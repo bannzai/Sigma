@@ -35,10 +35,18 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
 
   if (name.startsWith("App::")) {
     console.log(`App Component Name: ${name}`);
-    const appComponentName = name.slice("App::".length);
+    const appComponentOriginalName = name.slice("App::".length);
+    const countOfSameNameView = context.countOfAppView(
+      appComponentOriginalName
+    );
+    let appComponentName = appComponentOriginalName;
+    if (countOfSameNameView > 0) {
+      appComponentName = appComponentName + `_${countOfSameNameView}`;
+    }
     const appComponent: AppView = {
       type: "App",
       name: appComponentName,
+      orignalName: appComponentOriginalName,
       modifiers: [],
       node: node,
       children: [],

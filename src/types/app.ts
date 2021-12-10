@@ -7,5 +7,6 @@ export interface AppView extends View, ChildrenMixin {
   readonly type: "App";
 
   name: string;
+  orignalName: string;
   node: FrameNode;
 }

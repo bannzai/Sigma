@@ -69,4 +69,8 @@ export class FigmaContext {
   endAppView() {
     this.unnestContainer();
   }
+  countOfAppView(orignalName: string): number {
+    return this.appViewReferences.filter((e) => e.orignalName === orignalName)
+      .length;
+  }
 }
