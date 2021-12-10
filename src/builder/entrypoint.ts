@@ -6,7 +6,12 @@ import { isSwiftUIModifier, SwiftUIViewModifier } from "../types/modifiers";
 import { isSwiftUIViewShape, SwiftUIViewShape } from "../types/shape";
 import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
-import { isSwiftUIViewType, SwiftUIViewType, View } from "../types/views";
+import {
+  isContainerType,
+  isSwiftUIViewType,
+  SwiftUIViewType,
+  View,
+} from "../types/views";
 import { buildApp } from "./app";
 import { BuildContext } from "./context";
 import { buildImageModifier } from "./imageModifier";
@@ -32,6 +37,10 @@ export function build(
       buildContext.nest();
       buildBody(buildContext, child);
       buildContext.unnest();
+    });
+
+    view.modifiers.forEach((e) => {
+      buildBody(buildContext, e);
     });
 
     buildContext.add(`}`);
