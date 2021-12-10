@@ -33,7 +33,8 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
   } = node;
 
   if (name.startsWith("App::")) {
-    const appComponentName = name.slice(0, "App::".length);
+    console.log(`App Component Name: ${name}`);
+    const appComponentName = name.slice("App::".length);
     const appComponent: AppView = {
       type: "App",
       name: appComponentName,

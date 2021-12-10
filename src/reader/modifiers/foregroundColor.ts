@@ -4,12 +4,14 @@ import {
   ForegorundTextModifier,
   NamedFontWeight,
 } from "../../types/textModifier";
+import { trace } from "../../util/tracer";
 
 export function appendForegroundColor(
   context: FigmaContext,
-  node: DefaultShapeMixin,
+  node: DefaultShapeMixin & SceneNode,
   view: View
 ) {
+  trace("#appendForegroundColor", context, node);
   if (node.fills !== figma.mixed) {
     for (const fill of node.fills) {
       if (fill.type === "SOLID") {

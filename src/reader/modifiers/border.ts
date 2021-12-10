@@ -4,12 +4,14 @@ import { OverlayModifier } from "../../types/modifiers";
 import { StrokeModifier } from "../../types/shapeModifier";
 import { Rectangle, RoundedRectangle } from "../../types/shape";
 import { View } from "../../types/views";
+import { trace } from "../../util/tracer";
 
 export function appendBorder(
   context: FigmaContext,
   view: View,
   node: MinimalStrokesMixin & CornerMixin & SceneNode
 ) {
+  trace("#appendBorder", context, node);
   const { strokes, strokeAlign, strokeWeight, cornerRadius } = node;
 
   for (const stroke of strokes) {

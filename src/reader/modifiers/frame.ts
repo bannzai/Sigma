@@ -264,10 +264,10 @@ export function appendFrameModifierWithFrameNode(
 export function appendFixedFrame(
   context: FigmaContext,
   view: View,
-  node: LayoutMixin & BaseNode
+  node: LayoutMixin & SceneNode
 ) {
-  const { name, width, height, layoutAlign } = node;
-  console.log(JSON.stringify({ name, width, height, layoutAlign }));
+  trace("#appendFixedFrame", context, node);
+  const { width, height, layoutAlign } = node;
 
   /*
     NOTE: ⚠️ Previously, layoutAlign also determined counter axis alignment of auto-layout frame children.

@@ -2,12 +2,14 @@ const assert = require("assert");
 import { FigmaContext } from "../context";
 import { PositionModifier } from "../../types/modifiers";
 import { isAxisView, View } from "../../types/views";
+import { trace } from "../../util/tracer";
 
 export function appendPosition(
   context: FigmaContext,
   view: View,
   node: LayoutMixin & SceneNode
 ) {
+  trace("#appendPosition", context, node);
   if (context.root == null) {
     return;
   }
