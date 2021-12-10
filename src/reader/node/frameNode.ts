@@ -17,6 +17,7 @@ import {
 } from "../../types/views";
 import { appendBorder } from "../modifiers/border";
 import { AppView } from "../../types/app";
+import * as assert from "assert";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -58,6 +59,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
 
     context.endAppView();
   } else if (name.startsWith("SwiftUI::Button")) {
+    console.log(`SwiftUI::Button`);
     const button: Button = {
       type: "Button",
       node: node,
@@ -79,7 +81,8 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendBorder(context, button, node);
     appendPosition(context, button, node);
   } else {
-    let containerReference!: ChildrenMixin & View;
+    console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
+    let containerReference: (ChildrenMixin & View) | null = null;
     if (layoutMode === "HORIZONTAL") {
       const hstack: HStack = {
         type: "HStack",
@@ -133,6 +136,8 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     } else {
       const _: never = layoutMode;
     }
+
+    assert(containerReference != null);
 
     context.nestContainer(containerReference);
     if (

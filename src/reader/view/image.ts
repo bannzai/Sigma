@@ -25,7 +25,6 @@ export function walkForImage(
       parent: context.container,
       node: node,
     };
-    context.addChild(image);
   } else {
     image = {
       type: "Image",
@@ -34,8 +33,8 @@ export function walkForImage(
       parent: context.container,
       node: node,
     };
-    context.addChild(image);
   }
+  context.addChild(image);
 
   if (fill.scaleMode === "FIT") {
     image.modifiers.push({ type: "resizable" });

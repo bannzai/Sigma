@@ -39,11 +39,7 @@ export interface PrimitiveView extends View {
 export function isContainerType(
   args: any
 ): args is PrimitiveView & ChildrenMixin {
-  return (
-    (args as ChildrenMixin).children !== undefined &&
-    (args as PrimitiveView).type !== undefined &&
-    swiftUIViewType.includes(args.type)
-  );
+  return (args as ChildrenMixin).children !== undefined;
 }
 export interface ChildrenMixin {
   children: View[];
