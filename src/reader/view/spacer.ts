@@ -31,7 +31,6 @@ export function walkForFixedSpacer(
     context.addChild({
       type: "Spacer",
       modifiers: [frame],
-      parent: null,
       node: null,
     });
   } else if (context.container.axis === "H") {
@@ -43,7 +42,6 @@ export function walkForFixedSpacer(
     context.addChild({
       type: "Spacer",
       modifiers: [frame],
-      parent: null,
       node: null,
     });
   }

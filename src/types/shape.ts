@@ -12,7 +12,6 @@ export function isSwiftUIViewShape(args: {
 export interface Shape extends View {
   readonly type: typeof swiftUIShapeType[number];
   modifiers: (SwiftUIViewModifier | SwiftUIViewShapeModifier)[];
-  readonly parent: (View & ChildrenMixin) | null;
   readonly node: SceneNode | null;
 }
 

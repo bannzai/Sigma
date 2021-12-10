@@ -32,7 +32,6 @@ export function walkToLine(context: FigmaContext, node: LineNode) {
   const divider: Divider = {
     type: "Divider",
     modifiers: [frame],
-    parent: context.container,
     node: node,
   };
   context.addChild(divider);

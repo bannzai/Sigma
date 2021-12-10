@@ -16,11 +16,12 @@ export function appendPosition(
   if (context.root.node?.id === node.id) {
     return;
   }
-  if (
-    view.parent == null ||
-    !isAxisView(view.parent) ||
-    view.parent.axis !== "Z"
-  ) {
+  if (view.node?.parent == null) {
+    return;
+  }
+
+  const parent = context.findBy(view.node.parent);
+  if (!isAxisView(parent) || parent.axis !== "Z") {
     return;
   }
 

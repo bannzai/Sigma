@@ -24,7 +24,6 @@ export function appendBorder(
               shape: (function (): Rectangle {
                 return {
                   type: "Rectangle",
-                  parent: null,
                   modifiers: [
                     (function (): StrokeModifier {
                       return {
@@ -53,7 +52,6 @@ export function appendBorder(
               shape: (function (): RoundedRectangle {
                 return {
                   type: "RoundedRectangle",
-                  parent: null,
                   modifiers: [
                     (function (): StrokeModifier {
                       return {

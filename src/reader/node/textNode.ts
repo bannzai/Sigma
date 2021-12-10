@@ -45,7 +45,6 @@ export function walkToText(context: FigmaContext, node: TextNode) {
       text: characters,
       multipleLineSyntax: characters.split("\n").length > 1,
       modifiers: [],
-      parent: context.container,
       node: node,
     };
     context.addChild(text);

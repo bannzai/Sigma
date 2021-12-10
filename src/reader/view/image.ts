@@ -21,7 +21,6 @@ export function walkForImage(
       type: "Image",
       systemName,
       modifiers: [],
-      parent: context.container,
       node: node,
     };
   } else {
@@ -29,7 +28,6 @@ export function walkForImage(
       type: "Image",
       name,
       modifiers: [],
-      parent: context.container,
       node: node,
     };
   }

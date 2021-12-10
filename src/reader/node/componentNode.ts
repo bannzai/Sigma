@@ -17,7 +17,6 @@ export function walkToComponent(context: FigmaContext, node: ComponentNode) {
       type: "ZStack",
       axis: "Z",
       modifiers: [],
-      parent: context.container,
       node: node,
       children: [],
     };

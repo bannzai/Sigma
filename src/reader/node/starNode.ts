@@ -14,7 +14,6 @@ export function walkToStar(context: FigmaContext, node: StarNode) {
       type: "Image",
       systemName: "star",
       modifiers: [],
-      parent: context.container,
       node: node,
     };
     context.addChild(image);
@@ -26,7 +25,6 @@ export function walkToStar(context: FigmaContext, node: StarNode) {
         type: "Image",
         systemName: "star.fill",
         modifiers: [],
-        parent: context.container,
         node: node,
       };
       context.addChild(image);

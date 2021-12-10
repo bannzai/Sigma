@@ -40,7 +40,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       type: "App",
       name: appComponentName,
       modifiers: [],
-      parent: context.container,
       node: node,
       children: [],
     };
@@ -63,7 +62,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     const button: Button = {
       type: "Button",
       node: node,
-      parent: context.container,
       modifiers: [],
       children: [],
     };
@@ -88,7 +86,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         type: "HStack",
         axis: "H",
         modifiers: [],
-        parent: context.container,
         node: node,
         children: [],
         alignment: (function () {
@@ -108,7 +105,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         type: "VStack",
         axis: "V",
         modifiers: [],
-        parent: context.container,
         node: node,
         children: [],
         alignment: (function () {
@@ -128,7 +124,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         type: "ZStack",
         axis: "Z",
         modifiers: [],
-        parent: context.container,
         node: node,
         children: [],
       };
@@ -147,7 +142,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       const spacer: Spacer = {
         type: "Spacer",
         modifiers: [],
-        parent: containerReference,
         node: null,
       };
       context.addChild(spacer);
@@ -162,7 +156,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         const spacer: Spacer = {
           type: "Spacer",
           modifiers: [],
-          parent: containerReference,
           node: null,
         };
         context.addChild(spacer);
@@ -178,7 +171,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         const spacer: Spacer = {
           type: "Spacer",
           modifiers: [],
-          parent: containerReference,
           node: null,
         };
         context.addChild(spacer);
@@ -189,7 +181,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
               const spacer: Spacer = {
                 type: "Spacer",
                 modifiers: [],
-                parent: containerReference,
                 node: null,
               };
               context.addChild(spacer);
@@ -199,7 +190,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
               const spacer: Spacer = {
                 type: "Spacer",
                 modifiers: [],
-                parent: containerReference,
                 node: null,
               };
               context.addChild(spacer);
