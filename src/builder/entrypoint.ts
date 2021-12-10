@@ -23,7 +23,22 @@ export function build(
 ) {
   trace("#build", buildContext, view as View);
 
-  const buildBodyProperety = () => {
+  if (isAppView(view)) {
+    buildContext.add(`public struct ${view.name}: SwiftUI.View {`);
+    buildContext.nest();
+    buildContext.add(`public var body: some SwiftUI.View {`);
+
+    view.children.forEach((child) => {
+      buildContext.nest();
+      buildBody(buildContext, child);
+      buildContext.unnest();
+    });
+
+    buildContext.add(`}`);
+    buildContext.unnest();
+    buildContext.add(`}`);
+  } else {
+    buildContext.add(`public struct ContentView: SwiftUI.View {`);
     buildContext.nest();
     buildContext.add(`public var body: some SwiftUI.View {`);
     buildContext.nest();
@@ -31,15 +46,6 @@ export function build(
     buildContext.unnest();
     buildContext.add(`}`);
     buildContext.unnest();
-  };
-
-  if (isAppView(view)) {
-    buildContext.add(`public struct ${view.name}: SwiftUI.View {`);
-    buildBodyProperety();
-    buildContext.add(`}`);
-  } else {
-    buildContext.add(`public struct ContentView: SwiftUI.View {`);
-    buildBodyProperety();
     buildContext.add(`}`);
   }
 }
