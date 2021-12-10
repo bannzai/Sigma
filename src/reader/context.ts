@@ -38,20 +38,24 @@ export class FigmaContext {
       return root;
     }
 
-    return this._findBy(root, target)!;
+    const result = this._findBy(root, target);
+    console.log(JSON.stringify({ result }));
+    return result!;
   }
 
   _findBy(view: View, target: SceneNode): View | null {
+    if (view.node?.id === target.id) {
+      return view;
+    }
     if (isContainerType(view)) {
       for (const child of view.children) {
         if (child.node?.id === target.id) {
           return child;
         }
-        if (isContainerType(child) && child.node != null) {
-          const result = this._findBy(child, target);
-          if (result != null) {
-            return result;
-          }
+
+        const result = this._findBy(child, target);
+        if (result != null) {
+          return result;
         }
       }
     }
