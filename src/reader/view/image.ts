@@ -42,20 +42,3 @@ export function walkForImage(
   }
   appendForegroundColor(context, node, image);
 }
-
-export function walkForSFSymbols(context: FigmaContext, node: ImageNode) {
-  const { name } = node;
-
-  const systemName = name.slice("SFSymbols#".length);
-
-  const image: Image = {
-    type: "Image",
-    systemName,
-    modifiers: [],
-    parent: context.container,
-    node: node,
-  };
-  context.addChild(image);
-
-  appendForegroundColor(context, node, image);
-}
