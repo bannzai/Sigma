@@ -2,11 +2,11 @@ import { isContainerType, SwiftUIViewType, View } from "../types/views";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 import { buildBody } from "./entrypoint";
+import { trace } from "./tracer";
 
-export function buildView(
-  context: BuildContext,
-  view: SwiftUIViewType & View
-) {
+export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
+  trace("#buildView", context, view);
+
   if (view.type === "VStack") {
     context.add(
       `VStack(alignment: .${view.alignment}, spacing: ${view.spacing}) {`

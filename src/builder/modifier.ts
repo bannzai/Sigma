@@ -5,11 +5,13 @@ import { buildFrame } from "./frame";
 import { buildBackground } from "./background";
 import { buildOverlay } from "./overlay";
 import { buildBody } from "./entrypoint";
+import { trace } from "./tracer";
 
 export function buildModifier(
   context: BuildContext,
   modifier: SwiftUIViewModifier
 ) {
+  trace("#buildModifier", context, modifier);
   if (modifier.type === "frame") {
     buildFrame(context, modifier);
   } else if (modifier.type === "padding") {

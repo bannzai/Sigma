@@ -14,12 +14,15 @@ import { buildModifier } from "./modifier";
 import { buildShape } from "./shape";
 import { buildShapeModifier } from "./shapeModifier";
 import { buildTextModifier } from "./textModifier";
+import { trace } from "./tracer";
 import { buildView } from "./view";
 
 export function build(
   buildContext: BuildContext,
   view: { type: string; node: SceneNode | null }
 ) {
+  trace("#build", buildContext, view as View);
+
   const buildBodyProperety = () => {
     buildContext.nest();
     buildContext.add(`public var body: some SwiftUI.View {`);
@@ -42,6 +45,8 @@ export function build(
 }
 
 export function buildBody(context: BuildContext, view: { type: string }) {
+  trace("#buildBody", context, view as View);
+
   if (isSwiftUIViewType(view)) {
     buildView(context, view);
   } else if (isSwiftUIViewShape(view)) {

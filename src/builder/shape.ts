@@ -1,8 +1,10 @@
 import { SwiftUIViewShape } from "../types/shape";
 import { BuildContext } from "./context";
 import { buildBody } from "./entrypoint";
+import { trace } from "./tracer";
 
 export function buildShape(context: BuildContext, shape: SwiftUIViewShape) {
+  trace("#buildShape", context, shape);
   if (shape.type === "Rectangle") {
     context.add(`Rectangle()`);
     context.nest();
