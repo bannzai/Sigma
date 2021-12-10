@@ -1,15 +1,18 @@
 const assert = require("assert");
 import { BuildContext } from "./builder/context";
-import { buildBody as walkToSwiftUI } from "./builder/entrypoint";
+import { build, buildBody } from "./builder/entrypoint";
 import { FigmaContext } from "./reader/context";
-import { traverse as walkToFigma } from "./reader/entrypoint";
+import { traverse } from "./reader/entrypoint";
 
 export const run = (root: SceneNode): string => {
   const figmaContext = new FigmaContext();
-  walkToFigma(figmaContext, root);
+  traverse(figmaContext, root);
   assert(figmaContext.root != null, "it is necessary root");
 
   const buildContext = new BuildContext();
-  walkToSwiftUI(buildContext, figmaContext.root);
+  build(buildContext, figmaContext.root);
+  figmaContext.appViewReferences.forEach((e) => {
+    build(buildContext, e);
+  });
   return buildContext.code;
 };
