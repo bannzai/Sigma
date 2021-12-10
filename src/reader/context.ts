@@ -4,6 +4,7 @@ import { ChildrenMixin, isContainerType, View } from "../types/views";
 export class FigmaContext {
   root!: View;
   containerHistories: (View & ChildrenMixin)[] = [];
+  appViewReferences: AppView[] = [];
 
   get container(): (View & ChildrenMixin) | null {
     if (this.containerHistories.length <= 0) {
@@ -55,5 +56,13 @@ export class FigmaContext {
       }
     }
     return null;
+  }
+
+  beginAppView(view: AppView) {
+    this.nestContainer(view);
+    this.appViewReferences.push(view);
+  }
+  endAppView() {
+    this.unnestContainer();
   }
 }

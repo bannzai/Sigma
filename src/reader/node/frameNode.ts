@@ -44,7 +44,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       children: [],
     };
 
-    context.nestContainer(appComponent);
+    context.beginAppView(appComponent);
     children.forEach((child) => {
       traverse(context, child);
     });
@@ -56,7 +56,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendBorder(context, appComponent, node);
     appendPosition(context, appComponent, node);
 
-    context.unnestContainer();
+    context.endAppView();
   } else if (name.startsWith("SwiftUI::Button")) {
     const button: Button = {
       type: "Button",
