@@ -1,5 +1,4 @@
 import { FigmaContext } from "../context";
-import { ImageModifier } from "../../types/imageModifier";
 import { Image } from "../../types/views";
 import { appendForegroundColor } from "../modifiers/foregroundColor";
 import { appendFixedFrame } from "../modifiers/frame";
