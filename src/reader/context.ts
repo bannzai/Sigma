@@ -4,7 +4,8 @@ import { ChildrenMixin, isContainerType, View } from "../types/views";
 export class FigmaContext {
   root!: View;
   containerHistories: (View & ChildrenMixin)[] = [];
-  appViewReferences: AppView[] = [];
+  #appViewReferences: AppView[] = [];
+  allAppViewReferences: AppView[] = [];
 
   get container(): (View & ChildrenMixin) | null {
     if (this.containerHistories.length <= 0) {
@@ -16,7 +17,14 @@ export class FigmaContext {
     if (this.root == null) {
       this.root = container;
     }
-    this.container?.children.push(container);
+
+    const appComponent = this.#consumeAppComopnentContext();
+    if (appComponent != null) {
+      appComponent.body = container;
+    } else {
+      this.container?.children.push(container);
+    }
+
     this.containerHistories.push(container);
   }
   unnestContainer(): (View & ChildrenMixin) | null {
@@ -27,7 +35,12 @@ export class FigmaContext {
     if (this.root == null) {
       this.root = view;
     } else {
-      this.container?.children.push(view);
+      const appComponent = this.#consumeAppComopnentContext();
+      if (appComponent != null) {
+        appComponent.body = view;
+      } else {
+        this.container?.children.push(view);
+      }
     }
   }
 
@@ -62,15 +75,22 @@ export class FigmaContext {
     return null;
   }
 
-  beginAppView(view: AppView) {
-    this.nestContainer(view);
-    this.appViewReferences.push(view);
+  beginAppComponentContext(view: AppView) {
+    if (isContainerType(view)) {
+      this.nestContainer(view);
+    } else {
+      this.addChild(view);
+    }
+
+    this.#appViewReferences.push(view);
+    this.allAppViewReferences.push(view);
   }
-  endAppView() {
-    this.unnestContainer();
+  #consumeAppComopnentContext(): AppView | null {
+    return this.#appViewReferences.pop() ?? null;
   }
-  countOfAppView(orignalName: string): number {
-    return this.appViewReferences.filter((e) => e.orignalName === orignalName)
-      .length;
+  countOfAppView(customAppComponentName: string): number {
+    return this.allAppViewReferences.filter(
+      (e) => e.originalName === customAppComponentName
+    ).length;
   }
 }
