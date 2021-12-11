@@ -1,7 +1,12 @@
 import { View } from "../types/views";
 
+export interface BuildContextOption {
+  isGenerateOnlyView?: boolean;
+}
+
 export class BuildContext {
   current!: View;
+  option?: BuildContextOption;
   code: string = "";
   indent: number = 0;
   withoutIndent: boolean = false;

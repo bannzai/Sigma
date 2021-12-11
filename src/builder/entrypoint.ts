@@ -20,16 +20,24 @@ export function build(buildContext: BuildContext) {
   const { current: view } = buildContext;
   trace("#build", buildContext, view);
 
-  const name = view.appViewInfo?.appComponentName ?? "ContentView";
-  buildContext.add(`public struct ${name}: SwiftUI.View {`);
-  buildContext.nest();
-  buildContext.add(`public var body: some SwiftUI.View {`);
-  buildContext.nest();
-  buildBody(buildContext, view);
-  buildContext.unnest();
-  buildContext.add(`}`);
-  buildContext.unnest();
-  buildContext.add(`}`);
+  if (
+    buildContext.option != null &&
+    buildContext.option.isGenerateOnlyView != null &&
+    buildContext.option.isGenerateOnlyView
+  ) {
+    buildBody(buildContext, view);
+  } else {
+    const name = view.appViewInfo?.appComponentName ?? "ContentView";
+    buildContext.add(`public struct ${name}: SwiftUI.View {`);
+    buildContext.nest();
+    buildContext.add(`public var body: some SwiftUI.View {`);
+    buildContext.nest();
+    buildBody(buildContext, view);
+    buildContext.unnest();
+    buildContext.add(`}`);
+    buildContext.unnest();
+    buildContext.add(`}`);
+  }
 }
 
 export function buildBody(context: BuildContext, view: { type: string }) {
