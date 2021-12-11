@@ -16,7 +16,6 @@ import {
   ZStack,
 } from "../../types/views";
 import { appendBorder } from "../modifiers/border";
-import { AppView } from "../../types/app";
 import * as assert from "assert";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
@@ -33,39 +32,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     primaryAxisAlignItems,
   } = node;
 
-  if (name.startsWith("App::")) {
-    console.log(`App Component Name: ${name}`);
-    const appComponentOriginalName = name.slice("App::".length);
-    const countOfSameNameView = context.countOfAppView(
-      appComponentOriginalName
-    );
-    let appComponentName = appComponentOriginalName;
-    if (countOfSameNameView > 0) {
-      appComponentName = appComponentName + `_${countOfSameNameView}`;
-    }
-    const appComponent: AppView = {
-      type: "App",
-      name: appComponentName,
-      orignalName: appComponentOriginalName,
-      modifiers: [],
-      node: node,
-      children: [],
-    };
-
-    context.beginAppView(appComponent);
-    children.forEach((child) => {
-      traverse(context, child);
-    });
-
-    appendPadding(context, appComponent, node);
-    appendFrameModifierWithFrameNode(context, appComponent, node);
-    appendBackgroundColor(context, appComponent, node);
-    appendCornerRadius(context, appComponent, node);
-    appendBorder(context, appComponent, node);
-    appendPosition(context, appComponent, node);
-
-    context.endAppView();
-  } else if (name.startsWith("SwiftUI::Button")) {
+  if (name.startsWith("SwiftUI::Button")) {
     console.log(`SwiftUI::Button`);
     const button: Button = {
       type: "Button",

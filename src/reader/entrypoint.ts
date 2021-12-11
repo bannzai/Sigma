@@ -10,9 +10,30 @@ import { walkToText } from "./node/textNode";
 import { walkToFrame } from "./node/frameNode";
 import { trace } from "./tracer";
 import { walkToStar } from "./node/starNode";
+import { AppView, AppViewInfo } from "../types/app";
 
 export function traverse(context: FigmaContext, node: SceneNode) {
   trace(`#traverse`, context, node);
+
+  const { name } = node;
+
+  if (name.startsWith("App::")) {
+    console.log(`App Component Name: ${name}`);
+    const appComponentOriginalName = name.slice("App::".length);
+    const countOfSameNameView = context.countOfAppView(
+      appComponentOriginalName
+    );
+    let appComponentName = appComponentOriginalName;
+    if (countOfSameNameView > 0) {
+      appComponentName = appComponentName + `_${countOfSameNameView}`;
+    }
+    const appComponentInfo: AppViewInfo = {
+      appComponentOriginalName,
+      appComponentName: appComponentName,
+    };
+
+    context.beginAppComponentContext(appComponentInfo);
+  }
 
   if (node.type === "BOOLEAN_OPERATION") {
     // NOTE: Unsupported
