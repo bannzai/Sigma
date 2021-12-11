@@ -28,9 +28,9 @@ export function build(buildContext: BuildContext) {
     buildBody(buildContext, view);
   } else {
     const name = view.appViewInfo?.appComponentName ?? "ContentView";
-    buildContext.add(`public struct ${name}: SwiftUI.View {`);
+    buildContext.add(`public struct ${name}: View {`);
     buildContext.nest();
-    buildContext.add(`public var body: some SwiftUI.View {`);
+    buildContext.add(`public var body: some View {`);
     buildContext.nest();
     buildBody(buildContext, view);
     buildContext.unnest();
