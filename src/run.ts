@@ -10,9 +10,11 @@ export const run = (root: SceneNode): string => {
   assert(figmaContext.root != null, "it is necessary root");
 
   const buildContext = new BuildContext();
-  build(buildContext, figmaContext.root);
-  figmaContext.appViewReferences.forEach((e) => {
-    build(buildContext, e);
+  buildContext.current = figmaContext.root;
+  build(buildContext);
+  figmaContext.allAppViewReferences.forEach((e) => {
+    buildContext.current = e;
+    build(buildContext);
   });
   return buildContext.code;
 };
