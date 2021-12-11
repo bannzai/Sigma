@@ -1,3 +1,4 @@
+import { Modifier } from "./modifiers";
 import { Color } from "./views";
 
 export type SwiftUIViewShapeModifier = StrokeModifier;
@@ -8,7 +9,7 @@ export function isSwiftUIViewShapeModifier(args: {
   return (shapeModifiers as Readonly<string[]>).includes(args.type);
 }
 
-export interface ShapeModifier {
+export interface ShapeModifier extends Modifier {
   readonly type: typeof shapeModifiers[number];
 }
 
