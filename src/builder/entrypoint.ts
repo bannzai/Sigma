@@ -1,17 +1,11 @@
 const assert = require("assert");
-import { FigmaContext } from "../reader/context";
 import { isAppView } from "../types/app";
 import { isSwiftUIImageModifier } from "../types/imageModifier";
-import { isSwiftUIModifier, SwiftUIViewModifier } from "../types/modifiers";
-import { isSwiftUIViewShape, SwiftUIViewShape } from "../types/shape";
+import { isSwiftUIModifier } from "../types/modifiers";
+import { isSwiftUIViewShape } from "../types/shape";
 import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
-import {
-  isContainerType,
-  isSwiftUIViewType,
-  SwiftUIViewType,
-  View,
-} from "../types/views";
+import { isSwiftUIViewType, View } from "../types/views";
 import { buildApp } from "./app";
 import { BuildContext } from "./context";
 import { buildImageModifier } from "./imageModifier";
@@ -22,47 +16,28 @@ import { buildTextModifier } from "./textModifier";
 import { trace } from "./tracer";
 import { buildView } from "./view";
 
-export function build(
-  buildContext: BuildContext,
-  view: { type: string; node: SceneNode | null }
-) {
-  trace("#build", buildContext, view as View);
+export function build(buildContext: BuildContext) {
+  const { current: view } = buildContext;
+  trace("#build", buildContext, view);
 
-  if (isAppView(view)) {
-    buildContext.add(`public struct ${view.name}: SwiftUI.View {`);
-    buildContext.nest();
-    buildContext.add(`public var body: some SwiftUI.View {`);
-
-    view.children.forEach((child) => {
-      buildContext.nest();
-      buildBody(buildContext, child);
-      buildContext.unnest();
-    });
-
-    view.modifiers.forEach((e) => {
-      buildBody(buildContext, e);
-    });
-
-    buildContext.add(`}`);
-    buildContext.unnest();
-    buildContext.add(`}`);
-  } else {
-    buildContext.add(`public struct ContentView: SwiftUI.View {`);
-    buildContext.nest();
-    buildContext.add(`public var body: some SwiftUI.View {`);
-    buildContext.nest();
-    buildBody(buildContext, view);
-    buildContext.unnest();
-    buildContext.add(`}`);
-    buildContext.unnest();
-    buildContext.add(`}`);
-  }
+  const name = view.appViewInfo?.appComponentName ?? "ContentView";
+  buildContext.add(`public struct ${name}: SwiftUI.View {`);
+  buildContext.nest();
+  buildContext.add(`public var body: some SwiftUI.View {`);
+  buildContext.nest();
+  buildBody(buildContext, view);
+  buildContext.unnest();
+  buildContext.add(`}`);
+  buildContext.unnest();
+  buildContext.add(`}`);
 }
 
 export function buildBody(context: BuildContext, view: { type: string }) {
-  trace("#buildBody", context, view as View);
+  trace("#buildBody", context, view);
 
-  if (isSwiftUIViewType(view)) {
+  if (isAppView(view) && context.current.node?.id !== view.node?.id) {
+    buildApp(context, view);
+  } else if (isSwiftUIViewType(view)) {
     buildView(context, view);
   } else if (isSwiftUIViewShape(view)) {
     buildShape(context, view);
@@ -74,8 +49,6 @@ export function buildBody(context: BuildContext, view: { type: string }) {
     buildShapeModifier(context, view);
   } else if (isSwiftUIImageModifier(view)) {
     buildImageModifier(context, view);
-  } else if (isAppView(view)) {
-    buildApp(context, view);
   } else {
     const { type } = view;
     assert(false, JSON.stringify({ type }));
