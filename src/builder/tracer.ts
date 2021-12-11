@@ -1,3 +1,4 @@
+import { AppView, AppViewInfo } from "../types/app";
 import { ImageModifier } from "../types/imageModifier";
 import { Modifier } from "../types/modifiers";
 import { ShapeModifier } from "../types/shapeModifier";
@@ -8,7 +9,7 @@ import { BuildContext } from "./context";
 export function trace(
   prefix: string = "",
   context: BuildContext,
-  view: View | Modifier | ImageModifier | TextModifier | ShapeModifier
+  view: { type: string }
 ) {
   const { type } = view;
   console.log(`${prefix} ${JSON.stringify({ type })}`);
