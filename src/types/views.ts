@@ -1,3 +1,5 @@
+import { AppViewInfo } from "./app";
+
 export type SwiftUIViewType =
   | VStack
   | HStack
@@ -28,6 +30,7 @@ export function isSwiftUIViewType(args: {
 export interface View {
   readonly type: string;
   modifiers: { type: string }[];
+  appViewInfo?: AppViewInfo;
 
   readonly node: SceneNode | null;
 }

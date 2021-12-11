@@ -1,12 +1,14 @@
 import { View, ChildrenMixin } from "./views";
 
-export function isAppView(args: { type: string }): args is AppView {
-  return (["App"] as Readonly<string[]>).includes(args.type);
+export interface AppViewInfo {
+  appComponentName: string;
+  appComponentOriginalName: string;
 }
-export interface AppView extends View, ChildrenMixin {
-  readonly type: "App";
 
-  name: string;
-  orignalName: string;
-  node: FrameNode;
+export interface AppView extends View {
+  appViewInfo: AppViewInfo;
+}
+
+export function isAppView(view: any): view is AppView {
+  return (view as AppView).appViewInfo !== undefined;
 }
