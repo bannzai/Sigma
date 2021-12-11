@@ -1,7 +1,9 @@
 import { BuildContext } from "./context";
 import { FrameModifier } from "../types/modifiers";
+import { trace } from "./tracer";
 
 export function buildFrame(context: BuildContext, frame: FrameModifier) {
+  trace("#buildFrame", context, frame);
   const maximumFrameArguments: string[] = [];
   if (frame.maxWidth != null || frame.maxHeight != null) {
     if (frame.maxWidth != null) {

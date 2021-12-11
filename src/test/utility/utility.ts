@@ -6,5 +6,6 @@ export function createText(text: string): TextNode {
   node.name = "Text 1";
   node.characters = text;
   node.fills = [];
+  node.strokes = [];
   return node;
 }

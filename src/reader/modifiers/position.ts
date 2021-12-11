@@ -2,23 +2,26 @@ const assert = require("assert");
 import { FigmaContext } from "../context";
 import { PositionModifier } from "../../types/modifiers";
 import { isAxisView, View } from "../../types/views";
+import { trace } from "../tracer";
 
-export function walkForPosition(
+export function appendPosition(
   context: FigmaContext,
   view: View,
   node: LayoutMixin & SceneNode
 ) {
+  trace("#appendPosition", context, node);
   if (context.root == null) {
     return;
   }
   if (context.root.node?.id === node.id) {
     return;
   }
-  if (
-    view.parent == null ||
-    !isAxisView(view.parent) ||
-    view.parent.axis !== "Z"
-  ) {
+  if (view.node?.parent == null) {
+    return;
+  }
+
+  const parent = context.findBy(view.node.parent);
+  if (!isAxisView(parent) || parent.axis !== "Z") {
     return;
   }
 

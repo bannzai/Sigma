@@ -1,11 +1,11 @@
 const assert = require("assert");
 import { FigmaContext } from "../context";
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 import { isBlendMixin } from "../../util/type_guards";
-import { walkForMask } from "../modifiers/mask";
-import { walkForClipShape } from "../modifiers/clipShape";
-import { walkForFixedFrame } from "../modifiers/frame";
-import { walkForPosition } from "../modifiers/position";
+import { walkForMask as appendMask } from "../modifiers/mask";
+import { appendClipShape } from "../modifiers/clipShape";
+import { appendFixedFrame } from "../modifiers/frame";
+import { appendPosition } from "../modifiers/position";
 import { traverse } from "../entrypoint";
 
 export function walkToGroup(context: FigmaContext, node: GroupNode) {
@@ -24,7 +24,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
       console.log(JSON.stringify({ id, width, height }));
 
       const maskNode = reversed[1] as BlendMixin & SceneNode;
-      walkForClipShape(context, context.findBy(target), target, maskNode);
+      appendClipShape(context, context.findBy(target), target, maskNode);
     } else {
       const reversed = Array.from(node.children).reverse();
       const target = reversed[0];
@@ -32,18 +32,17 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
 
       reversed.slice(1).forEach((child) => {
         if (isBlendMixin(child)) {
-          walkForMask(context, context.findBy(target), target, child);
+          appendMask(context, context.findBy(target), target, child);
         } else {
           assert(false, "unexpected is not mask node");
         }
       });
     }
 
-    walkForFixedFrame(context, context.findBy(node), node);
+    appendFixedFrame(context, context.findBy(node), node);
   } else {
     node.children.forEach((child) => {
       traverse(context, child);
     });
   }
-  walkForPosition(context, context.findBy(node), node);
 }

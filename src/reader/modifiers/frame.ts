@@ -9,9 +9,9 @@ import {
   MaxWidth,
 } from "../../types/frameModifierTypes";
 import { View } from "../../types/views";
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 
-export function adaptFrameModifierWithFrameNode(
+export function appendFrameModifierWithFrameNode(
   context: FigmaContext,
   view: View,
   node: LayoutMixin & SceneNode
@@ -261,13 +261,13 @@ export function adaptFrameModifierWithFrameNode(
   view.modifiers.push(frameModifier);
 }
 
-export function walkForFixedFrame(
+export function appendFixedFrame(
   context: FigmaContext,
   view: View,
-  node: LayoutMixin & BaseNode
+  node: LayoutMixin & SceneNode
 ) {
-  const { name, width, height, layoutAlign } = node;
-  console.log(JSON.stringify({ name, width, height, layoutAlign }));
+  trace("#appendFixedFrame", context, node);
+  const { width, height, layoutAlign } = node;
 
   /*
     NOTE: ⚠️ Previously, layoutAlign also determined counter axis alignment of auto-layout frame children.

@@ -1,17 +1,37 @@
-import { trace } from "../../util/tracer";
+import { ZStack } from "../../types/views";
+import { trace } from "../tracer";
 import { FigmaContext } from "../context";
-import { walkForPadding } from "../modifiers/padding";
+import { traverse } from "../entrypoint";
+import { appendBackgroundColor } from "../modifiers/backgroundColor";
 
 export function walkToComponent(context: FigmaContext, node: ComponentNode) {
   trace(`#walkToComponent`, context, node);
-  const { documentationLinks, remote, variantProperties } = node;
-  console.log(
-    JSON.stringify({ documentationLinks, remote, variantProperties })
-  );
+  const { children, remote } = node;
 
-  if (documentationLinks.length === 0 || remote) {
+  if (remote) {
     return;
   }
 
-  walkForPadding(context, context.findBy(node), node);
+  if (children.length > 1) {
+    const zstack: ZStack = {
+      type: "ZStack",
+      axis: "Z",
+      modifiers: [],
+      node: node,
+      children: [],
+    };
+    context.addChild(zstack);
+
+    context.nestContainer(zstack);
+    children.forEach((e) => {
+      traverse(context, e);
+    });
+    context.unnestContainer();
+
+    appendBackgroundColor(context, zstack, node);
+  } else {
+    const child = children[0];
+    traverse(context, child);
+    appendBackgroundColor(context, context.findBy(child), node);
+  }
 }

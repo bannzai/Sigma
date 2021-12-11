@@ -2,7 +2,7 @@ import { FigmaContext } from "../context";
 import { ClipShapeModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 
-export function walkForClipShape(
+export function appendClipShape(
   context: FigmaContext,
   view: View,
   maskingTargetNode: SceneNode,

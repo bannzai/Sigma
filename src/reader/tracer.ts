@@ -1,4 +1,4 @@
-import { FigmaContext } from "../reader/context";
+import { FigmaContext } from "./context";
 
 export function trace(
   prefix: string = "",

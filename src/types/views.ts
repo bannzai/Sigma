@@ -1,3 +1,5 @@
+import { AppViewInfo } from "./app";
+
 export type SwiftUIViewType =
   | VStack
   | HStack
@@ -28,7 +30,7 @@ export function isSwiftUIViewType(args: {
 export interface View {
   readonly type: string;
   modifiers: { type: string }[];
-  readonly parent: (View & ChildrenMixin) | null;
+  appViewInfo?: AppViewInfo;
 
   readonly node: SceneNode | null;
 }
@@ -39,11 +41,7 @@ export interface PrimitiveView extends View {
 export function isContainerType(
   args: any
 ): args is PrimitiveView & ChildrenMixin {
-  return (
-    (args as ChildrenMixin).children !== undefined &&
-    (args as PrimitiveView).type !== undefined &&
-    swiftUIViewType.includes(args.type)
-  );
+  return (args as ChildrenMixin).children !== undefined;
 }
 export interface ChildrenMixin {
   children: View[];

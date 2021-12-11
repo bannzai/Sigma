@@ -1,10 +1,10 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 import { FigmaContext } from "../context";
-import { walkForPadding } from "../modifiers/padding";
-import { adaptFrameModifierWithFrameNode } from "../modifiers/frame";
-import { walkForBackgroundColor } from "../modifiers/backgroundColor";
-import { walkForPosition } from "../modifiers/position";
-import { walkForCornerRadius } from "../modifiers/cornerRadius";
+import { appendPadding } from "../modifiers/padding";
+import { appendFrameModifierWithFrameNode } from "../modifiers/frame";
+import { appendBackgroundColor } from "../modifiers/backgroundColor";
+import { appendPosition } from "../modifiers/position";
+import { appendCornerRadius } from "../modifiers/cornerRadius";
 import { traverse } from "../entrypoint";
 import {
   Button,
@@ -15,6 +15,8 @@ import {
   VStack,
   ZStack,
 } from "../../types/views";
+import { appendBorder } from "../modifiers/border";
+import * as assert from "assert";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -31,10 +33,10 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
   } = node;
 
   if (name.startsWith("SwiftUI::Button")) {
+    console.log(`SwiftUI::Button`);
     const button: Button = {
       type: "Button",
       node: node,
-      parent: context.container,
       modifiers: [],
       children: [],
     };
@@ -45,19 +47,20 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     });
     context.unnestContainer();
 
-    walkForPadding(context, button, node);
-    walkForBackgroundColor(context, button, node);
-    walkForCornerRadius(context, button, node);
-    adaptFrameModifierWithFrameNode(context, button, node);
-    walkForPosition(context, button, node);
+    appendPadding(context, button, node);
+    appendFrameModifierWithFrameNode(context, button, node);
+    appendBackgroundColor(context, button, node);
+    appendCornerRadius(context, button, node);
+    appendBorder(context, button, node);
+    appendPosition(context, button, node);
   } else {
+    console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
     let containerReference!: ChildrenMixin & View;
     if (layoutMode === "HORIZONTAL") {
       const hstack: HStack = {
         type: "HStack",
         axis: "H",
         modifiers: [],
-        parent: context.container,
         node: node,
         children: [],
         alignment: (function () {
@@ -71,14 +74,12 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         })(),
         spacing: itemSpacing,
       };
-      context.nestContainer(hstack);
       containerReference = hstack;
     } else if (layoutMode === "VERTICAL") {
       const vstack: VStack = {
         type: "VStack",
         axis: "V",
         modifiers: [],
-        parent: context.container,
         node: node,
         children: [],
         alignment: (function () {
@@ -92,23 +93,21 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         })(),
         spacing: itemSpacing,
       };
-      context.nestContainer(vstack);
       containerReference = vstack;
     } else if (layoutMode === "NONE") {
       const zstack: ZStack = {
         type: "ZStack",
         axis: "Z",
         modifiers: [],
-        parent: context.container,
         node: node,
         children: [],
       };
-      context.nestContainer(zstack);
       containerReference = zstack;
     } else {
       const _: never = layoutMode;
     }
 
+    context.nestContainer(containerReference);
     if (
       (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
       primaryAxisAlignItems === "MAX"
@@ -116,7 +115,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       const spacer: Spacer = {
         type: "Spacer",
         modifiers: [],
-        parent: containerReference,
         node: null,
       };
       context.addChild(spacer);
@@ -131,7 +129,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         const spacer: Spacer = {
           type: "Spacer",
           modifiers: [],
-          parent: containerReference,
           node: null,
         };
         context.addChild(spacer);
@@ -147,7 +144,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         const spacer: Spacer = {
           type: "Spacer",
           modifiers: [],
-          parent: containerReference,
           node: null,
         };
         context.addChild(spacer);
@@ -158,7 +154,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
               const spacer: Spacer = {
                 type: "Spacer",
                 modifiers: [],
-                parent: containerReference,
                 node: null,
               };
               context.addChild(spacer);
@@ -168,7 +163,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
               const spacer: Spacer = {
                 type: "Spacer",
                 modifiers: [],
-                parent: containerReference,
                 node: null,
               };
               context.addChild(spacer);
@@ -180,11 +174,12 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       }
     }
 
-    walkForPadding(context, containerReference, node);
-    adaptFrameModifierWithFrameNode(context, containerReference, node);
-    walkForBackgroundColor(context, containerReference, node);
-    walkForCornerRadius(context, containerReference, node);
-    walkForPosition(context, containerReference, node);
+    appendPadding(context, containerReference, node);
+    appendFrameModifierWithFrameNode(context, containerReference, node);
+    appendBackgroundColor(context, containerReference, node);
+    appendCornerRadius(context, containerReference, node);
+    appendBorder(context, containerReference, node);
+    appendPosition(context, containerReference, node);
 
     context.unnestContainer();
   }

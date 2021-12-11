@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const VSpace: React.VFC<{ height: number }> = ({ height }) => {
+export const VSpacer: React.VFC<{ height: number }> = ({ height }) => {
   return (
     <span
       style={{

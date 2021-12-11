@@ -1,12 +1,14 @@
 import { FigmaContext } from "../context";
 import { PaddingModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
+import { trace } from "../tracer";
 
-export function walkForPadding(
+export function appendPadding(
   context: FigmaContext,
   view: View,
-  node: BaseFrameMixin
+  node: BaseFrameMixin & SceneNode
 ) {
+  trace("#appendPadding", context, node);
   const {
     paddingLeft: left,
     paddingTop: top,

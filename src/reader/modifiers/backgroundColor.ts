@@ -1,12 +1,14 @@
 import { FigmaContext } from "../context";
 import { Color, View } from "../../types/views";
 import { BackgroundModifier } from "../../types/modifiers";
+import { trace } from "../tracer";
 
-export function walkForBackgroundColor(
+export function appendBackgroundColor(
   context: FigmaContext,
   view: View,
-  node: MinimalFillsMixin & BaseNode
+  node: MinimalFillsMixin & SceneNode
 ) {
+  trace("#appendBackgroundColor", context, node);
   if (node.fills !== figma.mixed) {
     for (const fill of node.fills) {
       if (fill.type === "SOLID") {

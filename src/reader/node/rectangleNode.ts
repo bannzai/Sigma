@@ -1,11 +1,16 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 import { FigmaContext } from "../context";
-import { walkForFixedFrame } from "../modifiers/frame";
-import { walkForBorder } from "../modifiers/border";
-import { walkForPosition } from "../modifiers/position";
-import { walkForCornerRadius } from "../modifiers/cornerRadius";
+import {
+  appendFixedFrame,
+  appendFrameModifierWithFrameNode,
+} from "../modifiers/frame";
+import { appendBorder } from "../modifiers/border";
+import { appendPosition } from "../modifiers/position";
+import { appendCornerRadius } from "../modifiers/cornerRadius";
 import { walkForImage } from "../view/image";
 import { walkForFixedSpacer } from "../view/spacer";
+import { appendPadding } from "../modifiers/padding";
+import { appendBackgroundColor } from "../modifiers/backgroundColor";
 
 export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
@@ -22,8 +27,10 @@ export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
       }
     }
 
-    walkForCornerRadius(context, context.findBy(node), node);
-    walkForBorder(context, context.findBy(node), node);
-    walkForPosition(context, context.findBy(node), node);
+    const view = context.findBy(node);
+    appendBackgroundColor(context, view, node);
+    appendCornerRadius(context, view, node);
+    appendBorder(context, view, node);
+    appendPosition(context, view, node);
   }
 }

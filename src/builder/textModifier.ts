@@ -1,11 +1,14 @@
 import { SwiftUITextModifier } from "../types/textModifier";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
+import { trace } from "./tracer";
 
 export function buildTextModifier(
   context: BuildContext,
   textModifier: SwiftUITextModifier
 ) {
+  trace("#buildTextModifier", context, textModifier);
+
   if (textModifier.type === "underline") {
     context.add(`.underline()`);
   } else if (textModifier.type === "strikethrough") {

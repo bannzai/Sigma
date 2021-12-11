@@ -1,7 +1,10 @@
 import { PaddingModifier } from "../types/modifiers";
 import { BuildContext } from "./context";
+import { trace } from "./tracer";
 
 export function buildPadding(context: BuildContext, padding: PaddingModifier) {
+  trace("#buildPadding", context, padding);
+
   const { left, top, right, bottom } = padding;
   if ([left, top, right, bottom].every((e) => e === 0)) {
     return;

@@ -4,12 +4,14 @@ import { OverlayModifier } from "../../types/modifiers";
 import { StrokeModifier } from "../../types/shapeModifier";
 import { Rectangle, RoundedRectangle } from "../../types/shape";
 import { View } from "../../types/views";
+import { trace } from "../tracer";
 
-export function walkForBorder(
+export function appendBorder(
   context: FigmaContext,
   view: View,
   node: MinimalStrokesMixin & CornerMixin & SceneNode
 ) {
+  trace("#appendBorder", context, node);
   const { strokes, strokeAlign, strokeWeight, cornerRadius } = node;
 
   for (const stroke of strokes) {
@@ -22,7 +24,6 @@ export function walkForBorder(
               shape: (function (): Rectangle {
                 return {
                   type: "Rectangle",
-                  parent: null,
                   modifiers: [
                     (function (): StrokeModifier {
                       return {
@@ -51,7 +52,6 @@ export function walkForBorder(
               shape: (function (): RoundedRectangle {
                 return {
                   type: "RoundedRectangle",
-                  parent: null,
                   modifiers: [
                     (function (): StrokeModifier {
                       return {

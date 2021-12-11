@@ -1,4 +1,4 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 import { FigmaContext } from "../../reader/context";
 import { Ellipse } from "../../types/shape";
 
@@ -7,7 +7,6 @@ export function walkToEllipse(context: FigmaContext, node: EllipseNode) {
   const ellipse: Ellipse = {
     type: "Ellipse",
     modifiers: [],
-    parent: context.container,
     node: node,
   };
   context.addChild(ellipse);

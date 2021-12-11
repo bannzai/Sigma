@@ -1,5 +1,5 @@
 import { createFigma } from "figma-api-stub";
-import { run } from "../../run";
+import { testRun } from "../../run";
 
 describe("Text.modifier(ANY_MODIFIER)", () => {
   const figma = createFigma({
@@ -18,12 +18,13 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       text.characters = "Hello";
       text.textDecoration = "UNDERLINE";
       text.fills = [];
+      text.strokes = [];
 
       const code = `
 Text("Hello")
     .underline()
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -36,12 +37,13 @@ Text("Hello")
       text.characters = "Hello";
       text.textDecoration = "STRIKETHROUGH";
       text.fills = [];
+      text.strokes = [];
 
       const code = `
 Text("Hello")
     .strikethrough()
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -53,12 +55,13 @@ Text("Hello")
       text.name = "Text 1";
       text.characters = "Hello";
       text.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 0 } }];
+      text.strokes = [];
 
       const code = `
 Text("Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0))
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
 
     test("with opacity", async () => {
@@ -70,12 +73,13 @@ Text("Hello")
       text.fills = [
         { type: "SOLID", color: { r: 1, g: 1, b: 0 }, opacity: 0.1 },
       ];
+      text.strokes = [];
 
       const code = `
 Text("Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -90,13 +94,14 @@ Text("Hello")
       text.fills = [
         { type: "SOLID", color: { r: 1, g: 1, b: 0 }, opacity: 0.1 },
       ];
+      text.strokes = [];
 
       const code = `
 Text("Hello")
     .strikethrough()
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
   });
 });

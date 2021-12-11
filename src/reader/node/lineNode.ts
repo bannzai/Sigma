@@ -1,6 +1,6 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 import { FigmaContext } from "../context";
-import { walkForPosition } from "../modifiers/position";
+import { appendPosition } from "../modifiers/position";
 import { FrameModifier } from "../../types/modifiers";
 import { Divider, isAxisView } from "../../types/views";
 
@@ -25,14 +25,13 @@ export function walkToLine(context: FigmaContext, node: LineNode) {
         frame.height = node.height;
       }
     } else if (context.container.axis === "Z") {
-      walkForPosition(context, context.findBy(node), node);
+      appendPosition(context, context.findBy(node), node);
     }
   }
 
   const divider: Divider = {
     type: "Divider",
     modifiers: [frame],
-    parent: context.container,
     node: node,
   };
   context.addChild(divider);

@@ -1,9 +1,9 @@
-import { trace } from "../../util/tracer";
+import { trace } from "../tracer";
 import { FigmaContext } from "../context";
 import { walkForTextModifier } from "../modifiers/textModifier";
-import { adaptFrameModifierWithFrameNode } from "../modifiers/frame";
+import { appendFrameModifierWithFrameNode } from "../modifiers/frame";
 import { Text } from "../../types/views";
-import { walkForForegroundColor } from "../modifiers/foregroundColor";
+import { appendForegroundColor } from "../modifiers/foregroundColor";
 
 export function walkToText(context: FigmaContext, node: TextNode) {
   trace(`#walkToText`, context, node);
@@ -45,12 +45,11 @@ export function walkToText(context: FigmaContext, node: TextNode) {
       text: characters,
       multipleLineSyntax: characters.split("\n").length > 1,
       modifiers: [],
-      parent: context.container,
       node: node,
     };
     context.addChild(text);
 
     walkForTextModifier(context, node, text);
-    walkForForegroundColor(context, node, text);
+    appendForegroundColor(context, node, text);
   }
 }
