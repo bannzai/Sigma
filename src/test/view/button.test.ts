@@ -14,6 +14,7 @@ describe("#Button", () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
     const button = figma.createFrame();
+    button.strokes = [];
     button.name = "SwiftUI::Button";
     button.paddingBottom = 0;
     button.paddingLeft = 0;

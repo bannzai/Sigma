@@ -19,6 +19,7 @@ describe("#View.frame(_:)", () => {
           return {
             id: "id",
             type: "FRAME",
+            strokes: [],
           };
         }),
       };
