@@ -1,6 +1,6 @@
 import { Alignment } from "./frameModifierTypes";
 import { Color } from "./views";
-import { SwiftUIViewShape } from "./shape";
+import { Shape, SwiftUIViewShape } from "./shape";
 
 export type SwiftUIViewModifier =
   | FrameModifier
@@ -24,7 +24,7 @@ const swiftUIModifierType = [
   "position",
 ] as const;
 export interface Modifier {
-  readonly type: typeof swiftUIModifierType[number];
+  readonly type: string;
 }
 export function isSwiftUIModifier(args: {
   type: string;

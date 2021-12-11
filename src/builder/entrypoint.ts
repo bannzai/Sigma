@@ -1,7 +1,7 @@
 const assert = require("assert");
 import { isAppView } from "../types/app";
 import { isSwiftUIImageModifier } from "../types/imageModifier";
-import { isSwiftUIModifier } from "../types/modifiers";
+import { isSwiftUIModifier, Modifier } from "../types/modifiers";
 import { isSwiftUIViewShape } from "../types/shape";
 import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
@@ -40,7 +40,7 @@ export function build(buildContext: BuildContext) {
   }
 }
 
-export function buildBody(context: BuildContext, view: { type: string }) {
+export function buildBody(context: BuildContext, view: View | Modifier) {
   trace("#buildBody", context, view);
 
   if (isAppView(view) && context.current.node?.id !== view.node?.id) {

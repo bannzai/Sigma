@@ -18,7 +18,6 @@ export function traverse(context: FigmaContext, node: SceneNode) {
   const { name } = node;
 
   if (name.startsWith("App::")) {
-    console.log(`App Component Name: ${name}`);
     const appComponentOriginalName = name.slice("App::".length);
     const countOfSameNameView = context.countOfAppView(
       appComponentOriginalName
