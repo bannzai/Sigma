@@ -17,8 +17,14 @@ export function traverse(context: FigmaContext, node: SceneNode) {
 
   const { name } = node;
 
-  if (name.startsWith("App::")) {
-    console.log(`App Component Name: ${name}`);
+  if (name.startsWith("Sigma@")) {
+    const sigmaSpecialOperation = name.slice("Sigma@".length);
+    if (sigmaSpecialOperation === "Skip") {
+      if ((node as any)["children"] === undefined) {
+        return;
+      }
+    }
+  } else if (name.startsWith("App::")) {
     const appComponentOriginalName = name.slice("App::".length);
     const countOfSameNameView = context.countOfAppView(
       appComponentOriginalName
