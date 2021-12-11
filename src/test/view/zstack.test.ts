@@ -1,6 +1,6 @@
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
-import { run } from "../../run";
+import { testRun } from "../../run";
 
 describe("#ZStack", () => {
   const figma = createFigma({
@@ -50,6 +50,6 @@ ZStack {
 .background(Color(red: 1, green: 1, blue: 0.8))
 `;
 
-    expect(run(component)).toEqual(code.slice("\n".length));
+    expect(testRun(component)).toEqual(code.slice("\n".length));
   });
 });

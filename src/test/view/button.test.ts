@@ -1,6 +1,6 @@
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
-import { run } from "../../run";
+import { testRun } from "../../run";
 
 describe("#Button", () => {
   const figma = createFigma({
@@ -27,6 +27,6 @@ Button(action: { /* TODO */ }) {
     Text("1")
 }
 `;
-    expect(run(button)).toEqual(code.slice("\n".length));
+    expect(testRun(button)).toEqual(code.slice("\n".length));
   });
 });

@@ -1,5 +1,5 @@
 import { createFigma } from "figma-api-stub";
-import { run } from "../../run";
+import { testRun } from "../../run";
 
 describe("Text.modifier(ANY_MODIFIER)", () => {
   const figma = createFigma({
@@ -23,7 +23,7 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
 Text("Hello")
     .underline()
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -41,7 +41,7 @@ Text("Hello")
 Text("Hello")
     .strikethrough()
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -58,7 +58,7 @@ Text("Hello")
 Text("Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0))
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
 
     test("with opacity", async () => {
@@ -75,7 +75,7 @@ Text("Hello")
 Text("Hello")
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
   });
 
@@ -96,7 +96,7 @@ Text("Hello")
     .strikethrough()
     .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
 `;
-      expect(run(text)).toEqual(code.slice("\n".length));
+      expect(testRun(text)).toEqual(code.slice("\n".length));
     });
   });
 });

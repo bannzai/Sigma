@@ -1,6 +1,6 @@
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
-import { run } from "../../run";
+import { testRun } from "../../run";
 
 describe("#VStack", () => {
   const figma = createFigma({
@@ -47,7 +47,7 @@ VStack(alignment: .leading, spacing: 10) {
     Text("3")
 }
 `;
-    expect(run(vstack)).toEqual(code.slice("\n".length));
+    expect(testRun(vstack)).toEqual(code.slice("\n".length));
   });
 
   test("VStack with padding", async () => {
@@ -74,7 +74,7 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.all, 20)
 `;
-    expect(run(vstack)).toEqual(code.slice("\n".length));
+    expect(testRun(vstack)).toEqual(code.slice("\n".length));
   });
 
   test("it is component child pattern", async () => {
@@ -104,6 +104,6 @@ VStack(alignment: .leading, spacing: 10) {
 }
 .padding(.all, 20)
 `;
-    expect(run(component)).toEqual(code.slice("\n".length));
+    expect(testRun(component)).toEqual(code.slice("\n".length));
   });
 });

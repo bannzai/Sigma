@@ -1,5 +1,5 @@
 import { createFigma } from "figma-api-stub";
-import { run } from "../../run";
+import { testRun } from "../../run";
 
 describe("#Image", () => {
   const figma = createFigma({
@@ -19,7 +19,7 @@ describe("#Image", () => {
 Image("image")
     .resizable()
 `;
-    expect(run(rectangle)).toEqual(code.slice("\n".length));
+    expect(testRun(rectangle)).toEqual(code.slice("\n".length));
   });
 
   test("Image for scaleMode to FILL", async () => {
@@ -31,7 +31,7 @@ Image("image")
     const code = `
 Image("image")
 `;
-    expect(run(rectangle)).toEqual(code.slice("\n".length));
+    expect(testRun(rectangle)).toEqual(code.slice("\n".length));
   });
 
   test("Image with special marker for SFSymbol", async () => {
@@ -43,6 +43,6 @@ Image("image")
     const code = `
 Image(systemName: "star")
 `;
-    expect(run(rectangle)).toEqual(code.slice("\n".length));
+    expect(testRun(rectangle)).toEqual(code.slice("\n".length));
   });
 });

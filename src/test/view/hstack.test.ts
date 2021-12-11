@@ -1,6 +1,6 @@
 import { createText } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
-import { run } from "../../run";
+import { testRun } from "../../run";
 
 describe("#HStack", () => {
   const figma = createFigma({
@@ -33,7 +33,7 @@ HStack(alignment: .top, spacing: 10) {
     Text("3")
 }
 `;
-    expect(run(hstack)).toEqual(code.slice("\n".length));
+    expect(testRun(hstack)).toEqual(code.slice("\n".length));
   });
 
   test("HStack with padding", async () => {
@@ -60,6 +60,6 @@ HStack(alignment: .top, spacing: 10) {
 }
 .padding(.all, 20)
 `;
-    expect(run(hstack)).toEqual(code.slice("\n".length));
+    expect(testRun(hstack)).toEqual(code.slice("\n".length));
   });
 });
