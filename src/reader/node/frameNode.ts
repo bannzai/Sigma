@@ -107,8 +107,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       const _: never = layoutMode;
     }
 
-    assert(containerReference != null);
-
     context.nestContainer(containerReference);
     if (
       (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
