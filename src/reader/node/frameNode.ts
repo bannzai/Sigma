@@ -55,7 +55,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendPosition(context, button, node);
   } else {
     console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
-    let containerReference: (ChildrenMixin & View) | null = null;
+    let containerReference!: ChildrenMixin & View;
     if (layoutMode === "HORIZONTAL") {
       const hstack: HStack = {
         type: "HStack",
