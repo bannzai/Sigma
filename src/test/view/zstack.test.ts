@@ -40,6 +40,7 @@ describe("#ZStack", () => {
     component.appendChild(createText("1"));
     component.appendChild(createText("2"));
     component.appendChild(createText("3"));
+    component.strokes = [];
 
     const code = `
 ZStack {

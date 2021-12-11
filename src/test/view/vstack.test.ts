@@ -18,6 +18,7 @@ describe("#VStack", () => {
           return {
             type: "COMPONENT",
             remote: false,
+            strokes: [],
           };
         }),
       };
@@ -39,6 +40,7 @@ describe("#VStack", () => {
     vstack.appendChild(createText("1"));
     vstack.appendChild(createText("2"));
     vstack.appendChild(createText("3"));
+    vstack.strokes = [];
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -65,6 +67,7 @@ VStack(alignment: .leading, spacing: 10) {
     vstack.appendChild(createText("1"));
     vstack.appendChild(createText("2"));
     vstack.appendChild(createText("3"));
+    vstack.strokes = [];
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -92,8 +95,11 @@ VStack(alignment: .leading, spacing: 10) {
     vstack.appendChild(createText("1"));
     vstack.appendChild(createText("2"));
     vstack.appendChild(createText("3"));
+    vstack.strokes = [];
 
     const component = figma.createComponent();
+    component.name = "";
+    component.strokes = [];
     component.appendChild(vstack);
 
     const code = `

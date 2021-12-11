@@ -14,13 +14,13 @@ describe("#Button", () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
     const button = figma.createFrame();
-    button.strokes = [];
     button.name = "SwiftUI::Button";
     button.paddingBottom = 0;
     button.paddingLeft = 0;
     button.paddingTop = 0;
     button.paddingRight = 0;
     button.appendChild(createText("1"));
+    button.strokes = [];
 
     const code = `
 Button(action: { /* TODO */ }) {

@@ -25,6 +25,7 @@ describe("#HStack", () => {
     hstack.appendChild(createText("1"));
     hstack.appendChild(createText("2"));
     hstack.appendChild(createText("3"));
+    hstack.strokes = [];
 
     const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -51,6 +52,7 @@ HStack(alignment: .top, spacing: 10) {
     hstack.appendChild(createText("1"));
     hstack.appendChild(createText("2"));
     hstack.appendChild(createText("3"));
+    hstack.strokes = [];
 
     const code = `
 HStack(alignment: .top, spacing: 10) {
