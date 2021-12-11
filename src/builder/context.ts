@@ -51,6 +51,9 @@ export class BuildContext {
     const linebreak = withoutLineBreak ? "" : "\n";
     this.code += `${indent}${code}${linebreak}`;
   }
+  lineBreak() {
+    this.add("");
+  }
 
   _indent(): string {
     return Array(this.indent).fill(" ").join("");

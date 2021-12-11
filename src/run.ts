@@ -13,9 +13,12 @@ export const run = (root: SceneNode, option?: BuildContextOption): string => {
   buildContext.option = option;
   buildContext.current = figmaContext.root;
   build(buildContext);
+  buildContext.lineBreak();
+
   figmaContext.allAppViewReferences.forEach((e) => {
     buildContext.current = e;
     build(buildContext);
+    buildContext.lineBreak();
   });
   return buildContext.code;
 };
