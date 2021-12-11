@@ -108,17 +108,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     }
 
     context.nestContainer(containerReference);
-    if (
-      (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
-      primaryAxisAlignItems === "MAX"
-    ) {
-      const spacer: Spacer = {
-        type: "Spacer",
-        modifiers: [],
-        node: null,
-      };
-      context.addChild(spacer);
-    }
 
     children.forEach((child, index) => {
       traverse(context, child);
@@ -134,45 +123,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         context.addChild(spacer);
       }
     });
-
-    if (
-      (layoutMode === "VERTICAL" || layoutMode === "HORIZONTAL") &&
-      primaryAxisAlignItems === "MIN"
-    ) {
-      // NOTE: This conditional expression may be wrong. I do not remember
-      if (layoutAlign === "STRETCH" && primaryAxisSizingMode === "FIXED") {
-        const spacer: Spacer = {
-          type: "Spacer",
-          modifiers: [],
-          node: null,
-        };
-        context.addChild(spacer);
-      } else {
-        if (context.root != null && context.root.node?.id !== node.id) {
-          if (layoutMode === "VERTICAL") {
-            if (node.height === context.root.node?.height) {
-              const spacer: Spacer = {
-                type: "Spacer",
-                modifiers: [],
-                node: null,
-              };
-              context.addChild(spacer);
-            }
-          } else if (layoutMode === "HORIZONTAL") {
-            if (node.width === context.root.node?.width) {
-              const spacer: Spacer = {
-                type: "Spacer",
-                modifiers: [],
-                node: null,
-              };
-              context.addChild(spacer);
-            }
-          } else {
-            const _: never = layoutMode;
-          }
-        }
-      }
-    }
 
     appendPadding(context, containerReference, node);
     appendFrameModifierWithFrameNode(context, containerReference, node);
