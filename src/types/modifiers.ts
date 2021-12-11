@@ -63,14 +63,14 @@ export interface OverlayModifier extends Modifier {
 
 export interface ClipShapeModifier extends Modifier {
   readonly type: "clipShape";
-
-  shapeNode: Shape;
+  // TOOD: Replace to Shape
+  shapeNode: BlendMixin & SceneNode;
 }
 
 export interface MaskModifier extends Modifier {
   readonly type: "mask";
-
-  shapeNode: Shape;
+  // TOOD: Replace to Shape
+  shapeNode: BlendMixin & SceneNode;
 }
 
 export interface CornerRadiusModifier extends Modifier {
