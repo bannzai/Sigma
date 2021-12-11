@@ -1,4 +1,7 @@
+import { View } from "../types/views";
+
 export class BuildContext {
+  current!: View;
   code: string = "";
   indent: number = 0;
   withoutIndent: boolean = false;
