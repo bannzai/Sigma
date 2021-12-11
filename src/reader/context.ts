@@ -1,10 +1,10 @@
-import { AppView } from "../types/app";
+import { AppView, AppViewInfo } from "../types/app";
 import { ChildrenMixin, isContainerType, View } from "../types/views";
 
 export class FigmaContext {
   root!: View;
   containerHistories: (View & ChildrenMixin)[] = [];
-  #appViewReferences: AppView[] = [];
+  #appViewInfoList: AppViewInfo[] = [];
   allAppViewReferences: AppView[] = [];
 
   get container(): (View & ChildrenMixin) | null {
@@ -14,17 +14,12 @@ export class FigmaContext {
     return this.containerHistories[this.containerHistories.length - 1];
   }
   nestContainer(container: View & ChildrenMixin) {
+    this.#associateCurrentContextAppComponentBody(container);
+
     if (this.root == null) {
       this.root = container;
     }
-
-    const appComponent = this.#consumeAppComopnentContext();
-    if (appComponent != null) {
-      appComponent.body = container;
-    } else {
-      this.container?.children.push(container);
-    }
-
+    this.container?.children.push(container);
     this.containerHistories.push(container);
   }
   unnestContainer(): (View & ChildrenMixin) | null {
@@ -32,15 +27,12 @@ export class FigmaContext {
   }
 
   addChild(view: View) {
+    this.#associateCurrentContextAppComponentBody(view);
+
     if (this.root == null) {
       this.root = view;
     } else {
-      const appComponent = this.#consumeAppComopnentContext();
-      if (appComponent != null) {
-        appComponent.body = view;
-      } else {
-        this.container?.children.push(view);
-      }
+      this.container?.children.push(view);
     }
   }
 
@@ -75,22 +67,28 @@ export class FigmaContext {
     return null;
   }
 
-  beginAppComponentContext(view: AppView) {
-    if (isContainerType(view)) {
-      this.nestContainer(view);
-    } else {
-      this.addChild(view);
+  beginAppComponentContext(view: AppViewInfo) {
+    this.#appViewInfoList.push(view);
+  }
+  #consumeCurrentContextAppViewInfo(): AppViewInfo | undefined {
+    return this.#appViewInfoList.pop();
+  }
+  #associateCurrentContextAppComponentBody(view: View) {
+    const info = this.#consumeCurrentContextAppViewInfo();
+    if (info == null) {
+      return;
     }
 
-    this.#appViewReferences.push(view);
-    this.allAppViewReferences.push(view);
+    view.appViewInfo = info;
+    this.allAppViewReferences.push(view as AppView);
   }
-  #consumeAppComopnentContext(): AppView | null {
-    return this.#appViewReferences.pop() ?? null;
-  }
-  countOfAppView(customAppComponentName: string): number {
-    return this.allAppViewReferences.filter(
-      (e) => e.originalName === customAppComponentName
+  countOfAppView(appComponentOriginalName: string): number {
+    const appViewCount = this.allAppViewReferences.filter(
+      (e) => e.appViewInfo.appComponentOriginalName === appComponentOriginalName
     ).length;
+    const appViewInfoCount = this.#appViewInfoList.filter(
+      (e) => e.appComponentOriginalName === appComponentOriginalName
+    ).length;
+    return appViewCount + appViewInfoCount;
   }
 }
