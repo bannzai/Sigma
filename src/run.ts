@@ -6,7 +6,12 @@ import { traverse } from "./reader/entrypoint";
 
 export const run = (root: SceneNode, option?: BuildContextOption): string => {
   const figmaContext = new FigmaContext();
-  traverse(figmaContext, root);
+  const body = findBody(root);
+  if (body != null) {
+    traverse(figmaContext, body);
+  } else {
+    traverse(figmaContext, root);
+  }
   assert(figmaContext.root != null, "it is necessary root");
 
   const buildContext = new BuildContext();
@@ -30,3 +35,22 @@ export const testRun = (root: SceneNode): string => {
     isGenerateOnlyView: true,
   });
 };
+
+function isContainerType(node: any): node is ChildrenMixin {
+  return (node as ChildrenMixin).children !== undefined;
+}
+
+function findBody(node: SceneNode): SceneNode | null {
+  if (node.name === "Sigma@Body") {
+    return node;
+  }
+  if (isContainerType(node)) {
+    for (const chlid of node.children) {
+      const value = findBody(chlid);
+      if (value != null) {
+        return value;
+      }
+    }
+  }
+  return null;
+}
