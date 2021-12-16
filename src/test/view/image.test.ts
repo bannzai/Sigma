@@ -45,4 +45,24 @@ Image(systemName: "star")
 `;
     expect(testRun(rectangle)).toEqual(code.slice("\n".length));
   });
+
+  test("Image fo SwiftUI::AsyncIamge", async () => {
+    const rectangle = figma.createRectangle();
+    rectangle.name = "SwiftUI::AsyncImage";
+    rectangle.strokes = [];
+    rectangle.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash: "" }];
+
+    const code = `
+AsyncImage(url: URL(string: "https://picsum.photos/seed/picsum/200/300")!) { phase in
+    switch phase {
+    case .success(let image):
+        image
+            .resizable()
+    case _:
+        ProgressView()
+    }
+}
+`;
+    expect(testRun(rectangle)).toEqual(code.slice("\n".length));
+  });
 });

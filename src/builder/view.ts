@@ -59,19 +59,17 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     );
     context.nestBlock(() => {
       context.add("switch phase {");
+      context.add("case .success(let image):");
       context.nestBlock(() => {
-        context.add("case .success(let image):");
-        context.nestBlock(() => {
-          buildView(context, view.image);
-        });
-        context.add("case _:");
-        context.nestBlock(() => {
-          context.add("ProgressView()");
-        });
-        context.add("}");
+        buildView(context, view.image);
+      });
+      context.add("case _:");
+      context.nestBlock(() => {
+        context.add("ProgressView()");
       });
       context.add("}");
     });
+    context.add("}");
   } else if (view.type === "Text") {
     context.add(`Text("${view.text}")`);
   } else if (view.type === "Divider") {
