@@ -7,10 +7,11 @@ import {
 import { appendBorder } from "../modifiers/border";
 import { appendPosition } from "../modifiers/position";
 import { appendCornerRadius } from "../modifiers/cornerRadius";
-import { walkForImage } from "../view/image";
+import { createImage } from "../view/image";
 import { walkForFixedSpacer } from "../view/spacer";
-import { appendPadding } from "../modifiers/padding";
 import { appendBackgroundColor } from "../modifiers/backgroundColor";
+import { AsyncImage } from "../../types/views";
+import { appendForegroundColor } from "../modifiers/foregroundColor";
 
 export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
@@ -22,7 +23,25 @@ export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
     if (fills !== figma.mixed) {
       for (const fill of fills) {
         if (fill.type === "IMAGE") {
-          walkForImage(context, fill, node);
+          const image = createImage(context, node);
+          if (fill.scaleMode === "FIT") {
+            image.modifiers.push({ type: "resizable" });
+            appendFixedFrame(context, image, node);
+          }
+          appendForegroundColor(context, node, image);
+
+          if (name.startsWith("SwiftUI::AsyncImage")) {
+            image.isAsyncImage = true;
+            const asyncImage: AsyncImage = {
+              type: "AsyncImage",
+              image: image,
+              modifiers: [],
+              node: null,
+            };
+            context.addChild(asyncImage);
+          } else {
+            context.addChild(image);
+          }
         }
       }
     }
