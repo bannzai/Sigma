@@ -8,6 +8,7 @@ export type SwiftUIViewType =
   | Text
   | Color
   | Image
+  | AsyncImage
   | Spacer
   | Divider;
 
@@ -19,9 +20,9 @@ const swiftUIViewType = [
   "Text",
   "Color",
   "Image",
+  "AsyncImage",
   "Spacer",
   "Divider",
-  "AsyncImage",
 ] as const;
 export function isSwiftUIViewType(args: {
   type: string;
@@ -104,6 +105,7 @@ export interface Image extends PrimitiveView {
 
   name?: string;
   systemName?: string;
+  isAsyncImage?: boolean;
 }
 
 export interface AsyncImage extends PrimitiveView {
