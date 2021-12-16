@@ -34,7 +34,7 @@ export interface View {
   modifiers: { type: string }[];
   appViewInfo?: AppViewInfo;
 
-  readonly node: SceneNode | null;
+  node: SceneNode | null;
 }
 export interface PrimitiveView extends View {
   readonly type: typeof swiftUIViewType[number];

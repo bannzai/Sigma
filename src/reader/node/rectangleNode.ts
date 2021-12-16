@@ -32,11 +32,13 @@ export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
 
           if (name.startsWith("SwiftUI::AsyncImage")) {
             image.isAsyncImage = true;
+            image.node = null;
+
             const asyncImage: AsyncImage = {
               type: "AsyncImage",
               image: image,
               modifiers: [],
-              node: null,
+              node: node,
             };
             context.addChild(asyncImage);
           } else {
