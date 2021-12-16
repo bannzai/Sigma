@@ -8,6 +8,7 @@ export type SwiftUIViewType =
   | Text
   | Color
   | Image
+  | AsyncImage
   | Spacer
   | Divider;
 
@@ -19,6 +20,7 @@ const swiftUIViewType = [
   "Text",
   "Color",
   "Image",
+  "AsyncImage",
   "Spacer",
   "Divider",
 ] as const;
@@ -32,7 +34,7 @@ export interface View {
   modifiers: { type: string }[];
   appViewInfo?: AppViewInfo;
 
-  readonly node: SceneNode | null;
+  node: SceneNode | null;
 }
 export interface PrimitiveView extends View {
   readonly type: typeof swiftUIViewType[number];
@@ -103,6 +105,13 @@ export interface Image extends PrimitiveView {
 
   name?: string;
   systemName?: string;
+  isAsyncImage?: boolean;
+}
+
+export interface AsyncImage extends PrimitiveView {
+  readonly type: "AsyncImage";
+
+  image: Image;
 }
 
 export interface Divider extends PrimitiveView {
