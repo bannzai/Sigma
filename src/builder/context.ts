@@ -18,6 +18,11 @@ export class BuildContext {
   unnest() {
     this.indent -= 4;
   }
+  nestBlock(closure: () => void) {
+    this.nest();
+    closure();
+    this.unnest();
+  }
 
   disableIndent() {
     this.withoutIndent = true;
