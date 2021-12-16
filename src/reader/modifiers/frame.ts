@@ -293,7 +293,7 @@ export function appendFixedFrame(
     };
     view.modifiers.push(modifier);
   } else if (layoutAlign === "STRETCH") {
-    assert(false, "unknown pattern");
+    return;
   } else {
     const _: never = layoutAlign;
   }
