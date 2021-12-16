@@ -46,19 +46,21 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
   } else if (view.type === "Color") {
     context.add(`${mappedSwiftUIColor(view)}`);
   } else if (view.type === "Image") {
-    if (view.name != null) {
+    if (view.isAsyncImage) {
+      context.add(`image`);
+    } else if (view.name != null) {
       context.add(`Image("${view.name}")`);
     } else if (view.systemName != null) {
       context.add(`Image(systemName: "${view.systemName}")`);
-    } else if (view.isAsyncImage) {
-      context.add(`image`);
     }
   } else if (view.type === "AsyncImage") {
-    context.add("AsyncImage { phase in");
+    context.add(
+      `AsyncImage(url: URL(string: "https://picsum.photos/seed/picsum/200/300")!) { phase in`
+    );
     context.nestBlock(() => {
       context.add("switch phase {");
       context.nestBlock(() => {
-        context.add("case .success(let image)");
+        context.add("case .success(let image):");
         context.nestBlock(() => {
           buildView(context, view.image);
         });
