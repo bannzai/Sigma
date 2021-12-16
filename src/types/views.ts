@@ -109,8 +109,7 @@ export interface Image extends PrimitiveView {
 export interface AsyncImage extends PrimitiveView {
   readonly type: "AsyncImage";
 
-  name?: string;
-  systemName?: string;
+  image: Image;
 }
 
 export interface Divider extends PrimitiveView {
