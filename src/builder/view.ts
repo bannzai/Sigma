@@ -50,7 +50,26 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
       context.add(`Image("${view.name}")`);
     } else if (view.systemName != null) {
       context.add(`Image(systemName: "${view.systemName}")`);
+    } else if (view.isAsyncImage) {
+      context.add(`image`);
     }
+  } else if (view.type === "AsyncImage") {
+    context.add("AsyncImage { phase in");
+    context.nestBlock(() => {
+      context.add("switch phase {");
+      context.nestBlock(() => {
+        context.add("case .success(let image)");
+        context.nestBlock(() => {
+          buildView(context, view.image);
+        });
+        context.add("case _:");
+        context.nestBlock(() => {
+          context.add("ProgressView()");
+        });
+        context.add("}");
+      });
+      context.add("}");
+    });
   } else if (view.type === "Text") {
     context.add(`Text("${view.text}")`);
   } else if (view.type === "Divider") {
