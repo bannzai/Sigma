@@ -266,8 +266,8 @@ export function appendFixedFrame(
   view: View,
   node: LayoutMixin & SceneNode
 ) {
-  trace("#appendFixedFrame", context, node);
   const { width, height, layoutAlign } = node;
+  trace("#appendFixedFrame", context, node, { width, height, layoutAlign });
 
   /*
     NOTE: ⚠️ Previously, layoutAlign also determined counter axis alignment of auto-layout frame children.
