@@ -8,7 +8,7 @@ import {
   MaxHeight,
   MaxWidth,
 } from "../../types/frameModifierTypes";
-import { View } from "../../types/views";
+import { isAxisView, View } from "../../types/views";
 import { trace } from "../tracer";
 
 export function appendFrameModifierWithFrameNode(
@@ -266,25 +266,29 @@ export function appendFixedFrame(
   view: View,
   node: LayoutMixin & SceneNode
 ) {
-  const { width, height, layoutAlign } = node;
-  trace("#appendFixedFrame", context, node, { width, height, layoutAlign });
+  const { width, height, layoutAlign, layoutGrow } = node;
+  trace("#appendFixedFrame", context, node, {
+    width,
+    height,
+    layoutAlign,
+    layoutGrow,
+  });
 
-  /*
-    NOTE: ⚠️ Previously, layoutAlign also determined counter axis alignment of auto-layout frame children.
-    Counter axis alignment is now set on the auto-layout frame itself through counterAxisAlignItems. Note that this means all layers in an auto-layout frame must now have the same counter axis alignment.
-    This means "MIN", "CENTER", and "MAX" are now deprecated values of layoutAlign.
-
-    Document: https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
-   */
-  if (
-    layoutAlign === "MIN" ||
-    layoutAlign === "MAX" ||
-    layoutAlign === "CENTER"
-  ) {
-    return;
+  let isFixedWidth = false;
+  let isFixedHeight = false;
+  if (context.container != null) {
+    if (isAxisView(context.container)) {
+      if (context.container.axis === "V") {
+        isFixedWidth = layoutAlign === "INHERIT";
+        isFixedHeight = layoutGrow === 0;
+      } else if (context.container.axis === "H") {
+        isFixedWidth = layoutGrow === 0;
+        isFixedHeight = layoutAlign === "INHERIT";
+      }
+    }
   }
 
-  if (layoutAlign === "INHERIT") {
+  if (isFixedWidth && isFixedHeight) {
     const modifier: FrameModifier = {
       type: "frame",
       width,
@@ -292,9 +296,19 @@ export function appendFixedFrame(
       alignment: "center",
     };
     view.modifiers.push(modifier);
-  } else if (layoutAlign === "STRETCH") {
-    return;
-  } else {
-    const _: never = layoutAlign;
+  } else if (isFixedWidth) {
+    const modifier: FrameModifier = {
+      type: "frame",
+      width,
+      alignment: "center",
+    };
+    view.modifiers.push(modifier);
+  } else if (isFixedHeight) {
+    const modifier: FrameModifier = {
+      type: "frame",
+      height,
+      alignment: "center",
+    };
+    view.modifiers.push(modifier);
   }
 }
