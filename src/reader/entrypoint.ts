@@ -11,6 +11,7 @@ import { walkToFrame } from "./node/frameNode";
 import { trace } from "./tracer";
 import { walkToStar } from "./node/starNode";
 import { AppView, AppViewInfo } from "../types/app";
+import { walkToVector } from "./node/vectorNode";
 
 export function traverse(context: FigmaContext, node: SceneNode) {
   trace(`#traverse`, context, node);
@@ -78,7 +79,7 @@ export function traverse(context: FigmaContext, node: SceneNode) {
   } else if (node.type === "TEXT") {
     walkToText(context, node);
   } else if (node.type === "VECTOR") {
-    // TODO:
+    walkToVector(context, node);
   } else if (node.type === "WIDGET") {
     // NOTE: Unsupported because it is figjam property
   } else {
