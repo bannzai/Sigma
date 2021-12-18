@@ -54,6 +54,7 @@ describe("#View.frame(_:)", () => {
             vstack.appendChild(createText("3"));
             vstack.layoutGrow = 0;
             vstack.strokes = [];
+            vstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -72,6 +73,7 @@ describe("#View.frame(_:)", () => {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -109,6 +111,7 @@ VStack(alignment: .leading, spacing: 10) {
             vstack.appendChild(createText("3"));
             vstack.layoutGrow = 1;
             vstack.strokes = [];
+            vstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -127,6 +130,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -167,6 +171,7 @@ VStack(alignment: .leading, spacing: 10) {
             vstack.layoutGrow = 0;
             vstack.layoutAlign = "INHERIT";
             vstack.strokes = [];
+            vstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -185,6 +190,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -223,6 +229,7 @@ VStack(alignment: .leading, spacing: 10) {
             vstack.layoutGrow = 0;
             vstack.layoutAlign = "STRETCH";
             vstack.strokes = [];
+            vstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -241,6 +248,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -282,6 +290,7 @@ VStack(alignment: .leading, spacing: 10) {
             vstack.appendChild(createText("3"));
             vstack.layoutGrow = 0;
             vstack.strokes = [];
+            vstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -300,6 +309,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -337,6 +347,7 @@ HStack(alignment: .top, spacing: 10) {
             vstack.appendChild(createText("3"));
             vstack.layoutGrow = 1;
             vstack.strokes = [];
+            vstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -355,6 +366,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -395,6 +407,7 @@ HStack(alignment: .top, spacing: 10) {
             vstack.layoutGrow = 0;
             vstack.layoutAlign = "INHERIT";
             vstack.strokes = [];
+            vstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -413,6 +426,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -451,6 +465,7 @@ HStack(alignment: .top, spacing: 10) {
             vstack.layoutGrow = 0;
             vstack.layoutAlign = "STRETCH";
             vstack.strokes = [];
+            vstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -469,6 +484,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(vstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -507,6 +523,7 @@ HStack(alignment: .top, spacing: 10) {
         vstack.appendChild(createText("2"));
         vstack.appendChild(createText("3"));
         vstack.strokes = [];
+        vstack.effects = [];
 
         const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -538,6 +555,7 @@ VStack(alignment: .leading, spacing: 10) {
         vstack.appendChild(createText("2"));
         vstack.appendChild(createText("3"));
         vstack.strokes = [];
+        vstack.effects = [];
 
         const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -569,6 +587,7 @@ VStack(alignment: .leading, spacing: 10) {
         vstack.appendChild(createText("2"));
         vstack.appendChild(createText("3"));
         vstack.strokes = [];
+        vstack.effects = [];
 
         const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -624,6 +643,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -679,6 +699,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -737,6 +758,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -793,6 +815,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -852,6 +875,7 @@ VStack(alignment: .leading, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -907,6 +931,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -965,6 +990,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -1021,6 +1047,7 @@ HStack(alignment: .top, spacing: 10) {
             parent.appendChild(hstack);
             parent.appendChild(createText("4"));
             parent.strokes = [];
+            parent.effects = [];
 
             const code = `
 HStack(alignment: .top, spacing: 10) {
