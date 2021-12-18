@@ -22,9 +22,11 @@ export const run = (root: SceneNode, option?: BuildContextOption): string => {
   if (figmaContext.allAppViewReferences.length > 0) {
     buildContext.lineBreak();
     figmaContext.allAppViewReferences.forEach((e) => {
-      buildContext.current = e;
-      build(buildContext);
-      buildContext.lineBreak();
+      if (e.node?.id !== root.id) {
+        buildContext.current = e;
+        build(buildContext);
+        buildContext.lineBreak();
+      }
     });
   }
   return buildContext.code;
