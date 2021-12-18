@@ -16,27 +16,27 @@ import { buildTextModifier } from "./textModifier";
 import { trace } from "./tracer";
 import { buildView } from "./view";
 
-export function build(buildContext: BuildContext) {
-  const { current: view } = buildContext;
-  trace("#build", buildContext, view);
+export function build(context: BuildContext) {
+  const { current: view } = context;
+  trace("#build", context, view);
 
   if (
-    buildContext.option != null &&
-    buildContext.option.isGenerateOnlyView != null &&
-    buildContext.option.isGenerateOnlyView
+    context.option != null &&
+    context.option.isGenerateOnlyView != null &&
+    context.option.isGenerateOnlyView
   ) {
-    buildBody(buildContext, view);
+    buildBody(context, view);
   } else {
     const name = view.appViewInfo?.appComponentName ?? "ContentView";
-    buildContext.add(`public struct ${name}: View {`);
-    buildContext.nestBlock(() => {
-      buildContext.add(`public var body: some View {`);
-      buildContext.nestBlock(() => {
-        buildBody(buildContext, view);
+    context.add(`public struct ${name}: View {`);
+    context.nestBlock(() => {
+      context.add(`public var body: some View {`);
+      context.nestBlock(() => {
+        buildBody(context, view);
       });
-      buildContext.add(`}`);
+      context.add(`}`);
     });
-    buildContext.add(`}`);
+    context.add(`}`);
   }
 }
 
