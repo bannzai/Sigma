@@ -10,7 +10,9 @@ export type SwiftUIViewModifier =
   | ClipShapeModifier
   | MaskModifier
   | CornerRadiusModifier
-  | PositionModifier;
+  | PositionModifier
+  | CompositingGroupModifier
+  | ShadowModifier;
 
 const swiftUIModifierType = [
   "frame",
