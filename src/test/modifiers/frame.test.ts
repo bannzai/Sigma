@@ -625,6 +625,7 @@ VStack(alignment: .leading, spacing: 10) {
             hstack.appendChild(createText("3"));
             hstack.layoutGrow = 0;
             hstack.strokes = [];
+            hstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -681,6 +682,7 @@ VStack(alignment: .leading, spacing: 10) {
             hstack.appendChild(createText("3"));
             hstack.layoutGrow = 1;
             hstack.strokes = [];
+            hstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -740,6 +742,7 @@ VStack(alignment: .leading, spacing: 10) {
             hstack.layoutGrow = 0;
             hstack.layoutAlign = "INHERIT";
             hstack.strokes = [];
+            hstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -797,6 +800,7 @@ VStack(alignment: .leading, spacing: 10) {
             hstack.layoutGrow = 0;
             hstack.layoutAlign = "STRETCH";
             hstack.strokes = [];
+            hstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -857,6 +861,7 @@ VStack(alignment: .leading, spacing: 10) {
             hstack.appendChild(createText("3"));
             hstack.layoutGrow = 0;
             hstack.strokes = [];
+            hstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -913,6 +918,7 @@ HStack(alignment: .top, spacing: 10) {
             hstack.appendChild(createText("3"));
             hstack.layoutGrow = 1;
             hstack.strokes = [];
+            hstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -972,6 +978,7 @@ HStack(alignment: .top, spacing: 10) {
             hstack.layoutGrow = 0;
             hstack.layoutAlign = "INHERIT";
             hstack.strokes = [];
+            hstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -1029,6 +1036,7 @@ HStack(alignment: .top, spacing: 10) {
             hstack.layoutGrow = 0;
             hstack.layoutAlign = "STRETCH";
             hstack.strokes = [];
+            hstack.effects = [];
 
             const parent = figma.createFrame();
             parent.name = "Frame 2";
@@ -1086,6 +1094,7 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("2"));
         hstack.appendChild(createText("3"));
         hstack.strokes = [];
+        hstack.effects = [];
 
         const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -1117,6 +1126,7 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("2"));
         hstack.appendChild(createText("3"));
         hstack.strokes = [];
+        hstack.effects = [];
 
         const code = `
 HStack(alignment: .top, spacing: 10) {
@@ -1148,6 +1158,7 @@ HStack(alignment: .top, spacing: 10) {
         hstack.appendChild(createText("2"));
         hstack.appendChild(createText("3"));
         hstack.strokes = [];
+        hstack.effects = [];
 
         const code = `
 HStack(alignment: .top, spacing: 10) {
