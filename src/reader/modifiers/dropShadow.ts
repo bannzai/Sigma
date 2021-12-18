@@ -11,11 +11,12 @@ export function appendDropShadow(
   view: View,
   node: SceneNode & BlendMixin
 ) {
+  const { effects } = node;
+  trace("#appendDropShadow", context, node, { effects });
   for (const effect of node.effects) {
     if (effect.type === "DROP_SHADOW") {
       const { color, radius, offset } = effect;
       const { x, y } = offset;
-      trace("#appendDropShadow", context, node, { color, radius, x, y });
 
       const compositingGroupModifier: CompositingGroupModifier = {
         type: "compositingGroup",
