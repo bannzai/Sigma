@@ -17,6 +17,7 @@ import {
 } from "../../types/views";
 import { appendBorder } from "../modifiers/border";
 import * as assert from "assert";
+import { appendDropShadow } from "../modifiers/dropShadow";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -53,6 +54,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendCornerRadius(context, button, node);
     appendBorder(context, button, node);
     appendPosition(context, button, node);
+    appendDropShadow(context, button, node);
   } else {
     console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
     let containerReference!: ChildrenMixin & View;
@@ -130,6 +132,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendCornerRadius(context, containerReference, node);
     appendBorder(context, containerReference, node);
     appendPosition(context, containerReference, node);
+    appendDropShadow(context, containerReference, node);
 
     context.unnestContainer();
   }

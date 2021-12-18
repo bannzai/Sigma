@@ -21,6 +21,7 @@ describe("#Button", () => {
     button.paddingRight = 0;
     button.appendChild(createText("1"));
     button.strokes = [];
+    button.effects = [];
 
     const code = `
 Button(action: { /* TODO */ }) {

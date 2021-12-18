@@ -7,6 +7,7 @@ import { appendClipShape } from "../modifiers/clipShape";
 import { appendFixedFrame } from "../modifiers/frame";
 import { appendPosition } from "../modifiers/position";
 import { traverse } from "../entrypoint";
+import { appendDropShadow } from "../modifiers/dropShadow";
 
 export function walkToGroup(context: FigmaContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
@@ -40,6 +41,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
     }
 
     appendFixedFrame(context, context.findBy(node), node);
+    appendDropShadow(context, context.findBy(node), node);
   } else {
     node.children.forEach((child) => {
       traverse(context, child);

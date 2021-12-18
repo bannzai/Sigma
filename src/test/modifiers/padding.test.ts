@@ -27,6 +27,7 @@ describe("#View.padding(_:)", () => {
       vstack.appendChild(createText("2"));
       vstack.appendChild(createText("3"));
       vstack.strokes = [];
+      vstack.effects = [];
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -55,6 +56,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("2"));
       vstack.appendChild(createText("3"));
       vstack.strokes = [];
+      vstack.effects = [];
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -82,6 +84,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("2"));
       vstack.appendChild(createText("3"));
       vstack.strokes = [];
+      vstack.effects = [];
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -110,6 +113,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("2"));
       vstack.appendChild(createText("3"));
       vstack.strokes = [];
+      vstack.effects = [];
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -138,6 +142,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("2"));
       vstack.appendChild(createText("3"));
       vstack.strokes = [];
+      vstack.effects = [];
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -166,6 +171,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("2"));
       vstack.appendChild(createText("3"));
       vstack.strokes = [];
+      vstack.effects = [];
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -194,6 +200,7 @@ VStack(alignment: .leading, spacing: 10) {
       vstack.appendChild(createText("2"));
       vstack.appendChild(createText("3"));
       vstack.strokes = [];
+      vstack.effects = [];
 
       const code = `
 VStack(alignment: .leading, spacing: 10) {

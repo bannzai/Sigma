@@ -7,5 +7,6 @@ export function createText(text: string): TextNode {
   node.characters = text;
   node.fills = [];
   node.strokes = [];
+  node.effects = [];
   return node;
 }

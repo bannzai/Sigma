@@ -3,6 +3,7 @@ import { FigmaContext } from "../context";
 import { Image } from "../../types/views";
 import { appendForegroundColor } from "../modifiers/foregroundColor";
 import { appendFixedFrame } from "../modifiers/frame";
+import { appendDropShadow } from "../modifiers/dropShadow";
 
 export function walkToVector(context: FigmaContext, node: VectorNode) {
   const { name, fills } = node;
@@ -30,5 +31,6 @@ export function walkToVector(context: FigmaContext, node: VectorNode) {
     }
 
     appendForegroundColor(context, node, image);
+    appendDropShadow(context, image, node);
   }
 }

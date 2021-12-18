@@ -6,6 +6,7 @@ import { buildBackground } from "./background";
 import { buildOverlay } from "./overlay";
 import { buildBody } from "./entrypoint";
 import { trace } from "./tracer";
+import { mappedSwiftUIColor } from "../util/mapper";
 
 export function buildModifier(
   context: BuildContext,
@@ -40,6 +41,14 @@ export function buildModifier(
     context.add(`.cornerRadius(${modifier.cornerRadius})`);
   } else if (modifier.type === "position") {
     context.add(`.position(x: ${modifier.x}, y: ${modifier.y})`);
+  } else if (modifier.type === "compositingGroup") {
+    context.add(`.compositingGroup()`);
+  } else if (modifier.type === "shadow") {
+    context.add(
+      `.shadow(color: ${mappedSwiftUIColor(modifier.color)}, radius: ${
+        modifier.radius
+      }, x: ${modifier.x}, y: ${modifier.y})`
+    );
   } else {
     const _: never = modifier;
   }
