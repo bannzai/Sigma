@@ -53,7 +53,7 @@ Image(systemName: "star")
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash: "" }];
 
     const code = `
-AsyncImage(url: URL(string: "https://picsum.photos/seed/picsum/200/300")!) { phase in
+AsyncImage(url: URL(string: "https://repository-images.githubusercontent.com/429982010/ca1373c5-2232-44be-bcf1-f47ac1007754")!) { phase in
     switch phase {
     case .success(let image):
         image
