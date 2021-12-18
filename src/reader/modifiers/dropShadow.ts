@@ -13,7 +13,7 @@ export function appendDropShadow(
 ) {
   const { effects } = node;
   trace("#appendDropShadow", context, node, { effects });
-  for (const effect of node.effects) {
+  for (const effect of effects) {
     if (effect.type === "DROP_SHADOW") {
       const { color, radius, offset } = effect;
       const { x, y } = offset;
