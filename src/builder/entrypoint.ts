@@ -29,13 +29,13 @@ export function build(buildContext: BuildContext) {
   } else {
     const name = view.appViewInfo?.appComponentName ?? "ContentView";
     buildContext.add(`public struct ${name}: View {`);
-    buildContext.nest();
-    buildContext.add(`public var body: some View {`);
-    buildContext.nest();
-    buildBody(buildContext, view);
-    buildContext.unnest();
-    buildContext.add(`}`);
-    buildContext.unnest();
+    buildContext.nestBlock(() => {
+      buildContext.add(`public var body: some View {`);
+      buildContext.nestBlock(() => {
+        buildBody(buildContext, view);
+      });
+      buildContext.add(`}`);
+    });
     buildContext.add(`}`);
   }
 }
