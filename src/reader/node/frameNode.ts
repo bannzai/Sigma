@@ -16,7 +16,6 @@ import {
   ZStack,
 } from "../../types/views";
 import { appendBorder } from "../modifiers/border";
-import * as assert from "assert";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -25,10 +24,8 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     name,
     children,
     layoutMode,
-    layoutAlign,
     itemSpacing,
     counterAxisAlignItems,
-    primaryAxisSizingMode,
     primaryAxisAlignItems,
   } = node;
 
@@ -104,6 +101,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       };
       containerReference = zstack;
     } else {
+      // @ts-ignore
       const _: never = layoutMode;
     }
 

@@ -1,6 +1,6 @@
 const assert = require("assert");
 import { BuildContext, BuildContextOption } from "./builder/context";
-import { build, buildBody } from "./builder/entrypoint";
+import { build } from "./builder/entrypoint";
 import { FigmaContext } from "./reader/context";
 import { traverse } from "./reader/entrypoint";
 

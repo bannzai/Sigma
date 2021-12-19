@@ -41,6 +41,7 @@ export function buildModifier(
   } else if (modifier.type === "position") {
     context.add(`.position(x: ${modifier.x}, y: ${modifier.y})`);
   } else {
+    // @ts-ignore
     const _: never = modifier;
   }
 }
