@@ -48,7 +48,7 @@ ZStack {
     Text("2")
     Text("3")
 }
-.background(Color(red: 1, green: 1, blue: 0.8))
+.background(Color(red: 1, green: 1, blue: 0.80))
 `;
 
     expect(testRun(component)).toEqual(code.slice("\n".length));
