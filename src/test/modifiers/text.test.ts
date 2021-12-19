@@ -81,7 +81,7 @@ Text("Hello")
 
       const code = `
 Text("Hello")
-    .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
+    .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.10))
 `;
       expect(testRun(text)).toEqual(code.slice("\n".length));
     });
@@ -104,7 +104,7 @@ Text("Hello")
       const code = `
 Text("Hello")
     .strikethrough()
-    .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.1))
+    .foregroundColor(Color(red: 1, green: 1, blue: 0, opacity: 0.10))
 `;
       expect(testRun(text)).toEqual(code.slice("\n".length));
     });

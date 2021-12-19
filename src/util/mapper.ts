@@ -1,9 +1,18 @@
 import { Color } from "../types/views";
 
 export function mappedSwiftUIColor(color: Color): string {
-  if (color.opacity != null && color.opacity !== 1) {
-    return `Color(red: ${color.red}, green: ${color.green}, blue: ${color.blue}, opacity: ${color.opacity})`;
+  const { red, blue, green, opacity } = color;
+  if (opacity != null && opacity !== 1) {
+    return `Color(red: ${truncated(red)}, green: ${truncated(
+      green
+    )}, blue: ${truncated(blue)}, opacity: ${truncated(opacity)})`;
   } else {
-    return `Color(red: ${color.red}, green: ${color.green}, blue: ${color.blue})`;
+    return `Color(red: ${truncated(red)}, green: ${truncated(
+      green
+    )}, blue: ${truncated(blue)})`;
   }
 }
+
+const truncated = (value: number): string => {
+  return value.toFixed(2).replace(/\.00$/, "");
+};
