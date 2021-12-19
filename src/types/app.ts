@@ -1,4 +1,4 @@
-import { View, ChildrenMixin } from "./views";
+import { View } from "./views";
 
 export interface AppViewInfo {
   appComponentName: string;

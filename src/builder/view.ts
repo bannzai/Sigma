@@ -77,6 +77,7 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
   } else if (view.type === "Spacer") {
     context.add(`Spacer()`);
   } else {
+    // @ts-ignore
     const _: never = view;
   }
 

@@ -2,7 +2,7 @@ import {
   CompositingGroupModifier,
   ShadowModifier,
 } from "../../types/modifiers";
-import { Color, View } from "../../types/views";
+import { View } from "../../types/views";
 import { FigmaContext } from "../context";
 import { trace } from "../tracer";
 

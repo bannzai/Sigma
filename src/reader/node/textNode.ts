@@ -1,7 +1,6 @@
 import { trace } from "../tracer";
 import { FigmaContext } from "../context";
 import { walkForTextModifier } from "../modifiers/textModifier";
-import { appendFrameModifierWithFrameNode } from "../modifiers/frame";
 import { Text } from "../../types/views";
 import { appendForegroundColor } from "../modifiers/foregroundColor";
 import { appendDropShadow } from "../modifiers/dropShadow";

@@ -25,6 +25,7 @@ export function buildTextModifier(
   } else if (textModifier.type === "foregroundColor") {
     context.add(`.foregroundColor(${mappedSwiftUIColor(textModifier.color)})`);
   } else {
+    // @ts-ignore
     const _: never = textModifier;
   }
 }

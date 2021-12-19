@@ -50,6 +50,7 @@ export function buildModifier(
       }, x: ${modifier.x}, y: ${modifier.y})`
     );
   } else {
+    // @ts-ignore
     const _: never = modifier;
   }
 }

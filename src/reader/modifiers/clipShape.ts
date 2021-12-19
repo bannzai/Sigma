@@ -3,9 +3,9 @@ import { ClipShapeModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 
 export function appendClipShape(
-  context: FigmaContext,
+  _context: FigmaContext,
   view: View,
-  maskingTargetNode: SceneNode,
+  _maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode
 ) {
   const clipShape: ClipShapeModifier = {

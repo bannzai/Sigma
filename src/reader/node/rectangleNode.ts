@@ -1,9 +1,6 @@
 import { trace } from "../tracer";
 import { FigmaContext } from "../context";
-import {
-  appendFixedFrame,
-  appendFrameModifierWithFrameNode,
-} from "../modifiers/frame";
+import { appendFixedFrame } from "../modifiers/frame";
 import { appendBorder } from "../modifiers/border";
 import { appendPosition } from "../modifiers/position";
 import { appendCornerRadius } from "../modifiers/cornerRadius";
