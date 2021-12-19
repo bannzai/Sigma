@@ -27,6 +27,7 @@ export function buildShape(context: BuildContext, shape: SwiftUIViewShape) {
     });
     context.unnest();
   } else {
+    // @ts-ignore
     const _: never = shape;
   }
 }
