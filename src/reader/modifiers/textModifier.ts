@@ -3,12 +3,11 @@ import { Text } from "../../types/views";
 import {
   FontTextModifier,
   FontWeightTextModifier,
-  ForegorundTextModifier,
   NamedFontWeight,
 } from "../../types/textModifier";
 
 export function walkForTextModifier(
-  context: FigmaContext,
+  _context: FigmaContext,
   node: TextNode,
   text: Text
 ) {
@@ -29,7 +28,6 @@ export function walkForTextModifier(
       text.modifiers.push(modifier);
     }
 
-    const fontSize = node.fontSize;
     const modifier: FontTextModifier = {
       type: "font",
       namedType: "system",
