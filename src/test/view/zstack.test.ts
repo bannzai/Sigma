@@ -41,6 +41,7 @@ describe("#ZStack", () => {
     component.appendChild(createText("2"));
     component.appendChild(createText("3"));
     component.strokes = [];
+    component.effects = [];
 
     const code = `
 ZStack {

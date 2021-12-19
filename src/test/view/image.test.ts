@@ -13,6 +13,7 @@ describe("#Image", () => {
     const rectangle = figma.createRectangle();
     rectangle.name = "image";
     rectangle.strokes = [];
+    rectangle.effects = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash: "" }];
 
     const code = `
@@ -26,6 +27,7 @@ Image("image")
     const rectangle = figma.createRectangle();
     rectangle.name = "image";
     rectangle.strokes = [];
+    rectangle.effects = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: "" }];
 
     const code = `
@@ -38,6 +40,7 @@ Image("image")
     const rectangle = figma.createRectangle();
     rectangle.name = "SFSymbols#star";
     rectangle.strokes = [];
+    rectangle.effects = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: "" }];
 
     const code = `
@@ -50,6 +53,7 @@ Image(systemName: "star")
     const rectangle = figma.createRectangle();
     rectangle.name = "SwiftUI::AsyncImage";
     rectangle.strokes = [];
+    rectangle.effects = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash: "" }];
 
     const code = `

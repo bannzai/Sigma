@@ -3,6 +3,7 @@ import { FigmaContext } from "../context";
 import { appendPosition } from "../modifiers/position";
 import { FrameModifier } from "../../types/modifiers";
 import { Divider, isAxisView } from "../../types/views";
+import { appendDropShadow } from "../modifiers/dropShadow";
 
 export function walkToLine(context: FigmaContext, node: LineNode) {
   trace(`#walkToLine`, context, node);
@@ -35,4 +36,6 @@ export function walkToLine(context: FigmaContext, node: LineNode) {
     node: node,
   };
   context.addChild(divider);
+
+  appendDropShadow(context, divider, node);
 }

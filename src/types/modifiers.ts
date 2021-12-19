@@ -10,7 +10,9 @@ export type SwiftUIViewModifier =
   | ClipShapeModifier
   | MaskModifier
   | CornerRadiusModifier
-  | PositionModifier;
+  | PositionModifier
+  | CompositingGroupModifier
+  | ShadowModifier;
 
 const swiftUIModifierType = [
   "frame",
@@ -22,6 +24,8 @@ const swiftUIModifierType = [
   "clipShape",
   "cornerRadius",
   "position",
+  "compositingGroup",
+  "shadow",
 ] as const;
 export interface Modifier {
   readonly type: string;
@@ -80,6 +84,19 @@ export interface CornerRadiusModifier extends Modifier {
 
 export interface PositionModifier extends Modifier {
   readonly type: "position";
+  x: number;
+  y: number;
+}
+
+export interface CompositingGroupModifier extends Modifier {
+  readonly type: "compositingGroup";
+}
+
+export interface ShadowModifier extends Modifier {
+  readonly type: "shadow";
+
+  color: Color;
+  radius: number;
   x: number;
   y: number;
 }

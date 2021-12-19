@@ -9,6 +9,7 @@ import { walkForFixedSpacer } from "../view/spacer";
 import { appendBackgroundColor } from "../modifiers/backgroundColor";
 import { AsyncImage } from "../../types/views";
 import { appendForegroundColor } from "../modifiers/foregroundColor";
+import { appendDropShadow } from "../modifiers/dropShadow";
 
 export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
   trace(`#walkToRectangle`, context, node);
@@ -50,5 +51,6 @@ export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
     appendCornerRadius(context, view, node);
     appendBorder(context, view, node);
     appendPosition(context, view, node);
+    appendDropShadow(context, view, node);
   }
 }

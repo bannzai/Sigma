@@ -19,6 +19,7 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
       text.textDecoration = "UNDERLINE";
       text.fills = [];
       text.strokes = [];
+      text.effects = [];
 
       const code = `
 Text("Hello")
@@ -38,6 +39,7 @@ Text("Hello")
       text.textDecoration = "STRIKETHROUGH";
       text.fills = [];
       text.strokes = [];
+      text.effects = [];
 
       const code = `
 Text("Hello")
@@ -56,6 +58,7 @@ Text("Hello")
       text.characters = "Hello";
       text.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 0 } }];
       text.strokes = [];
+      text.effects = [];
 
       const code = `
 Text("Hello")
@@ -74,6 +77,7 @@ Text("Hello")
         { type: "SOLID", color: { r: 1, g: 1, b: 0 }, opacity: 0.1 },
       ];
       text.strokes = [];
+      text.effects = [];
 
       const code = `
 Text("Hello")
@@ -95,6 +99,7 @@ Text("Hello")
         { type: "SOLID", color: { r: 1, g: 1, b: 0 }, opacity: 0.1 },
       ];
       text.strokes = [];
+      text.effects = [];
 
       const code = `
 Text("Hello")

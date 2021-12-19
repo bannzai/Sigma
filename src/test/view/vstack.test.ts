@@ -41,6 +41,7 @@ describe("#VStack", () => {
     vstack.appendChild(createText("2"));
     vstack.appendChild(createText("3"));
     vstack.strokes = [];
+    vstack.effects = [];
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -68,6 +69,7 @@ VStack(alignment: .leading, spacing: 10) {
     vstack.appendChild(createText("2"));
     vstack.appendChild(createText("3"));
     vstack.strokes = [];
+    vstack.effects = [];
 
     const code = `
 VStack(alignment: .leading, spacing: 10) {
@@ -96,10 +98,12 @@ VStack(alignment: .leading, spacing: 10) {
     vstack.appendChild(createText("2"));
     vstack.appendChild(createText("3"));
     vstack.strokes = [];
+    vstack.effects = [];
 
     const component = figma.createComponent();
     component.name = "";
     component.strokes = [];
+    component.effects = [];
     component.appendChild(vstack);
 
     const code = `
