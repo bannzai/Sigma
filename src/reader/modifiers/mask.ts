@@ -3,9 +3,9 @@ import { MaskModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 
 export function walkForMask(
-  context: FigmaContext,
+  _context: FigmaContext,
   view: View,
-  maskingTargetNode: SceneNode,
+  _maskingTargetNode: SceneNode,
   maskingNode: BlendMixin & SceneNode
 ) {
   const modifier: MaskModifier = {

@@ -1,9 +1,6 @@
 import { FigmaContext } from "../context";
 import { View } from "../../types/views";
-import {
-  ForegorundTextModifier,
-  NamedFontWeight,
-} from "../../types/textModifier";
+import { ForegorundTextModifier } from "../../types/textModifier";
 import { trace } from "../tracer";
 
 export function appendForegroundColor(
