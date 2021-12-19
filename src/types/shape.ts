@@ -1,6 +1,6 @@
 import { SwiftUIViewModifier } from "./modifiers";
 import { SwiftUIViewShapeModifier } from "./shapeModifier";
-import { View, ChildrenMixin } from "./views";
+import { View } from "./views";
 
 const swiftUIShapeType = ["Rectangle", "RoundedRectangle", "Ellipse"] as const;
 export type SwiftUIViewShape = Rectangle | RoundedRectangle | Ellipse;
