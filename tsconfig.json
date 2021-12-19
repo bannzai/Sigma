@@ -3,6 +3,7 @@
     "target": "es6",
     "lib": ["es6", "dom"],
     "noUnusedLocals": true,
+    "noImplicitAny": true,
     "outDir": "lib",
     "typeRoots": ["./node_modules/@types", "./node_modules/@figma"],
     "sourceMap": true,
