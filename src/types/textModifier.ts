@@ -52,7 +52,8 @@ export interface FontWeightTextModifier extends TextModifier {
 export interface FontTextModifier extends TextModifier {
   readonly type: "font";
 
-  namedType: "system";
+  system?: "system";
+  family?: string;
   size?: number;
 }
 
