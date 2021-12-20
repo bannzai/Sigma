@@ -1,3 +1,5 @@
+<img width="80%" src="https://user-images.githubusercontent.com/10897361/146839632-68d9f807-fabe-4e86-a7cf-d8b76e0fc3c3.png" />
+
 ## Sigma
 Sigma is a Figma plugin of automatically generate SwiftUI code from Figma
 
@@ -16,3 +18,7 @@ With the release of SwiftUI, iOS app developers are now writing code with a decl
 This means that if anyone write SwiftUI code from Figma design. It will look the same regardless of who wrote it. So, I think `Let's convert it automatically.` and develop tool of automatically converts Figma to Swift UI. That's Sigma.
 
 In addition, UI was built with GUI by Xib before SwiftUI release. It was excellent in terms of immediate preview. When using Sigma, Developer can make it check on the iPhone(or Simulator, or Xcode Previews) immediately as SwiftUI from Figma design files. And UI can be realized as designed by the designer (as intended or drawn). It is good.
+
+## LICENSE
+Sigma is released under the MIT license. See LICENSE for details.  
+Header logo is released [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed) license. Original design by [noainoue](https://github.com/noainoue).
