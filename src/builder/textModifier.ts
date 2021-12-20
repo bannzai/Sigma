@@ -21,7 +21,11 @@ export function buildTextModifier(
       args.push(`size: ${textModifier.size}`);
     }
     const fontArgument = args.join(", ");
-    context.add(`.font(.${textModifier.namedType}(${fontArgument}))`);
+    if (textModifier.system != null) {
+      context.add(`.font(.${textModifier.system}(${fontArgument}))`);
+    } else if (textModifier.family != null) {
+      context.add(`.font(.custom("${textModifier.family}", ${fontArgument}))`);
+    }
   } else if (textModifier.type === "foregroundColor") {
     context.add(`.foregroundColor(${mappedSwiftUIColor(textModifier.color)})`);
   } else {
