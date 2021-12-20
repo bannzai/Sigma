@@ -7,8 +7,8 @@ Sigma is a Figma plugin of automatically generate SwiftUI code from Figma
 https://user-images.githubusercontent.com/10897361/146834132-7a141c67-5b99-4a0f-9f33-d4f16be0d111.mov
 
 ## Documentation
-en: https://figma-to-swiftui.notion.site/Sigma-Document-en-da2b1b6d8e924373bb2e0630a3ea2ef6
-ja: https://figma-to-swiftui.notion.site/Sigma-Document-ja-7bacdb588eec4b35bcd2ca4104552682
+en: https://figma-to-swiftui.notion.site/Sigma-Document-en-da2b1b6d8e924373bb2e0630a3ea2ef6  
+ja: https://figma-to-swiftui.notion.site/Sigma-Document-ja-7bacdb588eec4b35bcd2ca4104552682  
 
 ## Plugin Link
 ... Not yet. It's being prepared now.
