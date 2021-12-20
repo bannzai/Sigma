@@ -1,40 +1,25 @@
-Below are the steps to get your plugin running. You can also find instructions at:
+![sigma](https://user-images.githubusercontent.com/10897361/146839756-190e36f6-e1ca-4032-b504-2e533816ddf6.png)
 
-  https://www.figma.com/plugin-docs/setup/
+## Sigma
+Sigma is a Figma plugin of automatically generate SwiftUI code from Figma
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+### Demo
+https://user-images.githubusercontent.com/10897361/146834132-7a141c67-5b99-4a0f-9f33-d4f16be0d111.mov
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+## Documentation
+en: https://figma-to-swiftui.notion.site/Sigma-Document-en-da2b1b6d8e924373bb2e0630a3ea2ef6  
+ja: https://figma-to-swiftui.notion.site/Sigma-Document-ja-7bacdb588eec4b35bcd2ca4104552682  
 
-  https://nodejs.org/en/download/
+## Plugin Link
+... Not yet. It's being prepared now. Just a moment, please.
 
-Next, install TypeScript using the command:
+## Why Sigma?
+With the release of SwiftUI, iOS app developers are now writing code with a declarative UI. We write the View code only Swift and aggregating information about the View to body property. And refined the way the UI is represented and limiting the options for writing it.
 
-  npm install -g typescript
+This means that if anyone write SwiftUI code from Figma design. It will look the same regardless of who wrote it. So, I think `Let's convert it automatically.` and develop tool of automatically converts Figma to Swift UI. That's Sigma.
 
-Finally, in the directory of your plugin, get the latest type definitions for the plugin API by running:
+In addition, UI was built with GUI by Xib before SwiftUI release. It was excellent in terms of immediate preview. When using Sigma, Developer can make it check on the iPhone(or Simulator, or Xcode Previews) immediately as SwiftUI from Figma design files. And UI can be realized as designed by the designer (as intended or drawn). It is good.
 
-  npm install --save-dev @figma/plugin-typings
-
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
-
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
-
-For more information, visit https://www.typescriptlang.org/
-
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
-
-We recommend writing TypeScript code using Visual Studio code:
-
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-    then select "tsc: watch - tsconfig.json". You will have to do this again every time
-    you reopen Visual Studio Code.
-
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+## LICENSE
+Sigma is released under the MIT license. See LICENSE for details.  
+Header logo is released [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed) license. Original design by [noainoue](https://github.com/noainoue).
