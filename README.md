@@ -1,4 +1,4 @@
-<img width="80%" src="https://user-images.githubusercontent.com/10897361/146839632-68d9f807-fabe-4e86-a7cf-d8b76e0fc3c3.png" />
+![sigma](https://user-images.githubusercontent.com/10897361/146839756-190e36f6-e1ca-4032-b504-2e533816ddf6.png)
 
 ## Sigma
 Sigma is a Figma plugin of automatically generate SwiftUI code from Figma
