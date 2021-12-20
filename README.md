@@ -11,7 +11,7 @@ en: https://figma-to-swiftui.notion.site/Sigma-Document-en-da2b1b6d8e924373bb2e0
 ja: https://figma-to-swiftui.notion.site/Sigma-Document-ja-7bacdb588eec4b35bcd2ca4104552682  
 
 ## Plugin Link
-... Not yet. It's being prepared now.
+... Not yet. It's being prepared now. Just a moment, please.
 
 ## Why Sigma?
 With the release of SwiftUI, iOS app developers are now writing code with a declarative UI. We write the View code only Swift and aggregating information about the View to body property. And refined the way the UI is represented and limiting the options for writing it.
