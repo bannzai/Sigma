@@ -28,16 +28,31 @@ export function walkForTextModifier(
       text.modifiers.push(modifier);
     }
 
-    const modifier: FontTextModifier = {
-      type: "font",
-      namedType: "system",
-      size: node.fontSize,
-    };
-    text.modifiers.push(modifier);
-
-    // TOOD: Mapping to SwiftUI FontFamily
-    // const fontFamily = node.fontName.family;
-    // console.log(JSON.stringify({ fontFamily, fontSize }));
+    // Apple Standard Font: https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/
+    const appleFonts = [
+      "San Francisco",
+      "SF Pro",
+      "SF Pro Rounded",
+      "SF Mono",
+      "SF Compact",
+      "SF Compact Rounded",
+    ];
+    const { family } = node.fontName;
+    if (appleFonts.includes(family)) {
+      const modifier: FontTextModifier = {
+        type: "font",
+        system: "system",
+        size: node.fontSize,
+      };
+      text.modifiers.push(modifier);
+    } else {
+      const modifier: FontTextModifier = {
+        type: "font",
+        family: family,
+        size: node.fontSize,
+      };
+      text.modifiers.push(modifier);
+    }
   }
 }
 
