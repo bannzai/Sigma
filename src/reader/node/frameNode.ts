@@ -31,7 +31,8 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     primaryAxisAlignItems,
   } = node;
 
-  if (name.startsWith("SwiftUI::Button")) {
+  if (name.startsWith("SwiftUI::Grid")) {
+  } else if (name.startsWith("SwiftUI::Button")) {
     console.log(`[DEBUG] SwiftUI::Button`);
 
     const button: Button = {
