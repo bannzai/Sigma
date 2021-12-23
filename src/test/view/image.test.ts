@@ -38,7 +38,7 @@ Image("image")
 
   test("Image with special marker for SFSymbol", async () => {
     const rectangle = figma.createRectangle();
-    rectangle.name = "SFSymbols#star";
+    rectangle.name = "SFSymbols::star";
     rectangle.strokes = [];
     rectangle.effects = [];
     rectangle.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: "" }];

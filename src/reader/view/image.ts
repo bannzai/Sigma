@@ -9,8 +9,8 @@ export function createImage(context: FigmaContext, node: ImageNode): Image {
   const { name } = node;
 
   let image: Image;
-  if (name.startsWith("SFSymbols#")) {
-    const systemName = name.slice("SFSymbols#".length);
+  if (name.startsWith("SFSymbols::")) {
+    const systemName = name.slice("SFSymbols::".length);
     image = {
       type: "Image",
       systemName,
