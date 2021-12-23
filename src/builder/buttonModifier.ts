@@ -9,7 +9,7 @@ export function buildButtonModifier(
   trace("#buildButtonModifier", context, buttonModifier);
 
   if (buttonModifier.type === "buttonStyle") {
-    context.add(`buttonStyle(${buttonModifier.name}())`);
+    context.add(`.buttonStyle(${buttonModifier.name}())`);
   } else {
     // @ts-ignore
     const _: never = buttonModifier;
