@@ -1,5 +1,4 @@
 import { SwiftUIButtonModifier } from "../types/buttonModifier";
-import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 import { trace } from "./tracer";
 
