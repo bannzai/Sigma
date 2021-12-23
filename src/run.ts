@@ -43,7 +43,7 @@ function isContainerType(node: any): node is ChildrenMixin {
 }
 
 function findBody(node: SceneNode): SceneNode | null {
-  if (node.name === "Sigma@Body") {
+  if (node.name === "Sigma::Body") {
     return node;
   }
   if (isContainerType(node)) {
