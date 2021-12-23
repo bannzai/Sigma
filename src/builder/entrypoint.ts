@@ -8,6 +8,7 @@ import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
 import { isSwiftUIViewType, View } from "../types/views";
 import { buildApp } from "./app";
+import { buildButtonModifier } from "./buttonModifier";
 import { BuildContext } from "./context";
 import { buildImageModifier } from "./imageModifier";
 import { buildModifier } from "./modifier";
