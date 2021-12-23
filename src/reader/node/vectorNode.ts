@@ -9,8 +9,8 @@ export function walkToVector(context: FigmaContext, node: VectorNode) {
   const { name, fills } = node;
   trace(`walkToVector`, context, node, { fills });
 
-  if (name.startsWith("SFSymbols#")) {
-    const systemName = name.slice("SFSymbols#".length);
+  if (name.startsWith("SFSymbols::")) {
+    const systemName = name.slice("SFSymbols::".length);
     const image: Image = {
       type: "Image",
       systemName,
