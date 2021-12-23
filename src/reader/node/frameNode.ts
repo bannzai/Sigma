@@ -17,6 +17,7 @@ import {
 } from "../../types/views";
 import { appendBorder } from "../modifiers/border";
 import { appendDropShadow } from "../modifiers/dropShadow";
+import { ButtonStyleModifier } from "../../types/buttonModifier";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -31,7 +32,8 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
   } = node;
 
   if (name.startsWith("SwiftUI::Button")) {
-    console.log(`SwiftUI::Button`);
+    console.log(`[DEBUG] SwiftUI::Button`);
+
     const button: Button = {
       type: "Button",
       node: node,
@@ -52,6 +54,16 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendBorder(context, button, node);
     appendPosition(context, button, node);
     appendDropShadow(context, button, node);
+
+    const nameWithoutButtonMarker = name.slice("SwiftUI::Button".length);
+    if (nameWithoutButtonMarker.startsWith("#")) {
+      const buttonStyleName = nameWithoutButtonMarker.slice("#".length);
+      const buttonStyleModifier: ButtonStyleModifier = {
+        type: "buttonStyle",
+        name: buttonStyleName,
+      };
+      button.modifiers.push(buttonStyleModifier);
+    }
   } else {
     console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
     let containerReference!: ChildrenMixin & View;

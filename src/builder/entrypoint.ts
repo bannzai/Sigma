@@ -1,5 +1,6 @@
 const assert = require("assert");
 import { isAppView } from "../types/app";
+import { isSwiftUIButtonModifier } from "../types/buttonModifier";
 import { isSwiftUIImageModifier } from "../types/imageModifier";
 import { isSwiftUIModifier, Modifier } from "../types/modifiers";
 import { isSwiftUIViewShape } from "../types/shape";
@@ -7,6 +8,7 @@ import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
 import { isSwiftUIViewType, View } from "../types/views";
 import { buildApp } from "./app";
+import { buildButtonModifier } from "./buttonModifier";
 import { BuildContext } from "./context";
 import { buildImageModifier } from "./imageModifier";
 import { buildModifier } from "./modifier";
@@ -57,6 +59,8 @@ export function buildBody(context: BuildContext, view: View | Modifier) {
     buildShapeModifier(context, view);
   } else if (isSwiftUIImageModifier(view)) {
     buildImageModifier(context, view);
+  } else if (isSwiftUIButtonModifier(view)) {
+    buildButtonModifier(context, view);
   } else {
     const { type } = view;
     assert(false, JSON.stringify({ type }));

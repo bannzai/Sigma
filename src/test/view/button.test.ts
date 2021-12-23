@@ -30,4 +30,26 @@ Button(action: { /* TODO */ }) {
 `;
     expect(testRun(button)).toEqual(code.slice("\n".length));
   });
+
+  test("Button with style", async () => {
+    await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+    const button = figma.createFrame();
+    button.name = "SwiftUI::Button#PrimaryButtonStyle";
+    button.paddingBottom = 0;
+    button.paddingLeft = 0;
+    button.paddingTop = 0;
+    button.paddingRight = 0;
+    button.appendChild(createText("1"));
+    button.strokes = [];
+    button.effects = [];
+
+    const code = `
+Button(action: { /* TODO */ }) {
+    Text("1")
+}
+.buttonStyle(PrimaryButtonStyle())
+`;
+    expect(testRun(button)).toEqual(code.slice("\n".length));
+  });
 });
