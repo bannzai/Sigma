@@ -4,6 +4,8 @@ export type SwiftUIViewType =
   | VStack
   | HStack
   | ZStack
+  | LazyVGrid
+  | LazyHGrid
   | Button
   | Text
   | Color
@@ -16,6 +18,8 @@ const swiftUIViewType = [
   "VStack",
   "HStack",
   "ZStack",
+  "LazyVGrid",
+  "LazyHGrid",
   "Button",
   "Text",
   "Color",
@@ -74,6 +78,16 @@ export interface HStack extends PrimitiveView, ChildrenMixin, AxisMixin {
 export interface ZStack extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "ZStack";
   readonly axis: "Z";
+}
+
+export interface LazyVGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
+  readonly type: "LazyVGrid";
+  readonly axis: "V";
+}
+
+export interface LazyHGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
+  readonly type: "LazyHGrid";
+  readonly axis: "H";
 }
 
 export interface Button extends PrimitiveView, ChildrenMixin {
