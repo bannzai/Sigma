@@ -1,0 +1,18 @@
+import { SwiftUIButtonModifier } from "../types/buttonModifier";
+import { mappedSwiftUIColor } from "../util/mapper";
+import { BuildContext } from "./context";
+import { trace } from "./tracer";
+
+export function buildButtonModifier(
+  context: BuildContext,
+  buttonModifier: SwiftUIButtonModifier
+) {
+  trace("#buildButtonModifier", context, buttonModifier);
+
+  if (buttonModifier.type === "buttonStyle") {
+    context.add(`buttonStyle(${buttonModifier.name}())`);
+  } else {
+    // @ts-ignore
+    const _: never = buttonModifier;
+  }
+}
