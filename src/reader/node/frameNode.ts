@@ -31,7 +31,8 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
   } = node;
 
   if (name.startsWith("SwiftUI::Button")) {
-    console.log(`SwiftUI::Button`);
+    console.log(`[DEBUG] SwiftUI::Button`);
+
     const button: Button = {
       type: "Button",
       node: node,
