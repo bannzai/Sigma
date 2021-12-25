@@ -64,11 +64,11 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       };
       walkForHGridChildren(context, node, grid);
 
-      context.nestContainer(grid);
+      context.beginGridContext(grid);
       children.forEach((child) => {
         traverse(context, child);
       });
-      context.unnestContainer();
+      context.endGridContext();
     } else {
       assert(false, "SwiftUI::Grid is necessary axis via layoutMode");
     }

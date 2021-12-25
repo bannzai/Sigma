@@ -1,5 +1,12 @@
 import { AppView, AppViewInfo } from "../types/app";
-import { Button, ChildrenMixin, isContainerType, View } from "../types/views";
+import {
+  Button,
+  ChildrenMixin,
+  isContainerType,
+  LazyHGrid,
+  LazyVGrid,
+  View,
+} from "../types/views";
 
 export class FigmaContext {
   root!: View;
@@ -30,6 +37,13 @@ export class FigmaContext {
     this.nestContainer(button);
   }
   endButtonContext(): (View & ChildrenMixin) | null {
+    return this.unnestContainer();
+  }
+
+  beginGridContext(grid: LazyVGrid | LazyHGrid) {
+    this.nestContainer(grid);
+  }
+  endGridContext(): (View & ChildrenMixin) | null {
     return this.unnestContainer();
   }
 
