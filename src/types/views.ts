@@ -83,11 +83,13 @@ export interface ZStack extends PrimitiveView, ChildrenMixin, AxisMixin {
 export interface LazyVGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "LazyVGrid";
   readonly axis: "V";
+  maximumChildrenCount: number;
 }
 
 export interface LazyHGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "LazyHGrid";
   readonly axis: "H";
+  maximumChildrenCount: number;
 }
 
 export interface Button extends PrimitiveView, ChildrenMixin {
