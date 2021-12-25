@@ -1,5 +1,5 @@
 import { AppView, AppViewInfo } from "../types/app";
-import { ChildrenMixin, isContainerType, View } from "../types/views";
+import { Button, ChildrenMixin, isContainerType, View } from "../types/views";
 
 export class FigmaContext {
   root!: View;
@@ -24,6 +24,13 @@ export class FigmaContext {
   }
   unnestContainer(): (View & ChildrenMixin) | null {
     return this.containerHistories.pop() ?? null;
+  }
+
+  beginButtonContext(button: Button) {
+    this.nestContainer(button);
+  }
+  endButtonContext(): (View & ChildrenMixin) | null {
+    return this.unnestContainer();
   }
 
   addChild(view: View) {

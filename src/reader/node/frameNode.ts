@@ -82,11 +82,11 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       children: [],
     };
 
-    context.nestContainer(button);
+    context.beginButtonContext(button);
     children.forEach((child) => {
       traverse(context, child);
     });
-    context.unnestContainer();
+    context.endButtonContext();
 
     appendPadding(context, button, node);
     appendFrameModifierWithFrameNode(context, button, node);
