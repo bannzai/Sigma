@@ -6,17 +6,17 @@ export function walkForVGridChildren(
   gridNode: FrameNode,
   grid: LazyVGrid
 ) {
-  let maximumChildrenCount = 0;
+  let maximumGridItemCount = 0;
   for (const child of gridNode.children) {
     if (child.type === "FRAME" && child.layoutMode === "HORIZONTAL") {
-      maximumChildrenCount = Math.max(
-        maximumChildrenCount,
+      maximumGridItemCount = Math.max(
+        maximumGridItemCount,
         child.children.length
       );
     }
   }
 
-  grid.maximumGridItemCount = maximumChildrenCount;
+  grid.maximumGridItemCount = maximumGridItemCount;
 }
 
 export function walkForHGridChildren(
@@ -24,15 +24,15 @@ export function walkForHGridChildren(
   gridNode: FrameNode,
   grid: LazyHGrid
 ) {
-  let maximumChildrenCount = 0;
+  let maximumGridItemCount = 0;
   for (const child of gridNode.children) {
     if (child.type === "FRAME" && child.layoutMode === "VERTICAL") {
-      maximumChildrenCount = Math.max(
-        maximumChildrenCount,
+      maximumGridItemCount = Math.max(
+        maximumGridItemCount,
         child.children.length
       );
     }
   }
 
-  grid.maximumGridItemCount = maximumChildrenCount;
+  grid.maximumGridItemCount = maximumGridItemCount;
 }
