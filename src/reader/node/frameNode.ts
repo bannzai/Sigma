@@ -105,12 +105,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       };
       button.modifiers.push(buttonStyleModifier);
     }
-  } else if (context.parentViewIsGrid) {
-    children.forEach((child) => {
-      context.parentViewIsGrid = false;
-      traverse(context, child);
-      context.parentViewIsGrid = true;
-    });
   } else {
     console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
 

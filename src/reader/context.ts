@@ -13,7 +13,6 @@ export class FigmaContext {
   containerHistories: (View & ChildrenMixin)[] = [];
   #appViewInfoList: AppViewInfo[] = [];
   allAppViewReferences: AppView[] = [];
-  parentViewIsGrid: boolean = false;
 
   get container(): (View & ChildrenMixin) | null {
     if (this.containerHistories.length <= 0) {
@@ -42,11 +41,9 @@ export class FigmaContext {
   }
 
   beginGridContext(grid: LazyVGrid | LazyHGrid) {
-    this.parentViewIsGrid = true;
     this.nestContainer(grid);
   }
   endGridContext(): (View & ChildrenMixin) | null {
-    this.parentViewIsGrid = false;
     return this.unnestContainer();
   }
 
