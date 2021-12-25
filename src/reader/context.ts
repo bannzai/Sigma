@@ -3,6 +3,7 @@ import {
   Button,
   ChildrenMixin,
   isContainerType,
+  isGridView,
   LazyHGrid,
   LazyVGrid,
   View,
@@ -33,6 +34,13 @@ export class FigmaContext {
     return this.containerHistories.pop() ?? null;
   }
 
+  get isGridContext(): boolean {
+    const currentContainer = this.container;
+    if (currentContainer == null) {
+      return false;
+    }
+    return isGridView(currentContainer);
+  }
   beginButtonContext(button: Button) {
     this.nestContainer(button);
   }

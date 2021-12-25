@@ -80,6 +80,12 @@ export interface ZStack extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly axis: "Z";
 }
 
+export const isGridView = (args: {
+  type: string;
+}): args is LazyHGrid | LazyHGrid => {
+  return args.type === "LazyVGrid" || args.type === "LazyHGrid";
+};
+
 export interface LazyVGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "LazyVGrid";
   readonly axis: "V";
