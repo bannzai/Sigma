@@ -48,11 +48,11 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       };
       walkForVGridChildren(context, node, grid);
 
-      context.nestContainer(grid);
+      context.beginGridContext(grid);
       children.forEach((child) => {
         traverse(context, child);
       });
-      context.unnestContainer();
+      context.endGridContext();
     } else if (layoutMode === "HORIZONTAL") {
       const grid: LazyHGrid = {
         type: "LazyHGrid",
