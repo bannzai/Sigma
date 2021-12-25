@@ -44,7 +44,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         node: node,
         modifiers: [],
         children: [],
-        maximumChildrenCount: 0,
+        maximumGridItemCount: 0,
       };
       walkForVGridChildren(context, node, grid);
 
@@ -60,7 +60,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         node: node,
         modifiers: [],
         children: [],
-        maximumChildrenCount: 0,
+        maximumGridItemCount: 0,
       };
       walkForHGridChildren(context, node, grid);
 

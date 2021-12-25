@@ -16,7 +16,7 @@ export function walkForVGridChildren(
     }
   }
 
-  grid.maximumChildrenCount = maximumChildrenCount;
+  grid.maximumGridItemCount = maximumChildrenCount;
 }
 
 export function walkForHGridChildren(
@@ -34,5 +34,5 @@ export function walkForHGridChildren(
     }
   }
 
-  grid.maximumChildrenCount = maximumChildrenCount;
+  grid.maximumGridItemCount = maximumChildrenCount;
 }
