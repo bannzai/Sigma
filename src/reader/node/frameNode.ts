@@ -10,6 +10,8 @@ import {
   Button,
   ChildrenMixin,
   HStack,
+  LazyHGrid,
+  LazyVGrid,
   Spacer,
   View,
   VStack,
@@ -18,6 +20,8 @@ import {
 import { appendBorder } from "../modifiers/border";
 import { appendDropShadow } from "../modifiers/dropShadow";
 import { ButtonStyleModifier } from "../../types/buttonModifier";
+import * as assert from "assert";
+import { walkForHGridChildren, walkForVGridChildren } from "../view/grid";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -32,6 +36,42 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
   } = node;
 
   if (name.startsWith("SwiftUI::Grid")) {
+    console.log(`[DEBUG] SwiftUI::Grid`);
+    if (layoutMode === "VERTICAL") {
+      const grid: LazyVGrid = {
+        type: "LazyVGrid",
+        axis: "V",
+        node: node,
+        modifiers: [],
+        children: [],
+        maximumChildrenCount: 0,
+      };
+      walkForVGridChildren(context, node, grid);
+
+      context.nestContainer(grid);
+      children.forEach((child) => {
+        traverse(context, child);
+      });
+      context.unnestContainer();
+    } else if (layoutMode === "HORIZONTAL") {
+      const grid: LazyHGrid = {
+        type: "LazyHGrid",
+        axis: "H",
+        node: node,
+        modifiers: [],
+        children: [],
+        maximumChildrenCount: 0,
+      };
+      walkForHGridChildren(context, node, grid);
+
+      context.nestContainer(grid);
+      children.forEach((child) => {
+        traverse(context, child);
+      });
+      context.unnestContainer();
+    } else {
+      assert(false, "SwiftUI::Grid is necessary axis via layoutMode");
+    }
   } else if (name.startsWith("SwiftUI::Button")) {
     console.log(`[DEBUG] SwiftUI::Button`);
 
