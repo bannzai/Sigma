@@ -1,8 +1,8 @@
-const assert = require("assert");
+import * as assert from "assert";
 import { FigmaContext } from "../context";
 import { trace } from "../tracer";
 import { isBlendMixin } from "../../util/type_guards";
-import { walkForMask as appendMask } from "../modifiers/mask";
+import { appendMask } from "../modifiers/mask";
 import { appendClipShape } from "../modifiers/clipShape";
 import { appendFixedFrame } from "../modifiers/frame";
 import { traverse } from "../entrypoint";
