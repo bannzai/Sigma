@@ -1,7 +1,7 @@
 import { FigmaContext } from "./context";
 
 export function trace(
-  prefix: string = "",
+  prefix = "",
   _context: FigmaContext,
   node: SceneNode,
   additional?: object
