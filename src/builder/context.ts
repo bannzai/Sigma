@@ -7,10 +7,10 @@ export interface BuildContextOption {
 export class BuildContext {
   current!: View;
   option?: BuildContextOption;
-  code: string = "";
-  indent: number = 0;
-  withoutIndent: boolean = false;
-  withoutLineBreak: boolean = false;
+  code = "";
+  indent = 0;
+  withoutIndent = false;
+  withoutLineBreak = false;
 
   nest() {
     this.indent += 4;
