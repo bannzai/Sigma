@@ -47,10 +47,12 @@ export function walkToRectangle(context: FigmaContext, node: RectangleNode) {
     }
 
     const view = context.findBy(node);
-    appendBackgroundColor(context, view, node);
-    appendCornerRadius(context, view, node);
-    appendBorder(context, view, node);
-    appendPosition(context, view, node);
-    appendDropShadow(context, view, node);
+    if (view != null) {
+      appendBackgroundColor(context, view, node);
+      appendCornerRadius(context, view, node);
+      appendBorder(context, view, node);
+      appendPosition(context, view, node);
+      appendDropShadow(context, view, node);
+    }
   }
 }

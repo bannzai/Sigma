@@ -32,6 +32,9 @@ export function walkToComponent(context: FigmaContext, node: ComponentNode) {
   } else {
     const child = children[0];
     traverse(context, child);
-    appendBackgroundColor(context, context.findBy(child), node);
+    const targetView = context.findBy(child);
+    if (targetView != null) {
+      appendBackgroundColor(context, targetView, node);
+    }
   }
 }
