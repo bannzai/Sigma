@@ -99,7 +99,25 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     });
     context.add("}");
   } else if (view.type === "Section") {
-    if (view.header != null) {
+    if (view.header != null && view.footer != null) {
+      const header = view.header;
+      const footer = view.footer;
+
+      context.add(`Section(header: `);
+      context.singleLine(() => {
+        buildBody(context, header);
+        context.add(`, footer: `);
+        buildBody(context, footer);
+        context.add(`) {\n`);
+      });
+
+      context.nestBlock(() => {
+        view.children.forEach((e) => {
+          buildBody(context, e);
+        });
+      });
+      context.add("}");
+    } else if (view.header != null) {
       const header = view.header;
 
       context.add(`Section(header: `);
