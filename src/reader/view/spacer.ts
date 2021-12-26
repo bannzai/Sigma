@@ -18,7 +18,7 @@ export function walkForFixedSpacer(
     return;
   }
 
-  if (!isAxisView(context.container)) {
+  if (context.container == null || !isAxisView(context.container)) {
     return;
   }
 
