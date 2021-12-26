@@ -1,10 +1,4 @@
-import { isAppView } from "../types/app";
-import {
-  isContainerType,
-  isSwiftUIViewType,
-  SwiftUIViewType,
-  View,
-} from "../types/views";
+import { isContainerType, SwiftUIViewType, View } from "../types/views";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 import { buildBody } from "./entrypoint";
