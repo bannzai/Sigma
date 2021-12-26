@@ -1,4 +1,10 @@
-import { isContainerType, SwiftUIViewType, View } from "../types/views";
+import { isAppView } from "../types/app";
+import {
+  isContainerType,
+  isSwiftUIViewType,
+  SwiftUIViewType,
+  View,
+} from "../types/views";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
 import { buildBody } from "./entrypoint";
@@ -76,6 +82,10 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     context.add(`Divider()`);
   } else if (view.type === "Spacer") {
     context.add(`Spacer()`);
+  } else if (view.type === "LazyVGrid") {
+    context.add(`LazyVGrid`);
+  } else if (view.type === "LazyHGrid") {
+    context.add(`LazyHGrid`);
   } else {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = view;
