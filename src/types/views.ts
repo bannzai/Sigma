@@ -47,7 +47,7 @@ export interface PrimitiveView extends View {
 }
 
 export function isContainerType(
-  args: any
+  args: object
 ): args is PrimitiveView & ChildrenMixin {
   return (args as ChildrenMixin).children !== undefined;
 }
@@ -59,7 +59,7 @@ export type Axis = "V" | "H" | "Z";
 export interface AxisMixin {
   readonly axis: Axis;
 }
-export const isAxisView = (args: any): args is AxisMixin => "axis" in args;
+export const isAxisView = (args: object): args is AxisMixin => "axis" in args;
 
 export interface VStack extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "VStack";

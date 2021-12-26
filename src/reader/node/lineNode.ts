@@ -13,7 +13,7 @@ export function walkToLine(context: FigmaContext, node: LineNode) {
     alignment: "center",
   };
 
-  if (context.root == null) {
+  if (context.root == null || context.container == null) {
     return;
   }
   if (isAxisView(context.container)) {
