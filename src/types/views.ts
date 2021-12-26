@@ -12,7 +12,8 @@ export type SwiftUIViewType =
   | Image
   | AsyncImage
   | Spacer
-  | Divider;
+  | Divider
+  | Section;
 
 const swiftUIViewType = [
   "VStack",
@@ -27,6 +28,7 @@ const swiftUIViewType = [
   "AsyncImage",
   "Spacer",
   "Divider",
+  "Section",
 ] as const;
 export function isSwiftUIViewType(args: {
   type: string;
@@ -138,4 +140,11 @@ export interface AsyncImage extends PrimitiveView {
 
 export interface Divider extends PrimitiveView {
   readonly type: "Divider";
+}
+
+export interface Section extends PrimitiveView, ChildrenMixin {
+  readonly type: "Section";
+
+  header?: View;
+  footer?: View;
 }
