@@ -69,59 +69,55 @@ export function walkForHGridChildren(
   grid: LazyHGrid
 ) {
   trace("#walkForHGridChildren", context, gridNode);
-  gridNode.children.forEach((child, index) => {
-    if (child.type === "FRAME" && child.children.length > 0) {
-      if (child.layoutMode === "VERTICAL") {
+  gridNode.children.forEach((gridNodeChild) => {
+    if (gridNodeChild.type === "FRAME" && gridNodeChild.children.length > 0) {
+      if (gridNodeChild.layoutMode === "VERTICAL") {
         grid.maximumGridItemCount = Math.max(
           grid.maximumGridItemCount,
-          child.children.length
+          gridNodeChild.children.length
         );
 
         context.beginGridContext(grid);
-        child.children.forEach((gridChild) => {
-          traverse(context, gridChild);
+        gridNodeChild.children.forEach((childForSkipVStack) => {
+          traverse(context, childForSkipVStack);
         });
         context.endGridContext();
-      } else if (child.layoutMode === "HORIZONTAL") {
-        if (index === 0) {
-          const section: Section = {
-            type: "Section",
-            modifiers: [],
-            node: child,
-            children: [],
-          };
-          grid.children.push(section);
+      } else if (gridNodeChild.layoutMode === "HORIZONTAL") {
+        const section: Section = {
+          type: "Section",
+          modifiers: [],
+          node: gridNodeChild,
+          children: [],
+        };
+        grid.children.push(section);
 
-          context.nestContainer(section);
-          child.children.forEach((sectionChild) => {
-            traverse(context, sectionChild);
+        context.nest(section, () => {
+          gridNodeChild.children.forEach((sectionChild, index) => {
+            const shouldFoldWhenSectionChildIsHStack =
+              sectionChild.type === "FRAME" &&
+              sectionChild.layoutMode === "VERTICAL";
+
+            if (shouldFoldWhenSectionChildIsHStack) {
+              sectionChild.children.forEach((gridElement) => {
+                traverse(context, gridElement);
+              });
+            } else {
+              traverse(context, sectionChild);
+
+              if (index === 0) {
+                const header = section.children.shift();
+                if (header != null) {
+                  section.header = header;
+                }
+              } else if (index === gridNodeChild.children.length - 1) {
+                const footer = section.children.pop();
+                if (footer != null) {
+                  section.footer = footer;
+                }
+              }
+            }
           });
-          context.unnestContainer();
-
-          const header = section.children.shift();
-          if (header != null) {
-            section.header = header;
-          }
-        } else if (index === gridNode.children.length - 1) {
-          const section: Section = {
-            type: "Section",
-            modifiers: [],
-            node: child,
-            children: [],
-          };
-          grid.children.push(section);
-
-          context.nestContainer(section);
-          child.children.forEach((sectionChild) => {
-            traverse(context, sectionChild);
-          });
-          context.unnestContainer();
-
-          const footer = section.children.pop();
-          if (footer != null) {
-            section.footer = footer;
-          }
-        }
+        });
       }
     }
   });
