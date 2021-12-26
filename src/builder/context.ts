@@ -37,6 +37,7 @@ export class BuildContext {
   enableLineBreak() {
     this.withoutLineBreak = false;
   }
+
   singleLine(closure: () => void) {
     this.disableIndent();
     this.disableLineBreak();
