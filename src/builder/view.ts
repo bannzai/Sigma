@@ -1,7 +1,7 @@
 import { isContainerType, SwiftUIViewType, View } from "../types/views";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
-import { buildBody } from "./entrypoint";
+import { build, buildBody } from "./entrypoint";
 import { trace } from "./tracer";
 
 export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
@@ -80,6 +80,36 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     context.add(`LazyVGrid`);
   } else if (view.type === "LazyHGrid") {
     context.add(`LazyHGrid`);
+  } else if (view.type === "Section") {
+    if (view.header != null) {
+      const header = view.header;
+
+      context.add(`Section(header: `);
+      context.singleLine(() => {
+        buildBody(context, header);
+        context.add(`) {`);
+      });
+      context.nestBlock(() => {
+        view.children.forEach((e) => {
+          buildBody(context, e);
+        });
+      });
+      context.add("}");
+    } else if (view.footer != null) {
+      const footer = view.footer;
+
+      context.add(`Section(footer: `);
+      context.singleLine(() => {
+        buildBody(context, footer);
+        context.add(`) {`);
+      });
+      context.nestBlock(() => {
+        view.children.forEach((e) => {
+          buildBody(context, e);
+        });
+      });
+      context.add("}");
+    }
   } else {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = view;
