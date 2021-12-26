@@ -1,7 +1,7 @@
 import { isContainerType, SwiftUIViewType, View } from "../types/views";
 import { mappedSwiftUIColor } from "../util/mapper";
 import { BuildContext } from "./context";
-import { build, buildBody } from "./entrypoint";
+import { buildBody } from "./entrypoint";
 import { trace } from "./tracer";
 
 export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
