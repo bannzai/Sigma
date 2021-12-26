@@ -1,12 +1,14 @@
 import { LazyHGrid, LazyVGrid, Section } from "../../types/views";
 import { FigmaContext } from "../context";
 import { traverse } from "../entrypoint";
+import { trace } from "../tracer";
 
 export function walkForVGridChildren(
   context: FigmaContext,
   gridNode: FrameNode,
   grid: LazyVGrid
 ) {
+  trace("#walkForVGridChildren", context, gridNode);
   gridNode.children.forEach((child, index) => {
     if (child.type === "FRAME" && child.children.length > 0) {
       if (child.layoutMode === "HORIZONTAL") {
@@ -64,6 +66,7 @@ export function walkForHGridChildren(
   gridNode: FrameNode,
   grid: LazyHGrid
 ) {
+  trace("#walkForHGridChildren", context, gridNode);
   gridNode.children.forEach((child, index) => {
     if (child.type === "FRAME" && child.children.length > 0) {
       if (child.layoutMode === "VERTICAL") {
