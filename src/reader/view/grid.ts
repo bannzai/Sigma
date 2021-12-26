@@ -81,9 +81,11 @@ export function walkForHGridChildren(
           child.children.length
         );
 
+        context.beginGridContext(grid);
         child.children.forEach((gridChild) => {
           traverse(context, gridChild);
         });
+        context.endGridContext();
       } else if (child.layoutMode === "HORIZONTAL") {
         if (index === 0) {
           const section: Section = {
@@ -92,6 +94,8 @@ export function walkForHGridChildren(
             node: child,
             children: [],
           };
+          grid.children.push(section);
+
           context.nestContainer(section);
           child.children.forEach((sectionChild) => {
             traverse(context, sectionChild);
@@ -109,6 +113,8 @@ export function walkForHGridChildren(
             node: child,
             children: [],
           };
+          grid.children.push(section);
+
           context.nestContainer(section);
           child.children.forEach((sectionChild) => {
             traverse(context, sectionChild);
