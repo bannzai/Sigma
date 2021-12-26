@@ -2,11 +2,11 @@ import * as assert from "assert";
 import { FigmaContext } from "../context";
 import { trace } from "../tracer";
 import { isBlendMixin } from "../../util/type_guards";
-import { appendMask } from "../modifiers/mask";
 import { appendClipShape } from "../modifiers/clipShape";
 import { appendFixedFrame } from "../modifiers/frame";
 import { traverse } from "../entrypoint";
 import { appendDropShadow } from "../modifiers/dropShadow";
+import { appendMask } from "../modifiers/mask";
 
 export function walkToGroup(context: FigmaContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
@@ -37,7 +37,7 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
         if (isBlendMixin(child)) {
           const targetView = context.findBy(target);
           if (targetView != null) {
-            appendClipShape(context, targetView, target, maskNode);
+            appendMask(context, targetView, target, child);
           }
         } else {
           assert(false, "unexpected is not mask node");
