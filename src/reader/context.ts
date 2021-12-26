@@ -32,6 +32,11 @@ export class FigmaContext {
   unnestContainer(): (View & ChildrenMixin) | null {
     return this.containerHistories.pop() ?? null;
   }
+  nest(container: View & ChildrenMixin, closure: () => void) {
+    this.nestContainer(container);
+    closure();
+    this.unnestContainer();
+  }
 
   beginButtonContext(button: Button) {
     this.nestContainer(button);
