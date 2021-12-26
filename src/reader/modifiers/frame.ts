@@ -25,11 +25,11 @@ export function appendFrameModifierWithFrameNode(
     parentFrameNode = null;
   }
 
-  var fixedWidth: FixedWidth | null = null;
-  var maxWidth: MaxWidth | null = null;
-  var fixedHeight: FixedHeight | null = null;
-  var maxHeight: MaxHeight | null = null;
-  var alignment: Alignment = "center";
+  let fixedWidth: FixedWidth | null = null;
+  let maxWidth: MaxWidth | null = null;
+  let fixedHeight: FixedHeight | null = null;
+  let maxHeight: MaxHeight | null = null;
+  let alignment: Alignment = "center";
 
   const {
     name,
@@ -276,12 +276,12 @@ export function appendFixedFrame(
 
   let isFixedWidth = false;
   let isFixedHeight = false;
-  if (context.container != null) {
-    if (isAxisView(context.container)) {
-      if (context.container.axis === "V") {
+  if (node.parent != null) {
+    if (node.parent.type === "FRAME") {
+      if (node.parent.layoutMode === "VERTICAL") {
         isFixedWidth = layoutAlign === "INHERIT";
         isFixedHeight = layoutGrow === 0;
-      } else if (context.container.axis === "H") {
+      } else if (node.parent.layoutMode === "HORIZONTAL") {
         isFixedWidth = layoutGrow === 0;
         isFixedHeight = layoutAlign === "INHERIT";
       }
