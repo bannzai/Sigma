@@ -17,9 +17,11 @@ export function walkForVGridChildren(
           child.children.length
         );
 
+        context.beginGridContext(grid);
         child.children.forEach((gridChild) => {
           traverse(context, gridChild);
         });
+        context.endGridContext();
       } else if (child.layoutMode === "VERTICAL") {
         if (index === 0) {
           const section: Section = {
@@ -28,6 +30,8 @@ export function walkForVGridChildren(
             node: child,
             children: [],
           };
+          grid.children.push(section);
+
           context.nestContainer(section);
           child.children.forEach((sectionChild) => {
             traverse(context, sectionChild);
@@ -45,6 +49,8 @@ export function walkForVGridChildren(
             node: child,
             children: [],
           };
+          grid.children.push(section);
+
           context.nestContainer(section);
           child.children.forEach((sectionChild) => {
             traverse(context, sectionChild);
