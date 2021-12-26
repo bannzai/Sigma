@@ -105,10 +105,9 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
       context.add(`Section(header: `);
       context.singleLine(() => {
         buildBody(context, header);
-        context.add(`)`);
+        context.add(`) {\n`);
       });
 
-      context.add(`{`);
       context.nestBlock(() => {
         view.children.forEach((e) => {
           buildBody(context, e);
@@ -121,10 +120,9 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
       context.add(`Section(footer: `);
       context.singleLine(() => {
         buildBody(context, footer);
-        context.add(`)`);
+        context.add(`) {\n`);
       });
 
-      context.add(`{`);
       context.nestBlock(() => {
         view.children.forEach((e) => {
           buildBody(context, e);
