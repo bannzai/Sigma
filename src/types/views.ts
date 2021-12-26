@@ -91,12 +91,14 @@ export const isGridView = (args: {
 export interface LazyVGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "LazyVGrid";
   readonly axis: "V";
+  children: (Section | HStack)[];
   maximumGridItemCount: number;
 }
 
 export interface LazyHGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "LazyHGrid";
   readonly axis: "H";
+  children: (Section | VStack)[];
   maximumGridItemCount: number;
 }
 
