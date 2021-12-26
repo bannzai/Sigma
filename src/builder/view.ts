@@ -77,9 +77,27 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
   } else if (view.type === "Spacer") {
     context.add(`Spacer()`);
   } else if (view.type === "LazyVGrid") {
-    context.add(`LazyVGrid`);
+    const flexibleSizeGridItem = Array(view.maximumGridItemCount)
+      .fill(`GridItem(.flexible())`)
+      .join(", ");
+    context.add(`LazyVGrid(columns: [${flexibleSizeGridItem}]) {`);
+    context.nestBlock(() => {
+      view.children.forEach((e) => {
+        buildBody(context, e);
+      });
+    });
+    context.add("}");
   } else if (view.type === "LazyHGrid") {
-    context.add(`LazyHGrid`);
+    const flexibleSizeGridItem = Array(view.maximumGridItemCount)
+      .fill(`GridItem(.flexible())`)
+      .join(", ");
+    context.add(`LazyHGrid(rows: [${flexibleSizeGridItem}]) {`);
+    context.nestBlock(() => {
+      view.children.forEach((e) => {
+        buildBody(context, e);
+      });
+    });
+    context.add("}");
   } else if (view.type === "Section") {
     if (view.header != null) {
       const header = view.header;
