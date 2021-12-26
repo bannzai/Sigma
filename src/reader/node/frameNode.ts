@@ -47,12 +47,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         maximumGridItemCount: 0,
       };
       walkForVGridChildren(context, node, grid);
-
-      context.beginGridContext(grid);
-      children.forEach((child) => {
-        traverse(context, child);
-      });
-      context.endGridContext();
     } else if (layoutMode === "HORIZONTAL") {
       const grid: LazyHGrid = {
         type: "LazyHGrid",
@@ -63,12 +57,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         maximumGridItemCount: 0,
       };
       walkForHGridChildren(context, node, grid);
-
-      context.beginGridContext(grid);
-      children.forEach((child) => {
-        traverse(context, child);
-      });
-      context.endGridContext();
     } else {
       assert(false, "SwiftUI::Grid is necessary axis via layoutMode");
     }
