@@ -26,7 +26,10 @@ export function walkToLine(context: FigmaContext, node: LineNode) {
         frame.height = node.height;
       }
     } else if (context.container.axis === "Z") {
-      appendPosition(context, context.findBy(node), node);
+      const view = context.findBy(node);
+      if (view != null) {
+        appendPosition(context, view, node);
+      }
     }
   }
 
