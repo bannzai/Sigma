@@ -16,7 +16,7 @@ export function buildTextModifier(
   } else if (textModifier.type === "fontWeight") {
     context.add(`.fontWeight(.${textModifier.fontWeight})`);
   } else if (textModifier.type === "font") {
-    var args: string[] = [];
+    const args: string[] = [];
     if (textModifier.size != null) {
       args.push(`size: ${textModifier.size}`);
     }
