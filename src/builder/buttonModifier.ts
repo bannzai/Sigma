@@ -11,7 +11,7 @@ export function buildButtonModifier(
   if (buttonModifier.type === "buttonStyle") {
     context.add(`.buttonStyle(${buttonModifier.name}())`);
   } else {
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = buttonModifier;
   }
 }

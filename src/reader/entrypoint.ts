@@ -83,7 +83,7 @@ export function traverse(context: FigmaContext, node: SceneNode) {
   } else if (node.type === "WIDGET") {
     // NOTE: Unsupported because it is figjam property
   } else {
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = node;
   }
 }

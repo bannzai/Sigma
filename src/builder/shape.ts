@@ -27,7 +27,7 @@ export function buildShape(context: BuildContext, shape: SwiftUIViewShape) {
     });
     context.unnest();
   } else {
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = shape;
   }
 }

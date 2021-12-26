@@ -157,7 +157,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       };
       containerReference = zstack;
     } else {
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const _: never = layoutMode;
     }
 

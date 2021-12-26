@@ -29,7 +29,7 @@ export function buildTextModifier(
   } else if (textModifier.type === "foregroundColor") {
     context.add(`.foregroundColor(${mappedSwiftUIColor(textModifier.color)})`);
   } else {
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = textModifier;
   }
 }

@@ -7,7 +7,7 @@ describe("#Button", () => {
     simulateErrors: true,
     isWithoutTimeout: false,
   });
-  // @ts-ignore for some reason, need to override this for figma.mixed to work
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars for some reason, need to override this for figma.mixed to work
   global.figma = figma;
 
   test("it is besically pattern. For Text Button", async () => {
