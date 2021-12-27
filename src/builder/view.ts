@@ -76,8 +76,86 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     context.add(`Divider()`);
   } else if (view.type === "Spacer") {
     context.add(`Spacer()`);
+  } else if (view.type === "LazyVGrid") {
+    const flexibleSizeGridItem = Array(view.maximumGridItemCount)
+      .fill(`GridItem(.flexible())`)
+      .join(", ");
+    context.add(`LazyVGrid(columns: [${flexibleSizeGridItem}]) {`);
+    context.nestBlock(() => {
+      view.children.forEach((e) => {
+        buildBody(context, e);
+      });
+    });
+    context.add("}");
+  } else if (view.type === "LazyHGrid") {
+    const flexibleSizeGridItem = Array(view.maximumGridItemCount)
+      .fill(`GridItem(.flexible())`)
+      .join(", ");
+    context.add(`LazyHGrid(rows: [${flexibleSizeGridItem}]) {`);
+    context.nestBlock(() => {
+      view.children.forEach((e) => {
+        buildBody(context, e);
+      });
+    });
+    context.add("}");
+  } else if (view.type === "Section") {
+    if (view.header != null && view.footer != null) {
+      const header = view.header;
+      const footer = view.footer;
+
+      context.disableLineBreak();
+      context.add(`Section(header: `);
+      context.disableIndent();
+      buildBody(context, header);
+      context.add(`, footer: `);
+      buildBody(context, footer);
+      context.enableLineBreak();
+      context.add(`) {`);
+      context.enableIndent();
+
+      context.nestBlock(() => {
+        view.children.forEach((e) => {
+          buildBody(context, e);
+        });
+      });
+      context.add("}");
+    } else if (view.header != null) {
+      const header = view.header;
+
+      context.disableLineBreak();
+      context.add(`Section(header: `);
+      context.disableIndent();
+      buildBody(context, header);
+      context.enableLineBreak();
+      context.add(`) {`);
+      context.enableIndent();
+
+      context.nestBlock(() => {
+        view.children.forEach((e) => {
+          buildBody(context, e);
+        });
+      });
+      context.add("}");
+    } else if (view.footer != null) {
+      const footer = view.footer;
+
+      context.disableLineBreak();
+      context.add(`Section(footer: `);
+      context.disableIndent();
+      buildBody(context, footer);
+      context.enableLineBreak();
+      context.add(`) {`);
+      context.enableIndent();
+
+      context.nestBlock(() => {
+        view.children.forEach((e) => {
+          buildBody(context, e);
+        });
+      });
+      context.add("}");
+    }
   } else {
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = view;
   }
 

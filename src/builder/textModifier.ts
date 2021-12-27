@@ -16,7 +16,7 @@ export function buildTextModifier(
   } else if (textModifier.type === "fontWeight") {
     context.add(`.fontWeight(.${textModifier.fontWeight})`);
   } else if (textModifier.type === "font") {
-    var args: string[] = [];
+    const args: string[] = [];
     if (textModifier.size != null) {
       args.push(`size: ${textModifier.size}`);
     }
@@ -29,7 +29,7 @@ export function buildTextModifier(
   } else if (textModifier.type === "foregroundColor") {
     context.add(`.foregroundColor(${mappedSwiftUIColor(textModifier.color)})`);
   } else {
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = textModifier;
   }
 }

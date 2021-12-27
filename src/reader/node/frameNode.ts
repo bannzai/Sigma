@@ -10,6 +10,8 @@ import {
   Button,
   ChildrenMixin,
   HStack,
+  LazyHGrid,
+  LazyVGrid,
   Spacer,
   View,
   VStack,
@@ -18,6 +20,8 @@ import {
 import { appendBorder } from "../modifiers/border";
 import { appendDropShadow } from "../modifiers/dropShadow";
 import { ButtonStyleModifier } from "../../types/buttonModifier";
+import * as assert from "assert";
+import { walkForHGridChildren, walkForVGridChildren } from "../view/grid";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -31,7 +35,48 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     primaryAxisAlignItems,
   } = node;
 
-  if (name.startsWith("SwiftUI::Button")) {
+  if (name.startsWith("SwiftUI::Grid")) {
+    console.log(`[DEBUG] SwiftUI::Grid`);
+    if (layoutMode === "VERTICAL") {
+      const grid: LazyVGrid = {
+        type: "LazyVGrid",
+        axis: "V",
+        node: node,
+        modifiers: [],
+        children: [],
+        maximumGridItemCount: 0,
+      };
+      walkForVGridChildren(context, node, grid);
+
+      appendPadding(context, grid, node);
+      appendFrameModifierWithFrameNode(context, grid, node);
+      appendBackgroundColor(context, grid, node);
+      appendCornerRadius(context, grid, node);
+      appendBorder(context, grid, node);
+      appendPosition(context, grid, node);
+      appendDropShadow(context, grid, node);
+    } else if (layoutMode === "HORIZONTAL") {
+      const grid: LazyHGrid = {
+        type: "LazyHGrid",
+        axis: "H",
+        node: node,
+        modifiers: [],
+        children: [],
+        maximumGridItemCount: 0,
+      };
+      walkForHGridChildren(context, node, grid);
+
+      appendPadding(context, grid, node);
+      appendFrameModifierWithFrameNode(context, grid, node);
+      appendBackgroundColor(context, grid, node);
+      appendCornerRadius(context, grid, node);
+      appendBorder(context, grid, node);
+      appendPosition(context, grid, node);
+      appendDropShadow(context, grid, node);
+    } else {
+      assert(false, "SwiftUI::Grid is necessary axis via layoutMode");
+    }
+  } else if (name.startsWith("SwiftUI::Button")) {
     console.log(`[DEBUG] SwiftUI::Button`);
 
     const button: Button = {
@@ -41,11 +86,11 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       children: [],
     };
 
-    context.nestContainer(button);
+    context.beginButtonContext(button);
     children.forEach((child) => {
       traverse(context, child);
     });
-    context.unnestContainer();
+    context.endButtonContext();
 
     appendPadding(context, button, node);
     appendFrameModifierWithFrameNode(context, button, node);
@@ -66,6 +111,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     }
   } else {
     console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
+
     let containerReference!: ChildrenMixin & View;
     if (layoutMode === "HORIZONTAL") {
       const hstack: HStack = {
@@ -115,7 +161,7 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       };
       containerReference = zstack;
     } else {
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const _: never = layoutMode;
     }
 

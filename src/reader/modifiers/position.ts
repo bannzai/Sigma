@@ -20,6 +20,9 @@ export function appendPosition(
   }
 
   const parent = context.findBy(view.node.parent);
+  if (parent == null) {
+    return;
+  }
   if (!isAxisView(parent) || parent.axis !== "Z") {
     return;
   }

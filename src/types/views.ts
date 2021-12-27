@@ -4,18 +4,23 @@ export type SwiftUIViewType =
   | VStack
   | HStack
   | ZStack
+  | LazyVGrid
+  | LazyHGrid
   | Button
   | Text
   | Color
   | Image
   | AsyncImage
   | Spacer
-  | Divider;
+  | Divider
+  | Section;
 
 const swiftUIViewType = [
   "VStack",
   "HStack",
   "ZStack",
+  "LazyVGrid",
+  "LazyHGrid",
   "Button",
   "Text",
   "Color",
@@ -23,6 +28,7 @@ const swiftUIViewType = [
   "AsyncImage",
   "Spacer",
   "Divider",
+  "Section",
 ] as const;
 export function isSwiftUIViewType(args: {
   type: string;
@@ -41,6 +47,7 @@ export interface PrimitiveView extends View {
 }
 
 export function isContainerType(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   args: any
 ): args is PrimitiveView & ChildrenMixin {
   return (args as ChildrenMixin).children !== undefined;
@@ -53,7 +60,7 @@ export type Axis = "V" | "H" | "Z";
 export interface AxisMixin {
   readonly axis: Axis;
 }
-export const isAxisView = (args: any): args is AxisMixin => "axis" in args;
+export const isAxisView = (args: object): args is AxisMixin => "axis" in args;
 
 export interface VStack extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "VStack";
@@ -74,6 +81,26 @@ export interface HStack extends PrimitiveView, ChildrenMixin, AxisMixin {
 export interface ZStack extends PrimitiveView, ChildrenMixin, AxisMixin {
   readonly type: "ZStack";
   readonly axis: "Z";
+}
+
+export const isGridView = (args: {
+  type: string;
+}): args is LazyHGrid | LazyHGrid => {
+  return args.type === "LazyVGrid" || args.type === "LazyHGrid";
+};
+
+export interface LazyVGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
+  readonly type: "LazyVGrid";
+  readonly axis: "V";
+  children: (Section | HStack)[];
+  maximumGridItemCount: number;
+}
+
+export interface LazyHGrid extends PrimitiveView, ChildrenMixin, AxisMixin {
+  readonly type: "LazyHGrid";
+  readonly axis: "H";
+  children: (Section | VStack)[];
+  maximumGridItemCount: number;
 }
 
 export interface Button extends PrimitiveView, ChildrenMixin {
@@ -116,4 +143,11 @@ export interface AsyncImage extends PrimitiveView {
 
 export interface Divider extends PrimitiveView {
   readonly type: "Divider";
+}
+
+export interface Section extends PrimitiveView, ChildrenMixin {
+  readonly type: "Section";
+
+  header?: View;
+  footer?: View;
 }

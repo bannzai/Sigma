@@ -1,8 +1,8 @@
-const assert = require("assert");
 import { BuildContext, BuildContextOption } from "./builder/context";
 import { build } from "./builder/entrypoint";
 import { FigmaContext } from "./reader/context";
 import { traverse } from "./reader/entrypoint";
+import { assert } from "./util/foundation";
 
 export const run = (root: SceneNode, option?: BuildContextOption): string => {
   const figmaContext = new FigmaContext();
@@ -38,6 +38,7 @@ export const testRun = (root: SceneNode): string => {
   });
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isContainerType(node: any): node is ChildrenMixin {
   return (node as ChildrenMixin).children !== undefined;
 }

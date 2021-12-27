@@ -6,7 +6,8 @@ describe("Text.modifier(ANY_MODIFIER)", () => {
     simulateErrors: true,
     isWithoutTimeout: false,
   });
-  // @ts-ignore for some reason, need to override this for figma.mixed to work
+  // eslint-disable-next-line
+  // @ts-ignore
   global.figma = figma;
 
   describe("#underline", () => {

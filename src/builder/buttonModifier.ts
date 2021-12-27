@@ -10,8 +10,5 @@ export function buildButtonModifier(
 
   if (buttonModifier.type === "buttonStyle") {
     context.add(`.buttonStyle(${buttonModifier.name}())`);
-  } else {
-    // @ts-ignore
-    const _: never = buttonModifier;
   }
 }

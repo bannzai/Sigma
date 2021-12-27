@@ -7,7 +7,8 @@ describe("#HStack", () => {
     simulateErrors: true,
     isWithoutTimeout: false,
   });
-  // @ts-ignore for some reason, need to override this for figma.mixed to work
+  // eslint-disable-next-line
+  // @ts-ignore
   global.figma = figma;
 
   test("it is besically pattern. HStack has three text", async () => {

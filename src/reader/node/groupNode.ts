@@ -1,12 +1,12 @@
-const assert = require("assert");
+import * as assert from "assert";
 import { FigmaContext } from "../context";
 import { trace } from "../tracer";
 import { isBlendMixin } from "../../util/type_guards";
-import { walkForMask as appendMask } from "../modifiers/mask";
 import { appendClipShape } from "../modifiers/clipShape";
 import { appendFixedFrame } from "../modifiers/frame";
 import { traverse } from "../entrypoint";
 import { appendDropShadow } from "../modifiers/dropShadow";
+import { appendMask } from "../modifiers/mask";
 
 export function walkToGroup(context: FigmaContext, node: GroupNode) {
   trace(`#walkToGroup`, context, node);
@@ -24,7 +24,10 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
       console.log(JSON.stringify({ id, width, height }));
 
       const maskNode = reversed[1] as BlendMixin & SceneNode;
-      appendClipShape(context, context.findBy(target), target, maskNode);
+      const targetView = context.findBy(target);
+      if (targetView != null) {
+        appendClipShape(context, targetView, target, maskNode);
+      }
     } else {
       const reversed = Array.from(node.children).reverse();
       const target = reversed[0];
@@ -32,15 +35,21 @@ export function walkToGroup(context: FigmaContext, node: GroupNode) {
 
       reversed.slice(1).forEach((child) => {
         if (isBlendMixin(child)) {
-          appendMask(context, context.findBy(target), target, child);
+          const targetView = context.findBy(target);
+          if (targetView != null) {
+            appendMask(context, targetView, target, child);
+          }
         } else {
           assert(false, "unexpected is not mask node");
         }
       });
     }
 
-    appendFixedFrame(context, context.findBy(node), node);
-    appendDropShadow(context, context.findBy(node), node);
+    const targetView = context.findBy(node);
+    if (targetView != null) {
+      appendFixedFrame(context, targetView, node);
+      appendDropShadow(context, targetView, node);
+    }
   } else {
     node.children.forEach((child) => {
       traverse(context, child);

@@ -13,7 +13,7 @@ export function walkToLine(context: FigmaContext, node: LineNode) {
     alignment: "center",
   };
 
-  if (context.root == null) {
+  if (context.root == null || context.container == null) {
     return;
   }
   if (isAxisView(context.container)) {
@@ -26,7 +26,10 @@ export function walkToLine(context: FigmaContext, node: LineNode) {
         frame.height = node.height;
       }
     } else if (context.container.axis === "Z") {
-      appendPosition(context, context.findBy(node), node);
+      const view = context.findBy(node);
+      if (view != null) {
+        appendPosition(context, view, node);
+      }
     }
   }
 

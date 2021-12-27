@@ -2,7 +2,7 @@ import { FigmaContext } from "../context";
 import { MaskModifier } from "../../types/modifiers";
 import { View } from "../../types/views";
 
-export function walkForMask(
+export function appendMask(
   _context: FigmaContext,
   view: View,
   _maskingTargetNode: SceneNode,

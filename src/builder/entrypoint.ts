@@ -1,4 +1,3 @@
-const assert = require("assert");
 import { isAppView } from "../types/app";
 import { isSwiftUIButtonModifier } from "../types/buttonModifier";
 import { isSwiftUIImageModifier } from "../types/imageModifier";
@@ -7,6 +6,7 @@ import { isSwiftUIViewShape } from "../types/shape";
 import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
 import { isSwiftUIViewType, View } from "../types/views";
+import { assert } from "../util/foundation";
 import { buildApp } from "./app";
 import { buildButtonModifier } from "./buttonModifier";
 import { BuildContext } from "./context";

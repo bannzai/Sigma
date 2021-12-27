@@ -50,7 +50,7 @@ export function buildModifier(
       }, x: ${modifier.x}, y: ${modifier.y})`
     );
   } else {
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = modifier;
   }
 }
