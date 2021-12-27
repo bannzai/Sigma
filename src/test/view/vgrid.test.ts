@@ -94,7 +94,7 @@ LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flex
     expect(testRun(vgrid)).toEqual(code.slice("\n".length));
   });
 
-  test("LazyVGrid Elements separate with Section", async () => {
+  test("LazyVGrid with Section. Section contains header ", async () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
     const vgrid = figma.createFrame();
@@ -108,7 +108,7 @@ LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flex
     vgrid.itemSpacing = 10;
     vgrid.appendChild(
       createVStack(
-        createText("Title"),
+        createText("Header"),
         createHStack(createText("1"), createText("2"), createText("3"))
       )
     );
@@ -117,7 +117,74 @@ LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flex
 
     const code = `
 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
-    Section(header: Text("Title")) {
+    Section(header: Text("Header")) {
+        Text("1")
+        Text("2")
+        Text("3")
+    }
+}
+`;
+    expect(testRun(vgrid)).toEqual(code.slice("\n".length));
+  });
+
+  test("LazyVGrid with Section. Section contains footer ", async () => {
+    await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+    const vgrid = figma.createFrame();
+    vgrid.name = "SwiftUI::Grid";
+    vgrid.layoutMode = "VERTICAL";
+    vgrid.counterAxisAlignItems = "MIN";
+    vgrid.paddingLeft = 0;
+    vgrid.paddingTop = 0;
+    vgrid.paddingRight = 0;
+    vgrid.paddingBottom = 0;
+    vgrid.itemSpacing = 10;
+    vgrid.appendChild(
+      createVStack(
+        createHStack(createText("1"), createText("2"), createText("3")),
+        createText("Footer")
+      )
+    );
+    vgrid.strokes = [];
+    vgrid.effects = [];
+
+    const code = `
+LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
+    Section(footer: Text("Footer")) {
+        Text("1")
+        Text("2")
+        Text("3")
+    }
+}
+`;
+    expect(testRun(vgrid)).toEqual(code.slice("\n".length));
+  });
+
+  test("LazyVGrid with Section. Section contains header and footer ", async () => {
+    await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+    const vgrid = figma.createFrame();
+    vgrid.name = "SwiftUI::Grid";
+    vgrid.layoutMode = "VERTICAL";
+    vgrid.counterAxisAlignItems = "MIN";
+    vgrid.paddingLeft = 0;
+    vgrid.paddingTop = 0;
+    vgrid.paddingRight = 0;
+    vgrid.paddingBottom = 0;
+    vgrid.itemSpacing = 10;
+    vgrid.appendChild(
+      createVStack(
+        createText("Header"),
+        createHStack(createText("1"), createText("2"), createText("3")),
+        createText("Footer")
+      )
+    );
+    vgrid.strokes = [];
+    vgrid.effects = [];
+
+    const code = `
+LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
+    Section(header: Text("Header"), footer: Text("Footer")) {
         Text("1")
         Text("2")
         Text("3")
