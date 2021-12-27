@@ -28,3 +28,21 @@ export function createHStack(...children: SceneNode[]): FrameNode {
   hstack.effects = [];
   return hstack;
 }
+
+export function createVStack(...children: SceneNode[]): FrameNode {
+  const vstack = figma.createFrame();
+  vstack.name = "Frame 1";
+  vstack.layoutMode = "VERTICAL";
+  vstack.counterAxisAlignItems = "MIN";
+  vstack.paddingLeft = 0;
+  vstack.paddingTop = 0;
+  vstack.paddingRight = 0;
+  vstack.paddingBottom = 0;
+  vstack.itemSpacing = 10;
+  children.forEach((child) => {
+    vstack.appendChild(child);
+  });
+  vstack.strokes = [];
+  vstack.effects = [];
+  return vstack;
+}
