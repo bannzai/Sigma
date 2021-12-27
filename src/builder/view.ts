@@ -103,13 +103,15 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
       const header = view.header;
       const footer = view.footer;
 
+      context.disableLineBreak();
       context.add(`Section(header: `);
-      context.singleLine(() => {
-        buildBody(context, header);
-        context.add(`, footer: `);
-        buildBody(context, footer);
-        context.add(`) {\n`);
-      });
+      context.disableIndent();
+      buildBody(context, header);
+      context.add(`, footer: `);
+      buildBody(context, footer);
+      context.enableLineBreak();
+      context.add(`) {`);
+      context.enableIndent();
 
       context.nestBlock(() => {
         view.children.forEach((e) => {
@@ -120,11 +122,13 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     } else if (view.header != null) {
       const header = view.header;
 
+      context.disableLineBreak();
       context.add(`Section(header: `);
-      context.singleLine(() => {
-        buildBody(context, header);
-        context.add(`) {\n`);
-      });
+      context.disableIndent();
+      buildBody(context, header);
+      context.enableLineBreak();
+      context.add(`) {`);
+      context.enableIndent();
 
       context.nestBlock(() => {
         view.children.forEach((e) => {
@@ -135,11 +139,13 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     } else if (view.footer != null) {
       const footer = view.footer;
 
+      context.disableLineBreak();
       context.add(`Section(footer: `);
-      context.singleLine(() => {
-        buildBody(context, footer);
-        context.add(`) {\n`);
-      });
+      context.disableIndent();
+      buildBody(context, footer);
+      context.enableLineBreak();
+      context.add(`) {`);
+      context.enableIndent();
 
       context.nestBlock(() => {
         view.children.forEach((e) => {
