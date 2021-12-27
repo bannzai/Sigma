@@ -38,7 +38,9 @@ describe("#LazyVGrid", () => {
     vgrid.paddingRight = 0;
     vgrid.paddingBottom = 0;
     vgrid.itemSpacing = 10;
-    vgrid.appendChild(createHStack());
+    vgrid.appendChild(
+      createHStack(createText("1"), createText("2"), createText("3"))
+    );
     vgrid.strokes = [];
     vgrid.effects = [];
 

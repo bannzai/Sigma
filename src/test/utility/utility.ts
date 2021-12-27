@@ -11,9 +11,9 @@ export function createText(text: string): TextNode {
   return node;
 }
 
-export function createHStack(): FrameNode {
+export function createHStack(...children: SceneNode[]): FrameNode {
   const hstack = figma.createFrame();
-  hstack.name = "SwiftUI::Grid";
+  hstack.name = "Frame 1";
   hstack.layoutMode = "HORIZONTAL";
   hstack.counterAxisAlignItems = "MIN";
   hstack.paddingLeft = 0;
@@ -21,9 +21,9 @@ export function createHStack(): FrameNode {
   hstack.paddingRight = 0;
   hstack.paddingBottom = 0;
   hstack.itemSpacing = 10;
-  hstack.appendChild(createText("1"));
-  hstack.appendChild(createText("2"));
-  hstack.appendChild(createText("3"));
+  children.forEach((child) => {
+    hstack.appendChild(child);
+  });
   hstack.strokes = [];
   hstack.effects = [];
   return hstack;
