@@ -1,4 +1,5 @@
-export function isBlendMixin(node: object): node is BlendMixin {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isBlendMixin(node: any): node is BlendMixin {
   const blendMixinTypes = [
     "ELLIPSE",
     "POLYGON",

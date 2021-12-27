@@ -38,7 +38,8 @@ export const testRun = (root: SceneNode): string => {
   });
 };
 
-function isContainerType(node: object): node is ChildrenMixin {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isContainerType(node: any): node is ChildrenMixin {
   return (node as ChildrenMixin).children !== undefined;
 }
 

@@ -47,7 +47,8 @@ export interface PrimitiveView extends View {
 }
 
 export function isContainerType(
-  args: object
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  args: any
 ): args is PrimitiveView & ChildrenMixin {
   return (args as ChildrenMixin).children !== undefined;
 }
