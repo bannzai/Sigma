@@ -3,7 +3,7 @@
 */
 export function createText(text: string): TextNode {
   const node = figma.createText();
-  node.name = "Text 1";
+  node.name = text;
   node.characters = text;
   node.fills = [];
   node.strokes = [];
