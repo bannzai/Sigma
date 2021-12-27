@@ -1,4 +1,3 @@
-const assert = require("assert");
 import { FigmaContext } from "./context";
 import { walkToComponent } from "./node/componentNode";
 import { walkToEllipse } from "./node/ellipseNode";
@@ -12,6 +11,7 @@ import { trace } from "./tracer";
 import { walkToStar } from "./node/starNode";
 import { AppViewInfo } from "../types/app";
 import { walkToVector } from "./node/vectorNode";
+import { assert } from "../util/foundation";
 
 export function traverse(context: FigmaContext, node: SceneNode) {
   trace(`#traverse`, context, node);

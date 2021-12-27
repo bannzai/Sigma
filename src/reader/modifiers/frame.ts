@@ -1,4 +1,3 @@
-const assert = require("assert");
 import { FigmaContext } from "../context";
 import { FrameModifier } from "../../types/modifiers";
 import {
@@ -10,6 +9,7 @@ import {
 } from "../../types/frameModifierTypes";
 import { isAxisView, View } from "../../types/views";
 import { trace } from "../tracer";
+import { assert } from "../../util/foundation";
 
 export function appendFrameModifierWithFrameNode(
   context: FigmaContext,

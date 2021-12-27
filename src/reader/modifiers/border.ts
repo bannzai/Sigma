@@ -1,10 +1,10 @@
-const assert = require("assert");
 import { FigmaContext } from "../context";
 import { OverlayModifier } from "../../types/modifiers";
 import { StrokeModifier } from "../../types/shapeModifier";
 import { Rectangle, RoundedRectangle } from "../../types/shape";
 import { View } from "../../types/views";
 import { trace } from "../tracer";
+import { assert } from "../../util/foundation";
 
 export function appendBorder(
   context: FigmaContext,

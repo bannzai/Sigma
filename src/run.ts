@@ -1,8 +1,8 @@
-import * as assert from "assert";
 import { BuildContext, BuildContextOption } from "./builder/context";
 import { build } from "./builder/entrypoint";
 import { FigmaContext } from "./reader/context";
 import { traverse } from "./reader/entrypoint";
+import { assert } from "./util/foundation";
 
 export const run = (root: SceneNode, option?: BuildContextOption): string => {
   const figmaContext = new FigmaContext();
