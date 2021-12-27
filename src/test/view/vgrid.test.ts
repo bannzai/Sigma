@@ -44,7 +44,7 @@ describe("#LazyVGrid", () => {
     }
   );
 
-  test("it is besically pattern. LazyVGrid has three component for Horizontal layout element", async () => {
+  test("it is besically pattern. LazyVGrid has single Horizontal layout element", async () => {
     await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
     const vgrid = figma.createFrame();
@@ -62,6 +62,40 @@ describe("#LazyVGrid", () => {
 
     const code = `
 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
+    Text("1")
+    Text("2")
+    Text("3")
+}
+`;
+    expect(testRun(vgrid)).toEqual(code.slice("\n".length));
+  });
+
+  test("it is besically pattern. LazyVGrid has plural Horizontal layout element", async () => {
+    await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+    const vgrid = figma.createFrame();
+    vgrid.name = "SwiftUI::Grid";
+    vgrid.layoutMode = "VERTICAL";
+    vgrid.counterAxisAlignItems = "MIN";
+    vgrid.paddingLeft = 0;
+    vgrid.paddingTop = 0;
+    vgrid.paddingRight = 0;
+    vgrid.paddingBottom = 0;
+    vgrid.itemSpacing = 10;
+    vgrid.appendChild(hstack());
+    vgrid.appendChild(hstack());
+    vgrid.appendChild(hstack());
+    vgrid.strokes = [];
+    vgrid.effects = [];
+
+    const code = `
+LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
+    Text("1")
+    Text("2")
+    Text("3")
+    Text("1")
+    Text("2")
+    Text("3")
     Text("1")
     Text("2")
     Text("3")
