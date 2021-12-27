@@ -7,7 +7,7 @@ import {
   MaxHeight,
   MaxWidth,
 } from "../../types/frameModifierTypes";
-import { isAxisView, View } from "../../types/views";
+import { View } from "../../types/views";
 import { trace } from "../tracer";
 import { assert } from "../../util/foundation";
 
