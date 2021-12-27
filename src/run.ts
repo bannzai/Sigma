@@ -38,7 +38,7 @@ export const testRun = (root: SceneNode): string => {
   });
 };
 
-function isContainerType(node: any): node is ChildrenMixin {
+function isContainerType(node: object): node is ChildrenMixin {
   return (node as ChildrenMixin).children !== undefined;
 }
 

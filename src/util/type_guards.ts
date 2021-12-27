@@ -1,4 +1,4 @@
-export function isBlendMixin(node: any): node is BlendMixin {
+export function isBlendMixin(node: object): node is BlendMixin {
   const blendMixinTypes = [
     "ELLIPSE",
     "POLYGON",
