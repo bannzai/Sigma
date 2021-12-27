@@ -1,4 +1,4 @@
-import { createText, createHStack } from "../utility/utility";
+import { createText, createHStack, createVStack } from "../utility/utility";
 import { createFigma } from "figma-api-stub";
 import { testRun } from "../../run";
 
@@ -66,9 +66,15 @@ LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flex
     vgrid.paddingRight = 0;
     vgrid.paddingBottom = 0;
     vgrid.itemSpacing = 10;
-    vgrid.appendChild(hstack());
-    vgrid.appendChild(hstack());
-    vgrid.appendChild(hstack());
+    vgrid.appendChild(
+      createHStack(createText("1"), createText("2"), createText("3"))
+    );
+    vgrid.appendChild(
+      createHStack(createText("1"), createText("2"), createText("3"))
+    );
+    vgrid.appendChild(
+      createHStack(createText("1"), createText("2"), createText("3"))
+    );
     vgrid.strokes = [];
     vgrid.effects = [];
 
