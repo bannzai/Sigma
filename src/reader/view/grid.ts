@@ -77,56 +77,64 @@ export function walkForHGridChildren(
   grid: LazyHGrid
 ) {
   trace("#walkForHGridChildren", context, gridNode);
+  context.beginGridContext(grid);
+
   gridNode.children.forEach((gridNodeChild) => {
-    if (gridNodeChild.type === "FRAME" && gridNodeChild.children.length > 0) {
-      if (gridNodeChild.layoutMode === "VERTICAL") {
-        grid.maximumGridItemCount = Math.max(
-          grid.maximumGridItemCount,
-          gridNodeChild.children.length
-        );
+    if (gridNodeChild.type !== "FRAME" || gridNodeChild.children.length <= 0) {
+      return;
+    }
 
-        context.beginGridContext(grid);
-        gridNodeChild.children.forEach((childForSkipVStack) => {
-          traverse(context, childForSkipVStack);
-        });
-        context.endGridContext();
-      } else if (gridNodeChild.layoutMode === "HORIZONTAL") {
-        const section: Section = {
-          type: "Section",
-          modifiers: [],
-          node: gridNodeChild,
-          children: [],
-        };
-        grid.children.push(section);
+    if (gridNodeChild.layoutMode === "VERTICAL") {
+      grid.maximumGridItemCount = Math.max(
+        grid.maximumGridItemCount,
+        gridNodeChild.children.length
+      );
 
-        context.nest(section, () => {
-          gridNodeChild.children.forEach((sectionChild, index) => {
-            const shouldFoldWhenSectionChildIsHStack =
-              sectionChild.type === "FRAME" &&
-              sectionChild.layoutMode === "VERTICAL";
+      gridNodeChild.children.forEach((childForSkipHStack) => {
+        traverse(context, childForSkipHStack);
+      });
+    } else if (gridNodeChild.layoutMode === "HORIZONTAL") {
+      const section: Section = {
+        type: "Section",
+        modifiers: [],
+        node: gridNodeChild,
+        children: [],
+      };
 
-            if (shouldFoldWhenSectionChildIsHStack) {
-              sectionChild.children.forEach((gridElement) => {
-                traverse(context, gridElement);
-              });
-            } else {
-              traverse(context, sectionChild);
+      context.nest(section, () => {
+        gridNodeChild.children.forEach((sectionChild, index) => {
+          const isVStack =
+            sectionChild.type === "FRAME" &&
+            sectionChild.layoutMode === "VERTICAL";
 
-              if (index === 0) {
-                const header = section.children.shift();
-                if (header != null) {
-                  section.header = header;
-                }
-              } else if (index === gridNodeChild.children.length - 1) {
-                const footer = section.children.pop();
-                if (footer != null) {
-                  section.footer = footer;
-                }
+          if (isVStack) {
+            grid.maximumGridItemCount = Math.max(
+              grid.maximumGridItemCount,
+              sectionChild.children.length
+            );
+
+            sectionChild.children.forEach((gridElement) => {
+              traverse(context, gridElement);
+            });
+          } else {
+            traverse(context, sectionChild);
+
+            if (index === 0) {
+              const header = section.children.pop();
+              if (header != null) {
+                section.header = header;
+              }
+            } else if (index === gridNodeChild.children.length - 1) {
+              const footer = section.children.pop();
+              if (footer != null) {
+                section.footer = footer;
               }
             }
-          });
+          }
         });
-      }
+      });
     }
   });
+
+  context.endGridContext();
 }
