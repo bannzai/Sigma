@@ -1,4 +1,4 @@
-const assert = require("assert");
+import * as assert from "assert";
 import { isAppView } from "../types/app";
 import { isSwiftUIButtonModifier } from "../types/buttonModifier";
 import { isSwiftUIImageModifier } from "../types/imageModifier";

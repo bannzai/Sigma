@@ -1,4 +1,4 @@
-const assert = require("assert");
+import * as assert from "assert";
 import { BuildContext, BuildContextOption } from "./builder/context";
 import { build } from "./builder/entrypoint";
 import { FigmaContext } from "./reader/context";
