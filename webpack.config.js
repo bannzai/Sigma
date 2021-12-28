@@ -33,8 +33,8 @@ module.exports = (env, argv) => ({
     path: path.resolve(__dirname, "lib"),
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      process: "process/browser",
+    new webpack.DefinePlugin({
+      global: {}, // Fix missing symbol error when running in developer VM
     }),
     new HtmlWebpackPlugin({
       template: "./src/ui.html",
