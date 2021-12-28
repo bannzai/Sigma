@@ -25,6 +25,10 @@ module.exports = (env, argv) => ({
           },
         ],
       },
+      {
+        test: /\.(png|jpg|gif|webp|svg|zip)$/,
+        loader: [{ loader: "url-loader" }],
+      },
     ],
   },
   resolve: { extensions: [".tsx", ".ts", ".jsx", ".js"] },
@@ -40,6 +44,7 @@ module.exports = (env, argv) => ({
       template: "./src/ui.html",
       filename: "ui.html",
       inlineSource: ".(js|css)$",
+      chunks: ["ui"],
     }),
     new HtmlWebpackInlineSourcePlugin(),
   ],
