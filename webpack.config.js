@@ -25,6 +25,10 @@ module.exports = (env, argv) => ({
           },
         ],
       },
+      {
+        test: /\.(png|jpg|gif|webp|svg|zip)$/,
+        loader: [{ loader: "url-loader" }],
+      },
     ],
   },
   resolve: { extensions: [".tsx", ".ts", ".jsx", ".js"] },
@@ -33,13 +37,14 @@ module.exports = (env, argv) => ({
     path: path.resolve(__dirname, "lib"),
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      process: "process/browser",
+    new webpack.DefinePlugin({
+      global: {}, // Fix missing symbol error when running in developer VM
     }),
     new HtmlWebpackPlugin({
       template: "./src/ui.html",
       filename: "ui.html",
       inlineSource: ".(js|css)$",
+      chunks: ["ui"],
     }),
     new HtmlWebpackInlineSourcePlugin(),
   ],
