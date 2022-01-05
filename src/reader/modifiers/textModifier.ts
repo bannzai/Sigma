@@ -6,7 +6,7 @@ import {
   NamedFontWeight,
 } from "../../types/textModifier";
 
-export function walkForTextModifier(
+export function appendTextModifier(
   _context: FigmaContext,
   node: TextNode,
   text: Text

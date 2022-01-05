@@ -1,6 +1,6 @@
 import { trace } from "../tracer";
 import { FigmaContext } from "../context";
-import { walkForTextModifier } from "../modifiers/textModifier";
+import { appendTextModifier } from "../modifiers/textModifier";
 import { Text, TextField } from "../../types/views";
 import { appendForegroundColor } from "../modifiers/foregroundColor";
 import { appendDropShadow } from "../modifiers/dropShadow";
@@ -58,7 +58,7 @@ export function walkToText(context: FigmaContext, node: TextNode) {
       };
       context.addChild(text);
 
-      walkForTextModifier(context, node, text);
+      appendTextModifier(context, node, text);
       appendForegroundColor(context, node, text);
       appendDropShadow(context, text, node);
     }
