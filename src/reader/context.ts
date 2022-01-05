@@ -5,6 +5,7 @@ import {
   isContainerType,
   LazyHGrid,
   LazyVGrid,
+  TextField,
   View,
 } from "../types/views";
 
@@ -42,6 +43,13 @@ export class FigmaContext {
     this.nestContainer(button);
   }
   endButtonContext(): (View & ChildrenMixin) | null {
+    return this.unnestContainer();
+  }
+
+  beginTextFieldContext(textField: TextField) {
+    this.nestContainer(textField);
+  }
+  endTextFieldContext(): (View & ChildrenMixin) | null {
     return this.unnestContainer();
   }
 
