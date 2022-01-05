@@ -118,8 +118,6 @@ export interface Text extends PrimitiveView {
 
 export interface TextField extends PrimitiveView, ChildrenMixin {
   readonly type: "TextField";
-
-  placeholder: string;
 }
 
 export interface Spacer extends PrimitiveView {

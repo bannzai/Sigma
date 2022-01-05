@@ -121,7 +121,6 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         node: node,
         modifiers: [],
         children: [],
-        placeholder: "",
       };
 
       context.beginTextFieldContext(textField);
