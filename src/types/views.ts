@@ -8,6 +8,7 @@ export type SwiftUIViewType =
   | LazyHGrid
   | Button
   | Text
+  | TextField
   | Color
   | Image
   | AsyncImage
@@ -23,6 +24,7 @@ const swiftUIViewType = [
   "LazyHGrid",
   "Button",
   "Text",
+  "TextField",
   "Color",
   "Image",
   "AsyncImage",
@@ -112,6 +114,12 @@ export interface Text extends PrimitiveView {
 
   readonly text: string;
   readonly multipleLineSyntax: boolean;
+}
+
+export interface TextField extends PrimitiveView {
+  readonly type: "TextField";
+
+  readonly placeholder: string;
 }
 
 export interface Spacer extends PrimitiveView {
