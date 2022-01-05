@@ -13,6 +13,7 @@ import {
   LazyHGrid,
   LazyVGrid,
   Spacer,
+  TextField,
   View,
   VStack,
   ZStack,
@@ -22,6 +23,7 @@ import { appendDropShadow } from "../modifiers/dropShadow";
 import { ButtonStyleModifier } from "../../types/buttonModifier";
 import * as assert from "assert";
 import { walkForHGridChildren, walkForVGridChildren } from "../view/grid";
+import { TextFieldStyleModifier } from "../../types/textFieldModifier";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -108,6 +110,45 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         name: buttonStyleName,
       };
       button.modifiers.push(buttonStyleModifier);
+    }
+  } else if (name.startsWith("SwiftUI::TextField")) {
+    console.log(`[DEBUG] SwiftUI::TextField`);
+
+    // Currently only support single text child
+    if (children.length === 1 && children[0].type === "TEXT") {
+      const textField: TextField = {
+        type: "TextField",
+        node: node,
+        modifiers: [],
+        children: [],
+        placeholder: "",
+      };
+
+      context.beginTextFieldContext(textField);
+      children.forEach((child) => {
+        traverse(context, child);
+      });
+      context.endTextFieldContext();
+
+      appendPadding(context, textField, node);
+      appendFrameModifierWithFrameNode(context, textField, node);
+      appendBackgroundColor(context, textField, node);
+      appendCornerRadius(context, textField, node);
+      appendBorder(context, textField, node);
+      appendPosition(context, textField, node);
+      appendDropShadow(context, textField, node);
+
+      const nameWithoutMarker = name.slice("SwiftUI::TextField".length);
+      if (nameWithoutMarker.startsWith("#")) {
+        const textFieldStyleName = nameWithoutMarker.slice("#".length);
+        const textFieldStyleModifier: TextFieldStyleModifier = {
+          type: "textFieldStyle",
+          name: textFieldStyleName,
+        };
+        textField.modifiers.push(textFieldStyleModifier);
+      }
+    } else {
+      // TODO: support for macOS & iPad format, TextField with Label
     }
   } else {
     console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
