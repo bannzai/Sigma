@@ -116,10 +116,10 @@ export interface Text extends PrimitiveView {
   readonly multipleLineSyntax: boolean;
 }
 
-export interface TextField extends PrimitiveView {
+export interface TextField extends PrimitiveView, ChildrenMixin {
   readonly type: "TextField";
 
-  readonly placeholder: string;
+  placeholder: string;
 }
 
 export interface Spacer extends PrimitiveView {
