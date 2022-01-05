@@ -100,9 +100,9 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendPosition(context, button, node);
     appendDropShadow(context, button, node);
 
-    const nameWithoutButtonMarker = name.slice("SwiftUI::Button".length);
-    if (nameWithoutButtonMarker.startsWith("#")) {
-      const buttonStyleName = nameWithoutButtonMarker.slice("#".length);
+    const nameWithoutMarker = name.slice("SwiftUI::Button".length);
+    if (nameWithoutMarker.startsWith("#")) {
+      const buttonStyleName = nameWithoutMarker.slice("#".length);
       const buttonStyleModifier: ButtonStyleModifier = {
         type: "buttonStyle",
         name: buttonStyleName,
