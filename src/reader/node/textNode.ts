@@ -1,7 +1,7 @@
 import { trace } from "../tracer";
 import { FigmaContext } from "../context";
 import { appendTextModifier } from "../modifiers/textModifier";
-import { Text, TextField } from "../../types/views";
+import { Text } from "../../types/views";
 import { appendForegroundColor } from "../modifiers/foregroundColor";
 import { appendDropShadow } from "../modifiers/dropShadow";
 
@@ -40,27 +40,17 @@ export function walkToText(context: FigmaContext, node: TextNode) {
     // }
     // context.lineBreak();
   } else {
-    if (node.name.startsWith("SwiftUI::TextField")) {
-      const textField: TextField = {
-        type: "TextField",
-        placeholder: "",
-        modifiers: [],
-        node: node,
-      };
-      context.addChild(textField);
-    } else {
-      const text: Text = {
-        type: "Text",
-        text: characters,
-        multipleLineSyntax: characters.split("\n").length > 1,
-        modifiers: [],
-        node: node,
-      };
-      context.addChild(text);
+    const text: Text = {
+      type: "Text",
+      text: characters,
+      multipleLineSyntax: characters.split("\n").length > 1,
+      modifiers: [],
+      node: node,
+    };
+    context.addChild(text);
 
-      appendTextModifier(context, node, text);
-      appendForegroundColor(context, node, text);
-      appendDropShadow(context, text, node);
-    }
+    appendTextModifier(context, node, text);
+    appendForegroundColor(context, node, text);
+    appendDropShadow(context, text, node);
   }
 }
