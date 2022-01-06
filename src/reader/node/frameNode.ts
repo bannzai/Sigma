@@ -13,6 +13,7 @@ import {
   LazyHGrid,
   LazyVGrid,
   Spacer,
+  Text,
   TextField,
   View,
   VStack,
@@ -128,6 +129,10 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
         traverse(context, child);
       });
       context.endTextFieldContext();
+
+      const text = textField.children.pop() as Text;
+      textField.text = text;
+      textField.modifiers.push(...text.modifiers);
 
       appendPadding(context, textField, node);
       appendFrameModifierWithFrameNode(context, textField, node);
