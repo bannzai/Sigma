@@ -79,7 +79,7 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     const placeholder = text.text;
 
     // prettier-ignore
-    context.add(`TextField("${codePlaceholder(placeholder, "LocalizedStringKey")}", text: ${codePlaceholder("Binding<String>")})`);
+    context.add(`TextField(${codePlaceholder(placeholder, "LocalizedStringKey")}, text: ${codePlaceholder("Binding<String>")})`);
   } else if (view.type === "Divider") {
     context.add(`Divider()`);
   } else if (view.type === "Spacer") {
@@ -167,7 +167,7 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     const _: never = view;
   }
 
-  if (isContainerType(view)) {
+  if (isContainerType(view) && view.type !== "TextField") {
     view.modifiers.forEach((e) => {
       buildBody(context, e);
     });
