@@ -74,9 +74,8 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
   } else if (view.type === "Text") {
     context.add(`Text("${view.text}")`);
   } else if (view.type === "TextField") {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const text = view.text!;
-    const placeholder = text.text;
+    const text = view.text;
+    const placeholder = text?.text ?? "";
 
     // prettier-ignore
     context.add(`TextField(${codePlaceholder(placeholder, "LocalizedStringKey")}, text: ${codePlaceholder("Binding<String>")})`);
