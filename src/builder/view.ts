@@ -1,5 +1,6 @@
 import { isContainerType, SwiftUIViewType, View } from "../types/views";
 import { mappedSwiftUIColor } from "../util/mapper";
+import { codePlaceholder } from "./codePlaceholder";
 import { BuildContext } from "./context";
 import { buildBody } from "./entrypoint";
 import { trace } from "./tracer";
@@ -72,6 +73,12 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     context.add("}");
   } else if (view.type === "Text") {
     context.add(`Text("${view.text}")`);
+  } else if (view.type === "TextField") {
+    const text = view.text;
+    const placeholder = text?.text ?? "";
+
+    // prettier-ignore
+    context.add(`TextField(${codePlaceholder(placeholder, "LocalizedStringKey")}, text: ${codePlaceholder("Binding<String>")})`);
   } else if (view.type === "Divider") {
     context.add(`Divider()`);
   } else if (view.type === "Spacer") {
@@ -159,7 +166,7 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
     const _: never = view;
   }
 
-  if (isContainerType(view)) {
+  if (isContainerType(view) && view.type !== "TextField") {
     view.modifiers.forEach((e) => {
       buildBody(context, e);
     });

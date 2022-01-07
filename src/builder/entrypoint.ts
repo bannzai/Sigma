@@ -4,6 +4,7 @@ import { isSwiftUIImageModifier } from "../types/imageModifier";
 import { isSwiftUIModifier, Modifier } from "../types/modifiers";
 import { isSwiftUIViewShape } from "../types/shape";
 import { isSwiftUIViewShapeModifier } from "../types/shapeModifier";
+import { isSwiftUITextFieldModifier } from "../types/textFieldModifier";
 import { isSwiftUITextModifier } from "../types/textModifier";
 import { isSwiftUIViewType, View } from "../types/views";
 import { assert } from "../util/foundation";
@@ -14,6 +15,7 @@ import { buildImageModifier } from "./imageModifier";
 import { buildModifier } from "./modifier";
 import { buildShape } from "./shape";
 import { buildShapeModifier } from "./shapeModifier";
+import { buildTextFieldModifier } from "./textFieldModifier";
 import { buildTextModifier } from "./textModifier";
 import { trace } from "./tracer";
 import { buildView } from "./view";
@@ -61,6 +63,8 @@ export function buildBody(context: BuildContext, view: View | Modifier) {
     buildImageModifier(context, view);
   } else if (isSwiftUIButtonModifier(view)) {
     buildButtonModifier(context, view);
+  } else if (isSwiftUITextFieldModifier(view)) {
+    buildTextFieldModifier(context, view);
   } else {
     const { type } = view;
     assert(false, JSON.stringify({ type }));

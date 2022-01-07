@@ -13,6 +13,8 @@ import {
   LazyHGrid,
   LazyVGrid,
   Spacer,
+  Text,
+  TextField,
   View,
   VStack,
   ZStack,
@@ -22,6 +24,7 @@ import { appendDropShadow } from "../modifiers/dropShadow";
 import { ButtonStyleModifier } from "../../types/buttonModifier";
 import * as assert from "assert";
 import { walkForHGridChildren, walkForVGridChildren } from "../view/grid";
+import { TextFieldStyleModifier } from "../../types/textFieldModifier";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -100,14 +103,57 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendPosition(context, button, node);
     appendDropShadow(context, button, node);
 
-    const nameWithoutButtonMarker = name.slice("SwiftUI::Button".length);
-    if (nameWithoutButtonMarker.startsWith("#")) {
-      const buttonStyleName = nameWithoutButtonMarker.slice("#".length);
+    const nameWithoutMarker = name.slice("SwiftUI::Button".length);
+    if (nameWithoutMarker.startsWith("#")) {
+      const buttonStyleName = nameWithoutMarker.slice("#".length);
       const buttonStyleModifier: ButtonStyleModifier = {
         type: "buttonStyle",
         name: buttonStyleName,
       };
       button.modifiers.push(buttonStyleModifier);
+    }
+  } else if (name.startsWith("SwiftUI::TextField")) {
+    console.log(`[DEBUG] SwiftUI::TextField`);
+
+    // Currently only support single text child
+    const textField: TextField = {
+      type: "TextField",
+      node: node,
+      modifiers: [],
+      children: [],
+    };
+
+    context.beginTextFieldContext(textField);
+    children.forEach((child) => {
+      traverse(context, child);
+    });
+    context.endTextFieldContext();
+
+    const firstChild = textField.children.pop();
+    if (children.length > 0 && firstChild != null) {
+      if (firstChild.type === "Text") {
+        const text = firstChild as Text;
+        textField.text = text;
+        textField.modifiers.push(...text.modifiers);
+
+        appendPadding(context, textField, node);
+        appendFrameModifierWithFrameNode(context, textField, node);
+        appendBackgroundColor(context, textField, node);
+        appendCornerRadius(context, textField, node);
+        appendBorder(context, textField, node);
+        appendPosition(context, textField, node);
+        appendDropShadow(context, textField, node);
+      }
+    }
+
+    const nameWithoutMarker = name.slice("SwiftUI::TextField".length);
+    if (nameWithoutMarker.startsWith("#")) {
+      const textFieldStyleName = nameWithoutMarker.slice("#".length);
+      const textFieldStyleModifier: TextFieldStyleModifier = {
+        type: "textFieldStyle",
+        name: textFieldStyleName,
+      };
+      textField.modifiers.push(textFieldStyleModifier);
     }
   } else {
     console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);

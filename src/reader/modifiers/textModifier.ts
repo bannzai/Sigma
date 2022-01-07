@@ -1,15 +1,15 @@
 import { FigmaContext } from "../context";
-import { Text } from "../../types/views";
+import { Text, TextField } from "../../types/views";
 import {
   FontTextModifier,
   FontWeightTextModifier,
   NamedFontWeight,
 } from "../../types/textModifier";
 
-export function walkForTextModifier(
+export function appendTextModifier(
   _context: FigmaContext,
   node: TextNode,
-  text: Text
+  text: Text | TextField
 ) {
   if (node.textDecoration === "UNDERLINE") {
     text.modifiers.push({ type: "underline" });
