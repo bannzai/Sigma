@@ -116,43 +116,44 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     console.log(`[DEBUG] SwiftUI::TextField`);
 
     // Currently only support single text child
-    if (children.length === 1 && children[0].type === "TEXT") {
-      const textField: TextField = {
-        type: "TextField",
-        node: node,
-        modifiers: [],
-        children: [],
-      };
+    const textField: TextField = {
+      type: "TextField",
+      node: node,
+      modifiers: [],
+      children: [],
+    };
 
-      context.beginTextFieldContext(textField);
-      children.forEach((child) => {
-        traverse(context, child);
-      });
-      context.endTextFieldContext();
+    context.beginTextFieldContext(textField);
+    children.forEach((child) => {
+      traverse(context, child);
+    });
+    context.endTextFieldContext();
 
-      const text = textField.children.pop() as Text;
-      textField.text = text;
-      textField.modifiers.push(...text.modifiers);
+    const firstChild = textField.children.pop();
+    if (children.length > 0 && firstChild != null) {
+      if (firstChild.type === "Text") {
+        const text = firstChild as Text;
+        textField.text = text;
+        textField.modifiers.push(...text.modifiers);
 
-      appendPadding(context, textField, node);
-      appendFrameModifierWithFrameNode(context, textField, node);
-      appendBackgroundColor(context, textField, node);
-      appendCornerRadius(context, textField, node);
-      appendBorder(context, textField, node);
-      appendPosition(context, textField, node);
-      appendDropShadow(context, textField, node);
-
-      const nameWithoutMarker = name.slice("SwiftUI::TextField".length);
-      if (nameWithoutMarker.startsWith("#")) {
-        const textFieldStyleName = nameWithoutMarker.slice("#".length);
-        const textFieldStyleModifier: TextFieldStyleModifier = {
-          type: "textFieldStyle",
-          name: textFieldStyleName,
-        };
-        textField.modifiers.push(textFieldStyleModifier);
+        appendPadding(context, textField, node);
+        appendFrameModifierWithFrameNode(context, textField, node);
+        appendBackgroundColor(context, textField, node);
+        appendCornerRadius(context, textField, node);
+        appendBorder(context, textField, node);
+        appendPosition(context, textField, node);
+        appendDropShadow(context, textField, node);
       }
-    } else {
-      // TODO: support for macOS & iPad format, TextField with Label
+    }
+
+    const nameWithoutMarker = name.slice("SwiftUI::TextField".length);
+    if (nameWithoutMarker.startsWith("#")) {
+      const textFieldStyleName = nameWithoutMarker.slice("#".length);
+      const textFieldStyleModifier: TextFieldStyleModifier = {
+        type: "textFieldStyle",
+        name: textFieldStyleName,
+      };
+      textField.modifiers.push(textFieldStyleModifier);
     }
   } else {
     console.log(`Stack pattern ${JSON.stringify({ layoutMode })}`);
