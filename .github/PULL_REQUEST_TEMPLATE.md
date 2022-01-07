@@ -3,8 +3,8 @@
 ## Abstract
 
 ## Checked
-- [ ] Write document for new component or functions
 - [ ] Write unit test
+- [ ] Write document for new component or functions
   - [ ] ja
   - [ ] en
 - [ ] Add example
