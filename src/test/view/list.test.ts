@@ -50,6 +50,7 @@ List {
     Text("2")
     Text("3")
 }
+.listStyle(PlainListStyle())
 `;
     expect(testRun(vstack)).toEqual(code.slice("\n".length));
   });
@@ -78,6 +79,7 @@ List {
     Text("2")
     Text("3")
 }
+.listStyle(PlainListStyle())
 `;
     expect(testRun(vstack)).toEqual(code.slice("\n".length));
   });
@@ -106,6 +108,7 @@ List {
     Text("2")
     Text("3")
 }
+.listStyle(PlainListStyle())
 `;
     expect(testRun(vstack)).toEqual(code.slice("\n".length));
   });
