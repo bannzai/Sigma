@@ -14,7 +14,8 @@ export type SwiftUIViewType =
   | AsyncImage
   | Spacer
   | Divider
-  | Section;
+  | Section
+  | ScrollView;
 
 const swiftUIViewType = [
   "VStack",
@@ -31,6 +32,7 @@ const swiftUIViewType = [
   "Spacer",
   "Divider",
   "Section",
+  "ScrollView",
 ] as const;
 export function isSwiftUIViewType(args: {
   type: string;
@@ -158,4 +160,16 @@ export interface Section extends PrimitiveView, ChildrenMixin {
 
   header?: View;
   footer?: View;
+}
+
+export type ScrollAxis = "V" | "H";
+export interface ScrollAxisMixin {
+  readonly axis: ScrollAxis;
+}
+
+export interface ScrollView
+  extends PrimitiveView,
+    ChildrenMixin,
+    ScrollAxisMixin {
+  readonly type: "ScrollView";
 }
