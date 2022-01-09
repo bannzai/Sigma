@@ -1,5 +1,3 @@
-
-
 ## Abstract
 
 ## Checked

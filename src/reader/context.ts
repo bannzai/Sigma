@@ -5,6 +5,7 @@ import {
   isContainerType,
   LazyHGrid,
   LazyVGrid,
+  ScrollView,
   TextField,
   View,
 } from "../types/views";
@@ -43,6 +44,13 @@ export class FigmaContext {
     this.nestContainer(button);
   }
   endButtonContext(): (View & ChildrenMixin) | null {
+    return this.unnestContainer();
+  }
+
+  beginScrollViewContext(scrollView: ScrollView) {
+    this.nestContainer(scrollView);
+  }
+  endScrollViewContext(): (View & ChildrenMixin) | null {
     return this.unnestContainer();
   }
 

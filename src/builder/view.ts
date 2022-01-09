@@ -161,6 +161,14 @@ export function buildView(context: BuildContext, view: SwiftUIViewType & View) {
       });
       context.add("}");
     }
+  } else if (view.type === "ScrollView") {
+    context.add(`ScrollView(.${view.axis}) {`);
+    context.nestBlock(() => {
+      view.children.forEach((e) => {
+        buildBody(context, e);
+      });
+    });
+    context.add("}");
   } else {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _: never = view;
