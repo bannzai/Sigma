@@ -12,6 +12,8 @@ import {
   HStack,
   LazyHGrid,
   LazyVGrid,
+  ScrollAxis,
+  ScrollView,
   Spacer,
   Text,
   TextField,
@@ -112,6 +114,39 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
       };
       button.modifiers.push(buttonStyleModifier);
     }
+  } else if (name.startsWith("SwiftUI::ScrollView")) {
+    console.log(`[DEBUG] SwiftUI::ScrollView`);
+
+    let axis: ScrollAxis;
+    if (layoutMode === "VERTICAL") {
+      axis = "V";
+    } else if (layoutMode === "HORIZONTAL") {
+      axis = "H";
+    } else {
+      axis = "V";
+    }
+
+    const scrollView: ScrollView = {
+      type: "ScrollView",
+      node,
+      modifiers: [],
+      children: [],
+      axis,
+    };
+
+    context.beginScrollViewContext(scrollView);
+    children.forEach((child) => {
+      traverse(context, child);
+    });
+    context.endScrollViewContext();
+
+    appendPadding(context, scrollView, node);
+    appendFrameModifierWithFrameNode(context, scrollView, node);
+    appendBackgroundColor(context, scrollView, node);
+    appendCornerRadius(context, scrollView, node);
+    appendBorder(context, scrollView, node);
+    appendPosition(context, scrollView, node);
+    appendDropShadow(context, scrollView, node);
   } else if (name.startsWith("SwiftUI::TextField")) {
     console.log(`[DEBUG] SwiftUI::TextField`);
 
