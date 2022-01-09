@@ -162,7 +162,7 @@ export interface Section extends PrimitiveView, ChildrenMixin {
   footer?: View;
 }
 
-export type ScrollAxis = "V" | "H";
+export type ScrollAxis = "vertical" | "horizontal";
 export interface ScrollAxisMixin {
   readonly axis: ScrollAxis;
 }

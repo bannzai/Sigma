@@ -119,11 +119,12 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
 
     let axis: ScrollAxis;
     if (layoutMode === "VERTICAL") {
-      axis = "V";
+      axis = "vertical";
     } else if (layoutMode === "HORIZONTAL") {
-      axis = "H";
+      axis = "horizontal";
     } else {
-      axis = "V";
+      // SwiftUI ScrollView default axis is vertical
+      axis = "vertical";
     }
 
     const scrollView: ScrollView = {
