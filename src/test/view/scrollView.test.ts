@@ -81,4 +81,32 @@ ScrollView(.horizontal) {
 `;
     expect(testRun(vstack)).toEqual(code.slice("\n".length));
   });
+
+  test("default ScrollView axis", async () => {
+    await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
+    const vstack = figma.createFrame();
+    vstack.name = "SwiftUI::ScrollView";
+    vstack.layoutMode = "NONE";
+    vstack.counterAxisAlignItems = "MIN";
+    vstack.paddingLeft = 0;
+    vstack.paddingTop = 0;
+    vstack.paddingRight = 0;
+    vstack.paddingBottom = 0;
+    vstack.itemSpacing = 0;
+    vstack.appendChild(createText("1"));
+    vstack.appendChild(createText("2"));
+    vstack.appendChild(createText("3"));
+    vstack.strokes = [];
+    vstack.effects = [];
+
+    const code = `
+ScrollView(.vertical) {
+    Text("1")
+    Text("2")
+    Text("3")
+}
+`;
+    expect(testRun(vstack)).toEqual(code.slice("\n".length));
+  });
 });
