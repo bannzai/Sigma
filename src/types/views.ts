@@ -15,7 +15,8 @@ export type SwiftUIViewType =
   | Spacer
   | Divider
   | Section
-  | ScrollView;
+  | ScrollView
+  | List;
 
 const swiftUIViewType = [
   "VStack",
@@ -33,6 +34,7 @@ const swiftUIViewType = [
   "Divider",
   "Section",
   "ScrollView",
+  "List",
 ] as const;
 export function isSwiftUIViewType(args: {
   type: string;
@@ -172,4 +174,8 @@ export interface ScrollView
     ChildrenMixin,
     ScrollAxisMixin {
   readonly type: "ScrollView";
+}
+
+export interface List extends PrimitiveView, ChildrenMixin {
+  readonly type: "List";
 }
