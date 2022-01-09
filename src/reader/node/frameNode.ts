@@ -12,6 +12,7 @@ import {
   HStack,
   LazyHGrid,
   LazyVGrid,
+  List,
   ScrollAxis,
   ScrollView,
   Spacer,
@@ -27,6 +28,7 @@ import { ButtonStyleModifier } from "../../types/buttonModifier";
 import * as assert from "assert";
 import { walkForHGridChildren, walkForVGridChildren } from "../view/grid";
 import { TextFieldStyleModifier } from "../../types/textFieldModifier";
+import { ListStyleModifier } from "../../types/listModifier";
 
 export function walkToFrame(context: FigmaContext, node: FrameNode) {
   trace(`#walkToFrame`, context, node);
@@ -148,6 +150,46 @@ export function walkToFrame(context: FigmaContext, node: FrameNode) {
     appendBorder(context, scrollView, node);
     appendPosition(context, scrollView, node);
     appendDropShadow(context, scrollView, node);
+  } else if (name.startsWith("SwiftUI::List")) {
+    console.log(`[DEBUG] SwiftUI::List`);
+
+    const list: List = {
+      type: "List",
+      node: node,
+      modifiers: [],
+      children: [],
+    };
+
+    context.beginListContext(list);
+    children.forEach((child) => {
+      traverse(context, child);
+    });
+    context.endListContext();
+
+    appendPadding(context, list, node);
+    appendFrameModifierWithFrameNode(context, list, node);
+    appendBackgroundColor(context, list, node);
+    appendCornerRadius(context, list, node);
+    appendBorder(context, list, node);
+    appendPosition(context, list, node);
+    appendDropShadow(context, list, node);
+
+    const nameWithoutMarker = name.slice("SwiftUI::List".length);
+    if (nameWithoutMarker.startsWith("#")) {
+      const listStyleName = nameWithoutMarker.slice("#".length);
+      const listStyleModifier: ListStyleModifier = {
+        type: "listStyle",
+        name: listStyleName,
+      };
+      list.modifiers.push(listStyleModifier);
+    } else {
+      // Sigma decided default style to plain
+      const listStyleModifier: ListStyleModifier = {
+        type: "listStyle",
+        name: "PlainListStyle",
+      };
+      list.modifiers.push(listStyleModifier);
+    }
   } else if (name.startsWith("SwiftUI::TextField")) {
     console.log(`[DEBUG] SwiftUI::TextField`);
 
